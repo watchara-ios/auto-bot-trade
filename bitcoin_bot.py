@@ -10,7 +10,7 @@ from datetime import datetime
 from urllib.parse import urlencode
 from dotenv import load_dotenv
 from openai import OpenAI
-from dataclasses import dataclass, field
+from dataclasses import dataclass
 from typing import List, Optional, Dict, Any
 
 # ===== LOAD ENV =====
@@ -54,8 +54,7 @@ class Config:
     # Binance
     API_KEY = os.getenv("BINANCE_API_KEY")
     SECRET = os.getenv("BINANCE_SECRET")
-    BASE_URL = "https://demo-fapi.binance.com"
-    # BASE_URL = "https://fapi.binance.com"           # Use fapi.binance.com for live trading, testnet.binancefuture.com for testnet
+    BASE_URL = "https://demo-fapi.binance.com"   # เปลี่ยนเป็น fapi.binance.com สำหรับเทรดจริง
     SYMBOL = "BTCUSDT"
 
     # DeepSeek
@@ -64,32 +63,32 @@ class Config:
     REASONER_MODEL = "deepseek-reasoner"
 
     # Runtime parameters
-    CHECK_INTERVAL = 30          # Status check interval (seconds)
-    ENTRY_COOLDOWN = 120         # Minimum interval between two entries (seconds)
-    LOSS_COOLDOWN = 300          # Cooldown period after a loss (seconds)
+    CHECK_INTERVAL = 30
+    ENTRY_COOLDOWN = 120
+    LOSS_COOLDOWN = 300
 
     # Position management
-    BASE_POSITION_PERCENT = 5.0  # Base position size as % of balance (before leverage)
+    BASE_POSITION_PERCENT = 5.0
     MAX_POSITIONS = 2
-    MAX_TOTAL_EXPOSURE = 30.0    # Maximum total exposure percentage (after leverage)
+    MAX_TOTAL_EXPOSURE = 30.0
     LEVERAGE = 5
 
     # Risk control
-    DEFAULT_SL_ATR_MULT = 1.5    # Stop loss = ATR * multiplier
-    DEFAULT_TP_ATR_MULT = 2.5    # Take profit = ATR * multiplier
-    TRAILING_ATR_MULT = 0.8      # Trailing stop distance = ATR * multiplier
+    DEFAULT_SL_ATR_MULT = 1.5
+    DEFAULT_TP_ATR_MULT = 2.5
+    TRAILING_ATR_MULT = 0.8
     MAX_CONSECUTIVE_LOSSES = 4
-    DAILY_LOSS_LIMIT_PERCENT = 10.0   # Maximum daily loss percentage (based on starting balance)
-    DAILY_PROFIT_TARGET = 8.0         # Daily profit target (stop opening new trades when reached)
+    DAILY_LOSS_LIMIT_PERCENT = 10.0
+    DAILY_PROFIT_TARGET = 8.0
 
     # AI thresholds
-    CHAT_CONFIDENCE_THRESHOLD = 70     # Minimum confidence for chat model to allow trade
+    CHAT_CONFIDENCE_THRESHOLD = 55     # ลดจาก 70 เพื่อให้ยืดหยุ่นขึ้น
 
 
 @dataclass
 class Position:
-    side: str                  # "BUY" or "SELL"
-    quantity: float            # Contract quantity
+    side: str
+    quantity: float
     entry_price: float
     sl_price: float
     tp_price: float
@@ -179,7 +178,7 @@ class BinanceAPI:
             "symbol": Config.SYMBOL,
             "side": side,
             "type": "MARKET",
-            "quantity": round(quantity, 3)      # BTC contract precision is usually 3 decimals
+            "quantity": round(quantity, 3)
         })
 
     @staticmethod
@@ -261,43 +260,58 @@ class MarketData:
                 "rsi": Indicators.rsi(closes_15m, 14),
                 "atr": Indicators.atr(klines_15m, 14),
             },
-            "klines_15m_raw": klines_15m,  # Provide richer data to the reasoner
+            "klines_15m_raw": klines_15m,
         }
         return data
 
 
-# ===== FILTERS =====
+# ===== FILTERS (ปรับปรุงให้ยืดหยุ่นขึ้น) =====
 class EntryFilters:
     @staticmethod
-    def momentum_confirmed(closes_1m: List[float], bars: int = 3) -> bool:
-        """Consecutive bars moving in the same direction"""
+    def momentum_confirmed(closes_1m: List[float], bars: int = 2) -> bool:
+        """ต้องการแค่ 2 แท่งติดต่อกัน (เดิม 3 แท่ง)"""
         if len(closes_1m) < bars + 1:
             return False
         recent = closes_1m[-bars-1:]
         if all(recent[i] < recent[i+1] for i in range(bars)):
-            return True   # Consecutive up
+            return True
         if all(recent[i] > recent[i+1] for i in range(bars)):
-            return True   # Consecutive down
+            return True
         return False
 
     @staticmethod
-    def volume_surge(klines_1m: List[List], multiplier: float = 1.2) -> bool:
-        """Current volume is higher than average of last 20 periods by multiplier"""
+    def volume_surge(klines_1m: List[List], multiplier: float = 1.0) -> bool:
+        """วอลุ่มไม่ต่ำกว่าค่าเฉลี่ย (เดิมต้องมากกว่า 1.2 เท่า)"""
         if len(klines_1m) < 21:
             return False
         volumes = [float(k[5]) for k in klines_1m[-21:]]
         current_vol = volumes[-1]
         avg_vol = np.mean(volumes[:-1])
-        return current_vol > avg_vol * multiplier
+        return current_vol >= avg_vol * multiplier
+
+    @staticmethod
+    def detect_breakout(klines_15m: List[List]) -> tuple:
+        """ตรวจสอบ Breakout จากแนวต้าน/แนวรับ 20 แท่ง"""
+        if len(klines_15m) < 20:
+            return False, ""
+        highs = [float(k[2]) for k in klines_15m[-20:]]
+        lows = [float(k[3]) for k in klines_15m[-20:]]
+        current = float(klines_15m[-1][4])
+        resistance = max(highs)
+        support = min(lows)
+        if current > resistance:
+            return True, "BUY"
+        elif current < support:
+            return True, "SELL"
+        return False, ""
 
 
 # ===== DEEPSEEK AI =====
 deepseek_client = OpenAI(api_key=Config.DEEPSEEK_KEY, base_url="https://api.deepseek.com/v1")
 
 class DeepSeekGatekeeper:
-    """Uses deepseek-chat to decide whether to enter a trade"""
     @staticmethod
-    def should_enter(data_1m: dict, data_5m: dict, data_15m: dict) -> tuple[bool, float]:
+    def should_enter(data_1m: dict, data_5m: dict, data_15m: dict) -> tuple:
         Logger.info("🤖 Gatekeeper (chat) evaluating market...")
         prompt = f"""You are a strict trading gatekeeper. Analyze the following market data for BTCUSDT perpetual futures.
 
@@ -333,7 +347,6 @@ Only say PROCEED if there is a clear directional bias and volatility is not too 
             )
             elapsed = (time.time() - start) * 1000
             content = resp.choices[0].message.content
-            # Clean possible markdown code blocks
             if "```json" in content:
                 content = content.split("```json")[1].split("```")[0]
             elif "```" in content:
@@ -350,11 +363,9 @@ Only say PROCEED if there is a clear directional bias and volatility is not too 
 
 
 class DeepSeekStrategist:
-    """Uses deepseek-reasoner to determine specific trade parameters"""
     @staticmethod
     def plan_trade(data_1m: dict, data_5m: dict, data_15m: dict, klines_15m: List) -> Optional[dict]:
         Logger.info("🧠 Strategist (reasoner) planning trade...")
-        # Prepare recent price summary
         closes_15m = [float(k[4]) for k in klines_15m[-20:]]
         price_summary = f"Last 20 closes (15m): {', '.join([f'${c:.0f}' for c in closes_15m])}"
         atr_15m = data_15m['atr']
@@ -415,7 +426,7 @@ class TradingBot:
         self.last_loss_time = 0.0
         self.trading_allowed = True
         self.last_reset_date = datetime.now().date()
-        # Set leverage
+        self.last_atr = 0.0
         if Config.LEVERAGE > 1:
             BinanceAPI.set_leverage(Config.LEVERAGE)
 
@@ -437,14 +448,12 @@ class TradingBot:
             self.last_reset_date = today
 
     def check_risk_limits(self) -> bool:
-        # Check daily loss limit
         if self.daily_start_balance > 0:
             daily_loss_percent = -self.daily_pnl / self.daily_start_balance * 100
             if daily_loss_percent >= Config.DAILY_LOSS_LIMIT_PERCENT:
                 Logger.error(f"❌ Daily loss limit reached: {daily_loss_percent:.2f}%")
                 self.trading_allowed = False
                 return False
-        # Check consecutive losses
         if self.consecutive_losses >= Config.MAX_CONSECUTIVE_LOSSES:
             Logger.error(f"❌ Max consecutive losses ({Config.MAX_CONSECUTIVE_LOSSES}) reached.")
             self.trading_allowed = False
@@ -462,11 +471,9 @@ class TradingBot:
         return False
 
     def calculate_position_size(self, price: float, percent: float) -> float:
-        """Calculate contract quantity (considering leverage)"""
         capital_used = self.balance * (percent / 100)
         position_notional = capital_used * Config.LEVERAGE
         qty = position_notional / price
-        # Minimum quantity limit (Binance BTC contract min is 0.001)
         return max(0.001, round(qty, 3))
 
     def open_position(self, plan: dict, current_price: float, atr: float) -> bool:
@@ -534,9 +541,7 @@ class TradingBot:
             Logger.error("Failed to close position")
 
     def check_exits(self, current_price: float):
-        """Check stop loss, take profit, and trailing stop"""
         for i, pos in enumerate(self.positions):
-            # Fixed SL/TP
             if pos.side == "BUY":
                 if current_price <= pos.sl_price:
                     self.close_position(i, current_price, "Stop Loss")
@@ -544,13 +549,12 @@ class TradingBot:
                 if current_price >= pos.tp_price:
                     self.close_position(i, current_price, "Take Profit")
                     return
-                # Trailing stop: raise stop loss when price rises
                 if current_price > pos.entry_price:
                     new_sl = current_price - Config.TRAILING_ATR_MULT * self.last_atr
                     if new_sl > pos.sl_price:
                         pos.sl_price = new_sl
                         pos.trailing_active = True
-            else:  # SELL
+            else:
                 if current_price >= pos.sl_price:
                     self.close_position(i, current_price, "Stop Loss")
                     return
@@ -565,9 +569,9 @@ class TradingBot:
 
     def run(self):
         Logger.success("=" * 50)
-        Logger.success("🚀 Enhanced BTC Trading Bot (Two-step AI decision)")
+        Logger.success("🚀 Enhanced BTC Trading Bot (Flexible Filters)")
         Logger.success("=" * 50)
-        Logger.info(f"Gatekeeper: {Config.CHAT_MODEL}")
+        Logger.info(f"Gatekeeper: {Config.CHAT_MODEL} (threshold: {Config.CHAT_CONFIDENCE_THRESHOLD}%)")
         Logger.info(f"Strategist: {Config.REASONER_MODEL}")
         Logger.info(f"Leverage: {Config.LEVERAGE}x | Cooldown: {Config.ENTRY_COOLDOWN}s")
         Logger.info("=" * 50)
@@ -575,7 +579,6 @@ class TradingBot:
         self.update_balance()
         self.daily_start_balance = self.balance
 
-        # Check for existing open position
         existing_amt = BinanceAPI.get_open_position_amt()
         if abs(existing_amt) > 0:
             price = BinanceAPI.get_price()
@@ -611,10 +614,10 @@ class TradingBot:
                 self.last_atr = market_data["15m"]["atr"]
                 closes_1m = [float(k[4]) for k in BinanceAPI.get_klines("1m", 20)]
 
-                # ---- Exit checks (always active regardless of cooldown) ----
+                # Exit checks
                 self.check_exits(current_price)
 
-                # ---- Entry logic ----
+                # Entry cooldown
                 now = time.time()
                 cooldown_active = (now - self.last_trade_time < Config.ENTRY_COOLDOWN) or \
                                   (now - self.last_loss_time < Config.LOSS_COOLDOWN)
@@ -626,17 +629,29 @@ class TradingBot:
                     time.sleep(Config.CHECK_INTERVAL)
                     continue
 
-                # 1. Pre-filter with technicals
-                if not EntryFilters.momentum_confirmed(closes_1m):
-                    Logger.info("⏸️ Momentum not confirmed, skipping")
-                    time.sleep(Config.CHECK_INTERVAL)
-                    continue
-                if not EntryFilters.volume_surge(BinanceAPI.get_klines("1m", 30)):
-                    Logger.info("⏸️ Volume insufficient, skipping")
-                    time.sleep(Config.CHECK_INTERVAL)
-                    continue
+                # ===== FLEXIBLE ENTRY FILTERS =====
+                breakout, breakout_dir = EntryFilters.detect_breakout(market_data["klines_15m_raw"])
+                if breakout:
+                    Logger.success(f"🚨 Breakout detected! Direction: {breakout_dir}. Bypassing filters.")
+                else:
+                    # Momentum check (relaxed)
+                    if not EntryFilters.momentum_confirmed(closes_1m, bars=2):
+                        price_1m = market_data["1m"]["price"]
+                        ema20_1m = market_data["1m"]["ema20"]
+                        if price_1m > ema20_1m:
+                            Logger.info("⚠️ Momentum weak but price > EMA20, allowing entry")
+                        else:
+                            Logger.info(f"⏸️ Momentum not confirmed (price={price_1m:.2f}, ema20={ema20_1m:.2f}), skipping")
+                            time.sleep(Config.CHECK_INTERVAL)
+                            continue
 
-                # 2. Gatekeeper (chat) decision
+                    # Volume check (relaxed)
+                    if not EntryFilters.volume_surge(BinanceAPI.get_klines("1m", 30), multiplier=1.0):
+                        Logger.info("⏸️ Volume below average, skipping")
+                        time.sleep(Config.CHECK_INTERVAL)
+                        continue
+
+                # Gatekeeper
                 should_proceed, conf = DeepSeekGatekeeper.should_enter(
                     market_data["1m"], market_data["5m"], market_data["15m"]
                 )
@@ -644,7 +659,7 @@ class TradingBot:
                     time.sleep(Config.CHECK_INTERVAL)
                     continue
 
-                # 3. Strategist (reasoner) creates plan
+                # Strategist
                 plan = DeepSeekStrategist.plan_trade(
                     market_data["1m"], market_data["5m"], market_data["15m"],
                     market_data["klines_15m_raw"]
@@ -653,10 +668,9 @@ class TradingBot:
                     time.sleep(Config.CHECK_INTERVAL)
                     continue
 
-                # 4. Execute trade
+                # Execute
                 self.open_position(plan, current_price, market_data["15m"]["atr"])
 
-                # Print status
                 daily_ret = (self.balance - self.daily_start_balance) / self.daily_start_balance * 100
                 Logger.info(f"📊 Balance: ${self.balance:.2f} | Daily Return: {daily_ret:.2f}% | Positions: {len(self.positions)}")
 

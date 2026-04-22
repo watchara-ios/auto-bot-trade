@@ -1,0 +1,1017 @@
+2026-04-22 14:33:21,955 - INFO - ==================================================
+2026-04-22 14:33:21,955 - INFO - 🚀 Enhanced BTC Trading Bot (Two-step AI decision)
+2026-04-22 14:33:21,955 - INFO - ==================================================
+2026-04-22 14:33:21,955 - INFO - Gatekeeper: deepseek-chat
+2026-04-22 14:33:21,955 - INFO - Strategist: deepseek-reasoner
+2026-04-22 14:33:21,955 - INFO - Leverage: 5x | Cooldown: 120s
+2026-04-22 14:33:21,955 - INFO - ==================================================
+2026-04-22 14:33:24,882 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 14:33:56,859 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 14:34:28,839 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 14:34:48,065 - WARNING - ⏹️ Bot stopped by user
+2026-04-22 14:34:58,738 - INFO - ==================================================
+2026-04-22 14:34:58,738 - INFO - 🚀 Enhanced BTC Trading Bot (Two-step AI decision)
+2026-04-22 14:34:58,738 - INFO - ==================================================
+2026-04-22 14:34:58,738 - INFO - Gatekeeper: deepseek-chat
+2026-04-22 14:34:58,738 - INFO - Strategist: deepseek-reasoner
+2026-04-22 14:34:58,738 - INFO - Leverage: 5x | Cooldown: 120s
+2026-04-22 14:34:58,738 - INFO - ==================================================
+2026-04-22 14:35:01,473 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 14:35:33,447 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 14:36:05,418 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 14:36:37,400 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 14:37:09,690 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 14:37:41,668 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 14:38:13,649 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 14:38:45,575 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 14:39:17,953 - INFO - ⏸️ Volume insufficient, skipping
+2026-04-22 14:39:49,935 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 14:40:21,944 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 14:40:53,901 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 14:41:25,896 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 14:41:57,873 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 14:42:29,861 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 14:43:01,828 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 14:43:33,808 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 14:44:05,973 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 14:44:37,954 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 14:45:09,937 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 14:45:41,917 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 14:46:13,900 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 14:46:45,880 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 14:47:18,210 - INFO - 🤖 Gatekeeper (chat) evaluating market...
+2026-04-22 14:47:18,578 - INFO - HTTP Request: POST https://api.deepseek.com/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-22 14:47:20,007 - INFO - Gatekeeper: HOLD (conf:15.0%) in 1795ms - Price is flat at $0.19 across all timeframes with zero ATR, indicating extremely low volatility and no clear directional bias. RSI values are mixed (62, 42, 58) showing no strong momentum. Conditions are unsuitable for a trade.
+2026-04-22 14:47:52,275 - INFO - 🤖 Gatekeeper (chat) evaluating market...
+2026-04-22 14:47:52,814 - INFO - HTTP Request: POST https://api.deepseek.com/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-22 14:47:54,269 - INFO - Gatekeeper: HOLD (conf:85.0%) in 1994ms - Price is flat at $0.19 across all timeframes with zero ATR, indicating extremely low volatility and no clear directional bias. RSI values are mixed and near neutral, providing no strong momentum signal. Conditions are unsuitable for a trade.
+2026-04-22 14:48:26,253 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 14:48:58,345 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 14:49:30,324 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 14:50:02,306 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 14:50:34,693 - INFO - ⏸️ Volume insufficient, skipping
+2026-04-22 14:51:07,084 - INFO - ⏸️ Volume insufficient, skipping
+2026-04-22 14:51:39,483 - INFO - ⏸️ Volume insufficient, skipping
+2026-04-22 14:52:11,804 - INFO - ⏸️ Volume insufficient, skipping
+2026-04-22 14:52:44,192 - INFO - ⏸️ Volume insufficient, skipping
+2026-04-22 14:53:16,584 - INFO - ⏸️ Volume insufficient, skipping
+2026-04-22 14:53:48,562 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 14:54:20,544 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 14:54:52,527 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 14:55:24,630 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 14:55:56,604 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 14:56:28,618 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 14:57:00,573 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 14:57:32,693 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 14:58:04,655 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 14:58:36,628 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 14:59:08,610 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 14:59:41,699 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 15:00:13,637 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 15:00:45,615 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 15:01:17,578 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 15:01:49,590 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 15:02:21,546 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 15:02:53,529 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 15:03:25,510 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 15:03:44,017 - WARNING - ⏹️ Bot stopped by user
+2026-04-22 15:03:45,940 - INFO - ==================================================
+2026-04-22 15:03:45,940 - INFO - 🚀 Enhanced BTC Trading Bot (Two-step AI decision)
+2026-04-22 15:03:45,941 - INFO - ==================================================
+2026-04-22 15:03:45,941 - INFO - Gatekeeper: deepseek-chat
+2026-04-22 15:03:45,941 - INFO - Strategist: deepseek-reasoner
+2026-04-22 15:03:45,941 - INFO - Leverage: 5x | Cooldown: 120s
+2026-04-22 15:03:45,941 - INFO - ==================================================
+2026-04-22 15:03:48,767 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 15:04:20,751 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 15:04:52,729 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 15:05:24,713 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 15:05:56,693 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 15:06:28,674 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 15:07:00,656 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 15:07:33,559 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 15:08:05,494 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 15:08:37,469 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 15:09:09,513 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 15:09:41,422 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 15:10:13,416 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 15:10:45,388 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 15:10:47,745 - WARNING - ⏹️ Bot stopped by user
+2026-04-22 15:10:49,462 - INFO - ==================================================
+2026-04-22 15:10:49,462 - INFO - 🚀 Enhanced BTC Trading Bot (Two-step AI decision)
+2026-04-22 15:10:49,462 - INFO - ==================================================
+2026-04-22 15:10:49,463 - INFO - Gatekeeper: deepseek-chat
+2026-04-22 15:10:49,463 - INFO - Strategist: deepseek-reasoner
+2026-04-22 15:10:49,463 - INFO - Leverage: 5x | Cooldown: 120s
+2026-04-22 15:10:49,463 - INFO - ==================================================
+2026-04-22 15:10:52,212 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 15:11:24,193 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 15:11:57,109 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 15:12:29,085 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 15:13:01,069 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 15:13:33,045 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 15:14:05,026 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 15:14:37,023 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 15:15:09,413 - INFO - ⏸️ Volume insufficient, skipping
+2026-04-22 15:15:41,799 - INFO - ⏸️ Volume insufficient, skipping
+2026-04-22 15:16:14,305 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 15:16:47,684 - INFO - ⏸️ Volume insufficient, skipping
+2026-04-22 15:17:19,682 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 15:17:51,644 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 15:18:23,626 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 15:18:56,005 - INFO - ⏸️ Volume insufficient, skipping
+2026-04-22 15:19:27,995 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 15:19:59,981 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 15:20:31,959 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 15:21:03,940 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 15:21:35,922 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 15:22:07,896 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 15:22:39,883 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 15:23:11,874 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 15:23:43,848 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 15:24:16,238 - INFO - ⏸️ Volume insufficient, skipping
+2026-04-22 15:24:48,863 - INFO - 🤖 Gatekeeper (chat) evaluating market...
+2026-04-22 15:24:49,983 - INFO - HTTP Request: POST https://api.deepseek.com/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-22 15:24:51,670 - INFO - Gatekeeper: HOLD (conf:65.0%) in 2807ms - Price is above all EMAs with bullish RSI on all timeframes, indicating upward momentum, but RSI is not overbought and volatility (ATR 35) is moderate, not low. However, the 1m RSI at 64 suggests short-term overextension, and no clear strong directional bias with low volatility to confirm a breakout. Holding is safer.
+2026-04-22 15:25:23,990 - INFO - 🤖 Gatekeeper (chat) evaluating market...
+2026-04-22 15:25:24,181 - INFO - HTTP Request: POST https://api.deepseek.com/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-22 15:25:25,854 - INFO - Gatekeeper: HOLD (conf:65.0%) in 1863ms - Price is above all EMAs, but 1m RSI is neutral (46.8) and 5m RSI is overbought (70.56), suggesting short-term exhaustion. 15m RSI is moderate (58.8). ATR is low (27.3) indicating low volatility, which does not favor a clear directional bias with sufficient momentum. Holding is prudent.
+2026-04-22 15:25:57,833 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 15:26:30,167 - INFO - 🤖 Gatekeeper (chat) evaluating market...
+2026-04-22 15:26:30,358 - INFO - HTTP Request: POST https://api.deepseek.com/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-22 15:26:32,323 - INFO - Gatekeeper: HOLD (conf:65.0%) in 2156ms - Mixed signals: 1m RSI oversold (33.94) but 5m RSI neutral (63.71) and 15m RSI neutral (55.77). Price below 1m EMA20 but above 5m and 15m EMAs, indicating no clear short-term directional bias. ATR (40.91) shows moderate volatility but not extreme enough to confirm a breakout. Holding until clearer momentum alignment.
+2026-04-22 15:27:04,247 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 15:27:36,402 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 15:28:08,545 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 15:28:40,892 - INFO - ⏸️ Volume insufficient, skipping
+2026-04-22 15:29:12,876 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 15:29:44,853 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 15:30:16,744 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 15:30:48,623 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 15:31:20,612 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 15:31:52,605 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 15:32:24,572 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 15:32:56,973 - INFO - ⏸️ Volume insufficient, skipping
+2026-04-22 15:33:28,943 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 15:34:00,914 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 15:34:33,317 - INFO - 🤖 Gatekeeper (chat) evaluating market...
+2026-04-22 15:34:33,501 - INFO - HTTP Request: POST https://api.deepseek.com/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-22 15:34:35,442 - INFO - Gatekeeper: HOLD (conf:65.0%) in 2125ms - Price is below 1m and 5m EMA20 but above 15m EMA20, showing mixed short-term trends. RSI is neutral to slightly bullish (56-66) without strong momentum. ATR at 67.89 indicates moderate volatility but not enough to confirm a clear directional breakout. Holding is prudent until a stronger trend emerges.
+2026-04-22 15:35:07,813 - INFO - 🤖 Gatekeeper (chat) evaluating market...
+2026-04-22 15:35:07,992 - INFO - HTTP Request: POST https://api.deepseek.com/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-22 15:35:10,257 - INFO - Gatekeeper: HOLD (conf:65.0%) in 2444ms - Price is below 1m and 5m EMA20, indicating short-term bearish pressure, but above 15m EMA20, showing mixed trends. RSI is neutral to slightly bullish across timeframes, but not extreme. ATR is moderate, not too low, but lack of clear directional bias and conflicting EMAs suggest waiting for confirmation.
+2026-04-22 15:35:42,222 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 15:36:14,202 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 15:36:47,650 - INFO - ⏸️ Volume insufficient, skipping
+2026-04-22 15:37:19,633 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 15:37:51,618 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 15:38:24,011 - INFO - ⏸️ Volume insufficient, skipping
+2026-04-22 15:38:31,504 - WARNING - ⏹️ Bot stopped by user
+2026-04-22 15:50:46,544 - INFO - ==================================================
+2026-04-22 15:50:46,544 - INFO - 🚀 Enhanced BTC Trading Bot (Two-step AI decision)
+2026-04-22 15:50:46,544 - INFO - ==================================================
+2026-04-22 15:50:46,545 - INFO - Gatekeeper: deepseek-chat
+2026-04-22 15:50:46,545 - INFO - Strategist: deepseek-reasoner
+2026-04-22 15:50:46,545 - INFO - Leverage: 5x | Cooldown: 120s
+2026-04-22 15:50:46,545 - INFO - ==================================================
+2026-04-22 15:50:49,355 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 15:51:21,337 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 15:51:53,318 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 15:52:25,299 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 15:52:57,280 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 15:53:29,595 - INFO - 🤖 Gatekeeper (chat) evaluating market...
+2026-04-22 15:53:29,976 - INFO - HTTP Request: POST https://api.deepseek.com/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-22 15:53:31,596 - INFO - Gatekeeper: HOLD (conf:65.0%) in 2000ms - Price is above all EMAs but RSI divergence across timeframes (1m overbought, 15m neutral-bearish) suggests weak momentum. Volatility (ATR 24.57) is moderate but not confirming a clear directional bias; better to wait for stronger alignment.
+2026-04-22 15:54:03,964 - INFO - 🤖 Gatekeeper (chat) evaluating market...
+2026-04-22 15:54:04,150 - INFO - HTTP Request: POST https://api.deepseek.com/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-22 15:54:06,123 - INFO - Gatekeeper: HOLD (conf:65.0%) in 2159ms - Mixed timeframes: 1-min RSI overbought (71.65) and above EMA20, but 15-min RSI is neutral-bearish (43.64) and price is above its EMA20, indicating conflicting momentum. Volatility (ATR 26.56) is moderate but not extreme enough to confirm a strong breakout. No clear directional bias across all timeframes.
+2026-04-22 15:54:38,060 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 15:55:10,448 - INFO - ⏸️ Volume insufficient, skipping
+2026-04-22 15:55:42,429 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 15:56:14,410 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 15:56:46,306 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 15:57:18,599 - INFO - ⏸️ Volume insufficient, skipping
+2026-04-22 15:57:50,585 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 15:58:22,562 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 15:58:54,540 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 15:59:26,525 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 15:59:58,913 - INFO - ⏸️ Volume insufficient, skipping
+2026-04-22 16:00:31,009 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 16:01:03,088 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 16:01:35,503 - INFO - 🤖 Gatekeeper (chat) evaluating market...
+2026-04-22 16:01:35,791 - INFO - HTTP Request: POST https://api.deepseek.com/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-22 16:01:37,469 - INFO - Gatekeeper: HOLD (conf:65.0%) in 1965ms - Price is below 1m and 5m EMAs, indicating short-term bearish momentum, but 15m EMA is above price with RSI at 45 showing neutral-to-weak bias. ATR is moderate but not extreme; no clear strong directional trend across timeframes to justify entry.
+2026-04-22 16:02:10,406 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 16:02:42,380 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 16:03:14,357 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 16:03:46,342 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 16:04:18,322 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 16:04:50,304 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 16:05:22,283 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 16:05:54,608 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 16:06:26,597 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 16:06:58,754 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 16:07:33,357 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 16:08:05,981 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 16:08:37,952 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 16:09:09,934 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 16:09:42,032 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 16:10:14,009 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 16:10:46,520 - INFO - 🤖 Gatekeeper (chat) evaluating market...
+2026-04-22 16:10:47,534 - INFO - HTTP Request: POST https://api.deepseek.com/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-22 16:10:49,602 - INFO - Gatekeeper: HOLD (conf:65.0%) in 3081ms - Mixed signals: 1m RSI is weak (41.11) and 15m RSI is also bearish (40.43), but 5m RSI is neutral (51.74). Price is above all EMAs, but no strong directional bias. ATR is moderate, not low, but lack of clear momentum and conflicting timeframes suggest waiting for confirmation.
+2026-04-22 16:11:21,945 - INFO - ⏸️ Volume insufficient, skipping
+2026-04-22 16:11:54,273 - INFO - ⏸️ Volume insufficient, skipping
+2026-04-22 16:12:26,249 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 16:12:58,226 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 16:13:30,214 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 16:14:02,189 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 16:14:34,582 - INFO - ⏸️ Volume insufficient, skipping
+2026-04-22 16:15:06,973 - INFO - ⏸️ Volume insufficient, skipping
+2026-04-22 16:15:40,128 - INFO - ⏸️ Volume insufficient, skipping
+2026-04-22 16:16:12,228 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 16:16:44,190 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 16:17:16,181 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 16:17:48,166 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 16:18:20,135 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 16:18:52,118 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 16:19:24,506 - INFO - 🤖 Gatekeeper (chat) evaluating market...
+2026-04-22 16:19:24,804 - INFO - HTTP Request: POST https://api.deepseek.com/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-22 16:19:26,713 - INFO - Gatekeeper: HOLD (conf:65.0%) in 2205ms - Price is below 1m and 5m EMAs, indicating short-term bearish pressure, but 15m EMA is barely held and RSI across timeframes is neutral (47-58). ATR is low (36.66) suggesting insufficient volatility for a clear directional breakout. No strong momentum or trend conviction to proceed.
+2026-04-22 16:19:59,216 - INFO - 🤖 Gatekeeper (chat) evaluating market...
+2026-04-22 16:19:59,406 - INFO - HTTP Request: POST https://api.deepseek.com/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-22 16:20:01,022 - INFO - Gatekeeper: HOLD (conf:65.0%) in 1805ms - Price is below 1m and 5m EMAs, indicating short-term bearish pressure, but 15m EMA support holds. RSI across timeframes is neutral (48-60), showing no strong momentum. ATR is moderate, not signaling a breakout. Lack of clear directional bias suggests waiting for confirmation.
+2026-04-22 16:20:33,309 - INFO - ⏸️ Volume insufficient, skipping
+2026-04-22 16:21:05,693 - INFO - ⏸️ Volume insufficient, skipping
+2026-04-22 16:21:37,677 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 16:22:09,660 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 16:22:41,658 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 16:23:13,628 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 16:23:45,815 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 16:24:17,702 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 16:24:49,687 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 16:25:21,673 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 16:25:53,834 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 16:26:25,848 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 16:26:57,798 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 16:27:29,780 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 16:28:01,760 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 16:28:33,738 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 16:29:05,722 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 16:29:37,704 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 16:30:09,685 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 16:30:41,666 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 16:31:13,648 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 16:31:45,629 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 16:32:17,610 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 16:32:49,593 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 16:33:21,573 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 16:33:53,554 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 16:34:25,644 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 16:34:57,743 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 16:35:29,718 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 16:36:02,001 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 16:36:33,985 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 16:37:05,966 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 16:37:37,953 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 16:38:10,994 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 16:38:42,984 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 16:39:14,967 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 16:39:47,060 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 16:40:19,039 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 16:40:51,025 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 16:41:23,422 - INFO - ⏸️ Volume insufficient, skipping
+2026-04-22 16:41:55,731 - INFO - ⏸️ Volume insufficient, skipping
+2026-04-22 16:42:27,725 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 16:43:00,118 - INFO - ⏸️ Volume insufficient, skipping
+2026-04-22 16:43:32,090 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 16:44:04,178 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 16:44:36,567 - INFO - ⏸️ Volume insufficient, skipping
+2026-04-22 16:45:09,202 - INFO - ⏸️ Volume insufficient, skipping
+2026-04-22 16:45:42,532 - INFO - ⏸️ Volume insufficient, skipping
+2026-04-22 16:46:14,504 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 16:46:46,901 - INFO - ⏸️ Volume insufficient, skipping
+2026-04-22 16:47:19,215 - INFO - ⏸️ Volume insufficient, skipping
+2026-04-22 16:47:51,616 - INFO - ⏸️ Volume insufficient, skipping
+2026-04-22 16:48:24,000 - INFO - ⏸️ Volume insufficient, skipping
+2026-04-22 16:48:56,396 - INFO - ⏸️ Volume insufficient, skipping
+2026-04-22 16:49:28,378 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 16:50:00,363 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 16:50:32,343 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 16:51:04,326 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 16:51:36,307 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 16:52:08,287 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 16:52:40,269 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 16:53:12,252 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 16:53:44,234 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 16:54:16,348 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 16:54:48,334 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 16:55:20,312 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 16:55:53,345 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 16:56:25,332 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 16:56:57,310 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 16:57:29,291 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 16:58:01,268 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 16:58:33,254 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 16:59:05,230 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 16:59:37,212 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 17:00:09,197 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 17:00:41,186 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 17:01:13,577 - INFO - ⏸️ Volume insufficient, skipping
+2026-04-22 17:01:45,895 - INFO - ⏸️ Volume insufficient, skipping
+2026-04-22 17:02:17,878 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 17:02:49,854 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 17:03:21,840 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 17:03:53,829 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 17:04:25,803 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 17:04:58,192 - INFO - ⏸️ Volume insufficient, skipping
+2026-04-22 17:05:30,179 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 17:06:02,163 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 17:06:34,147 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 17:07:06,128 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 17:07:38,108 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 17:08:10,087 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 17:08:42,996 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 17:09:14,979 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 17:09:47,081 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 17:10:19,068 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 17:10:51,050 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 17:11:23,030 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 17:11:55,014 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 17:12:26,993 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 17:12:59,386 - INFO - ⏸️ Volume insufficient, skipping
+2026-04-22 17:13:31,369 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 17:14:03,763 - INFO - ⏸️ Volume insufficient, skipping
+2026-04-22 17:14:36,083 - INFO - ⏸️ Volume insufficient, skipping
+2026-04-22 17:15:08,067 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 17:15:40,044 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 17:16:12,213 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 17:16:44,196 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 17:17:16,176 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 17:17:48,158 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 17:18:20,247 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 17:18:52,230 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 17:19:24,627 - INFO - ⏸️ Volume insufficient, skipping
+2026-04-22 17:19:56,717 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 17:20:28,697 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 17:21:00,687 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 17:21:32,666 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 17:22:04,643 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 17:22:36,838 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 17:23:09,023 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 17:23:41,005 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 17:24:12,989 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 17:24:45,822 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 17:25:17,824 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 17:25:49,798 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 17:26:21,874 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 17:26:53,769 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 17:27:26,161 - INFO - ⏸️ Volume insufficient, skipping
+2026-04-22 17:27:58,143 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 17:28:30,131 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 17:29:02,100 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 17:29:34,083 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 17:30:06,071 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 17:30:38,037 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 17:31:10,030 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 17:31:42,015 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 17:32:13,990 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 17:32:45,968 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 17:33:17,963 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 17:33:49,943 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 17:34:21,918 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 17:34:54,312 - INFO - ⏸️ Volume insufficient, skipping
+2026-04-22 17:35:27,341 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 17:35:59,315 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 17:36:31,976 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 17:37:03,921 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 17:37:35,913 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 17:38:07,889 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 17:38:39,983 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 17:39:12,793 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 17:39:44,766 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 17:40:16,854 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 17:40:49,473 - INFO - ⏸️ Volume insufficient, skipping
+2026-04-22 17:41:21,466 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 17:41:53,441 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 17:42:25,431 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 17:42:57,415 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 17:43:29,383 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 17:44:01,387 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 17:44:33,362 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 17:45:05,338 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 17:45:37,329 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 17:46:09,302 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 17:46:41,284 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 17:47:13,666 - INFO - ⏸️ Volume insufficient, skipping
+2026-04-22 17:47:45,776 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 17:48:17,759 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 17:48:49,739 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 17:49:21,722 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 17:49:54,111 - INFO - ⏸️ Volume insufficient, skipping
+2026-04-22 17:50:26,094 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 17:50:58,081 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 17:51:30,059 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 17:52:07,845 - INFO - ⏸️ Volume insufficient, skipping
+2026-04-22 17:52:39,789 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 17:53:11,767 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 17:53:43,753 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 17:54:15,730 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 17:54:47,709 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 17:55:19,701 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 17:55:52,504 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 17:56:24,484 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 17:56:56,578 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 17:57:28,555 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 17:58:00,546 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 17:58:32,648 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 17:59:04,619 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 17:59:36,599 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 18:00:08,579 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 18:00:40,565 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 18:01:12,548 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 18:01:44,528 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 18:02:16,511 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 18:02:48,552 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 18:03:20,890 - INFO - 🤖 Gatekeeper (chat) evaluating market...
+2026-04-22 18:03:21,093 - INFO - HTTP Request: POST https://api.deepseek.com/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-22 18:03:22,770 - INFO - Gatekeeper: HOLD (conf:65.0%) in 1879ms - Price is above EMA20 on all timeframes, but 1m and 5m RSI are overbought (76.64, 75.12) suggesting short-term exhaustion, while 15m RSI is neutral (57.38). ATR is low (15.57) indicating insufficient volatility for a strong directional move. No clear, sustainable bias with current momentum.
+2026-04-22 18:03:55,078 - INFO - 🤖 Gatekeeper (chat) evaluating market...
+2026-04-22 18:03:55,257 - INFO - HTTP Request: POST https://api.deepseek.com/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-22 18:04:19,061 - INFO - Gatekeeper: HOLD (conf:85.0%) in 23982ms - Price is above EMA20 on all timeframes, but RSI on 1m and 5m is overbought (81.76 and 77.39), suggesting short-term exhaustion. 15m RSI is neutral at 59.10, lacking strong momentum. ATR is low at 18.50, indicating insufficient volatility for a high-confidence directional trade. Holding is prudent until overbought conditions resolve or volatility increases.
+2026-04-22 18:04:51,064 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 18:05:23,162 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 18:05:55,140 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 18:06:27,526 - INFO - ⏸️ Volume insufficient, skipping
+2026-04-22 18:06:59,511 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 18:07:31,497 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 18:08:03,476 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 18:08:35,576 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 18:09:07,556 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 18:09:39,529 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 18:10:11,523 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 18:10:43,904 - INFO - ⏸️ Volume insufficient, skipping
+2026-04-22 18:11:15,887 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 18:11:47,869 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 18:12:19,849 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 18:12:51,832 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 18:13:23,811 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 18:13:55,919 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 18:14:27,901 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 18:14:59,995 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 18:15:32,382 - INFO - ⏸️ Volume insufficient, skipping
+2026-04-22 18:16:04,367 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 18:16:36,343 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 18:17:09,154 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 18:17:43,435 - INFO - ⏸️ Volume insufficient, skipping
+2026-04-22 18:18:15,439 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 18:18:47,413 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 18:19:19,408 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 18:19:51,786 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 18:20:23,772 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 18:20:55,864 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 18:21:28,261 - INFO - ⏸️ Volume insufficient, skipping
+2026-04-22 18:22:00,242 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 18:22:32,242 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 18:23:04,249 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 18:23:36,190 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 18:24:08,166 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 18:24:40,153 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 18:25:12,242 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 18:25:44,233 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 18:26:16,309 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 18:26:48,302 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 18:27:20,287 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 18:27:52,276 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 18:28:24,248 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 18:28:56,237 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 18:29:28,212 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 18:30:00,195 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 18:30:32,182 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 18:31:04,163 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 18:31:36,552 - INFO - ⏸️ Volume insufficient, skipping
+2026-04-22 18:32:08,526 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 18:32:40,517 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 18:33:12,494 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 18:33:44,477 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 18:34:16,458 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 18:34:48,453 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 18:35:20,528 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 18:35:52,515 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 18:36:25,432 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 18:36:57,420 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 18:37:30,340 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 18:38:02,431 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 18:38:34,406 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 18:39:06,793 - INFO - 🤖 Gatekeeper (chat) evaluating market...
+2026-04-22 18:39:08,041 - INFO - HTTP Request: POST https://api.deepseek.com/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-22 18:39:12,528 - INFO - Gatekeeper: HOLD (conf:65.0%) in 5734ms - Mixed signals across timeframes. 5-min shows strong momentum (RSI 78.77) and price above EMA, but 1-min and 15-min RSI are neutral (~56). Price is slightly below 1-min EMA20, suggesting near-term resistance. While volatility (ATR 36.53) is adequate, the conflicting momentum and lack of a unified directional bias across key timeframes advise caution.
+2026-04-22 18:39:44,774 - INFO - ⏸️ Volume insufficient, skipping
+2026-04-22 18:40:16,758 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 18:40:48,736 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 18:41:20,722 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 18:41:52,712 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 18:42:24,689 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 18:42:56,664 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 18:43:28,658 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 18:44:00,642 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 18:44:32,614 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 18:45:04,595 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 18:45:36,572 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 18:46:08,559 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 18:46:40,537 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 18:47:12,623 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 18:47:44,513 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 18:48:17,518 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 18:48:50,543 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 18:49:22,540 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 18:49:54,524 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 18:50:26,508 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 18:50:58,494 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 18:51:30,885 - INFO - ⏸️ Volume insufficient, skipping
+2026-04-22 18:52:07,878 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 18:52:40,601 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 18:53:12,594 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 18:53:44,575 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 18:54:16,562 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 18:54:48,535 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 18:55:20,521 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 18:55:52,588 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 18:56:24,597 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 18:56:57,814 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 18:57:30,423 - INFO - ⏸️ Volume insufficient, skipping
+2026-04-22 18:58:02,411 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 18:58:34,393 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 18:59:07,313 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 18:59:39,293 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 19:00:11,280 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 19:00:43,258 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 19:01:15,238 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 19:01:47,220 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 19:02:19,202 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 19:02:51,187 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 19:03:23,166 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 19:03:55,149 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 19:04:27,448 - INFO - 🤖 Gatekeeper (chat) evaluating market...
+2026-04-22 19:04:27,680 - INFO - HTTP Request: POST https://api.deepseek.com/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-22 19:04:31,932 - INFO - Gatekeeper: HOLD (conf:65.0%) in 4483ms - Price is above all EMAs showing a bullish alignment, but RSI across timeframes is neutral (55-60), indicating no strong momentum. ATR suggests moderate volatility, but there is no clear, strong directional bias for a high-probability entry.
+2026-04-22 19:05:04,354 - INFO - 🤖 Gatekeeper (chat) evaluating market...
+2026-04-22 19:05:04,528 - INFO - HTTP Request: POST https://api.deepseek.com/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-22 19:05:08,595 - INFO - Gatekeeper: HOLD (conf:65.0%) in 4240ms - Price is above all EMAs showing a bullish structure, but RSI across timeframes is neutral (55-60), indicating no strong momentum. ATR of 26.10 suggests moderate volatility, but there is no clear, strong directional bias or overbought/oversold signal to justify a trade entry.
+2026-04-22 19:05:40,865 - INFO - ⏸️ Volume insufficient, skipping
+2026-04-22 19:06:12,850 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 19:06:45,018 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 19:07:17,000 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 19:07:48,980 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 19:08:20,962 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 19:08:52,944 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 19:09:24,925 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 19:09:56,908 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 19:10:29,519 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 19:11:01,917 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 19:11:33,899 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 19:12:05,882 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 19:12:40,486 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 19:13:13,160 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 19:13:45,318 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 19:14:18,215 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 19:14:50,207 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 19:15:22,630 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 19:15:55,130 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 19:16:27,093 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 19:17:00,229 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 19:17:32,273 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 19:18:04,188 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 19:18:36,172 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 19:19:08,153 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 19:19:40,549 - INFO - ⏸️ Volume insufficient, skipping
+2026-04-22 19:20:13,165 - INFO - ⏸️ Volume insufficient, skipping
+2026-04-22 19:20:45,558 - INFO - ⏸️ Volume insufficient, skipping
+2026-04-22 19:21:17,542 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 19:21:49,936 - INFO - ⏸️ Volume insufficient, skipping
+2026-04-22 19:22:21,917 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 19:22:55,170 - INFO - ⏸️ Volume insufficient, skipping
+2026-04-22 19:23:27,567 - INFO - ⏸️ Volume insufficient, skipping
+2026-04-22 19:23:59,972 - INFO - ⏸️ Volume insufficient, skipping
+2026-04-22 19:24:32,276 - INFO - ⏸️ Volume insufficient, skipping
+2026-04-22 19:25:04,671 - INFO - ⏸️ Volume insufficient, skipping
+2026-04-22 19:25:38,003 - INFO - 🤖 Gatekeeper (chat) evaluating market...
+2026-04-22 19:25:38,269 - INFO - HTTP Request: POST https://api.deepseek.com/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-22 19:25:43,027 - INFO - Gatekeeper: HOLD (conf:75.0%) in 5024ms - Conflicting signals across timeframes: 1m shows extreme overbought (RSI 91.5) with price below EMA20, suggesting short-term exhaustion, while 5m RSI is oversold (38.33) and 15m is neutral (53.09). No clear directional bias emerges from the mixed momentum and trend alignment. High ATR (67.36) indicates elevated volatility but without consensus direction.
+2026-04-22 19:26:15,045 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 19:26:47,342 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 19:27:19,296 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 19:27:51,299 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 19:28:23,262 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 19:28:55,244 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 19:29:27,223 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 19:30:06,140 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 19:30:38,122 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 19:31:10,101 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 19:31:42,081 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 19:32:14,174 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 19:32:46,160 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 19:33:19,078 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 19:33:51,053 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 19:34:23,444 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 19:34:55,840 - INFO - ⏸️ Volume insufficient, skipping
+2026-04-22 19:35:27,931 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 19:35:59,915 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 19:36:31,897 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 19:37:03,983 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 19:37:36,913 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 19:38:08,960 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 19:38:40,979 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 19:39:13,072 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 19:39:45,060 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 19:40:17,060 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 19:40:49,033 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 19:41:21,027 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 19:41:53,174 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 19:42:25,157 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 19:42:57,137 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 19:43:29,120 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 19:44:01,101 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 19:44:33,083 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 19:45:05,063 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 19:45:37,045 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 19:46:09,895 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 19:46:42,921 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 19:47:15,446 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 19:47:47,823 - INFO - 🤖 Gatekeeper (chat) evaluating market...
+2026-04-22 19:47:48,164 - INFO - HTTP Request: POST https://api.deepseek.com/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-22 19:47:52,579 - INFO - Gatekeeper: HOLD (conf:65.0%) in 4756ms - Mixed signals across timeframes. 1m shows bullish momentum (RSI 66, price > EMA20), but 5m RSI is neutral-bearish (43) and 15m is neutral (52). No clear, aligned directional bias. Volatility (ATR 20.08) is adequate, but conflicting momentum suggests waiting for a clearer consensus.
+2026-04-22 19:48:24,628 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 19:48:56,603 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 19:49:29,725 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 19:50:01,913 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 19:50:33,894 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 19:51:05,869 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 19:51:38,088 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 19:52:10,069 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 19:52:42,053 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 19:53:14,030 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 19:53:46,194 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 19:54:18,507 - INFO - ⏸️ Volume insufficient, skipping
+2026-04-22 19:54:50,909 - INFO - ⏸️ Volume insufficient, skipping
+2026-04-22 19:55:22,880 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 19:55:55,169 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 19:56:27,149 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 19:56:59,132 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 19:57:31,220 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 19:58:03,235 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 19:58:35,372 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 19:59:07,396 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 19:59:39,563 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 20:00:11,855 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 20:00:44,576 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 20:01:16,556 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 20:01:49,064 - INFO - 🤖 Gatekeeper (chat) evaluating market...
+2026-04-22 20:01:49,359 - INFO - HTTP Request: POST https://api.deepseek.com/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-22 20:01:53,782 - INFO - Gatekeeper: HOLD (conf:65.0%) in 4718ms - Mixed signals across timeframes: 1m and 5m show price below EMA20 with weak RSI, suggesting short-term bearish momentum, while 15m shows price above EMA20 with neutral RSI, indicating a conflicting longer-term uptrend. ATR shows moderate volatility, but no clear, unified directional bias exists.
+2026-04-22 20:02:26,423 - INFO - ⏸️ Volume insufficient, skipping
+2026-04-22 20:02:58,791 - INFO - ⏸️ Volume insufficient, skipping
+2026-04-22 20:03:30,773 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 20:04:02,755 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 20:04:34,738 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 20:05:06,719 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 20:05:39,225 - INFO - ⏸️ Volume insufficient, skipping
+2026-04-22 20:06:11,117 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 20:06:43,004 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 20:07:14,982 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 20:07:46,950 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 20:08:18,948 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 20:08:50,933 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 20:09:22,907 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 20:09:54,889 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 20:10:26,881 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 20:10:59,785 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 20:11:32,200 - INFO - ⏸️ Volume insufficient, skipping
+2026-04-22 20:12:05,340 - INFO - 🤖 Gatekeeper (chat) evaluating market...
+2026-04-22 20:12:05,535 - INFO - HTTP Request: POST https://api.deepseek.com/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-22 20:12:09,944 - INFO - Gatekeeper: HOLD (conf:65.0%) in 4604ms - Mixed signals across timeframes: 1m and 15m RSI neutral (~50), 5m RSI slightly bearish (46.48). Price is above all EMAs, showing mild bullish bias, but EMA alignment is weak and momentum is not clearly directional. ATR (55.10) indicates moderate volatility, but insufficient confluence for a clear trade setup.
+2026-04-22 20:12:42,328 - INFO - 🤖 Gatekeeper (chat) evaluating market...
+2026-04-22 20:12:42,506 - INFO - HTTP Request: POST https://api.deepseek.com/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-22 20:12:45,865 - INFO - Gatekeeper: HOLD (conf:65.0%) in 3537ms - Mixed signals across timeframes. Price is above EMAs on 1m and 5m but RSI is neutral (46-51), showing no strong momentum. ATR indicates moderate volatility, but there is no clear, consistent directional bias to justify a trade.
+2026-04-22 20:13:17,790 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 20:13:49,773 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 20:14:22,580 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 20:14:54,556 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 20:15:27,591 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 20:15:59,565 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 20:16:31,553 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 20:17:03,527 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 20:17:36,559 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 20:18:08,954 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 20:18:40,938 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 20:19:12,919 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 20:19:44,902 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 20:20:17,221 - INFO - ⏸️ Volume insufficient, skipping
+2026-04-22 20:20:51,309 - INFO - 🤖 Gatekeeper (chat) evaluating market...
+2026-04-22 20:20:51,656 - INFO - HTTP Request: POST https://api.deepseek.com/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-22 20:20:56,727 - INFO - Gatekeeper: HOLD (conf:65.0%) in 5418ms - Mixed signals across timeframes: 1m and 5m RSI are neutral/weak (49.39, 43.86), while 15m RSI is mildly bullish (57.79). Price is above EMA20 on all timeframes, indicating a slight uptrend, but momentum is not strong or aligned. Volatility (ATR 40.83) is moderate but not providing a clear directional edge. No clear, high-conviction bias for entry.
+2026-04-22 20:21:28,710 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 20:22:01,325 - INFO - ⏸️ Volume insufficient, skipping
+2026-04-22 20:22:33,299 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 20:23:05,290 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 20:23:37,269 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 20:24:09,482 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 20:24:41,467 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 20:25:13,443 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 20:25:45,611 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 20:26:17,699 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 20:26:49,679 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 20:27:22,080 - INFO - ⏸️ Volume insufficient, skipping
+2026-04-22 20:27:55,509 - INFO - ⏸️ Volume insufficient, skipping
+2026-04-22 20:28:27,425 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 20:28:59,419 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 20:29:32,335 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 20:30:04,322 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 20:30:36,288 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 20:31:08,389 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 20:31:40,378 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 20:32:12,365 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 20:32:44,338 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 20:33:16,325 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 20:33:48,304 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 20:34:21,618 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 20:34:53,599 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 20:35:25,583 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 20:35:57,791 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 20:36:29,780 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 20:37:02,468 - INFO - ⏸️ Volume insufficient, skipping
+2026-04-22 20:37:34,448 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 20:38:06,429 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 20:38:38,413 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 20:39:10,395 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 20:39:42,716 - INFO - ⏸️ Volume insufficient, skipping
+2026-04-22 20:40:15,102 - INFO - ⏸️ Volume insufficient, skipping
+2026-04-22 20:40:47,499 - INFO - ⏸️ Volume insufficient, skipping
+2026-04-22 20:41:19,474 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 20:41:51,874 - INFO - 🤖 Gatekeeper (chat) evaluating market...
+2026-04-22 20:41:52,079 - INFO - HTTP Request: POST https://api.deepseek.com/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-22 20:42:02,122 - INFO - Gatekeeper: HOLD (conf:65.0%) in 10247ms - Mixed signals across timeframes: 5m shows bullish momentum (RSI 67.44 > EMA20), but 1m and 15m RSIs are neutral (56.63, 53.37). Trend is upward (price above all EMAs), but momentum lacks strong, consistent alignment. Volatility is moderate (ATR 31.13), not a barrier, but directional bias is not clear enough for a high-confidence entry.
+2026-04-22 20:42:34,151 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 20:43:07,473 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 20:43:39,459 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 20:44:11,446 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 20:44:43,430 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 20:45:15,406 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 20:45:47,388 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 20:46:19,369 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 20:46:51,350 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 20:47:23,336 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 20:47:55,314 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 20:48:27,992 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 20:48:59,916 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 20:49:32,936 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 20:50:04,933 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 20:50:36,914 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 20:51:09,305 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 20:51:41,279 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 20:52:13,264 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 20:52:45,567 - INFO - 🤖 Gatekeeper (chat) evaluating market...
+2026-04-22 20:52:45,854 - INFO - HTTP Request: POST https://api.deepseek.com/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-22 20:52:55,843 - INFO - Gatekeeper: HOLD (conf:65.0%) in 10276ms - Mixed signals across timeframes: 5m shows strong momentum (RSI 75.05) and price above EMA20, but 15m RSI is neutral (55.93) and 1m RSI is only moderately bullish (64.10). No clear, aligned directional bias. Volatility is moderate (ATR 38.84), but conflicting momentum suggests waiting for a clearer consensus.
+2026-04-22 20:53:27,830 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 20:54:00,111 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 20:54:32,433 - INFO - ⏸️ Volume insufficient, skipping
+2026-04-22 20:55:04,831 - INFO - ⏸️ Volume insufficient, skipping
+2026-04-22 20:55:36,919 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 20:56:09,086 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 20:56:41,068 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 20:57:13,049 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 20:57:45,362 - INFO - ⏸️ Volume insufficient, skipping
+2026-04-22 20:58:17,536 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 20:58:49,518 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 20:59:21,499 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 20:59:53,481 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 21:00:25,463 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 21:00:57,446 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 21:01:29,427 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 21:02:01,411 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 21:02:33,389 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 21:03:05,485 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 21:03:37,565 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 21:04:09,557 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 21:04:41,538 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 21:05:13,636 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 21:05:45,613 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 21:06:18,017 - INFO - 🤖 Gatekeeper (chat) evaluating market...
+2026-04-22 21:08:18,157 - INFO - HTTP Request: POST https://api.deepseek.com/v1/chat/completions "HTTP/1.1 504 Gateway Timeout"
+2026-04-22 21:08:18,158 - INFO - Retrying request to /chat/completions in 0.387111 seconds
+2026-04-22 21:10:18,681 - INFO - HTTP Request: POST https://api.deepseek.com/v1/chat/completions "HTTP/1.1 504 Gateway Timeout"
+2026-04-22 21:10:18,683 - INFO - Retrying request to /chat/completions in 0.906637 seconds
+2026-04-22 21:12:19,647 - INFO - HTTP Request: POST https://api.deepseek.com/v1/chat/completions "HTTP/1.1 504 Gateway Timeout"
+2026-04-22 21:12:19,650 - ERROR - Gatekeeper error: <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<HTML><HEAD><META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=UTF-8">
+<TITLE>ERROR: The request could not be satisfied</TITLE>
+</HEAD><BODY>
+<H1>504 Gateway Timeout ERROR</H1>
+<H2>The request could not be satisfied.</H2>
+<HR noshade size="1px">
+We can't connect to the server for this app or website at this time. There might be too much traffic or a configuration error. Try again later, or contact the app or website owner.
+<BR clear="all">
+If you provide content to customers through CloudFront, you can find steps to troubleshoot and help prevent this error by reviewing the CloudFront documentation.
+<BR clear="all">
+<HR noshade size="1px">
+<PRE>
+Generated by cloudfront (CloudFront) HTTP3 Server
+Request ID: 3CP5gxZJEdhC0cfi5IfcDtn6aL4acxWER6xAWoit2rxAkOmWdKK1tA&#x3D;&#x3D;
+</PRE>
+<ADDRESS>
+</ADDRESS>
+</BODY></HTML>
+2026-04-22 21:12:51,636 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 21:13:23,616 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 21:13:55,598 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 21:14:27,995 - INFO - ⏸️ Volume insufficient, skipping
+2026-04-22 21:15:00,101 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 21:15:32,299 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 21:16:04,275 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 21:16:36,265 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 21:17:08,238 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 21:17:40,240 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 21:18:12,203 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 21:18:44,197 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 21:19:17,113 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 21:19:50,434 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 21:20:23,688 - INFO - ⏸️ Volume insufficient, skipping
+2026-04-22 21:20:56,077 - INFO - ⏸️ Volume insufficient, skipping
+2026-04-22 21:21:28,059 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 21:22:00,165 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 21:22:32,144 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 21:23:04,109 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 21:23:36,098 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 21:24:08,083 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 21:24:40,067 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 21:25:12,046 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 21:25:44,030 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 21:26:16,007 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 21:26:47,996 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 21:27:19,973 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 21:27:51,959 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 21:28:23,939 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 21:28:55,917 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 21:29:27,894 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 21:29:59,875 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 21:30:32,898 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 21:31:05,001 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 21:31:36,983 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 21:32:08,972 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 21:32:41,482 - INFO - 🤖 Gatekeeper (chat) evaluating market...
+2026-04-22 21:32:42,465 - INFO - HTTP Request: POST https://api.deepseek.com/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-22 21:32:49,644 - INFO - Gatekeeper: HOLD (conf:65.0%) in 8162ms - Mixed signals across timeframes. 1m shows price below EMA20 with neutral-high RSI, suggesting short-term resistance. 5m shows price above EMA20 with neutral RSI, indicating mild bullish bias. However, 15m RSI is bearish (44.68) despite price above rising EMA20, signaling underlying weakness. ATR is high (267.20), indicating elevated volatility but without a clear, aligned directional trend. Conflicting momentum and lack of a unified trend bias advise caution.
+2026-04-22 21:33:21,616 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 21:33:53,599 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 21:34:25,619 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 21:34:57,560 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 21:35:29,555 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 21:36:01,645 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 21:36:33,715 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 21:37:05,727 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 21:37:37,692 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 21:38:10,387 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 21:38:43,242 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 21:39:15,213 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 21:39:48,020 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 21:40:19,992 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 21:40:52,393 - INFO - 🤖 Gatekeeper (chat) evaluating market...
+2026-04-22 21:40:52,649 - INFO - HTTP Request: POST https://api.deepseek.com/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-22 21:40:59,114 - INFO - Gatekeeper: HOLD (conf:65.0%) in 6720ms - Mixed signals across timeframes. 5m RSI (62.21) shows moderate bullish momentum, but 1m and 15m RSI are neutral (~51-53). Price is above all EMAs indicating a bullish trend structure, but the 1m ATR (160.41) suggests moderate, not extreme, volatility. No clear, strong directional confluence exists to justify a PROCEED signal.
+2026-04-22 21:41:31,539 - INFO - ⏸️ Volume insufficient, skipping
+2026-04-22 21:42:03,926 - INFO - ⏸️ Volume insufficient, skipping
+2026-04-22 21:42:35,899 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 21:43:07,996 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 21:43:41,735 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 21:44:13,715 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 21:44:46,031 - INFO - ⏸️ Volume insufficient, skipping
+2026-04-22 21:45:18,424 - INFO - ⏸️ Volume insufficient, skipping
+2026-04-22 21:45:50,824 - INFO - ⏸️ Volume insufficient, skipping
+2026-04-22 21:46:23,326 - INFO - ⏸️ Volume insufficient, skipping
+2026-04-22 21:46:55,422 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 21:47:27,403 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 21:47:59,387 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 21:48:31,371 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 21:49:03,355 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 21:49:35,331 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 21:50:07,309 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 21:50:39,295 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 21:51:11,281 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 21:51:43,259 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 21:52:15,646 - INFO - ⏸️ Volume insufficient, skipping
+2026-04-22 21:52:47,942 - INFO - ⏸️ Volume insufficient, skipping
+2026-04-22 21:53:20,023 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 21:53:52,009 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 21:54:23,919 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 21:54:55,969 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 21:55:27,951 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 21:55:59,931 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 21:56:31,914 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 21:57:04,007 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 21:57:36,631 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 21:58:08,617 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 21:58:40,998 - INFO - ⏸️ Volume insufficient, skipping
+2026-04-22 21:59:13,918 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 21:59:45,901 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 22:00:17,989 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 22:00:49,973 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 22:01:21,951 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 22:01:53,934 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 22:02:25,914 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 22:02:58,012 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 22:03:29,996 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 22:04:01,978 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 22:04:35,079 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 22:05:08,338 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 22:05:42,133 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 22:06:14,102 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 22:06:46,084 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 22:07:18,052 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 22:07:50,045 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 22:08:22,147 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 22:08:54,117 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 22:09:26,104 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 22:09:58,081 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 22:10:30,250 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 22:11:02,231 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 22:11:34,213 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 22:12:06,194 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 22:12:38,176 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 22:13:10,158 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 22:13:43,187 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 22:14:16,218 - INFO - ⏸️ Volume insufficient, skipping
+2026-04-22 22:14:48,540 - INFO - ⏸️ Volume insufficient, skipping
+2026-04-22 22:15:20,936 - INFO - ⏸️ Volume insufficient, skipping
+2026-04-22 22:15:52,909 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 22:16:24,904 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 22:16:56,994 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 22:17:28,968 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 22:18:00,959 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 22:18:36,587 - ERROR - API error: {'code': -1021, 'msg': 'Timestamp for this request is outside of the recvWindow.'}
+2026-04-22 22:18:38,188 - INFO - ⏸️ Momentum not confirmed, skipping
+2026-04-22 22:19:08,194 - ERROR - ❌ Daily loss limit reached: 100.00%
+2026-04-22 23:07:49,176 - WARNING - ⏹️ Bot stopped by user
+2026-04-22 23:07:53,259 - INFO - ==================================================
+2026-04-22 23:07:53,259 - INFO - 🚀 Enhanced BTC Trading Bot (Flexible Filters)
+2026-04-22 23:07:53,259 - INFO - ==================================================
+2026-04-22 23:07:53,259 - INFO - Gatekeeper: deepseek-chat (threshold: 55%)
+2026-04-22 23:07:53,259 - INFO - Strategist: deepseek-reasoner
+2026-04-22 23:07:53,259 - INFO - Leverage: 5x | Cooldown: 120s
+2026-04-22 23:07:53,259 - INFO - ==================================================
+2026-04-22 23:07:56,091 - INFO - ⚠️ Momentum weak but price > EMA20, allowing entry
+2026-04-22 23:07:56,502 - INFO - ⏸️ Volume below average, skipping
+2026-04-22 23:08:28,495 - INFO - ⚠️ Momentum weak but price > EMA20, allowing entry
+2026-04-22 23:08:28,897 - INFO - ⏸️ Volume below average, skipping
+2026-04-22 23:09:01,218 - INFO - ⏸️ Volume below average, skipping
+2026-04-22 23:09:33,199 - INFO - ⏸️ Momentum not confirmed (price=79275.50, ema20=79278.22), skipping
+2026-04-22 23:10:05,186 - INFO - ⏸️ Momentum not confirmed (price=79268.10, ema20=79277.85), skipping
+2026-04-22 23:10:37,592 - INFO - 🤖 Gatekeeper (chat) evaluating market...
+2026-04-22 23:10:39,495 - INFO - HTTP Request: POST https://api.deepseek.com/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-22 23:10:45,755 - INFO - Gatekeeper: HOLD (conf:65.0%) in 8163ms - Mixed signals across timeframes: 5m shows strong momentum (RSI 80.5) but overbought, while 1m and 15m show neutral RSI near 50. Price is below 1m EMA20 but above 5m/15m EMAs, indicating short-term weakness within longer uptrends. ATR 29.11 shows moderate volatility but no clear directional bias across all timeframes simultaneously.
+2026-04-22 23:11:17,717 - INFO - ⏸️ Momentum not confirmed (price=79244.20, ema20=79280.87), skipping
+2026-04-22 23:11:50,748 - INFO - 🤖 Gatekeeper (chat) evaluating market...
+2026-04-22 23:11:50,926 - INFO - HTTP Request: POST https://api.deepseek.com/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-22 23:11:57,630 - INFO - Gatekeeper: HOLD (conf:65.0%) in 6881ms - Conflicting signals across timeframes. 5-min shows strong bullish momentum (RSI 72.92, price above EMA20), but 1-min and 15-min show bearish pressure (price below EMA20, RSI neutral/bearish). High 5-min RSI suggests overbought near-term risk. ATR indicates moderate volatility, but lack of consistent directional alignment advises caution.
+2026-04-22 23:12:29,881 - INFO - ⏸️ Volume below average, skipping
+2026-04-22 23:13:02,050 - INFO - ⏸️ Momentum not confirmed (price=79157.70, ema20=79271.12), skipping
+2026-04-22 23:13:34,031 - INFO - ⏸️ Momentum not confirmed (price=79157.70, ema20=79264.62), skipping
+2026-04-22 23:14:06,537 - INFO - ⏸️ Volume below average, skipping
+2026-04-22 23:14:38,862 - INFO - ⏸️ Volume below average, skipping
+2026-04-22 23:15:10,843 - INFO - ⏸️ Momentum not confirmed (price=79157.10, ema20=79250.31), skipping
+2026-04-22 23:15:42,810 - INFO - ⏸️ Momentum not confirmed (price=79140.40, ema20=79249.47), skipping
+2026-04-22 23:15:43,969 - WARNING - ⏹️ Bot stopped by user
+2026-04-22 23:15:46,470 - INFO - ==================================================
+2026-04-22 23:15:46,471 - INFO - 🚀 Enhanced BTC Trading Bot (Flexible Filters)
+2026-04-22 23:15:46,471 - INFO - ==================================================
+2026-04-22 23:15:46,471 - INFO - Gatekeeper: deepseek-chat (threshold: 55%)
+2026-04-22 23:15:46,471 - INFO - Strategist: deepseek-reasoner
+2026-04-22 23:15:46,471 - INFO - Leverage: 5x | Cooldown: 120s
+2026-04-22 23:15:46,471 - INFO - ==================================================
+2026-04-22 23:15:49,210 - INFO - ⏸️ Momentum not confirmed (price=79140.30, ema20=79249.47), skipping
+2026-04-22 23:16:21,282 - INFO - ⏸️ Momentum not confirmed (price=79151.50, ema20=79242.86), skipping
+2026-04-22 23:16:53,261 - INFO - ⏸️ Momentum not confirmed (price=79151.40, ema20=79242.86), skipping
+2026-04-22 23:17:25,243 - INFO - ⏸️ Momentum not confirmed (price=79145.80, ema20=79234.69), skipping
+2026-04-22 23:17:57,225 - INFO - ⏸️ Momentum not confirmed (price=79122.50, ema20=79233.53), skipping
+2026-04-22 23:18:29,542 - INFO - ⏸️ Volume below average, skipping
+2026-04-22 23:19:01,951 - INFO - ⏸️ Volume below average, skipping
+2026-04-22 23:19:34,329 - INFO - ⏸️ Volume below average, skipping
+2026-04-22 23:20:07,356 - INFO - ⏸️ Momentum not confirmed (price=79100.00, ema20=79218.94), skipping
+2026-04-22 23:20:39,755 - INFO - ⏸️ Volume below average, skipping
+2026-04-22 23:21:12,090 - INFO - ⏸️ Volume below average, skipping
+2026-04-22 23:21:44,474 - INFO - ⏸️ Volume below average, skipping
+2026-04-22 23:22:16,555 - INFO - ⏸️ Momentum not confirmed (price=79100.10, ema20=79192.73), skipping
+2026-04-22 23:22:48,547 - INFO - ⏸️ Momentum not confirmed (price=79100.10, ema20=79192.73), skipping
+2026-04-22 23:23:20,936 - INFO - ⏸️ Volume below average, skipping
+2026-04-22 23:23:53,454 - INFO - 🤖 Gatekeeper (chat) evaluating market...
+2026-04-22 23:23:53,893 - INFO - HTTP Request: POST https://api.deepseek.com/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-22 23:23:59,045 - INFO - Gatekeeper: HOLD (conf:65.0%) in 5590ms - Mixed signals across timeframes: 1m shows price below EMA20 with neutral RSI, 5m shows bullish RSI but price just above EMA20, 15m shows neutral RSI with price above EMA20. No clear directional bias; volatility moderate (ATR 41.44) but conflicting momentum signals.
+2026-04-22 23:24:30,974 - INFO - ⏸️ Momentum not confirmed (price=79012.70, ema20=79162.93), skipping
+2026-04-22 23:25:03,289 - INFO - ⏸️ Volume below average, skipping
+2026-04-22 23:25:35,279 - INFO - ⏸️ Momentum not confirmed (price=79011.40, ema20=79146.47), skipping
+2026-04-22 23:26:07,253 - INFO - ⏸️ Momentum not confirmed (price=79011.40, ema20=79132.83), skipping
+2026-04-22 23:26:39,240 - INFO - ⏸️ Momentum not confirmed (price=79011.50, ema20=79132.83), skipping
+2026-04-22 23:27:11,211 - INFO - ⏸️ Momentum not confirmed (price=79011.50, ema20=79132.83), skipping
+2026-04-22 23:27:43,201 - INFO - ⏸️ Momentum not confirmed (price=79012.50, ema20=79119.35), skipping
+2026-04-22 23:28:15,173 - INFO - ⏸️ Momentum not confirmed (price=79001.60, ema20=79118.81), skipping
+2026-04-22 23:28:47,571 - INFO - ⏸️ Momentum not confirmed (price=79001.70, ema20=79104.80), skipping
