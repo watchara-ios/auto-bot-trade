@@ -1015,3 +1015,75 @@ Request ID: 3CP5gxZJEdhC0cfi5IfcDtn6aL4acxWER6xAWoit2rxAkOmWdKK1tA&#x3D;&#x3D;
 2026-04-22 23:27:43,201 - INFO - ⏸️ Momentum not confirmed (price=79012.50, ema20=79119.35), skipping
 2026-04-22 23:28:15,173 - INFO - ⏸️ Momentum not confirmed (price=79001.60, ema20=79118.81), skipping
 2026-04-22 23:28:47,571 - INFO - ⏸️ Momentum not confirmed (price=79001.70, ema20=79104.80), skipping
+2026-04-22 23:35:42,461 - INFO - ==================================================
+2026-04-22 23:35:42,462 - INFO - \U0001f680 Enhanced BTC Trading Bot (Flexible Filters)
+2026-04-22 23:35:42,462 - INFO - ==================================================
+2026-04-22 23:35:42,462 - INFO - Gatekeeper: deepseek-chat (threshold: 55%)
+2026-04-22 23:35:42,463 - INFO - Strategist: deepseek-reasoner
+2026-04-22 23:35:42,463 - INFO - Leverage: 5x | Cooldown: 120s
+2026-04-22 23:35:42,463 - INFO - ==================================================
+2026-04-22 23:35:47,800 - INFO - \u23f8\ufe0f Momentum not confirmed (price=78956.60, ema20=79021.89), skipping
+2026-04-22 23:36:22,345 - INFO - \u23f8\ufe0f Volume below average, skipping
+2026-04-22 23:36:56,871 - INFO - \u23f8\ufe0f Volume below average, skipping
+2026-04-22 23:37:31,381 - INFO - \u23f8\ufe0f Volume below average, skipping
+2026-04-22 23:38:05,112 - INFO - \u23f8\ufe0f Momentum not confirmed (price=78939.80, ema20=79000.51), skipping
+2026-04-22 23:38:38,849 - INFO - \u23f8\ufe0f Momentum not confirmed (price=78915.40, ema20=78989.36), skipping
+2026-04-22 23:39:12,707 - INFO - \u23f8\ufe0f Momentum not confirmed (price=78926.00, ema20=78980.10), skipping
+2026-04-22 23:39:46,916 - INFO - \u23f8\ufe0f Momentum not confirmed (price=78931.10, ema20=78980.36), skipping
+2026-04-22 23:40:21,187 - INFO - \u23f8\ufe0f Volume below average, skipping
+2026-04-22 23:40:54,752 - INFO - \u23f8\ufe0f Momentum not confirmed (price=78904.80, ema20=78969.68), skipping
+2026-04-22 23:41:29,380 - INFO - \u23f8\ufe0f Volume below average, skipping
+2026-04-22 23:42:04,063 - INFO - \U0001f916 Gatekeeper (chat) evaluating market...
+2026-04-22 23:42:05,416 - INFO - HTTP Request: POST https://api.deepseek.com/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-22 23:42:10,655 - INFO - Gatekeeper: HOLD (conf:72.0%) in 6592ms - Conflicting signals across timeframes: 5-min shows bullish momentum (RSI 69.13, price above EMA20), but 1-min and 15-min show bearish pressure (RSI 39.24 & 43.64, price below EMA20). No clear directional consensus. ATR (68.74) indicates moderate volatility, but trend strength is inconsistent.
+2026-04-22 23:42:45,069 - INFO - \U0001f916 Gatekeeper (chat) evaluating market...
+2026-04-22 23:42:45,658 - INFO - HTTP Request: POST https://api.deepseek.com/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-22 23:42:51,169 - INFO - Gatekeeper: HOLD (conf:65.0%) in 6100ms - Conflicting signals across timeframes: 5-min shows bullish momentum (RSI 69.01, price above EMA20), but 1-min and 15-min show bearish/neutral momentum (RSI 44.44 & 43.53) and price below their EMAs. No clear directional bias. ATR (62.01) indicates moderate volatility, but trend alignment is insufficient.
+2026-04-22 23:43:25,486 - INFO - \U0001f916 Gatekeeper (chat) evaluating market...
+2026-04-22 23:43:25,847 - INFO - HTTP Request: POST https://api.deepseek.com/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-22 23:43:30,971 - INFO - Gatekeeper: HOLD (conf:65.0%) in 5484ms - Conflicting signals across timeframes: 5-min shows bullish momentum (RSI 68.85, price above EMA20), but 1-min and 15-min show bearish/neutral momentum (RSI 46.32 & 43.38) and price below their EMAs. No clear directional consensus. Volatility is moderate (ATR 54.51).
+2026-04-22 23:44:05,040 - INFO - \U0001f916 Gatekeeper (chat) evaluating market...
+2026-04-22 23:44:05,260 - INFO - HTTP Request: POST https://api.deepseek.com/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-22 23:44:10,862 - INFO - Gatekeeper: HOLD (conf:65.0%) in 5822ms - Conflicting signals across timeframes: 5-min shows bullish momentum (RSI 68.48, price above EMA20), but 1-min and 15-min show bearish/neutral bias (price below EMA20, RSI 43-45). No clear directional consensus. Volatility is moderate (ATR 55.13), but trend strength is inconsistent.
+2026-04-22 23:44:44,208 - INFO - \u23f8\ufe0f Momentum not confirmed (price=78847.50, ema20=78929.01), skipping
+2026-04-22 23:45:17,767 - INFO - \u23f8\ufe0f Momentum not confirmed (price=78847.50, ema20=78920.82), skipping
+2026-04-22 23:45:51,343 - INFO - \u23f8\ufe0f Momentum not confirmed (price=78847.50, ema20=78920.82), skipping
+2026-04-22 23:46:24,875 - INFO - \u23f8\ufe0f Momentum not confirmed (price=78846.30, ema20=78913.23), skipping
+2026-04-22 23:46:59,131 - INFO - \u23f8\ufe0f Momentum not confirmed (price=78846.30, ema20=78913.23), skipping
+2026-04-22 23:47:32,619 - INFO - \u23f8\ufe0f Momentum not confirmed (price=78846.40, ema20=78906.20), skipping
+2026-04-22 23:48:07,526 - INFO - \u23f8\ufe0f Momentum not confirmed (price=78846.40, ema20=78906.20), skipping
+2026-04-22 23:48:41,874 - INFO - \u23f8\ufe0f Momentum not confirmed (price=78846.40, ema20=78897.96), skipping
+2026-04-22 23:49:15,863 - INFO - \u23f8\ufe0f Momentum not confirmed (price=78846.40, ema20=78890.91), skipping
+2026-04-22 23:49:50,160 - INFO - \u23f8\ufe0f Momentum not confirmed (price=78846.30, ema20=78890.90), skipping
+2026-04-22 23:50:23,488 - INFO - \u23f8\ufe0f Momentum not confirmed (price=78846.30, ema20=78884.52), skipping
+2026-04-22 23:50:57,201 - INFO - \u23f8\ufe0f Momentum not confirmed (price=78846.30, ema20=78884.52), skipping
+2026-04-22 23:51:32,603 - INFO - \u23f8\ufe0f Momentum not confirmed (price=78846.30, ema20=78883.64), skipping
+2026-04-22 23:52:09,120 - INFO - \u23f8\ufe0f Volume below average, skipping
+2026-04-22 23:52:43,709 - INFO - \U0001f916 Gatekeeper (chat) evaluating market...
+2026-04-22 23:52:43,979 - INFO - HTTP Request: POST https://api.deepseek.com/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-22 23:52:48,980 - INFO - Gatekeeper: HOLD (conf:72.0%) in 5271ms - Mixed signals across timeframes: 5m shows bullish momentum (RSI 59.69, price above EMA20), but 1m and 15m indicate weakness (price below EMA20, RSI < 47). No clear directional consensus; volatility is moderate (ATR 31.89) but trend is indecisive.
+2026-04-22 23:53:22,439 - INFO - \u23f8\ufe0f Momentum not confirmed (price=78774.30, ema20=78868.78), skipping
+2026-04-22 23:53:56,093 - INFO - \u23f8\ufe0f Momentum not confirmed (price=78766.50, ema20=78868.39), skipping
+2026-04-22 23:54:29,670 - INFO - \u23f8\ufe0f Momentum not confirmed (price=78766.50, ema20=78858.89), skipping
+2026-04-22 23:55:04,446 - INFO - \u23f8\ufe0f Volume below average, skipping
+2026-04-22 23:55:40,274 - INFO - \u23f8\ufe0f Volume below average, skipping
+2026-04-22 23:56:14,254 - INFO - \u23f8\ufe0f Momentum not confirmed (price=78687.60, ema20=78832.10), skipping
+2026-04-22 23:56:47,826 - INFO - \u23f8\ufe0f Momentum not confirmed (price=78727.90, ema20=78834.11), skipping
+2026-04-22 23:57:22,000 - INFO - \u26a0\ufe0f Momentum weak but price > EMA20, allowing entry
+2026-04-22 23:57:22,967 - INFO - \u23f8\ufe0f Volume below average, skipping
+2026-04-22 23:57:58,007 - INFO - \u23f8\ufe0f Momentum not confirmed (price=78715.70, ema20=78829.50), skipping
+2026-04-22 23:58:33,178 - INFO - \u23f8\ufe0f Volume below average, skipping
+2026-04-22 23:59:07,315 - INFO - \u23f8\ufe0f Volume below average, skipping
+2026-04-22 23:59:41,168 - INFO - \u23f8\ufe0f Momentum not confirmed (price=78710.80, ema20=78808.29), skipping
+2026-04-23 00:00:11,169 - INFO - \U0001f4c5 New trading day. Yesterday's PnL: $0.00
+2026-04-23 00:00:15,524 - INFO - \u23f8\ufe0f Momentum not confirmed (price=78708.30, ema20=78805.91), skipping
+2026-04-23 00:00:48,928 - INFO - \u23f8\ufe0f Momentum not confirmed (price=78710.90, ema20=78806.04), skipping
+2026-04-23 00:01:22,752 - INFO - \u23f8\ufe0f Momentum not confirmed (price=78790.20, ema20=78804.36), skipping
+2026-04-23 00:01:57,128 - INFO - \u26a0\ufe0f Momentum weak but price > EMA20, allowing entry
+2026-04-23 00:01:57,897 - INFO - \u23f8\ufe0f Volume below average, skipping
+2026-04-23 00:02:33,560 - INFO - \u26a0\ufe0f Momentum weak but price > EMA20, allowing entry
+2026-04-23 00:02:34,256 - INFO - \u23f8\ufe0f Volume below average, skipping
+2026-04-23 00:03:09,465 - INFO - \u23f8\ufe0f Volume below average, skipping
+2026-04-23 00:03:42,901 - INFO - \u26a0\ufe0f Momentum weak but price > EMA20, allowing entry
+2026-04-23 00:03:43,633 - INFO - \u23f8\ufe0f Volume below average, skipping
+2026-04-23 00:04:17,845 - INFO - \u23f8\ufe0f Volume below average, skipping
