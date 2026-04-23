@@ -15,3 +15,6 @@
 2026-04-24 00:20:49,540 - ERROR - Error fetching 5m: binance GET https://demo.binance.com/api/v3/klines?interval=5m&limit=100&symbol=BTCUSDT
 2026-04-24 00:26:52,662 - INFO - ⏹️ Bot stopped by user
 2026-04-24 00:26:56,226 - INFO - 🚀 Binance Demo BTC Bot started (V2 + AI)
+2026-04-24 00:34:42,010 - INFO - ⏹️ Bot stopped by user
+2026-04-24 00:40:25,378 - INFO - 🚀 Binance Demo BTC Bot started (V2 + AI)
+2026-04-24 00:41:25,391 - INFO - ⏹️ Bot stopped by user

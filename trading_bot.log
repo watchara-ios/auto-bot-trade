@@ -1241,3 +1241,22 @@ Request ID: 3CP5gxZJEdhC0cfi5IfcDtn6aL4acxWER6xAWoit2rxAkOmWdKK1tA&#x3D;&#x3D;
 2026-04-23 00:53:54,620 - INFO - \u23f8\ufe0f Volume below average, skipping
 2026-04-23 00:54:24,621 - ERROR - \u274c Daily loss limit reached: 100.00%
 2026-04-23 09:39:06,710 - WARNING - \u23f9\ufe0f Bot stopped by user
+2026-04-24 00:41:27,075 - INFO - เวลาซิงค์แล้ว offset: -20ms
+2026-04-24 00:41:27,846 - INFO - ==================================================
+2026-04-24 00:41:27,846 - INFO - 🚀 Multi-Symbol BTC+ETH Trading Bot (Active Mode with Reasoner Exit)
+2026-04-24 00:41:27,846 - INFO - ==================================================
+2026-04-24 00:41:27,846 - INFO - Symbols: BTCUSDT, ETHUSDT
+2026-04-24 00:41:27,846 - INFO - Gatekeeper: deepseek-chat (threshold: 50%)
+2026-04-24 00:41:27,846 - INFO - Strategist: deepseek-reasoner
+2026-04-24 00:41:27,846 - INFO - Leverage: 5x | Cooldown: 60s
+2026-04-24 00:41:27,846 - INFO - Min ATR%: 0.3% | Reasoner Exit Check ทุก 1 ชม.
+2026-04-24 00:41:27,847 - INFO - ==================================================
+2026-04-24 00:41:29,039 - WARNING - ⚠️ พบสถานะ BTCUSDT เปิดค้างอยู่ โหลดเข้าสู่ระบบ
+2026-04-24 00:41:29,781 - WARNING - ⚠️ พบสถานะ ETHUSDT เปิดค้างอยู่ โหลดเข้าสู่ระบบ
+2026-04-24 00:41:29,781 - WARNING - ⚠️ Exposure รวม 42.87% เกิน 20.0% ห้ามเปิดเพิ่ม
+2026-04-24 00:42:29,783 - WARNING - ⚠️ Exposure รวม 42.87% เกิน 20.0% ห้ามเปิดเพิ่ม
+2026-04-24 00:43:29,789 - WARNING - ⚠️ Exposure รวม 42.87% เกิน 20.0% ห้ามเปิดเพิ่ม
+2026-04-24 00:44:29,796 - WARNING - ⚠️ Exposure รวม 42.87% เกิน 20.0% ห้ามเปิดเพิ่ม
+2026-04-24 00:45:29,802 - WARNING - ⚠️ Exposure รวม 42.87% เกิน 20.0% ห้ามเปิดเพิ่ม
+2026-04-24 00:46:29,804 - WARNING - ⚠️ Exposure รวม 42.87% เกิน 20.0% ห้ามเปิดเพิ่ม
+2026-04-24 00:46:46,567 - WARNING - ⏹️ Bot หยุดโดยผู้ใช้

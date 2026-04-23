@@ -1,0 +1,5 @@
+# Trading bot logs
+log/
+logs/
+*.log
+trading_bot.log
