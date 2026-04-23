@@ -1087,3 +1087,157 @@ Request ID: 3CP5gxZJEdhC0cfi5IfcDtn6aL4acxWER6xAWoit2rxAkOmWdKK1tA&#x3D;&#x3D;
 2026-04-23 00:03:42,901 - INFO - \u26a0\ufe0f Momentum weak but price > EMA20, allowing entry
 2026-04-23 00:03:43,633 - INFO - \u23f8\ufe0f Volume below average, skipping
 2026-04-23 00:04:17,845 - INFO - \u23f8\ufe0f Volume below average, skipping
+2026-04-23 00:04:51,916 - INFO - \U0001f916 Gatekeeper (chat) evaluating market...
+2026-04-23 00:04:52,198 - INFO - HTTP Request: POST https://api.deepseek.com/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-23 00:04:57,786 - INFO - Gatekeeper: HOLD (conf:72.0%) in 5870ms - Conflicting signals across timeframes: 1m and 5m show price above EMA with bullish RSI, but 15m shows price just above EMA with bearish RSI (45.83), indicating weak momentum on a higher timeframe. Volatility (ATR) is adequate, but the lack of a clear, aligned directional bias suggests waiting for a stronger consensus.
+2026-04-23 00:05:31,187 - INFO - \u26a0\ufe0f Momentum weak but price > EMA20, allowing entry
+2026-04-23 00:05:31,817 - INFO - \u23f8\ufe0f Volume below average, skipping
+2026-04-23 00:06:05,902 - INFO - \u23f8\ufe0f Volume below average, skipping
+2026-04-23 00:06:41,330 - INFO - \U0001f916 Gatekeeper (chat) evaluating market...
+2026-04-23 00:06:41,817 - INFO - HTTP Request: POST https://api.deepseek.com/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-23 00:06:46,777 - INFO - Gatekeeper: HOLD (conf:65.0%) in 5447ms - Conflicting signals across timeframes. 1m and 5m show price near/above EMA with neutral RSI, but 15m shows bearish momentum (RSI 38.2) despite price above EMA. No clear, aligned directional bias. Volatility (ATR) is adequate, but trend and momentum are not in agreement.
+2026-04-23 00:07:20,659 - INFO - \u26a0\ufe0f Momentum weak but price > EMA20, allowing entry
+2026-04-23 00:07:21,293 - INFO - \u23f8\ufe0f Volume below average, skipping
+2026-04-23 00:07:55,374 - INFO - \u26a0\ufe0f Momentum weak but price > EMA20, allowing entry
+2026-04-23 00:07:56,023 - INFO - \u23f8\ufe0f Volume below average, skipping
+2026-04-23 00:08:29,901 - INFO - \u26a0\ufe0f Momentum weak but price > EMA20, allowing entry
+2026-04-23 00:08:30,604 - INFO - \u23f8\ufe0f Volume below average, skipping
+2026-04-23 00:09:04,302 - INFO - \u26a0\ufe0f Momentum weak but price > EMA20, allowing entry
+2026-04-23 00:09:05,048 - INFO - \u23f8\ufe0f Volume below average, skipping
+2026-04-23 00:09:39,393 - INFO - \u26a0\ufe0f Momentum weak but price > EMA20, allowing entry
+2026-04-23 00:09:40,124 - INFO - \u23f8\ufe0f Volume below average, skipping
+2026-04-23 00:10:15,079 - INFO - \u23f8\ufe0f Volume below average, skipping
+2026-04-23 00:10:49,866 - INFO - \U0001f916 Gatekeeper (chat) evaluating market...
+2026-04-23 00:10:50,174 - INFO - HTTP Request: POST https://api.deepseek.com/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-23 00:10:55,916 - INFO - Gatekeeper: HOLD (conf:65.0%) in 6050ms - Mixed signals across timeframes. 1m and 15m RSI are oversold (<40) with price near/below EMA20, suggesting short-term bearish momentum. However, 5m shows neutral RSI with price below its EMA20, indicating no clear higher-timeframe trend alignment. ATR shows moderate volatility, but conflicting EMAs and RSI levels lack a clear, unified directional bias.
+2026-04-23 00:11:30,365 - INFO - \u23f8\ufe0f Volume below average, skipping
+2026-04-23 00:12:04,672 - INFO - \u23f8\ufe0f Volume below average, skipping
+2026-04-23 00:12:40,259 - INFO - \u23f8\ufe0f Volume below average, skipping
+2026-04-23 00:13:14,198 - INFO - \u26a0\ufe0f Momentum weak but price > EMA20, allowing entry
+2026-04-23 00:13:14,875 - INFO - \u23f8\ufe0f Volume below average, skipping
+2026-04-23 00:13:49,404 - INFO - \U0001f916 Gatekeeper (chat) evaluating market...
+2026-04-23 00:13:49,599 - INFO - HTTP Request: POST https://api.deepseek.com/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-23 00:13:55,461 - INFO - Gatekeeper: HOLD (conf:65.0%) in 6057ms - Conflicting signals across timeframes: 5-min shows bullish bias (price > EMA20, RSI > 50), but 15-min is bearish (RSI oversold at 39.94) and 1-min is neutral (RSI ~48). No clear directional consensus. Volatility is moderate (ATR 54.51), but trend strength is weak due to mixed EMA alignments.
+2026-04-23 00:14:30,074 - INFO - \u26a0\ufe0f Momentum weak but price > EMA20, allowing entry
+2026-04-23 00:14:30,775 - INFO - \u23f8\ufe0f Volume below average, skipping
+2026-04-23 00:15:04,222 - INFO - \u26a0\ufe0f Momentum weak but price > EMA20, allowing entry
+2026-04-23 00:15:04,951 - INFO - \u23f8\ufe0f Volume below average, skipping
+2026-04-23 00:15:38,229 - INFO - \u26a0\ufe0f Momentum weak but price > EMA20, allowing entry
+2026-04-23 00:15:38,927 - INFO - \u23f8\ufe0f Volume below average, skipping
+2026-04-23 00:16:12,343 - INFO - \u26a0\ufe0f Momentum weak but price > EMA20, allowing entry
+2026-04-23 00:16:12,990 - INFO - \u23f8\ufe0f Volume below average, skipping
+2026-04-23 00:16:46,480 - INFO - \u26a0\ufe0f Momentum weak but price > EMA20, allowing entry
+2026-04-23 00:16:47,173 - INFO - \U0001f916 Gatekeeper (chat) evaluating market...
+2026-04-23 00:16:47,387 - INFO - HTTP Request: POST https://api.deepseek.com/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-23 00:16:51,987 - INFO - Gatekeeper: HOLD (conf:65.0%) in 4813ms - Conflicting signals across timeframes: 5m shows price below EMA20 with neutral RSI, while 15m shows price above EMA20 but oversold RSI. 1m shows weak momentum. No clear, aligned directional bias; volatility is moderate but trend is indecisive.
+2026-04-23 00:17:26,526 - INFO - \U0001f916 Gatekeeper (chat) evaluating market...
+2026-04-23 00:17:26,751 - INFO - HTTP Request: POST https://api.deepseek.com/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-23 00:17:32,785 - INFO - Gatekeeper: HOLD (conf:72.0%) in 6258ms - Mixed signals across timeframes. 15m shows price below EMA20 with oversold RSI (36.38), suggesting potential bounce, but 1m is also oversold (RSI 36.65) with price below EMA20, while 5m shows neutral RSI (53.12) with price still below EMA20. No clear directional bias established; volatility (ATR 46.50) is moderate but conflicting momentum signals advise waiting for clearer alignment.
+2026-04-23 00:18:07,025 - INFO - \U0001f916 Gatekeeper (chat) evaluating market...
+2026-04-23 00:18:07,220 - INFO - HTTP Request: POST https://api.deepseek.com/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-23 00:18:13,828 - INFO - Gatekeeper: HOLD (conf:65.0%) in 6798ms - Mixed signals across timeframes. 1m and 15m show oversold RSI (<36) with price below EMA20, suggesting short-term bearish pressure, but 5m RSI is neutral (52.47) with price below EMA20. No clear directional bias—EMA20 alignment is inconsistent (1m bearish, 5m bearish, 15m nearly flat). ATR (47.88) indicates moderate volatility, but conflicting momentum signals and lack of trend convergence advise waiting for clearer alignment.
+2026-04-23 00:18:47,422 - INFO - \u23f8\ufe0f Momentum not confirmed (price=78780.80, ema20=78864.10), skipping
+2026-04-23 00:19:21,841 - INFO - \u23f8\ufe0f Momentum not confirmed (price=78780.70, ema20=78860.38), skipping
+2026-04-23 00:19:55,903 - INFO - \u23f8\ufe0f Momentum not confirmed (price=78780.70, ema20=78860.38), skipping
+2026-04-23 00:20:31,053 - INFO - \u23f8\ufe0f Volume below average, skipping
+2026-04-23 00:21:06,084 - INFO - \u23f8\ufe0f Momentum not confirmed (price=78780.80, ema20=78862.00), skipping
+2026-04-23 00:21:39,438 - INFO - \u23f8\ufe0f Momentum not confirmed (price=78784.20, ema20=78858.35), skipping
+2026-04-23 00:22:13,372 - INFO - \u23f8\ufe0f Momentum not confirmed (price=78784.20, ema20=78857.26), skipping
+2026-04-23 00:22:48,607 - INFO - \U0001f916 Gatekeeper (chat) evaluating market...
+2026-04-23 00:22:49,128 - INFO - HTTP Request: POST https://api.deepseek.com/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-23 00:22:54,624 - INFO - Gatekeeper: HOLD (conf:65.0%) in 6017ms - Mixed signals across timeframes. 15m shows price at EMA20 support with oversold RSI, but 1m and 5m EMAs are above price indicating short-term resistance. Momentum is weak (RSI mostly below 50) and volatility is moderate (ATR 37.69). No clear, strong directional bias established.
+2026-04-23 00:23:28,697 - INFO - \u23f8\ufe0f Volume below average, skipping
+2026-04-23 00:24:02,061 - INFO - \u23f8\ufe0f Momentum not confirmed (price=78790.10, ema20=78856.83), skipping
+2026-04-23 00:24:36,866 - INFO - \u23f8\ufe0f Volume below average, skipping
+2026-04-23 00:25:10,522 - INFO - \u23f8\ufe0f Momentum not confirmed (price=78751.00, ema20=78846.44), skipping
+2026-04-23 00:25:44,498 - INFO - \u23f8\ufe0f Volume below average, skipping
+2026-04-23 00:26:18,200 - INFO - \u23f8\ufe0f Momentum not confirmed (price=78760.60, ema20=78840.72), skipping
+2026-04-23 00:26:52,924 - INFO - \u23f8\ufe0f Momentum not confirmed (price=78772.80, ema20=78841.33), skipping
+2026-04-23 00:27:28,693 - INFO - \u23f8\ufe0f Volume below average, skipping
+2026-04-23 00:28:02,790 - INFO - \u23f8\ufe0f Volume below average, skipping
+2026-04-23 00:28:38,335 - INFO - \u23f8\ufe0f Volume below average, skipping
+2026-04-23 00:29:12,762 - INFO - \u26a0\ufe0f Momentum weak but price > EMA20, allowing entry
+2026-04-23 00:29:13,968 - INFO - \U0001f916 Gatekeeper (chat) evaluating market...
+2026-04-23 00:29:14,155 - INFO - HTTP Request: POST https://api.deepseek.com/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-23 00:29:18,433 - INFO - Gatekeeper: HOLD (conf:65.0%) in 4465ms - Conflicting signals across timeframes: 5-min shows bearish price below EMA20 with neutral RSI, while 15-min shows bullish price above EMA20 but oversold RSI. 1-min shows weak momentum. No clear directional consensus; volatility is moderate but trend is indecisive.
+2026-04-23 00:29:52,038 - INFO - \u26a0\ufe0f Momentum weak but price > EMA20, allowing entry
+2026-04-23 00:29:52,757 - INFO - \U0001f916 Gatekeeper (chat) evaluating market...
+2026-04-23 00:29:52,931 - INFO - HTTP Request: POST https://api.deepseek.com/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-23 00:29:58,332 - INFO - Gatekeeper: HOLD (conf:65.0%) in 5575ms - Conflicting signals across timeframes. 1m and 15m RSI are oversold (<45) with price near/above EMA20, suggesting potential support, but 5m shows price below EMA20 with neutral RSI. No clear, aligned directional bias. Volatility (ATR 38) is adequate, but trend consensus is lacking.
+2026-04-23 00:30:33,058 - INFO - \u23f8\ufe0f Volume below average, skipping
+2026-04-23 00:31:06,689 - INFO - \u26a0\ufe0f Momentum weak but price > EMA20, allowing entry
+2026-04-23 00:31:07,365 - INFO - \u23f8\ufe0f Volume below average, skipping
+2026-04-23 00:31:40,732 - INFO - \u23f8\ufe0f Momentum not confirmed (price=78803.70, ema20=78822.41), skipping
+2026-04-23 00:32:14,289 - INFO - \u26a0\ufe0f Momentum weak but price > EMA20, allowing entry
+2026-04-23 00:32:14,999 - INFO - \u23f8\ufe0f Volume below average, skipping
+2026-04-23 00:32:48,996 - INFO - \u26a0\ufe0f Momentum weak but price > EMA20, allowing entry
+2026-04-23 00:32:49,688 - INFO - \u23f8\ufe0f Volume below average, skipping
+2026-04-23 00:33:23,327 - INFO - \u26a0\ufe0f Momentum weak but price > EMA20, allowing entry
+2026-04-23 00:33:24,198 - INFO - \u23f8\ufe0f Volume below average, skipping
+2026-04-23 00:33:59,537 - INFO - \u23f8\ufe0f Volume below average, skipping
+2026-04-23 00:34:33,155 - INFO - \u26a0\ufe0f Momentum weak but price > EMA20, allowing entry
+2026-04-23 00:34:33,829 - INFO - \u23f8\ufe0f Volume below average, skipping
+2026-04-23 00:35:07,941 - INFO - \u23f8\ufe0f Volume below average, skipping
+2026-04-23 00:35:42,008 - INFO - \U0001f916 Gatekeeper (chat) evaluating market...
+2026-04-23 00:35:42,236 - INFO - HTTP Request: POST https://api.deepseek.com/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-23 00:35:47,434 - INFO - Gatekeeper: HOLD (conf:75.0%) in 5425ms - Mixed signals across timeframes: 1m shows slight bullish momentum (RSI 62.97) but price below EMA20; 5m and 15m show bearish momentum (RSI 59.19 and 41.15) with price below EMA20 on 5m. No clear directional bias. Volatility is moderate (ATR 38.36), but conflicting trends suggest waiting for clearer alignment.
+2026-04-23 00:36:22,589 - INFO - \u23f8\ufe0f Volume below average, skipping
+2026-04-23 00:36:58,004 - INFO - \U0001f916 Gatekeeper (chat) evaluating market...
+2026-04-23 00:36:58,720 - INFO - HTTP Request: POST https://api.deepseek.com/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-23 00:37:03,424 - INFO - Gatekeeper: HOLD (conf:72.0%) in 5420ms - Mixed signals across timeframes: 1m shows price below EMA20 with neutral-high RSI, 5m shows price below EMA20 with neutral RSI, 15m shows bearish momentum (RSI 40.14) but price near EMA20. No clear directional bias; volatility moderate (ATR 39.34) but conflicting trends suggest waiting for clearer alignment.
+2026-04-23 00:37:39,184 - INFO - \u23f8\ufe0f Volume below average, skipping
+2026-04-23 00:38:13,634 - INFO - \u23f8\ufe0f Momentum not confirmed (price=78742.40, ema20=78787.33), skipping
+2026-04-23 00:38:47,352 - INFO - \u23f8\ufe0f Momentum not confirmed (price=78742.40, ema20=78787.33), skipping
+2026-04-23 00:39:21,396 - INFO - \u23f8\ufe0f Volume below average, skipping
+2026-04-23 00:39:55,541 - INFO - \u23f8\ufe0f Volume below average, skipping
+2026-04-23 00:40:30,578 - INFO - \u23f8\ufe0f Volume below average, skipping
+2026-04-23 00:41:05,708 - INFO - \U0001f916 Gatekeeper (chat) evaluating market...
+2026-04-23 00:41:06,214 - INFO - HTTP Request: POST https://api.deepseek.com/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-23 00:41:11,678 - INFO - Gatekeeper: HOLD (conf:65.0%) in 5969ms - Mixed signals across timeframes. 1m shows bullish momentum (RSI 61.86, price above EMA20), but 5m and 15m show weakening momentum (RSI 56.46 and 42.92) and price near or below their EMAs. No clear, aligned directional bias. Volatility (ATR 39.47) is acceptable, but conflicting trends advise caution.
+2026-04-23 00:41:46,271 - INFO - \u26a0\ufe0f Momentum weak but price > EMA20, allowing entry
+2026-04-23 00:41:47,238 - INFO - \u23f8\ufe0f Volume below average, skipping
+2026-04-23 00:42:20,933 - INFO - \u26a0\ufe0f Momentum weak but price > EMA20, allowing entry
+2026-04-23 00:42:21,689 - INFO - \u23f8\ufe0f Volume below average, skipping
+2026-04-23 00:42:54,927 - INFO - \u26a0\ufe0f Momentum weak but price > EMA20, allowing entry
+2026-04-23 00:42:55,890 - INFO - \u23f8\ufe0f Volume below average, skipping
+2026-04-23 00:43:29,856 - INFO - \u26a0\ufe0f Momentum weak but price > EMA20, allowing entry
+2026-04-23 00:43:30,541 - INFO - \u23f8\ufe0f Volume below average, skipping
+2026-04-23 00:44:04,766 - INFO - \u23f8\ufe0f Volume below average, skipping
+2026-04-23 00:44:38,956 - INFO - \u26a0\ufe0f Momentum weak but price > EMA20, allowing entry
+2026-04-23 00:44:39,811 - INFO - \u23f8\ufe0f Volume below average, skipping
+2026-04-23 00:45:13,149 - INFO - \u23f8\ufe0f Momentum not confirmed (price=78796.00, ema20=78797.33), skipping
+2026-04-23 00:45:47,944 - INFO - \U0001f916 Gatekeeper (chat) evaluating market...
+2026-04-23 00:45:48,135 - INFO - HTTP Request: POST https://api.deepseek.com/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-23 00:45:53,117 - INFO - Gatekeeper: HOLD (conf:65.0%) in 5172ms - Mixed signals across timeframes. 1m and 5m RSI show neutral-bullish momentum, but 15m RSI is weak (41.52). Price is below EMA20 on all three timeframes, indicating short-term bearish pressure. ATR (30.24) shows moderate volatility, but no clear, strong directional bias exists to justify a trade entry.
+2026-04-23 00:46:27,072 - INFO - \u23f8\ufe0f Volume below average, skipping
+2026-04-23 00:47:03,468 - INFO - \U0001f916 Gatekeeper (chat) evaluating market...
+2026-04-23 00:47:03,706 - INFO - HTTP Request: POST https://api.deepseek.com/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-23 00:47:08,206 - INFO - Gatekeeper: HOLD (conf:65.0%) in 4737ms - Mixed signals across timeframes. 1m and 5m RSI show neutral-bullish momentum, but 15m RSI is bearish at 40.32. Price is below all three EMAs, indicating short-term bearish pressure. ATR of 31.45 shows moderate volatility, but no clear directional bias exists due to conflicting trends.
+2026-04-23 00:47:42,270 - INFO - \u23f8\ufe0f Momentum not confirmed (price=78754.40, ema20=78794.24), skipping
+2026-04-23 00:48:17,125 - INFO - \U0001f916 Gatekeeper (chat) evaluating market...
+2026-04-23 00:48:17,406 - INFO - HTTP Request: POST https://api.deepseek.com/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-23 00:48:22,410 - INFO - Gatekeeper: HOLD (conf:75.0%) in 5285ms - Mixed signals across timeframes: 1m shows bullish momentum (RSI 67.44, price above EMA20), but 5m and 15m show weakening momentum (RSI 61.86 and 38.28) and price near or below EMAs. No clear directional bias; volatility is moderate but trend is inconsistent.
+2026-04-23 00:48:56,693 - INFO - \U0001f916 Gatekeeper (chat) evaluating market...
+2026-04-23 00:48:56,893 - INFO - HTTP Request: POST https://api.deepseek.com/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-23 00:49:01,204 - INFO - Gatekeeper: HOLD (conf:65.0%) in 4511ms - Conflicting signals across timeframes: 1m shows bullish momentum (RSI 67, price above EMA20), but 5m and 15m show weakening or bearish momentum (15m RSI 38, price near EMA20). No clear directional consensus; volatility is moderate but trend is indecisive.
+2026-04-23 00:49:34,618 - INFO - \u26a0\ufe0f Momentum weak but price > EMA20, allowing entry
+2026-04-23 00:49:35,269 - INFO - \u23f8\ufe0f Volume below average, skipping
+2026-04-23 00:50:08,746 - INFO - \u26a0\ufe0f Momentum weak but price > EMA20, allowing entry
+2026-04-23 00:50:09,473 - INFO - \u23f8\ufe0f Volume below average, skipping
+2026-04-23 00:50:44,322 - INFO - \u26a0\ufe0f Momentum weak but price > EMA20, allowing entry
+2026-04-23 00:50:45,303 - INFO - \u23f8\ufe0f Volume below average, skipping
+2026-04-23 00:51:20,476 - INFO - \u26a0\ufe0f Momentum weak but price > EMA20, allowing entry
+2026-04-23 00:51:21,586 - INFO - \u23f8\ufe0f Volume below average, skipping
+2026-04-23 00:51:55,563 - INFO - \u26a0\ufe0f Momentum weak but price > EMA20, allowing entry
+2026-04-23 00:51:56,315 - INFO - \u23f8\ufe0f Volume below average, skipping
+2026-04-23 00:52:29,928 - INFO - \u26a0\ufe0f Momentum weak but price > EMA20, allowing entry
+2026-04-23 00:52:30,612 - INFO - \U0001f916 Gatekeeper (chat) evaluating market...
+2026-04-23 00:52:30,909 - INFO - HTTP Request: POST https://api.deepseek.com/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-23 00:52:36,639 - INFO - Gatekeeper: HOLD (conf:72.0%) in 6026ms - Mixed signals across timeframes: 1m shows bullish momentum (RSI 65.81, price above EMA20) but 15m reveals underlying weakness (RSI 38.38). EMA20 alignment is inconsistent (1m: +65.42, 5m: +5.12, 15m: +15.09). ATR 42.55 indicates moderate volatility, but no clear directional bias emerges from conflicting RSI readings across timeframes.
+2026-04-23 00:53:11,425 - INFO - \u26a0\ufe0f Momentum weak but price > EMA20, allowing entry
+2026-04-23 00:53:12,461 - INFO - \u23f8\ufe0f Volume below average, skipping
+2026-04-23 00:53:49,169 - ERROR - API error: {'code': -1021, 'msg': 'Timestamp for this request is outside of the recvWindow.'}
+2026-04-23 00:53:53,876 - INFO - \u26a0\ufe0f Momentum weak but price > EMA20, allowing entry
+2026-04-23 00:53:54,620 - INFO - \u23f8\ufe0f Volume below average, skipping
+2026-04-23 00:54:24,621 - ERROR - \u274c Daily loss limit reached: 100.00%
+2026-04-23 09:39:06,710 - WARNING - \u23f9\ufe0f Bot stopped by user
