@@ -1,859 +1,634 @@
+# ============================================================
+# V28 BINANCE FUTURES DEMO BOT
+# ------------------------------------------------------------
+# DEMO / TESTNET ONLY
+#
+# Required:
+#   pip install pandas numpy requests python-dotenv scikit-learn joblib
+#
+# .env example:
+#   BINANCE_API_KEY=your_testnet_key
+#   BINANCE_SECRET=your_testnet_secret
+#
+# Run:
+#   python3 v28_binance_futures_demo_bot.py
+#
+# Important:
+#   - Uses Binance Futures Testnet endpoint:
+#       https://demo-fapi.binance.com
+#   - Default DRY_RUN = True. Set DRY_RUN = False only after checking logs.
+#   - This is NOT financial advice and not guaranteed profitable.
+# ============================================================
+
 import os
 import time
-import json
 import hmac
+import json
 import hashlib
 import logging
-import requests
-import numpy as np
+from pathlib import Path
 from datetime import datetime
 from urllib.parse import urlencode
-from dotenv import load_dotenv
-from openai import OpenAI
-from dataclasses import dataclass
-from typing import List, Optional, Dict, Any
 
-# ===== LOAD ENV =====
+import requests
+import numpy as np
+import pandas as pd
+from dotenv import load_dotenv
+
+# =====================
+# LOAD ENV
+# =====================
 load_dotenv()
 
-# ===== LOGGER =====
-logging.basicConfig(
-    filename='trading_bot.log',
-    level=logging.INFO,
-    format='%(asctime)s - %(levelname)s - %(message)s'
-)
-
-class Logger:
-    @staticmethod
-    def _time():
-        return datetime.now().strftime("%H:%M:%S")
-
-    @staticmethod
-    def info(msg):
-        print(f"[{Logger._time()}] 📘 {msg}")
-        logging.info(msg)
-
-    @staticmethod
-    def success(msg):
-        print(f"[{Logger._time()}] ✅ {msg}")
-        logging.info(msg)
-
-    @staticmethod
-    def error(msg):
-        print(f"[{Logger._time()}] ❌ {msg}")
-        logging.error(msg)
-
-    @staticmethod
-    def warn(msg):
-        print(f"[{Logger._time()}] ⚠️ {msg}")
-        logging.warning(msg)
-
-
-# ===== CONFIG =====
+# =====================
+# CONFIG
+# =====================
 class Config:
-    # Binance
     API_KEY = os.getenv("BINANCE_API_KEY")
     SECRET = os.getenv("BINANCE_SECRET")
-    BASE_URL = "https://demo-fapi.binance.com"   # เปลี่ยนเป็น fapi.binance.com สำหรับเทรดจริง
-    SYMBOLS = ["BTCUSDT", "ETHUSDT"]
+    BASE_URL = "https://demo-fapi.binance.com"
 
-    # DeepSeek
-    DEEPSEEK_KEY = os.getenv("DEEPSEEK_API_KEY")
-    CHAT_MODEL = "deepseek-chat"
-    REASONER_MODEL = "deepseek-reasoner"
+    SYMBOLS = ["BTCUSDT","ETHUSDT","SOLUSDT"]  # Start with BTC only. Add ETHUSDT/SOLUSDT after stable.
+    INTERVAL = "5m"
+    KLINE_LIMIT = 500
 
-    # Runtime parameters
-    CHECK_INTERVAL = 30
-    ENTRY_COOLDOWN = 60
-    LOSS_COOLDOWN = 180
+    # Safety
+    DRY_RUN = True          # True = log signal only. False = place demo orders.
+    LEVERAGE = 1
+    MARGIN_TYPE = "ISOLATED"
 
-    # Position management
-    BASE_POSITION_PERCENT = 3.0
-    MAX_POSITIONS = 2
-    MAX_TOTAL_EXPOSURE = 20.0
-    LEVERAGE = 5
+    START_BALANCE_FALLBACK = 5000.0
+    RISK_PER_TRADE = 0.005
+    MAX_OPEN_POSITIONS = 1
+    MAX_TRADES_PER_DAY = 3
+    MAX_DAILY_LOSS_PCT = -0.03
 
-    # Risk control
-    DEFAULT_SL_ATR_MULT = 1.5
-    DEFAULT_TP_ATR_MULT = 2.5
-    TRAILING_ATR_MULT = 0.8
-    MAX_CONSECUTIVE_LOSSES = 4
-    DAILY_LOSS_LIMIT_PERCENT = 10.0
-    DAILY_PROFIT_TARGET = 8.0
+    # Strategy / AI-gate fallback
+    AI_PROB_THRESHOLD = 0.52
 
-    # AI thresholds
-    CHAT_CONFIDENCE_THRESHOLD = 50
-    # เพิ่มเติม: ขีดจำกัด ATR ขั้นต่ำ (% ของราคา)
-    MIN_ATR_PERCENT = 0.3
+    # Rule filters from V26/V27 family
+    SESSION_START = 13
+    SESSION_END = 21
 
+    RR = 2.1
+    SL_ATR = 1.2
+    TP_ATR = SL_ATR * RR
 
-@dataclass
-class Position:
-    symbol: str
-    side: str
-    quantity: float
-    entry_price: float
-    sl_price: float
-    tp_price: float
-    open_time: float
-    trailing_active: bool = False
+    MIN_ATR_PCT = 0.0013
+    MAX_ATR_PCT = 0.0080
+    MIN_VOLUME_RATIO = 0.60
+    MIN_MOMENTUM_PCT = 0.00045
+    MIN_EMA20_DISTANCE = 0.00035
+    MIN_BODY_RATIO = 0.30
+
+    POLL_SECONDS = 60
+
+    LOG_FILE = "v28_demo_bot.log"
+    TRADE_LOG = "v28_demo_trades.csv"
+    STATE_FILE = "v28_demo_state.json"
 
 
-# ===== BINANCE API (Multi-Symbol) =====
-class BinanceAPI:
-    _time_offset = 0
+# =====================
+# LOGGING
+# =====================
+logging.basicConfig(
+    filename=Config.LOG_FILE,
+    level=logging.INFO,
+    format="%(asctime)s - %(levelname)s - %(message)s",
+)
 
-    @classmethod
-    def sync_time(cls):
-        try:
-            resp = requests.get(f"{Config.BASE_URL}/fapi/v1/time", timeout=5)
-            server_time = resp.json()["serverTime"]
-            local_time = int(time.time() * 1000)
-            cls._time_offset = server_time - local_time
-            Logger.info(f"เวลาซิงค์แล้ว offset: {cls._time_offset}ms")
-        except Exception as e:
-            Logger.error(f"ซิงค์เวลาล้มเหลว: {e}")
+def now():
+    return datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+
+def log(msg):
+    print(f"[{now()}] {msg}")
+    logging.info(msg)
+
+
+# =====================
+# BASIC VALIDATION
+# =====================
+if not Config.API_KEY or not Config.SECRET:
+    raise RuntimeError("Missing BINANCE_API_KEY or BINANCE_SECRET in .env")
+
+
+# =====================
+# BINANCE FUTURES API
+# =====================
+class BinanceFutures:
+    @staticmethod
+    def _headers():
+        return {"X-MBX-APIKEY": Config.API_KEY}
 
     @staticmethod
-    def _sign(params: dict) -> str:
+    def _sign(params):
         query = urlencode(params)
-        signature = hmac.new(Config.SECRET.encode(), query.encode(), hashlib.sha256).hexdigest()
-        return f"{query}&signature={signature}"
+        sig = hmac.new(
+            Config.SECRET.encode("utf-8"),
+            query.encode("utf-8"),
+            hashlib.sha256
+        ).hexdigest()
+        return f"{query}&signature={sig}"
 
     @staticmethod
-    def _request(method: str, endpoint: str, params: dict = None, retry: int = 3) -> Any:
+    def public_get(path, params=None):
+        url = Config.BASE_URL + path
+        r = requests.get(url, params=params or {}, timeout=15)
+        r.raise_for_status()
+        return r.json()
+
+    @staticmethod
+    def signed_request(method, path, params=None):
         params = params or {}
-        params["timestamp"] = int(time.time() * 1000) + BinanceAPI._time_offset
+        params["timestamp"] = int(time.time() * 1000)
         params["recvWindow"] = 5000
-        url = f"{Config.BASE_URL}{endpoint}?{BinanceAPI._sign(params)}"
-        headers = {"X-MBX-APIKEY": Config.API_KEY}
 
-        for attempt in range(retry):
-            try:
-                resp = requests.request(method, url, headers=headers, timeout=10)
-                data = resp.json()
-                if isinstance(data, dict) and data.get("code") is not None:
-                    Logger.error(f"API error: {data}")
-                return data
-            except Exception as e:
-                Logger.error(f"Request error: {e}")
-                if attempt < retry - 1:
-                    time.sleep(2 ** attempt)
-        return {}
+        query = BinanceFutures._sign(params)
+        url = Config.BASE_URL + path + "?" + query
 
-    @staticmethod
-    def get_balance() -> float:
-        res = BinanceAPI._request("GET", "/fapi/v2/account")
-        if isinstance(res, dict):
-            for asset in res.get("assets", []):
-                if asset.get("asset") == "USDT":
-                    return float(asset.get("walletBalance", 0))
-        return 0.0
+        if method == "GET":
+            r = requests.get(url, headers=BinanceFutures._headers(), timeout=15)
+        elif method == "POST":
+            r = requests.post(url, headers=BinanceFutures._headers(), timeout=15)
+        elif method == "DELETE":
+            r = requests.delete(url, headers=BinanceFutures._headers(), timeout=15)
+        else:
+            raise ValueError(f"Unsupported method: {method}")
 
-    @staticmethod
-    def get_price(symbol: str) -> float:
-        for _ in range(3):
-            try:
-                res = requests.get(
-                    f"{Config.BASE_URL}/fapi/v1/ticker/price",
-                    params={"symbol": symbol},
-                    timeout=5
-                ).json()
-                return float(res.get("price", 0))
-            except:
-                time.sleep(1)
-        return 0.0
-
-    @staticmethod
-    def get_klines(symbol: str, interval: str, limit: int = 100) -> List[List]:
         try:
-            res = requests.get(
-                f"{Config.BASE_URL}/fapi/v1/klines",
-                params={"symbol": symbol, "interval": interval, "limit": limit},
-                timeout=5
-            ).json()
-            return res if isinstance(res, list) else []
-        except:
-            return []
+            data = r.json()
+        except Exception:
+            data = {"raw": r.text}
+
+        if r.status_code >= 400:
+            raise RuntimeError(f"Binance error {r.status_code}: {data}")
+
+        return data
 
     @staticmethod
-    def get_open_position_amt(symbol: str) -> float:
-        res = BinanceAPI._request("GET", "/fapi/v2/positionRisk")
-        if isinstance(res, list):
-            for p in res:
-                if p["symbol"] == symbol:
-                    return float(p["positionAmt"])
-        return 0.0
+    def get_klines(symbol, interval="5m", limit=500):
+        data = BinanceFutures.public_get(
+            "/fapi/v1/klines",
+            {"symbol": symbol, "interval": interval, "limit": limit}
+        )
+        df = pd.DataFrame(data, columns=[
+            "open_time", "open", "high", "low", "close", "volume",
+            "close_time", "quote_asset_volume", "num_trades",
+            "taker_buy_base", "taker_buy_quote", "ignore"
+        ])
+
+        df["time"] = pd.to_datetime(df["open_time"], unit="ms")
+        for c in ["open", "high", "low", "close", "volume"]:
+            df[c] = pd.to_numeric(df[c], errors="coerce")
+
+        return df[["time", "open", "high", "low", "close", "volume"]].set_index("time").dropna()
 
     @staticmethod
-    def place_market_order(symbol: str, side: str, quantity: float) -> dict:
-        if quantity <= 0:
-            return {}
-        return BinanceAPI._request("POST", "/fapi/v1/order", {
+    def account_balance_usdt():
+        data = BinanceFutures.signed_request("GET", "/fapi/v2/balance", {})
+        for item in data:
+            if item.get("asset") == "USDT":
+                return float(item.get("balance", 0))
+        return Config.START_BALANCE_FALLBACK
+
+    @staticmethod
+    def positions():
+        return BinanceFutures.signed_request("GET", "/fapi/v2/positionRisk", {})
+
+    @staticmethod
+    def get_position(symbol):
+        positions = BinanceFutures.positions()
+        for p in positions:
+            if p.get("symbol") == symbol:
+                amt = float(p.get("positionAmt", 0))
+                entry = float(p.get("entryPrice", 0))
+                return {"amount": amt, "entry": entry, "raw": p}
+        return {"amount": 0.0, "entry": 0.0, "raw": None}
+
+    @staticmethod
+    def set_leverage(symbol):
+        try:
+            BinanceFutures.signed_request(
+                "POST",
+                "/fapi/v1/leverage",
+                {"symbol": symbol, "leverage": Config.LEVERAGE}
+            )
+            log(f"Set leverage {symbol} = {Config.LEVERAGE}x")
+        except Exception as e:
+            log(f"Set leverage warning {symbol}: {e}")
+
+    @staticmethod
+    def set_margin_type(symbol):
+        try:
+            BinanceFutures.signed_request(
+                "POST",
+                "/fapi/v1/marginType",
+                {"symbol": symbol, "marginType": Config.MARGIN_TYPE}
+            )
+            log(f"Set margin {symbol} = {Config.MARGIN_TYPE}")
+        except Exception as e:
+            # Binance returns error if margin type is already set. Safe to ignore.
+            log(f"Set margin warning {symbol}: {e}")
+
+    @staticmethod
+    def market_order(symbol, side, quantity):
+        params = {
             "symbol": symbol,
             "side": side,
             "type": "MARKET",
-            "quantity": round(quantity, 3)
-        })
-
-    @staticmethod
-    def set_leverage(symbol: str, leverage: int) -> bool:
-        res = BinanceAPI._request("POST", "/fapi/v1/leverage", {
-            "symbol": symbol,
-            "leverage": leverage
-        })
-        return isinstance(res, dict) and res.get("leverage") == leverage
-
-
-# ===== INDICATORS =====
-class Indicators:
-    @staticmethod
-    def rsi(closes: List[float], period: int = 14) -> float:
-        if len(closes) < period + 1:
-            return 50.0
-        deltas = np.diff(closes[-period-1:])
-        gain = np.mean([d for d in deltas if d > 0]) or 0.001
-        loss = abs(np.mean([d for d in deltas if d < 0])) or 0.001
-        rs = gain / loss
-        return round(100 - (100 / (1 + rs)), 2)
-
-    @staticmethod
-    def ema(closes: List[float], period: int = 20) -> float:
-        if len(closes) < period:
-            return closes[-1] if closes else 0.0
-        return round(np.mean(closes[-period:]), 2)
-
-    @staticmethod
-    def atr(klines: List[List], period: int = 14) -> float:
-        if len(klines) < period + 1:
-            return 0.0
-        highs = [float(k[2]) for k in klines[-period-1:]]
-        lows = [float(k[3]) for k in klines[-period-1:]]
-        closes = [float(k[4]) for k in klines[-period-1:]]
-        tr_values = []
-        for i in range(1, len(highs)):
-            hl = highs[i] - lows[i]
-            hc = abs(highs[i] - closes[i-1])
-            lc = abs(lows[i] - closes[i-1])
-            tr = max(hl, hc, lc)
-            tr_values.append(tr)
-        return float(np.mean(tr_values)) if tr_values else 0.0
-
-    # เพิ่มเติม: EMA slope (ใช้ 3 แท่งล่าสุด)
-    @staticmethod
-    def ema_slope(closes: List[float], period: int = 20, lookback: int = 3) -> float:
-        if len(closes) < period + lookback:
-            return 0.0
-        ema_vals = []
-        for i in range(lookback, 0, -1):
-            ema_vals.append(Indicators.ema(closes[:-i] if i > 0 else closes, period))
-        return (ema_vals[-1] - ema_vals[0]) / lookback
-
-
-# ===== MARKET DATA =====
-class MarketData:
-    @staticmethod
-    def fetch(symbol: str) -> Optional[Dict]:
-        klines_1m = BinanceAPI.get_klines(symbol, "1m", 100)
-        klines_5m = BinanceAPI.get_klines(symbol, "5m", 100)
-        klines_15m = BinanceAPI.get_klines(symbol, "15m", 100)
-
-        if not klines_1m or not klines_5m or not klines_15m:
-            return None
-
-        closes_1m = [float(k[4]) for k in klines_1m]
-        closes_5m = [float(k[4]) for k in klines_5m]
-        closes_15m = [float(k[4]) for k in klines_15m]
-
-        data = {
-            "1m": {
-                "price": closes_1m[-1],
-                "ema20": Indicators.ema(closes_1m, 20),
-                "rsi": Indicators.rsi(closes_1m, 14),
-                "atr": Indicators.atr(klines_1m, 14),
-                "volume": float(klines_1m[-1][5]),
-                "closes": closes_1m,
-            },
-            "5m": {
-                "price": closes_5m[-1],
-                "ema20": Indicators.ema(closes_5m, 20),
-                "rsi": Indicators.rsi(closes_5m, 14),
-                "atr": Indicators.atr(klines_5m, 14),
-                "closes": closes_5m,
-            },
-            "15m": {
-                "price": closes_15m[-1],
-                "ema20": Indicators.ema(closes_15m, 20),
-                "rsi": Indicators.rsi(closes_15m, 14),
-                "atr": Indicators.atr(klines_15m, 14),
-                "ema_slope": Indicators.ema_slope(closes_15m, 20, 5),  # เพิ่ม slope
-                "closes": closes_15m,
-            },
-            "klines_15m_raw": klines_15m,
+            "quantity": quantity,
         }
-        return data
 
+        if Config.DRY_RUN:
+            log(f"DRY_RUN market_order {params}")
+            return {"dry_run": True, **params}
 
-# ===== FILTERS =====
-class EntryFilters:
+        return BinanceFutures.signed_request("POST", "/fapi/v1/order", params)
+
     @staticmethod
-    def momentum_confirmed(closes_1m: List[float], bars: int = 2) -> bool:
-        if len(closes_1m) < bars + 1:
-            return False
-        recent = closes_1m[-bars-1:]
-        if all(recent[i] < recent[i+1] for i in range(bars)):
-            return True
-        if all(recent[i] > recent[i+1] for i in range(bars)):
-            return True
+    def stop_market_order(symbol, side, stop_price, quantity):
+        params = {
+            "symbol": symbol,
+            "side": side,
+            "type": "STOP_MARKET",
+            "stopPrice": round(stop_price, 2),
+            "quantity": quantity,
+            "reduceOnly": "true",
+            "workingType": "MARK_PRICE",
+        }
+
+        if Config.DRY_RUN:
+            log(f"DRY_RUN stop_market_order {params}")
+            return {"dry_run": True, **params}
+
+        return BinanceFutures.signed_request("POST", "/fapi/v1/order", params)
+
+    @staticmethod
+    def take_profit_market_order(symbol, side, stop_price, quantity):
+        params = {
+            "symbol": symbol,
+            "side": side,
+            "type": "TAKE_PROFIT_MARKET",
+            "stopPrice": round(stop_price, 2),
+            "quantity": quantity,
+            "reduceOnly": "true",
+            "workingType": "MARK_PRICE",
+        }
+
+        if Config.DRY_RUN:
+            log(f"DRY_RUN take_profit_market_order {params}")
+            return {"dry_run": True, **params}
+
+        return BinanceFutures.signed_request("POST", "/fapi/v1/order", params)
+
+    @staticmethod
+    def exchange_info(symbol):
+        data = BinanceFutures.public_get("/fapi/v1/exchangeInfo")
+        for s in data["symbols"]:
+            if s["symbol"] == symbol:
+                return s
+        raise RuntimeError(f"Symbol not found: {symbol}")
+
+
+# =====================
+# STATE
+# =====================
+def load_state():
+    if Path(Config.STATE_FILE).exists():
+        return json.loads(Path(Config.STATE_FILE).read_text(encoding="utf-8"))
+    state = {
+        "date": datetime.now().strftime("%Y-%m-%d"),
+        "day_start_balance": None,
+        "trades_today": 0,
+    }
+    save_state(state)
+    return state
+
+def save_state(state):
+    Path(Config.STATE_FILE).write_text(json.dumps(state, indent=2), encoding="utf-8")
+
+def reset_day_if_needed(state, balance):
+    today = datetime.now().strftime("%Y-%m-%d")
+    if state.get("date") != today:
+        state["date"] = today
+        state["day_start_balance"] = balance
+        state["trades_today"] = 0
+        save_state(state)
+
+    if state.get("day_start_balance") is None:
+        state["day_start_balance"] = balance
+        save_state(state)
+
+    return state
+
+def append_trade_log(row):
+    pd.DataFrame([row]).to_csv(
+        Config.TRADE_LOG,
+        mode="a",
+        header=not Path(Config.TRADE_LOG).exists(),
+        index=False
+    )
+
+
+# =====================
+# INDICATORS
+# =====================
+def ema(s, n):
+    return s.ewm(span=n, adjust=False).mean()
+
+def atr(df, n=14):
+    tr = np.maximum(
+        df["high"] - df["low"],
+        np.maximum(abs(df["high"] - df["close"].shift(1)), abs(df["low"] - df["close"].shift(1)))
+    )
+    return tr.rolling(n).mean()
+
+def prepare_df(df):
+    df = df.copy()
+    df["ema20"] = ema(df["close"], 20)
+    df["ema50"] = ema(df["close"], 50)
+    df["atr"] = atr(df)
+    df["vol_ma20"] = df["volume"].rolling(20).mean()
+    df["atr_pct"] = df["atr"] / df["close"]
+    df["volume_ratio"] = df["volume"] / df["vol_ma20"]
+    df["body_ratio"] = abs(df["close"] - df["open"]) / (df["high"] - df["low"]).replace(0, np.nan)
+    df["ema20_distance"] = abs(df["close"] - df["ema20"]) / df["close"]
+    return df
+
+
+# =====================
+# SIGNAL ENGINE
+# =====================
+def ai_probability_placeholder(features):
+    """
+    Safe placeholder.
+
+    V26 showed AI filter works in backtest, but for live demo we need exported model
+    to avoid mismatched logic. This placeholder approximates quality score from filters.
+
+    Later version:
+      - export sklearn model with joblib
+      - load model here
+      - return model.predict_proba([features])[0][1]
+    """
+
+    score = 0.50
+
+    if features["volume_ratio"] >= 1.0:
+        score += 0.04
+    if features["momentum_pct"] >= 0.0010:
+        score += 0.04
+    if features["body_ratio"] >= 0.55:
+        score += 0.03
+    if features["ema20_distance"] >= 0.0010:
+        score += 0.03
+    if Config.MIN_ATR_PCT <= features["atr_pct"] <= 0.005:
+        score += 0.03
+
+    return min(score, 0.75)
+
+def generate_signal(symbol, df):
+    df = prepare_df(df)
+
+    # use last CLOSED candle
+    row = df.iloc[-2]
+    prev = df.iloc[-3]
+    t = row.name
+    price = float(row["close"])
+
+    if not (Config.SESSION_START <= t.hour <= Config.SESSION_END):
+        return None
+
+    if pd.isna(row["atr"]) or row["atr"] <= 0:
+        return None
+
+    atr_val = float(row["atr"])
+    atr_pct = float(row["atr_pct"])
+    volume_ratio = float(row["volume_ratio"]) if not pd.isna(row["volume_ratio"]) else 0.0
+    momentum_pct = abs(price - float(prev["close"])) / float(prev["close"])
+    ema20_distance = float(row["ema20_distance"])
+    body_ratio = float(row["body_ratio"]) if not pd.isna(row["body_ratio"]) else 0.0
+
+    if not (Config.MIN_ATR_PCT <= atr_pct <= Config.MAX_ATR_PCT):
+        return None
+    if volume_ratio < Config.MIN_VOLUME_RATIO:
+        return None
+    if momentum_pct < Config.MIN_MOMENTUM_PCT:
+        return None
+    if ema20_distance < Config.MIN_EMA20_DISTANCE:
+        return None
+    if body_ratio < Config.MIN_BODY_RATIO:
+        return None
+
+    # Lightweight live direction logic:
+    # trend + breakout. Conservative until model export is added.
+    side = None
+
+    if row["ema50"] > row["ema20"] and price > float(prev["high"]):
+        side = "BUY"
+    elif row["ema50"] < row["ema20"] and price < float(prev["low"]):
+        side = "SELL"
+
+    if not side:
+        return None
+
+    slip = atr_val * Config.SLIPPAGE_ATR
+
+    if side == "BUY":
+        entry = price + slip
+        sl = entry - Config.SL_ATR * atr_val
+        tp = entry + Config.TP_ATR * atr_val
+    else:
+        entry = price - slip
+        sl = entry + Config.SL_ATR * atr_val
+        tp = entry - Config.TP_ATR * atr_val
+
+    features = {
+        "atr_pct": atr_pct,
+        "volume_ratio": volume_ratio,
+        "momentum_pct": momentum_pct,
+        "ema20_distance": ema20_distance,
+        "body_ratio": body_ratio,
+    }
+
+    ai_prob = ai_probability_placeholder(features)
+
+    if ai_prob < Config.AI_PROB_THRESHOLD:
+        return None
+
+    return {
+        "symbol": symbol,
+        "time": str(t),
+        "side": side,
+        "price": price,
+        "entry": entry,
+        "sl": sl,
+        "tp": tp,
+        "atr": atr_val,
+        "ai_prob": ai_prob,
+        **features,
+    }
+
+
+# =====================
+# POSITION SIZING
+# =====================
+def get_quantity(symbol, balance, entry, sl):
+    risk_amount = balance * Config.RISK_PER_TRADE
+    stop_distance = abs(entry - sl)
+
+    if stop_distance <= 0:
+        return 0.0
+
+    qty = risk_amount / stop_distance
+
+    # Round quantity according to symbol stepSize.
+    info = BinanceFutures.exchange_info(symbol)
+    step_size = None
+    min_qty = None
+
+    for f in info["filters"]:
+        if f["filterType"] == "LOT_SIZE":
+            step_size = float(f["stepSize"])
+            min_qty = float(f["minQty"])
+            break
+
+    if not step_size:
+        return round(qty, 3)
+
+    precision = max(0, int(round(-np.log10(step_size))))
+    qty = np.floor(qty / step_size) * step_size
+    qty = round(qty, precision)
+
+    if min_qty and qty < min_qty:
+        return 0.0
+
+    return qty
+
+
+# =====================
+# RISK CHECK
+# =====================
+def can_trade(state, balance):
+    reset_day_if_needed(state, balance)
+
+    day_start = float(state["day_start_balance"])
+    daily_ret = (balance - day_start) / day_start if day_start else 0
+
+    if daily_ret <= Config.MAX_DAILY_LOSS_PCT:
+        log(f"Daily stop hit: {daily_ret:.2%}")
         return False
 
-    @staticmethod
-    def volume_surge(klines_1m: List[List], multiplier: float = 1.0) -> bool:
-        if len(klines_1m) < 21:
-            return False
-        volumes = [float(k[5]) for k in klines_1m[-21:]]
-        current_vol = volumes[-1]
-        avg_vol = np.mean(volumes[:-1])
-        return current_vol >= avg_vol * multiplier
-
-    @staticmethod
-    def detect_breakout(klines_15m: List[List]) -> tuple:
-        if len(klines_15m) < 20:
-            return False, ""
-        highs = [float(k[2]) for k in klines_15m[-20:]]
-        lows = [float(k[3]) for k in klines_15m[-20:]]
-        current = float(klines_15m[-1][4])
-        resistance = max(highs)
-        support = min(lows)
-        if current > resistance:
-            return True, "BUY"
-        elif current < support:
-            return True, "SELL"
-        return False, ""
-
-    # เพิ่มเติม: Trend Filter (15m EMA20 slope + ราคาเทียบ EMA)
-    @staticmethod
-    def trend_filter(price: float, ema20: float, ema_slope: float, direction: str) -> bool:
-        if direction == "BUY":
-            # ราคาอยู่เหนือ EMA และ slope > 0 (แนวโน้มขึ้น)
-            return price > ema20 and ema_slope > 0
-        elif direction == "SELL":
-            # ราคาอยู่ใต้ EMA และ slope < 0 (แนวโน้มลง)
-            return price < ema20 and ema_slope < 0
+    if state["trades_today"] >= Config.MAX_TRADES_PER_DAY:
+        log("Max trades per day reached")
         return False
 
+    open_count = 0
+    for symbol in Config.SYMBOLS:
+        pos = BinanceFutures.get_position(symbol)
+        if abs(pos["amount"]) > 0:
+            open_count += 1
 
-# ===== DEEPSEEK AI =====
-deepseek_client = OpenAI(api_key=Config.DEEPSEEK_KEY, base_url="https://api.deepseek.com/v1")
-
-class DeepSeekGatekeeper:
-    @staticmethod
-    def should_enter(symbol: str, data_1m: dict, data_5m: dict, data_15m: dict) -> tuple:
-        Logger.info(f"🤖 Gatekeeper ({symbol}) evaluating market...")
-        prompt = f"""You are a strict trading gatekeeper. Analyze the following market data for {symbol} perpetual futures.
-
-1-minute data:
-- Price: ${data_1m['price']:.2f}
-- EMA20: ${data_1m['ema20']:.2f}
-- RSI: {data_1m['rsi']:.2f}
-- ATR: {data_1m['atr']:.2f}
-
-5-minute data:
-- Price: ${data_5m['price']:.2f}
-- EMA20: ${data_5m['ema20']:.2f}
-- RSI: {data_5m['rsi']:.2f}
-
-15-minute data:
-- Price: ${data_15m['price']:.2f}
-- EMA20: ${data_15m['ema20']:.2f}
-- RSI: {data_15m['rsi']:.2f}
-- EMA Slope: {data_15m.get('ema_slope', 0):.4f}
-
-Based on trend strength, momentum, and volatility, determine if now is a good time to consider a trade.
-Respond with a JSON object:
-{{"decision": "PROCEED" or "HOLD", "confidence": 0-100, "reason": "brief explanation"}}
-
-Only say PROCEED if there is a clear directional bias and volatility is not too low. Otherwise HOLD.
-"""
-        try:
-            start = time.time()
-            resp = deepseek_client.chat.completions.create(
-                model=Config.CHAT_MODEL,
-                messages=[{"role": "user", "content": prompt}],
-                temperature=0.2,
-                max_tokens=200
-            )
-            elapsed = (time.time() - start) * 1000
-            content = resp.choices[0].message.content
-            if "```json" in content:
-                content = content.split("```json")[1].split("```")[0]
-            elif "```" in content:
-                content = content.split("```")[1].split("```")[0]
-            result = json.loads(content.strip())
-            decision = result.get("decision", "HOLD")
-            confidence = float(result.get("confidence", 0))
-            reason = result.get("reason", "")
-            Logger.info(f"Gatekeeper ({symbol}): {decision} (conf:{confidence}%) in {elapsed:.0f}ms - {reason}")
-            return decision == "PROCEED", confidence
-        except Exception as e:
-            Logger.error(f"Gatekeeper error for {symbol}: {e}")
-            return False, 0.0
-
-
-class DeepSeekStrategist:
-    @staticmethod
-    def plan_trade(symbol: str, data_1m: dict, data_5m: dict, data_15m: dict, klines_15m: List) -> Optional[dict]:
-        Logger.info(f"🧠 Strategist ({symbol}) planning trade...")
-        closes_15m = [float(k[4]) for k in klines_15m[-20:]]
-        price_summary = f"Last 20 closes (15m): {', '.join([f'${c:.0f}' for c in closes_15m])}"
-        atr_15m = data_15m['atr']
-
-        prompt = f"""You are a professional crypto futures strategist. Based on the provided data, propose a single trade setup for {symbol}.
-
-Market Data:
-- 1m: Price ${data_1m['price']:.2f}, EMA20 ${data_1m['ema20']:.2f}, RSI {data_1m['rsi']:.2f}, ATR {data_1m['atr']:.2f}
-- 5m: Price ${data_5m['price']:.2f}, EMA20 ${data_5m['ema20']:.2f}, RSI {data_5m['rsi']:.2f}, ATR {data_5m['atr']:.2f}
-- 15m: Price ${data_15m['price']:.2f}, EMA20 ${data_15m['ema20']:.2f}, RSI {data_15m['rsi']:.2f}, ATR {data_15m['atr']:.2f}, EMA Slope: {data_15m.get('ema_slope',0):.4f}
-
-{price_summary}
-
-Current ATR (15m) = {atr_15m:.2f}
-
-Please suggest:
-- direction: "BUY" or "SELL"
-- position_size_percent: what % of current balance to risk (1-5%)
-- stop_loss_atr_mult: multiple of ATR for stop loss (suggest 1.0-2.0)
-- take_profit_atr_mult: multiple of ATR for take profit (suggest 2.0-3.5)
-- confidence: 0-100
-
-Output must be strict JSON:
-{{"direction": "BUY/SELL", "position_percent": float, "sl_atr_mult": float, "tp_atr_mult": float, "confidence": int, "reasoning": "short text"}}
-"""
-        try:
-            start = time.time()
-            resp = deepseek_client.chat.completions.create(
-                model=Config.REASONER_MODEL,
-                messages=[{"role": "user", "content": prompt}],
-                temperature=0.3,
-                max_tokens=300
-            )
-            elapsed = (time.time() - start) * 1000
-            content = resp.choices[0].message.content
-            if "```json" in content:
-                content = content.split("```json")[1].split("```")[0]
-            elif "```" in content:
-                content = content.split("```")[1].split("```")[0]
-            plan = json.loads(content.strip())
-            Logger.success(f"Strategist ({symbol}): {plan['direction']} ({plan['confidence']}%) in {elapsed:.0f}ms")
-            return plan
-        except Exception as e:
-            Logger.error(f"Strategist error for {symbol}: {e}")
-            return None
-
-    # เพิ่มเติม: Reasoner ประเมินว่าควรปิด position หรือไม่
-    @staticmethod
-    def evaluate_exit(position: Position, current_price: float, market_data: Dict) -> Optional[str]:
-        """Return "CLOSE" or "HOLD" based on AI decision"""
-        Logger.info(f"🧠 Reasoner evaluating exit for {position.symbol} {position.side}...")
-        unrealized_pnl = (current_price - position.entry_price) * position.quantity
-        if position.side == "SELL":
-            unrealized_pnl = -unrealized_pnl
-        pnl_percent = (unrealized_pnl / (position.entry_price * position.quantity)) * 100
-
-        # ดึงข้อมูล market data ที่จำเป็น
-        data_15m = market_data.get("15m", {})
-        prompt = f"""You are an expert exit strategist. Decide whether to close this open position now.
-
-Position:
-- Symbol: {position.symbol}
-- Side: {position.side}
-- Entry Price: ${position.entry_price:.2f}
-- Current Price: ${current_price:.2f}
-- Unrealized PnL: ${unrealized_pnl:.2f} ({pnl_percent:.2f}%)
-- Stop Loss: ${position.sl_price:.2f}, Take Profit: ${position.tp_price:.2f}
-
-Market (15m):
-- Price: ${data_15m.get('price', 0):.2f}
-- EMA20: ${data_15m.get('ema20', 0):.2f}
-- RSI: {data_15m.get('rsi', 50):.2f}
-- ATR: {data_15m.get('atr', 0):.2f}
-- EMA Slope: {data_15m.get('ema_slope', 0):.4f}
-
-Analyze if momentum is fading or if risk/reward favors taking profit now. Respond JSON:
-{{"action": "CLOSE" or "HOLD", "reason": "short explanation"}}
-"""
-        try:
-            resp = deepseek_client.chat.completions.create(
-                model=Config.REASONER_MODEL,
-                messages=[{"role": "user", "content": prompt}],
-                temperature=0.2,
-                max_tokens=150
-            )
-            content = resp.choices[0].message.content
-            if "```json" in content:
-                content = content.split("```json")[1].split("```")[0]
-            elif "```" in content:
-                content = content.split("```")[1].split("```")[0]
-            result = json.loads(content.strip())
-            action = result.get("action", "HOLD")
-            Logger.info(f"Reasoner Exit for {position.symbol}: {action} - {result.get('reason','')}")
-            return action
-        except Exception as e:
-            Logger.error(f"Reasoner exit error: {e}")
-            return None
-
-
-# ===== TRADING BOT (Multi-Symbol) =====
-class TradingBot:
-    def __init__(self):
-        self.positions: Dict[str, List[Position]] = {sym: [] for sym in Config.SYMBOLS}
-        self.balance = 0.0
-        self.daily_start_balance = 0.0
-        self.daily_pnl = 0.0
-        self.daily_trades = 0
-        self.consecutive_losses = 0
-        self.last_trade_time: Dict[str, float] = {sym: 0.0 for sym in Config.SYMBOLS}
-        self.last_loss_time: Dict[str, float] = {sym: 0.0 for sym in Config.SYMBOLS}
-        self.trading_allowed = True
-        self.last_reset_date = datetime.now().date()
-        self.last_atr: Dict[str, float] = {sym: 0.0 for sym in Config.SYMBOLS}
-        # เพิ่มเติม: เวลาที่ใช้ Reasoner ตรวจสอบ exit ล่าสุด
-        self.last_reasoner_exit_time = 0.0
-
-        for sym in Config.SYMBOLS:
-            if Config.LEVERAGE > 1:
-                BinanceAPI.set_leverage(sym, Config.LEVERAGE)
-
-    def update_balance(self):
-        for attempt in range(5):
-            bal = BinanceAPI.get_balance()
-            if bal > 0:
-                self.balance = bal
-                if self.daily_start_balance == 0:
-                    self.daily_start_balance = self.balance
-                return
-            time.sleep(2)
-        Logger.error("ไม่สามารถดึงยอดเงินที่ถูกต้องได้หลังจากลอง 5 ครั้ง")
-
-    def daily_reset(self):
-        today = datetime.now().date()
-        if today != self.last_reset_date:
-            Logger.success(f"📅 วันเทรดใหม่ PnL เมื่อวาน: ${self.daily_pnl:.2f}")
-            self.daily_start_balance = self.balance
-            self.daily_pnl = 0.0
-            self.daily_trades = 0
-            self.consecutive_losses = 0
-            self.trading_allowed = True
-            self.last_reset_date = today
-
-    def check_risk_limits(self) -> bool:
-        if self.daily_start_balance <= 0:
-            return True
-        daily_loss = -self.daily_pnl
-        daily_loss_percent = (daily_loss / self.daily_start_balance) * 100
-        if daily_loss_percent >= Config.DAILY_LOSS_LIMIT_PERCENT:
-            Logger.error(f"❌ ขีดจำกัดการขาดทุนรายวันถึงแล้ว: {daily_loss_percent:.2f}%")
-            self.trading_allowed = False
-            return False
-        if self.consecutive_losses >= Config.MAX_CONSECUTIVE_LOSSES:
-            Logger.error(f"❌ ขาดทุนติดต่อกันเกิน {Config.MAX_CONSECUTIVE_LOSSES} ครั้ง")
-            self.trading_allowed = False
-            return False
-        total_exposure = 0.0
-        for sym, pos_list in self.positions.items():
-            for pos in pos_list:
-                exposure = (pos.quantity * pos.entry_price) / self.balance * 100
-                total_exposure += exposure
-        if total_exposure > Config.MAX_TOTAL_EXPOSURE:
-            Logger.warn(f"⚠️ Exposure รวม {total_exposure:.2f}% เกิน {Config.MAX_TOTAL_EXPOSURE}% ห้ามเปิดเพิ่ม")
-            return False
-        return True
-
-    def check_daily_target(self) -> bool:
-        if self.daily_start_balance <= 0:
-            return False
-        profit_percent = self.daily_pnl / self.daily_start_balance * 100
-        if profit_percent >= Config.DAILY_PROFIT_TARGET:
-            Logger.success(f"🎯 บรรลุเป้ากำไรรายวัน: {profit_percent:.2f}%")
-            self.trading_allowed = False
-            return True
+    if open_count >= Config.MAX_OPEN_POSITIONS:
+        log("Max open positions reached")
         return False
 
-    def calculate_position_size(self, symbol: str, price: float, percent: float) -> float:
-        capital_used = self.balance * (percent / 100)
-        position_notional = capital_used * Config.LEVERAGE
-        qty = position_notional / price
-        step = 0.001 if symbol == "BTCUSDT" else 0.01
-        return max(step, round(qty, 3 if symbol == "BTCUSDT" else 2))
+    return True
 
-    def open_position(self, symbol: str, plan: dict, current_price: float, atr: float) -> bool:
-        direction = plan["direction"]
-        pos_percent = plan["position_percent"]
-        sl_mult = plan["sl_atr_mult"]
-        tp_mult = plan["tp_atr_mult"]
 
-        qty = self.calculate_position_size(symbol, current_price, pos_percent)
-        if qty <= 0:
-            return False
+# =====================
+# EXECUTION
+# =====================
+def execute_signal(signal, balance, state):
+    symbol = signal["symbol"]
 
-        if direction == "BUY":
-            sl_price = current_price - atr * sl_mult
-            tp_price = current_price + atr * tp_mult
-        else:
-            sl_price = current_price + atr * sl_mult
-            tp_price = current_price - atr * tp_mult
+    pos = BinanceFutures.get_position(symbol)
+    if abs(pos["amount"]) > 0:
+        log(f"Skip {symbol}: already has position {pos['amount']}")
+        return
 
-        Logger.info(f"🚀 เปิด {symbol} {direction} {qty} @ ${current_price:.2f}")
-        Logger.info(f"   SL: ${sl_price:.2f} | TP: ${tp_price:.2f} (ATR={atr:.2f})")
+    qty = get_quantity(symbol, balance, signal["entry"], signal["sl"])
+    if qty <= 0:
+        log(f"Skip {symbol}: qty too small")
+        return
 
-        resp = BinanceAPI.place_market_order(symbol, direction, qty)
-        if resp.get("orderId"):
-            self.positions[symbol].append(Position(
-                symbol=symbol,
-                side=direction,
-                quantity=qty,
-                entry_price=current_price,
-                sl_price=sl_price,
-                tp_price=tp_price,
-                open_time=time.time()
-            ))
-            self.daily_trades += 1
-            self.last_trade_time[symbol] = time.time()
-            Logger.success(f"✅ เปิดออเดอร์ {symbol} สำเร็จ")
-            return True
-        else:
-            Logger.error(f"คำสั่ง {symbol} ล้มเหลว")
-            return False
+    if signal["side"] == "BUY":
+        entry_side = "BUY"
+        exit_side = "SELL"
+    else:
+        entry_side = "SELL"
+        exit_side = "BUY"
 
-    def close_position(self, symbol: str, index: int, current_price: float, reason: str):
-        if index >= len(self.positions[symbol]):
-            return
-        pos = self.positions[symbol][index]
-        close_side = "SELL" if pos.side == "BUY" else "BUY"
-        resp = BinanceAPI.place_market_order(symbol, close_side, pos.quantity)
+    log(
+        f"SIGNAL {symbol} {signal['side']} qty={qty} "
+        f"entry≈{signal['entry']:.2f} sl={signal['sl']:.2f} tp={signal['tp']:.2f} "
+        f"ai={signal['ai_prob']:.3f}"
+    )
 
-        if resp.get("orderId"):
-            if pos.side == "BUY":
-                pnl = (current_price - pos.entry_price) * pos.quantity
-            else:
-                pnl = (pos.entry_price - current_price) * pos.quantity
-            pnl_pct = pnl / (pos.entry_price * pos.quantity) * 100
+    entry_order = BinanceFutures.market_order(symbol, entry_side, qty)
+    sl_order = BinanceFutures.stop_market_order(symbol, exit_side, signal["sl"], qty)
+    tp_order = BinanceFutures.take_profit_market_order(symbol, exit_side, signal["tp"], qty)
 
-            if pnl < 0:
-                self.consecutive_losses += 1
-                self.last_loss_time[symbol] = time.time()
-                Logger.warn(f"⚠️ ขาดทุน {symbol} ติดต่อกัน: {self.consecutive_losses}")
-            else:
-                self.consecutive_losses = 0
+    state["trades_today"] += 1
+    save_state(state)
 
-            self.daily_pnl += pnl
-            self.positions[symbol].pop(index)
-            Logger.success(f"💰 ปิด {symbol}: {reason} | PnL: ${pnl:.2f} ({pnl_pct:.2f}%)")
-        else:
-            Logger.error(f"ไม่สามารถปิดออเดอร์ {symbol} ได้")
+    append_trade_log({
+        "time": now(),
+        "symbol": symbol,
+        "side": signal["side"],
+        "qty": qty,
+        "entry_ref": signal["entry"],
+        "sl": signal["sl"],
+        "tp": signal["tp"],
+        "ai_prob": signal["ai_prob"],
+        "dry_run": Config.DRY_RUN,
+        "entry_order": json.dumps(entry_order),
+        "sl_order": json.dumps(sl_order),
+        "tp_order": json.dumps(tp_order),
+    })
 
-    def check_exits(self, symbol: str, current_price: float, atr: float):
-        for i, pos in reversed(list(enumerate(self.positions[symbol]))):
-            if pos.side == "BUY":
-                if current_price <= pos.sl_price:
-                    self.close_position(symbol, i, current_price, "Stop Loss")
-                    continue
-                if current_price >= pos.tp_price:
-                    self.close_position(symbol, i, current_price, "Take Profit")
-                    continue
-                # Trailing stop (ใช้เมื่อกำไรเกิน 0.5 ATR)
-                if current_price > pos.entry_price + 0.5 * atr:
-                    new_sl = current_price - Config.TRAILING_ATR_MULT * atr
-                    if new_sl > pos.sl_price:
-                        pos.sl_price = new_sl
-                        pos.trailing_active = True
-            else:
-                if current_price >= pos.sl_price:
-                    self.close_position(symbol, i, current_price, "Stop Loss")
-                    continue
-                if current_price <= pos.tp_price:
-                    self.close_position(symbol, i, current_price, "Take Profit")
-                    continue
-                if current_price < pos.entry_price - 0.5 * atr:
-                    new_sl = current_price + Config.TRAILING_ATR_MULT * atr
-                    if new_sl < pos.sl_price:
-                        pos.sl_price = new_sl
-                        pos.trailing_active = True
 
-    # เพิ่มเติม: ฟังก์ชันให้ Reasoner ตรวจ exit ทุกชั่วโมง
-    def reasoner_exit_check(self):
-        """เรียกทุก 1 ชั่วโมง ให้ Reasoner วิเคราะห์ว่าควรปิดออเดอร์หรือไม่"""
-        if time.time() - self.last_reasoner_exit_time < 3600:
-            return  # ยังไม่ถึงเวลา
-        self.last_reasoner_exit_time = time.time()
-        Logger.info("🕐 Reasoner กำลังตรวจสอบการปิดออเดอร์ทุกสัญลักษณ์...")
+# =====================
+# MAIN LOOP
+# =====================
+def setup():
+    for symbol in Config.SYMBOLS:
+        BinanceFutures.set_margin_type(symbol)
+        BinanceFutures.set_leverage(symbol)
 
-        # ดึงข้อมูลตลาดของทุก symbol ที่มี position
-        for symbol in list(self.positions.keys()):
-            if not self.positions[symbol]:
+def main():
+    log("🚀 V28 Binance Futures Demo Bot started")
+    log(f"BASE_URL={Config.BASE_URL}")
+    log(f"DRY_RUN={Config.DRY_RUN}")
+
+    setup()
+    state = load_state()
+
+    while True:
+        try:
+            balance = BinanceFutures.account_balance_usdt()
+            reset_day_if_needed(state, balance)
+
+            log(f"Balance USDT={balance:.2f}")
+
+            if not can_trade(state, balance):
+                time.sleep(Config.POLL_SECONDS)
                 continue
-            market_data = MarketData.fetch(symbol)
-            if not market_data:
-                continue
-            current_price = market_data["1m"]["price"]
-            # ต้องวนลูปจากหลังไปหน้าเพราะอาจมีการลบระหว่าง iteration
-            for i in reversed(range(len(self.positions[symbol]))):
-                pos = self.positions[symbol][i]
-                action = DeepSeekStrategist.evaluate_exit(pos, current_price, market_data)
-                if action == "CLOSE":
-                    self.close_position(symbol, i, current_price, "AI Reasoner Exit")
 
-    def run(self):
-        Logger.success("=" * 50)
-        Logger.success("🚀 Multi-Symbol BTC+ETH Trading Bot (Active Mode with Reasoner Exit)")
-        Logger.success("=" * 50)
-        Logger.info(f"Symbols: {', '.join(Config.SYMBOLS)}")
-        Logger.info(f"Gatekeeper: {Config.CHAT_MODEL} (threshold: {Config.CHAT_CONFIDENCE_THRESHOLD}%)")
-        Logger.info(f"Strategist: {Config.REASONER_MODEL}")
-        Logger.info(f"Leverage: {Config.LEVERAGE}x | Cooldown: {Config.ENTRY_COOLDOWN}s")
-        Logger.info(f"Min ATR%: {Config.MIN_ATR_PERCENT}% | Reasoner Exit Check ทุก 1 ชม.")
-        Logger.info("=" * 50)
+            for symbol in Config.SYMBOLS:
+                df = BinanceFutures.get_klines(symbol, Config.INTERVAL, Config.KLINE_LIMIT)
+                signal = generate_signal(symbol, df)
 
-        self.update_balance()
-        if self.balance <= 0:
-            Logger.error("ไม่สามารถเริ่มบอทได้เนื่องจากยอดเงินไม่ถูกต้อง")
-            return
-        self.daily_start_balance = self.balance
+                if signal:
+                    execute_signal(signal, balance, state)
+                else:
+                    log(f"No signal {symbol}")
 
-        for sym in Config.SYMBOLS:
-            existing_amt = BinanceAPI.get_open_position_amt(sym)
-            if abs(existing_amt) > 0:
-                price = BinanceAPI.get_price(sym)
-                self.positions[sym].append(Position(
-                    symbol=sym,
-                    side="BUY" if existing_amt > 0 else "SELL",
-                    quantity=abs(existing_amt),
-                    entry_price=price,
-                    sl_price=price * 0.99,
-                    tp_price=price * 1.02,
-                    open_time=time.time()
-                ))
-                Logger.warn(f"⚠️ พบสถานะ {sym} เปิดค้างอยู่ โหลดเข้าสู่ระบบ")
+        except Exception as e:
+            log(f"ERROR: {e}")
 
-        while True:
-            try:
-                self.daily_reset()
-                if not self.trading_allowed or not self.check_risk_limits():
-                    time.sleep(60)
-                    continue
-                if self.check_daily_target():
-                    time.sleep(60)
-                    continue
-
-                self.update_balance()
-
-                # *** เช็ค Reasoner Exit ทุก 1 ชั่วโมง ***
-                self.reasoner_exit_check()
-
-                for symbol in Config.SYMBOLS:
-                    Logger.info(f"\n--- กำลังวิเคราะห์ {symbol} ---")
-                    market_data = MarketData.fetch(symbol)
-                    if not market_data:
-                        Logger.warn(f"ไม่สามารถดึงข้อมูล {symbol} ได้")
-                        continue
-
-                    current_price = market_data["1m"]["price"]
-                    atr_15m = market_data["15m"]["atr"]
-                    self.last_atr[symbol] = atr_15m
-
-                    # เพิ่มเติม: เช็ค ATR ขั้นต่ำ (กันตลาดเงียบ)
-                    if atr_15m <= 0 or (atr_15m / current_price * 100) < Config.MIN_ATR_PERCENT:
-                        Logger.info(f"⏸️ {symbol} ATR ต่ำเกินไป ({atr_15m/current_price*100:.2f}%) ข้าม")
-                        continue
-
-                    # ตรวจสอบการปิด position ตาม SL/TP/Trailing
-                    self.check_exits(symbol, current_price, atr_15m)
-
-                    now = time.time()
-                    cooldown_active = (now - self.last_trade_time[symbol] < Config.ENTRY_COOLDOWN) or \
-                                      (now - self.last_loss_time[symbol] < Config.LOSS_COOLDOWN)
-                    if cooldown_active:
-                        Logger.info(f"⏸️ {symbol} อยู่ใน cooldown")
-                        continue
-
-                    if len(self.positions[symbol]) >= Config.MAX_POSITIONS:
-                        Logger.info(f"📊 {symbol} มีตำแหน่งครบ {Config.MAX_POSITIONS} แล้ว")
-                        continue
-
-                    # ตัวกรอง
-                    breakout, breakout_dir = EntryFilters.detect_breakout(market_data["klines_15m_raw"])
-                    if breakout:
-                        Logger.success(f"🚨 {symbol} Breakout detected! Direction: {breakout_dir}. Bypassing momentum filter.")
-                        direction_guess = breakout_dir
-                    else:
-                        # ใช้ trend filter เพื่อเดาทิศทางจาก EMA slope (สำหรับ momentum filter)
-                        price_15m = market_data["15m"]["price"]
-                        ema20_15m = market_data["15m"]["ema20"]
-                        slope = market_data["15m"]["ema_slope"]
-                        if slope > 0 and price_15m > ema20_15m:
-                            direction_guess = "BUY"
-                        elif slope < 0 and price_15m < ema20_15m:
-                            direction_guess = "SELL"
-                        else:
-                            # แนวโน้มไม่ชัด
-                            Logger.info(f"⏸️ {symbol} แนวโน้มไม่ชัดเจน (slope={slope:.4f}) ข้าม")
-                            continue
-
-                        if not EntryFilters.momentum_confirmed(market_data["1m"]["closes"], bars=2):
-                            Logger.info(f"⏸️ {symbol} โมเมนตัมไม่ยืนยัน ข้าม")
-                            continue
-
-                        if not EntryFilters.volume_surge(BinanceAPI.get_klines(symbol, "1m", 30), multiplier=1.0):
-                            Logger.info(f"⏸️ {symbol} ปริมาณต่ำกว่าค่าเฉลี่ย ข้าม")
-                            continue
-
-                        # ใช้ trend filter ตรวจสอบอีกครั้งกับทิศทางที่ได้จาก strategist
-                        # (เราจะส่งต่อให้ Gatekeeper/Strategist ตัดสินอีกที แต่เพิ่มความแข็งแกร่ง)
-                        Logger.info(f"✅ {symbol} ผ่านตัวกรอง เตรียมส่ง AI...")
-
-                    # Gatekeeper
-                    should_proceed, conf = DeepSeekGatekeeper.should_enter(
-                        symbol,
-                        market_data["1m"], market_data["5m"], market_data["15m"]
-                    )
-                    if not should_proceed or conf < Config.CHAT_CONFIDENCE_THRESHOLD:
-                        Logger.info(f"🚫 {symbol} Gatekeeper ปฏิเสธ (conf={conf})")
-                        continue
-
-                    # Strategist
-                    plan = DeepSeekStrategist.plan_trade(
-                        symbol,
-                        market_data["1m"], market_data["5m"], market_data["15m"],
-                        market_data["klines_15m_raw"]
-                    )
-                    if not plan:
-                        continue
-
-                    # ตรวจสอบ trend filter อีกครั้งด้วยทิศทางจากแผน
-                    if not EntryFilters.trend_filter(market_data["15m"]["price"],
-                                                     market_data["15m"]["ema20"],
-                                                     market_data["15m"]["ema_slope"],
-                                                     plan["direction"]):
-                        Logger.info(f"⏸️ {symbol} เทรนด์ไม่สอดคล้องกับแผน ({plan['direction']}) ข้าม")
-                        continue
-
-                    self.open_position(symbol, plan, current_price, atr_15m)
-
-                # สรุปสถานะ
-                total_positions = sum(len(v) for v in self.positions.values())
-                daily_ret = (self.balance - self.daily_start_balance) / self.daily_start_balance * 100
-                Logger.info(f"📊 Balance: ${self.balance:.2f} | Daily Return: {daily_ret:.2f}% | Total Positions: {total_positions}")
-                time.sleep(Config.CHECK_INTERVAL)
-
-            except KeyboardInterrupt:
-                Logger.warn("⏹️ Bot หยุดโดยผู้ใช้")
-                break
-            except Exception as e:
-                Logger.error(f"ข้อผิดพลาดใน loop หลัก: {e}")
-                time.sleep(10)
+        time.sleep(Config.POLL_SECONDS)
 
 
 if __name__ == "__main__":
-    BinanceAPI.sync_time()
-    bot = TradingBot()
-    bot.run()
+    main()
