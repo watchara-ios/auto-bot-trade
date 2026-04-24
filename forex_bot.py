@@ -1,10 +1,11 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
-MT5 Forex Multi-Pair Bot - Enhanced V2 Strategy + AI Close Assistant
+MT5 Forex Multi-Pair Bot - Adjusted V3 Strategy + AI Close Assistant
 - ดึงข้อมูลจาก MT5 (Forex)
-- วิเคราะห์สัญญาณซื้อจาก EMA/RSI/ADX/Trend (5m/1h/4h)
+- วิเคราะห์สัญญาณ BUY/SELL จาก EMA/RSI/ADX/Trend (5m/1h/4h)
 - เลือกคู่เงินที่สัญญาณดีที่สุดตาม Score
+- เพิ่ม debug reason ว่าทำไมไม่เข้าเทรด
 - AI Review ทุก 30 วินาที ช่วยตัดสินใจปิดก่อน
 """
 
@@ -44,9 +45,11 @@ FOREX_WATCHLIST = [
 FAST_EMA = 12
 SLOW_EMA = 30
 RSI_PERIOD = 14
-RSI_LOW = 35
-RSI_HIGH = 70
-ADX_THRESH = 22
+RSI_BUY_MIN = 45          # เดิม RSI < 35 ทำให้ชนกับ EMA cross และไม่ค่อยเข้า
+RSI_BUY_MAX = 68
+RSI_SELL_MIN = 32
+RSI_SELL_MAX = 55
+ADX_THRESH = 18           # ลดจาก 22 เพื่อให้มีโอกาสเข้าเทรดมากขึ้น
 USE_VOLUME_FILTER = False       # Forex volume ไม่ใช้ดีกว่า
 VOL_MA_PERIOD = 20
 SL_ATR_MULT = 1.8
@@ -62,7 +65,8 @@ MAGIC_NUMBER = 654321
 
 # AI Review intervals
 AI_REVIEW_INTERVAL = 30         # วินาที
-FULL_REVIEW_INTERVAL = 3600     # ชั่วโมง
+FULL_REVIEW_INTERVAL = 3600     # วินาที = 1 ชั่วโมง
+SCAN_INTERVAL = 300           # scan หา entry ทุก 5 นาทีจริง ๆ
 
 # Logging
 LOG_DIR = "logs"
@@ -180,58 +184,100 @@ def compute_adx(df, period=14):
     return dx.rolling(period).mean()
 
 # ==================== STRATEGY SIGNAL + SCORE ====================
-def analyze_symbol(symbol):
+def analyze_symbol(symbol, debug=False):
     """
-    Returns dict { 'signal': 'BUY' or None, 'score': float, 'atr': float } or None if data insufficient.
-    score: higher = stronger setup (e.g., ADX + RSI oversold strength)
+    Returns dict { 'signal': 'BUY'/'SELL', 'score': float, 'atr': float } or None.
+
+    V3 adjustment:
+    - ไม่บังคับให้ EMA เพิ่ง cross ในแท่งล่าสุด เพราะเงื่อนไขนี้หายากเกินไป
+    - ใช้ trend continuation แทน: fast EMA อยู่เหนือ/ใต้ slow EMA
+    - เพิ่ม SELL logic
+    - RSI ใช้เป็น filter ว่าไม่ overextended เกินไป
+    - H4 ใช้เป็น soft filter: ถ้าขัดกับ signal จะหัก score ไม่ได้ตัดทิ้งทันที
     """
-    # Fetch 5m data (100 bars)
-    rates_5m = mt5.copy_rates_from_pos(symbol, mt5.TIMEFRAME_M5, 0, 100)
-    if rates_5m is None or len(rates_5m) < 50:
+    def reject(reason):
+        if debug:
+            logger.info(f"❌ {symbol}: {reason}")
         return None
+
+    rates_5m = mt5.copy_rates_from_pos(symbol, mt5.TIMEFRAME_M5, 0, 120)
+    if rates_5m is None or len(rates_5m) < 60:
+        return reject("M5 data insufficient")
+
     df_5m = pd.DataFrame(rates_5m)
-    # Compute indicators
     fast = compute_ema(df_5m['close'], FAST_EMA)
     slow = compute_ema(df_5m['close'], SLOW_EMA)
     rsi = compute_rsi(df_5m['close'], RSI_PERIOD)
     adx = compute_adx(df_5m, 14)
     atr = compute_atr(df_5m, 14)
 
-    latest = len(df_5m)-1
-    prev = latest-1
+    latest = len(df_5m) - 1
+    last_fast = fast.iloc[latest]
+    last_slow = slow.iloc[latest]
+    last_rsi = rsi.iloc[latest]
+    last_adx = adx.iloc[latest]
+    last_atr = atr.iloc[latest]
 
-    # Entry condition on 5m
-    if not (fast.iloc[latest] > slow.iloc[latest] and fast.iloc[prev] <= slow.iloc[prev]):
-        return None
-    if not (rsi.iloc[latest] < RSI_LOW and adx.iloc[latest] > ADX_THRESH):
-        return None
+    if pd.isna(last_rsi) or pd.isna(last_adx) or pd.isna(last_atr):
+        return reject("indicator not ready")
 
-    # 1h trend
+    if last_adx < ADX_THRESH:
+        return reject(f"ADX too weak {last_adx:.1f} < {ADX_THRESH}")
+
+    signal = None
+    if last_fast > last_slow and RSI_BUY_MIN <= last_rsi <= RSI_BUY_MAX:
+        signal = "BUY"
+    elif last_fast < last_slow and RSI_SELL_MIN <= last_rsi <= RSI_SELL_MAX:
+        signal = "SELL"
+    else:
+        return reject(
+            f"no EMA/RSI setup | fast={last_fast:.5f}, slow={last_slow:.5f}, RSI={last_rsi:.1f}"
+        )
+
+    # 1H trend = hard filter
     rates_1h = mt5.copy_rates_from_pos(symbol, mt5.TIMEFRAME_H1, 0, 100)
-    if rates_1h is None or len(rates_1h) < 50:
-        return None
+    if rates_1h is None or len(rates_1h) < 60:
+        return reject("H1 data insufficient")
     df_1h = pd.DataFrame(rates_1h)
     ema50_1h = compute_ema(df_1h['close'], 50)
-    if df_1h['close'].iloc[-1] <= ema50_1h.iloc[-1]:
-        return None  # must be above 1h EMA50
+    h1_close = df_1h['close'].iloc[-1]
+    h1_ema = ema50_1h.iloc[-1]
 
-    # 4h trend (optional)
+    if signal == "BUY" and h1_close <= h1_ema:
+        return reject(f"BUY blocked by H1 trend: close {h1_close:.5f} <= EMA50 {h1_ema:.5f}")
+    if signal == "SELL" and h1_close >= h1_ema:
+        return reject(f"SELL blocked by H1 trend: close {h1_close:.5f} >= EMA50 {h1_ema:.5f}")
+
+    # H4 trend = soft filter
+    h4_penalty = 0
     try:
         rates_4h = mt5.copy_rates_from_pos(symbol, mt5.TIMEFRAME_H4, 0, 100)
-        if rates_4h is not None and len(rates_4h) >= 50:
+        if rates_4h is not None and len(rates_4h) >= 60:
             df_4h = pd.DataFrame(rates_4h)
             ema50_4h = compute_ema(df_4h['close'], 50)
-            if df_4h['close'].iloc[-1] <= ema50_4h.iloc[-1]:
-                return None
-    except:
-        pass  # if H4 not available, skip this filter
+            h4_close = df_4h['close'].iloc[-1]
+            h4_ema = ema50_4h.iloc[-1]
+            if signal == "BUY" and h4_close <= h4_ema:
+                h4_penalty = 8
+            elif signal == "SELL" and h4_close >= h4_ema:
+                h4_penalty = 8
+    except Exception as e:
+        logger.debug(f"H4 filter skipped for {symbol}: {e}")
 
-    # Calculate score: combination of ADX strength and RSI oversold depth
-    score = (adx.iloc[latest] - 20) * 0.5 + (35 - rsi.iloc[latest]) * 2   # tune weights
+    if signal == "BUY":
+        rsi_quality = max(0, RSI_BUY_MAX - last_rsi)
+    else:
+        rsi_quality = max(0, last_rsi - RSI_SELL_MIN)
+
+    score = (last_adx - ADX_THRESH) * 0.8 + rsi_quality * 0.4 - h4_penalty
+
+    logger.info(
+        f"✅ Signal {signal} {symbol}: score={score:.2f}, RSI={last_rsi:.1f}, ADX={last_adx:.1f}, ATR={last_atr:.5f}"
+    )
     return {
-        'signal': 'BUY',
+        'signal': signal,
         'score': score,
-        'atr': atr.iloc[latest]
+        'atr': last_atr
     }
 
 def select_best_symbols(max_picks):
@@ -249,7 +295,7 @@ def select_best_symbols(max_picks):
         # ตรวจสอบว่ามี position เปิดอยู่แล้วหรือไม่
         if mt5.positions_get(symbol=found):
             continue
-        analysis = analyze_symbol(found)
+        analysis = analyze_symbol(found, debug=True)
         if analysis:
             candidates.append((found, analysis))
     # เรียงตามคะแนนจากมากไปน้อย
@@ -277,15 +323,29 @@ def calculate_lot(symbol, atr, account_balance):
     lot = round(lot / step) * step
     return round(lot, 2)
 
-def execute_buy(symbol, analysis):
-    """เปิด BUY market order พร้อม SL/TP"""
+def execute_trade(symbol, analysis):
+    """เปิด market order BUY/SELL พร้อม SL/TP"""
     tick = mt5.symbol_info_tick(symbol)
     if not tick:
+        logger.error(f"No tick for {symbol}")
         return False
-    entry = tick.ask
+
+    signal = analysis.get('signal', 'BUY')
     atr = analysis['atr']
-    sl = entry - atr * SL_ATR_MULT
-    tp = entry + atr * TP_ATR_MULT
+
+    if signal == "BUY":
+        order_type = mt5.ORDER_TYPE_BUY
+        entry = tick.ask
+        sl = entry - atr * SL_ATR_MULT
+        tp = entry + atr * TP_ATR_MULT
+    elif signal == "SELL":
+        order_type = mt5.ORDER_TYPE_SELL
+        entry = tick.bid
+        sl = entry + atr * SL_ATR_MULT
+        tp = entry - atr * TP_ATR_MULT
+    else:
+        logger.error(f"Unknown signal {signal} for {symbol}")
+        return False
 
     acc = get_account_info()
     if not acc:
@@ -296,22 +356,30 @@ def execute_buy(symbol, analysis):
         "action": mt5.TRADE_ACTION_DEAL,
         "symbol": symbol,
         "volume": lot,
-        "type": mt5.ORDER_TYPE_BUY,
+        "type": order_type,
         "price": entry,
         "sl": sl,
         "tp": tp,
         "deviation": DEVIATION,
         "magic": MAGIC_NUMBER,
-        "comment": f"V2_{datetime.now().strftime('%H%M')}",
+        "comment": f"V3_{signal}_{datetime.now().strftime('%H%M')}",
         "type_time": mt5.ORDER_TIME_GTC,
         "type_filling": mt5.ORDER_FILLING_IOC,
     }
     result = mt5.order_send(request)
     if result.retcode != mt5.TRADE_RETCODE_DONE:
-        logger.error(f"BUY {symbol} failed: {result.comment}")
+        logger.error(f"{signal} {symbol} failed: retcode={result.retcode}, comment={result.comment}")
         return False
-    logger.info(f"✅ BUY {symbol} {lot} lot @ {entry}, SL={sl:.5f}, TP={tp:.5f}")
+
+    logger.info(f"✅ {signal} {symbol} {lot} lot @ {entry:.5f}, SL={sl:.5f}, TP={tp:.5f}")
     return True
+
+
+def execute_buy(symbol, analysis):
+    """Backward compatibility"""
+    analysis = dict(analysis)
+    analysis['signal'] = 'BUY'
+    return execute_trade(symbol, analysis)
 
 # ==================== AI REVIEW FOR ALL OPEN POSITIONS ====================
 def ai_review_all_positions():
@@ -390,6 +458,7 @@ def main():
 
     last_ai_time = time.time()
     last_full_time = time.time()
+    last_scan_time = 0
 
     while True:
         try:
@@ -427,17 +496,19 @@ def main():
                     slots = MAX_CONCURRENT_TRADES - current_trades
                     best_pairs = select_best_symbols(slots)
                     for sym, analysis in best_pairs:
-                        execute_buy(sym, analysis)
+                        execute_trade(sym, analysis)
                         time.sleep(1)
                 last_full_time = now
 
-            # Check for opportunities every 5 minutes if we have free slots
-            if len(get_open_positions()) < MAX_CONCURRENT_TRADES:
-                slots = MAX_CONCURRENT_TRADES - len(get_open_positions())
-                best_pairs = select_best_symbols(slots)
-                for sym, analysis in best_pairs:
-                    execute_buy(sym, analysis)
-                    time.sleep(1)
+            # Check for opportunities every SCAN_INTERVAL seconds if we have free slots
+            if now - last_scan_time >= SCAN_INTERVAL:
+                if len(get_open_positions()) < MAX_CONCURRENT_TRADES:
+                    slots = MAX_CONCURRENT_TRADES - len(get_open_positions())
+                    best_pairs = select_best_symbols(slots)
+                    for sym, analysis in best_pairs:
+                        execute_trade(sym, analysis)
+                        time.sleep(1)
+                last_scan_time = now
 
             time.sleep(1)
 
