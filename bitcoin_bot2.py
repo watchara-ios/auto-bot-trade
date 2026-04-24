@@ -59,12 +59,12 @@ class Config:
 
     START_BALANCE_FALLBACK = 5000.0
     RISK_PER_TRADE = 0.005
-    MAX_OPEN_POSITIONS = 1
+    MAX_OPEN_POSITIONS = 3
     MAX_TRADES_PER_DAY = 3
     MAX_DAILY_LOSS_PCT = -0.03
 
     # Strategy / AI-gate fallback
-    AI_PROB_THRESHOLD = 0.52
+    AI_PROB_THRESHOLD = 0.50
 
     # Rule filters from V26/V27 family
     SESSION_START = 13
@@ -76,16 +76,16 @@ class Config:
 
     MIN_ATR_PCT = 0.0013
     MAX_ATR_PCT = 0.0080
-    MIN_VOLUME_RATIO = 0.60
-    MIN_MOMENTUM_PCT = 0.00045
-    MIN_EMA20_DISTANCE = 0.00035
-    MIN_BODY_RATIO = 0.30
+    MIN_VOLUME_RATIO = 0.50
+    MIN_MOMENTUM_PCT = 0.00030
+    MIN_EMA20_DISTANCE = 0.00025
+    MIN_BODY_RATIO = 0.25
 
-    POLL_SECONDS = 60
+    POLL_SECONDS = 30
 
-    LOG_FILE = "v28_demo_bot.log"
-    TRADE_LOG = "v28_demo_trades.csv"
-    STATE_FILE = "v28_demo_state.json"
+    LOG_FILE = "v29_xray_demo_bot.log"
+    TRADE_LOG = "v29_xray_demo_trades.csv"
+    STATE_FILE = "v29_xray_demo_state.json"
 
 
 # =====================
@@ -388,49 +388,87 @@ def ai_probability_placeholder(features):
     return min(score, 0.75)
 
 def generate_signal(symbol, df):
+    """
+    X-ray version:
+    returns (signal, reason)
+    - signal = dict when bot should enter
+    - reason = text explaining pass/fail filter
+    """
     df = prepare_df(df)
 
-    # use last CLOSED candle
-    row = df.iloc[-2]
+    if len(df) < 60:
+        return None, f"{symbol}: not enough candles"
+
+    row = df.iloc[-2]   # last closed candle
     prev = df.iloc[-3]
     t = row.name
     price = float(row["close"])
 
     if not (Config.SESSION_START <= t.hour <= Config.SESSION_END):
-        return None
+        return None, f"{symbol}: outside session hour={t.hour}"
 
     if pd.isna(row["atr"]) or row["atr"] <= 0:
-        return None
+        return None, f"{symbol}: ATR not ready"
 
     atr_val = float(row["atr"])
-    atr_pct = float(row["atr_pct"])
+    atr_pct = float(row["atr_pct"]) if not pd.isna(row["atr_pct"]) else 0.0
     volume_ratio = float(row["volume_ratio"]) if not pd.isna(row["volume_ratio"]) else 0.0
     momentum_pct = abs(price - float(prev["close"])) / float(prev["close"])
-    ema20_distance = float(row["ema20_distance"])
+    ema20_distance = float(row["ema20_distance"]) if not pd.isna(row["ema20_distance"]) else 0.0
     body_ratio = float(row["body_ratio"]) if not pd.isna(row["body_ratio"]) else 0.0
 
-    if not (Config.MIN_ATR_PCT <= atr_pct <= Config.MAX_ATR_PCT):
-        return None
-    if volume_ratio < Config.MIN_VOLUME_RATIO:
-        return None
-    if momentum_pct < Config.MIN_MOMENTUM_PCT:
-        return None
-    if ema20_distance < Config.MIN_EMA20_DISTANCE:
-        return None
-    if body_ratio < Config.MIN_BODY_RATIO:
-        return None
+    metrics = (
+        f"price={price:.2f} atr_pct={atr_pct:.5f} "
+        f"vol_ratio={volume_ratio:.2f} momentum={momentum_pct:.5f} "
+        f"ema20_dist={ema20_distance:.5f} body={body_ratio:.2f}"
+    )
 
-    # Lightweight live direction logic:
-    # trend + breakout. Conservative until model export is added.
+    if not (Config.MIN_ATR_PCT <= atr_pct <= Config.MAX_ATR_PCT):
+        return None, (
+            f"{symbol}: ATR filter fail {metrics} "
+            f"need {Config.MIN_ATR_PCT:.5f}-{Config.MAX_ATR_PCT:.5f}"
+        )
+
+    if volume_ratio < Config.MIN_VOLUME_RATIO:
+        return None, (
+            f"{symbol}: volume filter fail {metrics} "
+            f"need >= {Config.MIN_VOLUME_RATIO:.2f}"
+        )
+
+    if momentum_pct < Config.MIN_MOMENTUM_PCT:
+        return None, (
+            f"{symbol}: momentum filter fail {metrics} "
+            f"need >= {Config.MIN_MOMENTUM_PCT:.5f}"
+        )
+
+    if ema20_distance < Config.MIN_EMA20_DISTANCE:
+        return None, (
+            f"{symbol}: EMA20 distance fail {metrics} "
+            f"need >= {Config.MIN_EMA20_DISTANCE:.5f}"
+        )
+
+    if body_ratio < Config.MIN_BODY_RATIO:
+        return None, (
+            f"{symbol}: body filter fail {metrics} "
+            f"need >= {Config.MIN_BODY_RATIO:.2f}"
+        )
+
     side = None
 
-    if row["ema50"] > row["ema20"] and price > float(prev["high"]):
+    # Practical demo direction logic:
+    # BUY  = price above EMA50 + close breaks previous high
+    # SELL = price below EMA50 + close breaks previous low
+    if row["close"] > row["ema50"] and price > float(prev["high"]):
         side = "BUY"
-    elif row["ema50"] < row["ema20"] and price < float(prev["low"]):
+    elif row["close"] < row["ema50"] and price < float(prev["low"]):
         side = "SELL"
 
     if not side:
-        return None
+        return None, (
+            f"{symbol}: direction fail {metrics} "
+            f"close={row['close']:.2f} ema50={row['ema50']:.2f} "
+            f"prev_high={prev['high']:.2f} prev_low={prev['low']:.2f}"
+        )
 
     slip = atr_val * Config.SLIPPAGE_ATR
 
@@ -454,9 +492,12 @@ def generate_signal(symbol, df):
     ai_prob = ai_probability_placeholder(features)
 
     if ai_prob < Config.AI_PROB_THRESHOLD:
-        return None
+        return None, (
+            f"{symbol}: AI score fail ai={ai_prob:.3f} "
+            f"need >= {Config.AI_PROB_THRESHOLD:.2f} {metrics}"
+        )
 
-    return {
+    signal = {
         "symbol": symbol,
         "time": str(t),
         "side": side,
@@ -468,6 +509,8 @@ def generate_signal(symbol, df):
         "ai_prob": ai_prob,
         **features,
     }
+
+    return signal, f"{symbol}: SIGNAL {side} ai={ai_prob:.3f} {metrics}"
 
 
 # =====================
@@ -526,11 +569,12 @@ def can_trade(state, balance):
     open_count = 0
     for symbol in Config.SYMBOLS:
         pos = BinanceFutures.get_position(symbol)
+        log(f"Position {symbol}: amount={pos['amount']} entry={pos['entry']}")
         if abs(pos["amount"]) > 0:
             open_count += 1
 
     if open_count >= Config.MAX_OPEN_POSITIONS:
-        log("Max open positions reached")
+        log(f"Max open positions reached: {open_count}/{Config.MAX_OPEN_POSITIONS}")
         return False
 
     return True
@@ -597,7 +641,7 @@ def setup():
         BinanceFutures.set_leverage(symbol)
 
 def main():
-    log("🚀 V28 Binance Futures Demo Bot started")
+    log("🚀 V29 X-Ray Binance Futures Demo Bot started")
     log(f"BASE_URL={Config.BASE_URL}")
     log(f"DRY_RUN={Config.DRY_RUN}")
 
@@ -616,13 +660,19 @@ def main():
                 continue
 
             for symbol in Config.SYMBOLS:
+                pos = BinanceFutures.get_position(symbol)
+                if abs(pos["amount"]) > 0:
+                    log(f"Skip {symbol}: position already open amount={pos['amount']} entry={pos['entry']}")
+                    continue
+
                 df = BinanceFutures.get_klines(symbol, Config.INTERVAL, Config.KLINE_LIMIT)
-                signal = generate_signal(symbol, df)
+                signal, reason = generate_signal(symbol, df)
 
                 if signal:
+                    log(reason)
                     execute_signal(signal, balance, state)
                 else:
-                    log(f"No signal {symbol}")
+                    log(reason)
 
         except Exception as e:
             log(f"ERROR: {e}")
