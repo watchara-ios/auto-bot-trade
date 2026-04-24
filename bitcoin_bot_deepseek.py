@@ -56,7 +56,7 @@ class Config:
     SECRET = os.getenv("BINANCE2_SECRET")
     BASE_URL = "https://demo-fapi.binance.com"   # เปลี่ยนเป็น fapi.binance.com สำหรับเทรดจริง
     # ★★★ เปลี่ยนเป็นคู่ที่ทำกำไรได้ (USDCAD, USDCHF) ★★★
-    SYMBOLS = ["USDCAD", "USDCHF"]
+    SYMBOLS = ["BTCUSDT","ETHUSDT","SOLUSDT"]
 
     # DeepSeek
     DEEPSEEK_KEY = os.getenv("DEEPSEEK_API_KEY")
