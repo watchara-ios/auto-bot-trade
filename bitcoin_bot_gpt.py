@@ -49,7 +49,11 @@ class Config:
     BASE_URL = "https://demo-fapi.binance.com"
 
     SYMBOLS = ["BTCUSDT","ETHUSDT","SOLUSDT"]  # Start with BTC only. Add ETHUSDT/SOLUSDT after stable.
-    INTERVAL = "5m"
+    ENTRY_INTERVAL = "5m"
+    CONFIRM_INTERVAL = "15m"
+    TREND_INTERVAL = "1h"
+    TIMEFRAMES = (ENTRY_INTERVAL, CONFIRM_INTERVAL, TREND_INTERVAL)
+    INTERVAL = ENTRY_INTERVAL  # legacy alias
     KLINE_LIMIT = 500
 
     # Safety
@@ -70,9 +74,15 @@ class Config:
     SESSION_START = 13
     SESSION_END = 21
 
-    RR = 2.1
+    # RR_MODE:
+    #   "auto" = RR 1:1 on normal aligned trend, RR 1:2 on strong EMA trend
+    #   1.0 or 2.0 = force fixed RR
+    RR_MODE = "auto"
+    RR_OPTIONS = (1.0, 2.0)
+    RR = 2.0
     SL_ATR = 1.2
     TP_ATR = SL_ATR * RR
+    SLIPPAGE_ATR = 0.03
 
     MIN_ATR_PCT = 0.0013
     MAX_ATR_PCT = 0.0080
@@ -80,6 +90,9 @@ class Config:
     MIN_MOMENTUM_PCT = 0.00030
     MIN_EMA20_DISTANCE = 0.00025
     MIN_BODY_RATIO = 0.25
+    MIN_15M_EMA_GAP = 0.00050
+    MIN_1H_EMA_GAP = 0.00070
+    STRONG_TREND_GAP_MULT = 1.5
 
     POLL_SECONDS = 30
 
@@ -330,6 +343,13 @@ def append_trade_log(row):
     )
 
 
+def fetch_timeframes(symbol):
+    return {
+        interval: BinanceFutures.get_klines(symbol, interval, Config.KLINE_LIMIT)
+        for interval in Config.TIMEFRAMES
+    }
+
+
 # =====================
 # INDICATORS
 # =====================
@@ -347,12 +367,15 @@ def prepare_df(df):
     df = df.copy()
     df["ema20"] = ema(df["close"], 20)
     df["ema50"] = ema(df["close"], 50)
+    df["ema200"] = ema(df["close"], 200)
     df["atr"] = atr(df)
     df["vol_ma20"] = df["volume"].rolling(20).mean()
     df["atr_pct"] = df["atr"] / df["close"]
     df["volume_ratio"] = df["volume"] / df["vol_ma20"]
     df["body_ratio"] = abs(df["close"] - df["open"]) / (df["high"] - df["low"]).replace(0, np.nan)
     df["ema20_distance"] = abs(df["close"] - df["ema20"]) / df["close"]
+    df["ema20_50_gap"] = abs(df["ema20"] - df["ema50"]) / df["close"]
+    df["ema50_200_gap"] = abs(df["ema50"] - df["ema200"]) / df["close"]
     return df
 
 
@@ -384,43 +407,162 @@ def ai_probability_placeholder(features):
         score += 0.03
     if Config.MIN_ATR_PCT <= features["atr_pct"] <= 0.005:
         score += 0.03
+    if features.get("mtf_ema_gap", 0) >= Config.MIN_15M_EMA_GAP * Config.STRONG_TREND_GAP_MULT:
+        score += 0.02
+    if features.get("htf_ema_gap", 0) >= Config.MIN_1H_EMA_GAP * Config.STRONG_TREND_GAP_MULT:
+        score += 0.03
 
     return min(score, 0.75)
 
-def generate_signal(symbol, df):
+def has_ready_values(row, columns):
+    return all(not pd.isna(row[col]) for col in columns)
+
+
+def trend_15m(row):
+    if row["ema20_50_gap"] < Config.MIN_15M_EMA_GAP:
+        return None
+    if row["close"] > row["ema20"] > row["ema50"]:
+        return "BUY"
+    if row["close"] < row["ema20"] < row["ema50"]:
+        return "SELL"
+    return None
+
+
+def trend_1h(row):
+    if row["ema50_200_gap"] < Config.MIN_1H_EMA_GAP:
+        return None
+    if row["close"] > row["ema50"] > row["ema200"]:
+        return "BUY"
+    if row["close"] < row["ema50"] < row["ema200"]:
+        return "SELL"
+    return None
+
+
+def fixed_rr_from_config():
+    if str(Config.RR_MODE).lower() == "auto":
+        return None
+
+    try:
+        rr = float(Config.RR_MODE)
+    except (TypeError, ValueError):
+        log(f"Invalid RR_MODE={Config.RR_MODE}; fallback to auto")
+        return None
+
+    if rr in Config.RR_OPTIONS:
+        return rr
+
+    log(f"Unsupported RR_MODE={Config.RR_MODE}; allowed {Config.RR_OPTIONS}, fallback to auto")
+    return None
+
+
+def choose_rr(row_15m, row_1h):
+    fixed_rr = fixed_rr_from_config()
+    if fixed_rr is not None:
+        return fixed_rr, "fixed"
+
+    strong_15m = row_15m["ema20_50_gap"] >= Config.MIN_15M_EMA_GAP * Config.STRONG_TREND_GAP_MULT
+    strong_1h = row_1h["ema50_200_gap"] >= Config.MIN_1H_EMA_GAP * Config.STRONG_TREND_GAP_MULT
+
+    if strong_15m and strong_1h:
+        return 2.0, "strong_15m_1h_ema"
+
+    return 1.0, "normal_15m_1h_ema"
+
+
+def generate_signal(symbol, market_data):
     """
     X-ray version:
     returns (signal, reason)
     - signal = dict when bot should enter
     - reason = text explaining pass/fail filter
     """
-    df = prepare_df(df)
+    if isinstance(market_data, pd.DataFrame):
+        market_data = {Config.ENTRY_INTERVAL: market_data}
 
-    if len(df) < 60:
-        return None, f"{symbol}: not enough candles"
+    required = {
+        Config.ENTRY_INTERVAL: 60,
+        Config.CONFIRM_INTERVAL: 60,
+        Config.TREND_INTERVAL: 220,
+    }
+
+    prepared = {}
+    for interval, min_len in required.items():
+        df = market_data.get(interval)
+        if df is None or df.empty:
+            return None, f"{symbol}: missing {interval} candles"
+
+        df = prepare_df(df)
+        if len(df) < min_len:
+            return None, f"{symbol}: not enough {interval} candles len={len(df)} need>={min_len}"
+        prepared[interval] = df
+
+    df = prepared[Config.ENTRY_INTERVAL]
+    df_15m = prepared[Config.CONFIRM_INTERVAL]
+    df_1h = prepared[Config.TREND_INTERVAL]
 
     row = df.iloc[-2]   # last closed candle
     prev = df.iloc[-3]
+    row_15m = df_15m.iloc[-2]
+    row_1h = df_1h.iloc[-2]
+
     t = row.name
     price = float(row["close"])
 
     if not (Config.SESSION_START <= t.hour <= Config.SESSION_END):
         return None, f"{symbol}: outside session hour={t.hour}"
 
-    if pd.isna(row["atr"]) or row["atr"] <= 0:
+    if not has_ready_values(row, ["atr", "atr_pct", "volume_ratio", "body_ratio", "ema20", "ema50"]):
+        return None, f"{symbol}: 5m indicators not ready"
+
+    if not has_ready_values(row_15m, ["close", "ema20", "ema50", "ema20_50_gap"]):
+        return None, f"{symbol}: 15m EMA indicators not ready"
+
+    if not has_ready_values(row_1h, ["close", "ema50", "ema200", "ema50_200_gap"]):
+        return None, f"{symbol}: 1h EMA indicators not ready"
+
+    if row["atr"] <= 0:
         return None, f"{symbol}: ATR not ready"
+
+    side_15m = trend_15m(row_15m)
+    side_1h = trend_1h(row_1h)
+    mtf_ema_gap = float(row_15m["ema20_50_gap"])
+    htf_ema_gap = float(row_1h["ema50_200_gap"])
+
+    trend_metrics = (
+        f"15m_close={row_15m['close']:.2f} 15m_ema20={row_15m['ema20']:.2f} "
+        f"15m_ema50={row_15m['ema50']:.2f} 15m_gap={mtf_ema_gap:.5f} "
+        f"1h_close={row_1h['close']:.2f} 1h_ema50={row_1h['ema50']:.2f} "
+        f"1h_ema200={row_1h['ema200']:.2f} 1h_gap={htf_ema_gap:.5f}"
+    )
+
+    if side_15m is None:
+        return None, (
+            f"{symbol}: 15m EMA trend fail {trend_metrics} "
+            f"need gap>={Config.MIN_15M_EMA_GAP:.5f}"
+        )
+
+    if side_1h is None:
+        return None, (
+            f"{symbol}: 1h EMA trend fail {trend_metrics} "
+            f"need gap>={Config.MIN_1H_EMA_GAP:.5f}"
+        )
+
+    if side_15m != side_1h:
+        return None, f"{symbol}: timeframe trend mismatch 15m={side_15m} 1h={side_1h} {trend_metrics}"
 
     atr_val = float(row["atr"])
     atr_pct = float(row["atr_pct"]) if not pd.isna(row["atr_pct"]) else 0.0
     volume_ratio = float(row["volume_ratio"]) if not pd.isna(row["volume_ratio"]) else 0.0
-    momentum_pct = abs(price - float(prev["close"])) / float(prev["close"])
+    signed_momentum_pct = (price - float(prev["close"])) / float(prev["close"])
+    momentum_pct = abs(signed_momentum_pct)
     ema20_distance = float(row["ema20_distance"]) if not pd.isna(row["ema20_distance"]) else 0.0
     body_ratio = float(row["body_ratio"]) if not pd.isna(row["body_ratio"]) else 0.0
 
     metrics = (
         f"price={price:.2f} atr_pct={atr_pct:.5f} "
         f"vol_ratio={volume_ratio:.2f} momentum={momentum_pct:.5f} "
-        f"ema20_dist={ema20_distance:.5f} body={body_ratio:.2f}"
+        f"ema20_dist={ema20_distance:.5f} body={body_ratio:.2f} "
+        f"15m_gap={mtf_ema_gap:.5f} 1h_gap={htf_ema_gap:.5f}"
     )
 
     if not (Config.MIN_ATR_PCT <= atr_pct <= Config.MAX_ATR_PCT):
@@ -453,33 +595,43 @@ def generate_signal(symbol, df):
             f"need >= {Config.MIN_BODY_RATIO:.2f}"
         )
 
-    side = None
+    side = side_1h
 
-    # Practical demo direction logic:
-    # BUY  = price above EMA50 + close breaks previous high
-    # SELL = price below EMA50 + close breaks previous low
-    if row["close"] > row["ema50"] and price > float(prev["high"]):
-        side = "BUY"
-    elif row["close"] < row["ema50"] and price < float(prev["low"]):
-        side = "SELL"
+    if side == "BUY":
+        entry_ok = (
+            row["close"] > row["ema20"]
+            and row["close"] > row["ema50"]
+            and price > float(prev["high"])
+            and signed_momentum_pct > 0
+        )
+    else:
+        entry_ok = (
+            row["close"] < row["ema20"]
+            and row["close"] < row["ema50"]
+            and price < float(prev["low"])
+            and signed_momentum_pct < 0
+        )
 
-    if not side:
+    if not entry_ok:
         return None, (
-            f"{symbol}: direction fail {metrics} "
-            f"close={row['close']:.2f} ema50={row['ema50']:.2f} "
+            f"{symbol}: 5m entry fail side={side} {metrics} "
+            f"close={row['close']:.2f} ema20={row['ema20']:.2f} ema50={row['ema50']:.2f} "
             f"prev_high={prev['high']:.2f} prev_low={prev['low']:.2f}"
         )
 
+    rr, rr_reason = choose_rr(row_15m, row_1h)
     slip = atr_val * Config.SLIPPAGE_ATR
+    stop_distance = Config.SL_ATR * atr_val
+    take_profit_distance = stop_distance * rr
 
     if side == "BUY":
         entry = price + slip
-        sl = entry - Config.SL_ATR * atr_val
-        tp = entry + Config.TP_ATR * atr_val
+        sl = entry - stop_distance
+        tp = entry + take_profit_distance
     else:
         entry = price - slip
-        sl = entry + Config.SL_ATR * atr_val
-        tp = entry - Config.TP_ATR * atr_val
+        sl = entry + stop_distance
+        tp = entry - take_profit_distance
 
     features = {
         "atr_pct": atr_pct,
@@ -487,6 +639,9 @@ def generate_signal(symbol, df):
         "momentum_pct": momentum_pct,
         "ema20_distance": ema20_distance,
         "body_ratio": body_ratio,
+        "mtf_ema_gap": mtf_ema_gap,
+        "htf_ema_gap": htf_ema_gap,
+        "rr": rr,
     }
 
     ai_prob = ai_probability_placeholder(features)
@@ -506,11 +661,16 @@ def generate_signal(symbol, df):
         "sl": sl,
         "tp": tp,
         "atr": atr_val,
+        "rr": rr,
+        "rr_reason": rr_reason,
         "ai_prob": ai_prob,
+        "entry_interval": Config.ENTRY_INTERVAL,
+        "confirm_interval": Config.CONFIRM_INTERVAL,
+        "trend_interval": Config.TREND_INTERVAL,
         **features,
     }
 
-    return signal, f"{symbol}: SIGNAL {side} ai={ai_prob:.3f} {metrics}"
+    return signal, f"{symbol}: SIGNAL {side} rr={rr:.1f} ({rr_reason}) ai={ai_prob:.3f} {metrics}"
 
 
 # =====================
@@ -606,7 +766,7 @@ def execute_signal(signal, balance, state):
     log(
         f"SIGNAL {symbol} {signal['side']} qty={qty} "
         f"entry≈{signal['entry']:.2f} sl={signal['sl']:.2f} tp={signal['tp']:.2f} "
-        f"ai={signal['ai_prob']:.3f}"
+        f"rr={signal['rr']:.1f} ai={signal['ai_prob']:.3f}"
     )
 
     entry_order = BinanceFutures.market_order(symbol, entry_side, qty)
@@ -624,7 +784,12 @@ def execute_signal(signal, balance, state):
         "entry_ref": signal["entry"],
         "sl": signal["sl"],
         "tp": signal["tp"],
+        "rr": signal["rr"],
+        "rr_reason": signal["rr_reason"],
         "ai_prob": signal["ai_prob"],
+        "entry_interval": signal["entry_interval"],
+        "confirm_interval": signal["confirm_interval"],
+        "trend_interval": signal["trend_interval"],
         "dry_run": Config.DRY_RUN,
         "entry_order": json.dumps(entry_order),
         "sl_order": json.dumps(sl_order),
@@ -644,6 +809,7 @@ def main():
     log("🚀 V29 X-Ray Binance Futures Demo Bot started")
     log(f"BASE_URL={Config.BASE_URL}")
     log(f"DRY_RUN={Config.DRY_RUN}")
+    log(f"TIMEFRAMES={','.join(Config.TIMEFRAMES)} RR_MODE={Config.RR_MODE}")
 
     setup()
     state = load_state()
@@ -665,8 +831,8 @@ def main():
                     log(f"Skip {symbol}: position already open amount={pos['amount']} entry={pos['entry']}")
                     continue
 
-                df = BinanceFutures.get_klines(symbol, Config.INTERVAL, Config.KLINE_LIMIT)
-                signal, reason = generate_signal(symbol, df)
+                market_data = fetch_timeframes(symbol)
+                signal, reason = generate_signal(symbol, market_data)
 
                 if signal:
                     log(reason)
