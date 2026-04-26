@@ -4,6 +4,7 @@ import hmac
 import json
 import hashlib
 import logging
+from logging.handlers import TimedRotatingFileHandler
 from pathlib import Path
 from datetime import datetime
 from urllib.parse import urlencode
@@ -59,26 +60,38 @@ class Config:
     DEEPSEEK_KEY = os.getenv("DEEPSEEK_API_KEY")
     AI_MODEL = "deepseek-chat"
 
-    LOG_FILE = "hybrid_bot.log"
-    TRADE_LOG = "hybrid_trades.csv"
+    LOG_DIR = Path("logs")
+    LOG_FILE = LOG_DIR / f"hybrid_bot_{datetime.now().strftime('%Y-%m-%d')}.log"
+    TRADE_LOG = LOG_DIR / "hybrid_trades.csv"
     STATE_FILE = "hybrid_state.json"
 
 
-logging.basicConfig(
-    filename=Config.LOG_FILE,
-    level=logging.INFO,
-    format="%(asctime)s - %(levelname)s - %(message)s",
+Config.LOG_DIR.mkdir(parents=True, exist_ok=True)
+
+logger = logging.getLogger("hybrid_bot")
+logger.setLevel(logging.INFO)
+logger.propagate = False
+
+file_handler = TimedRotatingFileHandler(
+    Config.LOG_FILE,
+    when="midnight",
+    interval=1,
+    backupCount=30,
+    encoding="utf-8",
 )
+file_handler.suffix = "%Y-%m-%d"
+file_handler.setFormatter(logging.Formatter("%(asctime)s - %(levelname)s - %(message)s"))
+logger.addHandler(file_handler)
 
 
 def log(msg):
     print(f"[{datetime.now().strftime('%Y-%m-%d %H:%M:%S')}] {msg}")
-    logging.info(msg)
+    logger.info(msg)
 
 
 def warn(msg):
     print(f"[{datetime.now().strftime('%Y-%m-%d %H:%M:%S')}] WARNING {msg}")
-    logging.warning(msg)
+    logger.warning(msg)
 
 
 class Binance:
