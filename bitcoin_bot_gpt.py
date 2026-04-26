@@ -240,8 +240,11 @@ class BinanceFutures:
             )
             log(f"Set margin {symbol} = {Config.MARGIN_TYPE}")
         except Exception as e:
-            # Binance returns error if margin type is already set. Safe to ignore.
-            log(f"Set margin warning {symbol}: {e}")
+            # Binance code -4046 means the symbol is already using this margin type.
+            if "-4046" in str(e):
+                log(f"Set margin {symbol}: already {Config.MARGIN_TYPE}")
+            else:
+                log(f"Set margin warning {symbol}: {e}")
 
     @staticmethod
     def market_order(symbol, side, quantity):

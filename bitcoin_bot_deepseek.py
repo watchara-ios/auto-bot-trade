@@ -92,8 +92,12 @@ class Config:
 
     # AI thresholds
     CHAT_CONFIDENCE_THRESHOLD = 50
-    MIN_ATR_PERCENT = 0.3
+    MIN_ATR_PERCENT = 0.12
     REASONER_EXIT_INTERVAL = 3600
+    VOLUME_SURGE_MULTIPLIER = 0.8
+    MOMENTUM_CONFIRM_BARS = 1
+    BREAKOUT_LOOKBACK = 20
+    TECHNICAL_FALLBACK_CONFIDENCE = 55
 
 
 @dataclass
@@ -338,10 +342,11 @@ class EntryFilters:
 
     @staticmethod
     def detect_breakout(klines_15m: List[List]) -> tuple:
-        if len(klines_15m) < 20:
+        lookback = Config.BREAKOUT_LOOKBACK
+        if len(klines_15m) < lookback + 1:
             return False, ""
-        highs = [float(k[2]) for k in klines_15m[-20:]]
-        lows = [float(k[3]) for k in klines_15m[-20:]]
+        highs = [float(k[2]) for k in klines_15m[-lookback-1:-1]]
+        lows = [float(k[3]) for k in klines_15m[-lookback-1:-1]]
         current = float(klines_15m[-1][4])
         resistance = max(highs)
         support = min(lows)
@@ -358,6 +363,43 @@ class EntryFilters:
         elif direction == "SELL":
             return price < ema20 and ema_slope < 0
         return False
+
+    @staticmethod
+    def reclaim_signal(data_5m: dict, data_15m: dict, data_1h: dict) -> tuple:
+        price_15m = data_15m["price"]
+        ema20_15m = data_15m["ema20"]
+        ema50_15m = data_15m.get("ema50")
+        slope_15m = data_15m.get("ema_slope", 0.0)
+        price_1h = data_1h["price"]
+        ema20_1h = data_1h["ema20"]
+        slope_1h = data_1h.get("ema_slope", 0.0)
+        rsi_5m = data_5m.get("rsi", 50.0)
+        rsi_15m = data_15m.get("rsi", 50.0)
+
+        buy_reclaim = (
+            price_15m > ema20_15m
+            and (ema50_15m is None or price_15m > ema50_15m)
+            and price_1h > ema20_1h
+            and slope_15m >= 0
+            and slope_1h >= 0
+            and rsi_5m < 75
+            and rsi_15m < 75
+        )
+        sell_reclaim = (
+            price_15m < ema20_15m
+            and (ema50_15m is None or price_15m < ema50_15m)
+            and price_1h < ema20_1h
+            and slope_15m <= 0
+            and slope_1h <= 0
+            and rsi_5m > 25
+            and rsi_15m > 25
+        )
+
+        if buy_reclaim:
+            return True, "BUY", "15m reclaim aligned with 1h trend"
+        if sell_reclaim:
+            return True, "SELL", "15m breakdown aligned with 1h trend"
+        return False, "", ""
 
     # ★★★ Filter สำหรับไม้ใหญ่: ราคาต้องอยู่เหนือ/ใต้ EMA50 ★★★
     @staticmethod
@@ -910,15 +952,27 @@ class TradingBot:
                         Logger.info(f"📊 {symbol} มีตำแหน่งครบ {Config.MAX_POSITIONS} แล้ว")
                         continue
 
+                    reclaim = False
                     breakout, breakout_dir = EntryFilters.detect_breakout(market_data["klines_15m_raw"])
                     if breakout:
                         Logger.success(f"🚨 {symbol} Breakout detected! Direction: {breakout_dir}. Bypassing momentum filter.")
                         direction_guess = breakout_dir
                     else:
+                        reclaim, reclaim_dir, reclaim_reason = EntryFilters.reclaim_signal(
+                            market_data["5m"], market_data["15m"], market_data["1h"]
+                        )
+                        if reclaim:
+                            Logger.success(f"⚡ {symbol} Reclaim signal: {reclaim_dir} - {reclaim_reason}")
+                            direction_guess = reclaim_dir
+                        else:
+                            reclaim_reason = ""
+
                         price_15m = market_data["15m"]["price"]
                         ema20_15m = market_data["15m"]["ema20"]
                         slope = market_data["15m"]["ema_slope"]
-                        if slope > 0 and price_15m > ema20_15m:
+                        if reclaim:
+                            pass
+                        elif slope > 0 and price_15m > ema20_15m:
                             direction_guess = "BUY"
                         elif slope < 0 and price_15m < ema20_15m:
                             direction_guess = "SELL"
@@ -926,11 +980,11 @@ class TradingBot:
                             Logger.info(f"⏸️ {symbol} แนวโน้มไม่ชัดเจน ข้าม")
                             continue
 
-                        if not EntryFilters.momentum_confirmed(market_data["1m"]["closes"], bars=2):
+                        if not EntryFilters.momentum_confirmed(market_data["1m"]["closes"], bars=Config.MOMENTUM_CONFIRM_BARS):
                             Logger.info(f"⏸️ {symbol} โมเมนตัมไม่ยืนยัน ข้าม")
                             continue
 
-                        if not EntryFilters.volume_surge(BinanceAPI.get_klines(symbol, "1m", 30), multiplier=1.0):
+                        if not EntryFilters.volume_surge(BinanceAPI.get_klines(symbol, "1m", 30), multiplier=Config.VOLUME_SURGE_MULTIPLIER):
                             Logger.info(f"⏸️ {symbol} ปริมาณต่ำกว่าค่าเฉลี่ย ข้าม")
                             continue
 
@@ -939,15 +993,36 @@ class TradingBot:
                         market_data["1m"], market_data["5m"], market_data["15m"]
                     )
                     if not should_proceed or conf < Config.CHAT_CONFIDENCE_THRESHOLD:
-                        Logger.info(f"🚫 {symbol} Gatekeeper ปฏิเสธ (conf={conf})")
-                        continue
+                        if breakout or reclaim:
+                            Logger.warn(
+                                f"⚠️ {symbol} ใช้ technical fallback เพราะมี signal ชัด "
+                                f"(breakout={breakout}, reclaim={reclaim}, AI conf={conf})"
+                            )
+                            plan = {
+                                "direction": direction_guess,
+                                "position_percent": Config.BASE_POSITION_PERCENT,
+                                "sl_atr_mult": Config.DEFAULT_SL_ATR_MULT,
+                                "tp_atr_mult": Config.DEFAULT_TP_ATR_MULT,
+                                "confidence": Config.TECHNICAL_FALLBACK_CONFIDENCE,
+                                "reasoning": "technical fallback"
+                            }
+                        else:
+                            Logger.info(f"🚫 {symbol} Gatekeeper ปฏิเสธ (conf={conf})")
+                            continue
+                    else:
+                        plan = DeepSeekStrategist.plan_trade(
+                            symbol,
+                            market_data["1m"], market_data["5m"], market_data["15m"],
+                            market_data["klines_15m_raw"]
+                        )
+                        if not plan:
+                            continue
 
-                    plan = DeepSeekStrategist.plan_trade(
-                        symbol,
-                        market_data["1m"], market_data["5m"], market_data["15m"],
-                        market_data["klines_15m_raw"]
-                    )
-                    if not plan:
+                    if plan["direction"] != direction_guess:
+                        Logger.info(
+                            f"⏸️ {symbol} แผนไม่ตรงกับสัญญาณเทคนิค "
+                            f"(plan={plan['direction']} signal={direction_guess}) ข้าม"
+                        )
                         continue
 
                     # Trend filter มาตรฐาน
