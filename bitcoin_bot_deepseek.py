@@ -93,6 +93,7 @@ class Config:
     # AI thresholds
     CHAT_CONFIDENCE_THRESHOLD = 50
     MIN_ATR_PERCENT = 0.3
+    REASONER_EXIT_INTERVAL = 3600
 
 
 @dataclass
@@ -264,16 +265,19 @@ class MarketData:
         klines_1m = BinanceAPI.get_klines(symbol, "1m", 100)
         klines_5m = BinanceAPI.get_klines(symbol, "5m", 100)
         klines_15m = BinanceAPI.get_klines(symbol, "15m", 100)
+        klines_1h = BinanceAPI.get_klines(symbol, "1h", 100)
 
-        if not klines_1m or not klines_5m or not klines_15m:
+        if not klines_1m or not klines_5m or not klines_15m or not klines_1h:
             return None
 
         closes_1m = [float(k[4]) for k in klines_1m]
         closes_5m = [float(k[4]) for k in klines_5m]
         closes_15m = [float(k[4]) for k in klines_15m]
+        closes_1h = [float(k[4]) for k in klines_1h]
 
         # ★★★ คำนวณ EMA50 สำหรับ Trend Filter ไม้ใหญ่ ★★★
         ema50_15m = Indicators.ema(closes_15m, 50) if len(closes_15m) >= 50 else None
+        ema50_1h = Indicators.ema(closes_1h, 50) if len(closes_1h) >= 50 else None
 
         data = {
             "1m": {
@@ -299,6 +303,15 @@ class MarketData:
                 "ema_slope": Indicators.ema_slope(closes_15m, 20, 5),
                 "ema50": ema50_15m,  # เพิ่ม EMA50
                 "closes": closes_15m,
+            },
+            "1h": {
+                "price": closes_1h[-1],
+                "ema20": Indicators.ema(closes_1h, 20),
+                "rsi": Indicators.rsi(closes_1h, 14),
+                "atr": Indicators.atr(klines_1h, 14),
+                "ema_slope": Indicators.ema_slope(closes_1h, 20, 5),
+                "ema50": ema50_1h,
+                "closes": closes_1h,
             },
             "klines_15m_raw": klines_15m,
         }
@@ -592,6 +605,49 @@ class TradingBot:
             return True
         return False
 
+    def log_market_snapshot(self, symbol: str, market_data: Dict):
+        Logger.info(f"📈 Market snapshot {symbol}")
+        for tf in ["1m", "5m", "15m", "1h"]:
+            data = market_data.get(tf, {})
+            price = data.get("price", 0.0)
+            ema20 = data.get("ema20", 0.0)
+            ema50 = data.get("ema50")
+            rsi = data.get("rsi", 0.0)
+            atr = data.get("atr", 0.0)
+            slope = data.get("ema_slope")
+            atr_pct = (atr / price * 100) if price else 0.0
+            trend = "UP" if price > ema20 else "DOWN" if price < ema20 else "FLAT"
+            extra = ""
+            if slope is not None:
+                extra += f" | slope={slope:.4f}"
+            if ema50 is not None:
+                extra += f" | EMA50={ema50:.2f}"
+            Logger.info(
+                f"   {tf}: price={price:.2f} EMA20={ema20:.2f} RSI={rsi:.2f} "
+                f"ATR={atr:.2f} ({atr_pct:.2f}%) trend={trend}{extra}"
+            )
+
+    def log_position_status(self, symbol: str, current_price: float):
+        for idx, pos in enumerate(self.positions[symbol]):
+            if pos.side == "BUY":
+                pnl = (current_price - pos.entry_price) * pos.quantity
+                pnl_pct = (current_price - pos.entry_price) / pos.entry_price * 100
+                sl_gap = (current_price - pos.sl_price) / current_price * 100
+                tp_gap = (pos.tp_price - current_price) / current_price * 100
+            else:
+                pnl = (pos.entry_price - current_price) * pos.quantity
+                pnl_pct = (pos.entry_price - current_price) / pos.entry_price * 100
+                sl_gap = (pos.sl_price - current_price) / current_price * 100
+                tp_gap = (current_price - pos.tp_price) / current_price * 100
+            age_min = (time.time() - pos.open_time) / 60
+            Logger.info(
+                f"📌 Position {symbol}#{idx} {pos.side} qty={pos.quantity} entry={pos.entry_price:.2f} "
+                f"now={current_price:.2f} PnL=${pnl:.2f} ({pnl_pct:.2f}%) "
+                f"SL={pos.sl_price:.2f} ({sl_gap:.2f}% away) "
+                f"TP={pos.tp_price:.2f} ({tp_gap:.2f}% away) "
+                f"age={age_min:.1f}m trailing={pos.trailing_active}"
+            )
+
     # ★★★ คำนวณขนาด Lot ตาม confidence ★★★
     def get_lot_size(self, confidence: float) -> float:
         if confidence >= 70:
@@ -705,34 +761,58 @@ class TradingBot:
 
     def check_exits(self, symbol: str, current_price: float, atr: float):
         for i, pos in reversed(list(enumerate(self.positions[symbol]))):
+            Logger.info(f"🔎 Exit check {symbol}#{i}: side={pos.side} price={current_price:.2f} SL={pos.sl_price:.2f} TP={pos.tp_price:.2f} ATR={atr:.2f}")
             if pos.side == "BUY":
                 if current_price <= pos.sl_price:
+                    Logger.warn(f"🚪 {symbol} BUY hit SL: price {current_price:.2f} <= SL {pos.sl_price:.2f}")
                     self.close_position(symbol, i, current_price, "Stop Loss")
                     continue
                 if current_price >= pos.tp_price:
+                    Logger.success(f"🚪 {symbol} BUY hit TP: price {current_price:.2f} >= TP {pos.tp_price:.2f}")
                     self.close_position(symbol, i, current_price, "Take Profit")
                     continue
                 # Trailing stop เมื่อกำไรเกิน 0.5 ATR
                 if current_price > pos.entry_price + 0.5 * atr:
                     new_sl = current_price - Config.TRAILING_ATR_MULT * atr
                     if new_sl > pos.sl_price:
+                        old_sl = pos.sl_price
                         pos.sl_price = new_sl
                         pos.trailing_active = True
+                        Logger.info(f"🔁 {symbol} BUY trailing SL moved {old_sl:.2f} -> {new_sl:.2f}")
+                    else:
+                        Logger.info(f"⏸️ {symbol} BUY trailing not moved: new SL {new_sl:.2f} <= current SL {pos.sl_price:.2f}")
+                else:
+                    trigger = pos.entry_price + 0.5 * atr
+                    Logger.info(f"⏸️ {symbol} BUY hold: price below trailing trigger {trigger:.2f}")
             else:
                 if current_price >= pos.sl_price:
+                    Logger.warn(f"🚪 {symbol} SELL hit SL: price {current_price:.2f} >= SL {pos.sl_price:.2f}")
                     self.close_position(symbol, i, current_price, "Stop Loss")
                     continue
                 if current_price <= pos.tp_price:
+                    Logger.success(f"🚪 {symbol} SELL hit TP: price {current_price:.2f} <= TP {pos.tp_price:.2f}")
                     self.close_position(symbol, i, current_price, "Take Profit")
                     continue
                 if current_price < pos.entry_price - 0.5 * atr:
                     new_sl = current_price + Config.TRAILING_ATR_MULT * atr
                     if new_sl < pos.sl_price:
+                        old_sl = pos.sl_price
                         pos.sl_price = new_sl
                         pos.trailing_active = True
+                        Logger.info(f"🔁 {symbol} SELL trailing SL moved {old_sl:.2f} -> {new_sl:.2f}")
+                    else:
+                        Logger.info(f"⏸️ {symbol} SELL trailing not moved: new SL {new_sl:.2f} >= current SL {pos.sl_price:.2f}")
+                else:
+                    trigger = pos.entry_price - 0.5 * atr
+                    Logger.info(f"⏸️ {symbol} SELL hold: price above trailing trigger {trigger:.2f}")
 
     def reasoner_exit_check(self):
-        if time.time() - self.last_reasoner_exit_time < 3600:
+        elapsed = time.time() - self.last_reasoner_exit_time
+        if elapsed < Config.REASONER_EXIT_INTERVAL:
+            remaining = Config.REASONER_EXIT_INTERVAL - elapsed
+            total_positions = sum(len(v) for v in self.positions.values())
+            if total_positions > 0:
+                Logger.info(f"⏸️ Reasoner exit ยังไม่ถึงรอบ เหลือ {remaining/60:.1f} นาที (positions={total_positions})")
             return
         self.last_reasoner_exit_time = time.time()
         Logger.info("🕐 Reasoner กำลังตรวจสอบการปิดออเดอร์ทุกสัญลักษณ์...")
@@ -749,6 +829,10 @@ class TradingBot:
                 action = DeepSeekStrategist.evaluate_exit(pos, current_price, market_data)
                 if action == "CLOSE":
                     self.close_position(symbol, i, current_price, "AI Reasoner Exit")
+                elif action == "HOLD":
+                    Logger.info(f"⏸️ AI Reasoner ให้ถือ {symbol}#{i} ต่อ")
+                else:
+                    Logger.warn(f"⚠️ AI Reasoner ไม่มีคำสั่งปิดที่ชัดเจนสำหรับ {symbol}#{i}: {action}")
 
     def run(self):
         Logger.success("=" * 50)
@@ -806,11 +890,14 @@ class TradingBot:
                     atr_15m = market_data["15m"]["atr"]
                     self.last_atr[symbol] = atr_15m
 
-                    if atr_15m <= 0 or (atr_15m / current_price * 100) < Config.MIN_ATR_PERCENT:
-                        Logger.info(f"⏸️ {symbol} ATR ต่ำเกินไป ({atr_15m/current_price*100:.2f}%) ข้าม")
-                        continue
+                    self.log_market_snapshot(symbol, market_data)
+                    if self.positions[symbol]:
+                        self.log_position_status(symbol, current_price)
+                        self.check_exits(symbol, current_price, atr_15m)
 
-                    self.check_exits(symbol, current_price, atr_15m)
+                    if atr_15m <= 0 or (atr_15m / current_price * 100) < Config.MIN_ATR_PERCENT:
+                        Logger.info(f"⏸️ {symbol} ATR ต่ำเกินไป ({atr_15m/current_price*100:.2f}%) ข้ามเฉพาะการเปิดไม้ใหม่")
+                        continue
 
                     now = time.time()
                     cooldown_active = (now - self.last_trade_time[symbol] < Config.ENTRY_COOLDOWN) or \

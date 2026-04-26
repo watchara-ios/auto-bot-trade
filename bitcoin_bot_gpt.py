@@ -96,9 +96,9 @@ class Config:
 
     POLL_SECONDS = 30
 
-    LOG_FILE = "v29_xray_demo_bot.log"
-    TRADE_LOG = "v29_xray_demo_trades.csv"
-    STATE_FILE = "v29_xray_demo_state.json"
+    LOG_FILE = "demo_bot.log"
+    TRADE_LOG = "demo_trades.csv"
+    STATE_FILE = "demo_state.json"
 
 
 # =====================
