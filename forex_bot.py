@@ -46,7 +46,7 @@ SL_BUFFER_POINTS = 100
 MAX_TRADES_PER_DAY = 2
 MAX_DAILY_LOSS_PERCENT = 3.0
 
-CHECK_INTERVAL_SECONDS = 30
+CHECK_INTERVAL_SECONDS = int(os.getenv("FOREX_CHECK_INTERVAL_SECONDS", "300"))
 
 # เทรดเฉพาะช่วงเวลาไทยโดยประมาณ
 TRADE_START_HOUR = int(os.getenv("FOREX_TRADE_START_HOUR", "14"))
@@ -462,25 +462,70 @@ DeepSeek-R1: You must NOT output your reasoning chain – only the final JSON.
 Now, analyze the Forex market and return only the JSON."""
 
 
-def choose_ai_trading_symbol(recommendations):
+def build_ai_watchlist(recommendations):
     ranked = sorted(
         [r for r in recommendations if int(r.get("rating", 99)) in {1, 2, 3}],
-        key=lambda r: (int(r.get("rating", 99)), AI_MAJOR_PAIRS.index(r["symbol"]) if r.get("symbol") in AI_MAJOR_PAIRS else 999),
+        key=lambda r: (
+            int(r.get("rating", 99)),
+            AI_MAJOR_PAIRS.index(str(r.get("symbol", "")).upper())
+            if str(r.get("symbol", "")).upper() in AI_MAJOR_PAIRS
+            else 999,
+        ),
     )
 
+    watchlist = []
     errors = []
     for rec in ranked:
         symbol = str(rec.get("symbol", "")).strip().upper()
         if not symbol:
             continue
         try:
-            selected = select_trading_symbol(symbol, f"AI rating={rec.get('rating')} reason={rec.get('reason', '')}")
-            return selected, rec
+            resolved_symbol, symbol_info = resolve_symbol(symbol)
+            if not symbol_info.visible:
+                if not mt5.symbol_select(resolved_symbol, True):
+                    raise RuntimeError(f"Cannot select symbol in Market Watch: {resolved_symbol} | {mt5.last_error()}")
+            watchlist.append({
+                "symbol": resolved_symbol,
+                "rating": int(rec.get("rating", 99)),
+                "reason": rec.get("reason", ""),
+                "source_symbol": symbol,
+            })
         except Exception as e:
             errors.append(f"{symbol}: {e}")
 
-    print(f"[{datetime.now()}] 🧠 No AI recommended symbol is available in MT5: {' | '.join(errors)}", flush=True)
-    return None, None
+    if watchlist:
+        symbols_text = ", ".join([f"{item['symbol']}(r{item['rating']})" for item in watchlist])
+        print(f"[{datetime.now()}] 🧠 AI MT5 watchlist: {symbols_text}", flush=True)
+    else:
+        print(f"[{datetime.now()}] 🧠 No AI recommended symbol is available in MT5: {' | '.join(errors)}", flush=True)
+    return watchlist
+
+
+def choose_ai_trading_symbol(recommendations):
+    watchlist = build_ai_watchlist(recommendations)
+    if not watchlist:
+        return None, None
+    first = watchlist[0]
+    selected = select_trading_symbol(
+        first["symbol"],
+        f"AI rating={first['rating']} reason={first['reason']}",
+    )
+    return selected, first
+
+
+def get_trading_watchlist():
+    state = read_ai_state()
+    symbols = state.get("candidate_symbols") or []
+    if not symbols and state.get("selected_symbol"):
+        symbols = [state["selected_symbol"]]
+    if not symbols:
+        symbols = [SYMBOL]
+
+    unique_symbols = []
+    for symbol in symbols:
+        if symbol and symbol not in unique_symbols:
+            unique_symbols.append(symbol)
+    return unique_symbols
 
 
 def apply_ai_selected_symbol_from_state():
@@ -505,14 +550,14 @@ def run_daily_ai_market_scan_once():
 
     state = read_ai_state()
     if state.get("last_scan_date") == today:
-        if not state.get("selected_symbol") and state.get("last_recommendations"):
-            selected_symbol, selected_rec = choose_ai_trading_symbol(state["last_recommendations"])
-            if selected_symbol:
-                state["selected_symbol"] = selected_symbol
-                state["selected_recommendation"] = selected_rec
+        if not state.get("candidate_symbols") and state.get("last_recommendations"):
+            watchlist = build_ai_watchlist(state["last_recommendations"])
+            if watchlist:
+                state["candidate_symbols"] = [item["symbol"] for item in watchlist]
+                state["candidate_recommendations"] = watchlist
+                state["selected_symbol"] = watchlist[0]["symbol"]
+                state["selected_recommendation"] = watchlist[0]
                 write_ai_state(state)
-        elif state.get("selected_symbol") and SYMBOL != state.get("selected_symbol"):
-            apply_ai_selected_symbol_from_state()
         return
 
     if not DEEPSEEK_API_KEY:
@@ -549,10 +594,12 @@ def run_daily_ai_market_scan_once():
         state["last_scan_date"] = today
         state["last_scan_at"] = now.strftime("%Y-%m-%d %H:%M:%S")
         state["last_recommendations"] = result.get("recommendations", [])
-        selected_symbol, selected_rec = choose_ai_trading_symbol(state["last_recommendations"])
-        if selected_symbol:
-            state["selected_symbol"] = selected_symbol
-            state["selected_recommendation"] = selected_rec
+        watchlist = build_ai_watchlist(state["last_recommendations"])
+        if watchlist:
+            state["candidate_symbols"] = [item["symbol"] for item in watchlist]
+            state["candidate_recommendations"] = watchlist
+            state["selected_symbol"] = watchlist[0]["symbol"]
+            state["selected_recommendation"] = watchlist[0]
         write_ai_state(state)
 
         print(f"[{datetime.now()}] 🧠 DeepSeek recommendations: {json.dumps(result, ensure_ascii=False)}", flush=True)
@@ -566,6 +613,18 @@ def run_daily_ai_market_scan_once():
 def has_open_position():
     positions = mt5.positions_get(symbol=SYMBOL)
     return positions is not None and len(positions) > 0
+
+
+def has_any_open_position(symbols):
+    positions = mt5.positions_get()
+    if positions is None:
+        return False, ""
+
+    symbol_set = set(symbols)
+    for pos in positions:
+        if pos.symbol in symbol_set:
+            return True, pos.symbol
+    return False, ""
 
 
 # =========================================================
@@ -776,13 +835,12 @@ def run_bot():
     print(
         f"[{datetime.now()}] 🚀 Forex bot booting | pid={os.getpid()} | cwd={os.getcwd()} | "
         f"session={TRADE_START_HOUR}:00-{TRADE_END_HOUR}:59 | blocked_hours={sorted(BLOCK_ENTRY_HOURS)} | "
-        f"DRY_RUN={DRY_RUN}",
+        f"interval={CHECK_INTERVAL_SECONDS}s | DRY_RUN={DRY_RUN}",
         flush=True,
     )
     connect_mt5()
-    apply_ai_selected_symbol_from_state()
 
-    last_entry_candle_time = None
+    last_entry_candle_time = {}
 
     print(f"[{datetime.now()}] 🚀 Bot started", flush=True)
 
@@ -798,48 +856,67 @@ def run_bot():
                 time.sleep(CHECK_INTERVAL_SECONDS)
                 continue
 
-            spread_ok, spread_msg = pass_spread_filter()
-            if not spread_ok:
-                print(f"[{datetime.now()}] ⏸ {spread_msg}")
+            watchlist = get_trading_watchlist()
+            print(f"[{datetime.now()}] 👀 AI watchlist scan: {', '.join(watchlist)}", flush=True)
+
+            has_position, position_symbol = has_any_open_position(watchlist)
+            if has_position:
+                print(f"[{datetime.now()}] 📌 Existing position detected on {position_symbol}, skip new entries")
                 time.sleep(CHECK_INTERVAL_SECONDS)
                 continue
 
-            risk_ok, risk_msg = pass_daily_risk_filter()
-            if not risk_ok:
-                print(f"[{datetime.now()}] 🛑 {risk_msg}")
-                time.sleep(CHECK_INTERVAL_SECONDS)
-                continue
+            order_sent = False
+            for preferred_symbol in watchlist:
+                try:
+                    select_trading_symbol(preferred_symbol, "AI watchlist candidate")
+                    print(f"[{datetime.now()}] 🔎 Analyzing {SYMBOL}", flush=True)
 
-            if has_open_position():
-                print(f"[{datetime.now()}] 📌 Existing position detected, skip")
-                time.sleep(CHECK_INTERVAL_SECONDS)
-                continue
+                    spread_ok, spread_msg = pass_spread_filter()
+                    if not spread_ok:
+                        print(f"[{datetime.now()}] ⏸ {SYMBOL} {spread_msg}")
+                        continue
 
-            signal, df_m5 = generate_signal()
+                    risk_ok, risk_msg = pass_daily_risk_filter()
+                    if not risk_ok:
+                        print(f"[{datetime.now()}] 🛑 {SYMBOL} {risk_msg}")
+                        continue
 
-            current_candle_time = signal["time"]
+                    if has_open_position():
+                        print(f"[{datetime.now()}] 📌 {SYMBOL} existing position detected, skip")
+                        continue
 
-            # กันยิงซ้ำในแท่งเดียวกัน
-            if last_entry_candle_time == current_candle_time:
-                time.sleep(CHECK_INTERVAL_SECONDS)
-                continue
+                    signal, df_m5 = generate_signal()
 
-            print("\n==============================")
-            print(f"Time: {datetime.now()}")
-            print("SIGNAL:", signal)
+                    current_candle_time = signal["time"]
 
-            if signal["side"] == "NO_TRADE":
-                print("⏸ No trade")
-                last_entry_candle_time = current_candle_time
-                time.sleep(CHECK_INTERVAL_SECONDS)
-                continue
+                    # กันยิงซ้ำในแท่งเดียวกัน แยกตาม symbol
+                    if last_entry_candle_time.get(SYMBOL) == current_candle_time:
+                        print(f"[{datetime.now()}] ⏸ {SYMBOL} already checked candle {current_candle_time}")
+                        continue
 
-            tp_sl = calculate_tp_sl(signal)
-            print("TP/SL:", tp_sl)
+                    print("\n==============================")
+                    print(f"Time: {datetime.now()}")
+                    print("SIGNAL:", signal)
 
-            send_order(signal, tp_sl)
+                    if signal["side"] == "NO_TRADE":
+                        print(f"⏸ {SYMBOL} No trade")
+                        last_entry_candle_time[SYMBOL] = current_candle_time
+                        continue
 
-            last_entry_candle_time = current_candle_time
+                    tp_sl = calculate_tp_sl(signal)
+                    print("TP/SL:", tp_sl)
+
+                    send_order(signal, tp_sl)
+
+                    last_entry_candle_time[SYMBOL] = current_candle_time
+                    order_sent = True
+                    break
+
+                except Exception as e:
+                    print(f"[{datetime.now()}] ❌ {preferred_symbol} analysis error: {e}", flush=True)
+
+            if not order_sent:
+                print(f"[{datetime.now()}] ⏳ No order from AI watchlist this round", flush=True)
 
             time.sleep(CHECK_INTERVAL_SECONDS)
 
