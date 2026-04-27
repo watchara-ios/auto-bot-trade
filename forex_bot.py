@@ -36,6 +36,7 @@ CHECK_INTERVAL_SECONDS = 30
 TRADE_START_HOUR = 14
 TRADE_END_HOUR = 23
 BLOCK_ENTRY_HOURS = {15, 17, 19}  # ชั่วโมงที่ history แพ้หนัก ลดการ overtrade ก่อน
+EXIT_AFTER_SESSION_END = True
 
 DRY_RUN = True   # True = ไม่ยิง order จริง / False = ยิงจริง
 
@@ -292,6 +293,12 @@ def pass_session_filter():
     return False
 
 
+def should_exit_after_session():
+    if not EXIT_AFTER_SESSION_END:
+        return False
+    return datetime.now().hour > TRADE_END_HOUR
+
+
 def get_spread_points():
     tick = mt5.symbol_info_tick(SYMBOL)
     info = mt5.symbol_info(SYMBOL)
@@ -532,6 +539,9 @@ def run_bot():
     while True:
         try:
             if not pass_session_filter():
+                if should_exit_after_session():
+                    print(f"[{datetime.now()}] 🌙 Session ended, bot exiting")
+                    break
                 print(f"[{datetime.now()}] ⏳ Outside trading session")
                 time.sleep(CHECK_INTERVAL_SECONDS)
                 continue
