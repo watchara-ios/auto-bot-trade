@@ -95,12 +95,13 @@ def resolve_symbol(preferred_symbol):
 def connect_mt5():
     global SYMBOL
 
+    print(f"[{datetime.now()}] 🔌 Connecting MT5...", flush=True)
     if not mt5.initialize():
         raise RuntimeError(f"MT5 initialize failed: {mt5.last_error()}")
 
     resolved_symbol, symbol_info = resolve_symbol(SYMBOL)
     if resolved_symbol != SYMBOL:
-        print(f"🔎 Symbol resolved: {SYMBOL} -> {resolved_symbol}")
+        print(f"[{datetime.now()}] 🔎 Symbol resolved: {SYMBOL} -> {resolved_symbol}", flush=True)
         SYMBOL = resolved_symbol
 
     if not symbol_info.visible:
@@ -108,7 +109,7 @@ def connect_mt5():
             raise RuntimeError(f"Cannot select symbol in Market Watch: {SYMBOL} | {mt5.last_error()}")
         symbol_info = mt5.symbol_info(SYMBOL)
 
-    print(f"✅ Connected MT5 | Symbol={SYMBOL}")
+    print(f"[{datetime.now()}] ✅ Connected MT5 | Symbol={SYMBOL}", flush=True)
 
 
 # =========================================================
@@ -535,12 +536,17 @@ def send_order(signal, tp_sl):
 # MAIN LOOP
 # =========================================================
 def run_bot():
+    print(
+        f"[{datetime.now()}] 🚀 Forex bot booting | pid={os.getpid()} | cwd={os.getcwd()} | "
+        f"session={TRADE_START_HOUR}:00-{TRADE_END_HOUR}:59 | blocked_hours={sorted(BLOCK_ENTRY_HOURS)} | "
+        f"DRY_RUN={DRY_RUN}",
+        flush=True,
+    )
     connect_mt5()
 
     last_entry_candle_time = None
 
-    print("🚀 Bot started")
-    print(f"DRY_RUN={DRY_RUN}")
+    print(f"[{datetime.now()}] 🚀 Bot started", flush=True)
 
     while True:
         try:
