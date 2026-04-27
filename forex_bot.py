@@ -1,9 +1,24 @@
+import json
 import os
 import time
 from datetime import datetime, time as dtime
+from pathlib import Path
 import MetaTrader5 as mt5
 import pandas as pd
 import numpy as np
+
+try:
+    from dotenv import load_dotenv
+except ImportError:
+    load_dotenv = None
+
+try:
+    from openai import OpenAI
+except ImportError:
+    OpenAI = None
+
+if load_dotenv:
+    load_dotenv()
 
 
 # =========================================================
@@ -44,6 +59,26 @@ BLOCK_ENTRY_HOURS = {
 EXIT_AFTER_SESSION_END = True
 
 DRY_RUN = True   # True = ไม่ยิง order จริง / False = ยิงจริง
+
+# DeepSeek daily market scan
+AI_DAILY_SCAN_ENABLED = os.getenv("FOREX_AI_DAILY_SCAN_ENABLED", "true").lower() == "true"
+DEEPSEEK_API_KEY = os.getenv("DEEPSEEK_API_KEY")
+DEEPSEEK_MODEL = os.getenv("FOREX_DEEPSEEK_MODEL", "deepseek-reasoner")
+AI_SCAN_HOUR = int(os.getenv("FOREX_AI_SCAN_HOUR", str(TRADE_START_HOUR)))
+AI_STATE_FILE = Path("logs") / "forex_ai_state.json"
+AI_RECOMMENDATION_LOG = Path("logs") / "forex_ai_recommendations.jsonl"
+AI_MAJOR_PAIRS = [
+    "EURUSD",
+    "GBPUSD",
+    "USDJPY",
+    "USDCHF",
+    "USDCAD",
+    "AUDUSD",
+    "NZDUSD",
+    "EURJPY",
+    "GBPJPY",
+    "XAUUSD",
+]
 
 # Quality filters
 MAX_SPREAD_POINTS = 80
@@ -324,6 +359,137 @@ def pass_spread_filter():
 
 
 # =========================================================
+# DEEPSEEK DAILY MARKET SCAN
+# =========================================================
+def read_ai_state():
+    if AI_STATE_FILE.exists():
+        try:
+            return json.loads(AI_STATE_FILE.read_text(encoding="utf-8"))
+        except (json.JSONDecodeError, OSError):
+            return {}
+    return {}
+
+
+def write_ai_state(state):
+    AI_STATE_FILE.parent.mkdir(parents=True, exist_ok=True)
+    AI_STATE_FILE.write_text(json.dumps(state, indent=2), encoding="utf-8")
+
+
+def clean_ai_json(content):
+    content = content.strip()
+    if "```json" in content:
+        content = content.split("```json", 1)[1].split("```", 1)[0]
+    elif "```" in content:
+        content = content.split("```", 1)[1].split("```", 1)[0]
+    return json.loads(content.strip())
+
+
+def build_daily_ai_prompt():
+    now = datetime.now()
+    return f"""You are a professional Forex analyst. Every day at 14:00 (Thailand time, UTC+7), you analyze the current market situation and rate major currency pairs based on the criteria below.
+
+**Time context:** 2:00 PM Thailand time (UTC+7) – this is the London-New York overlap session, offering high liquidity and moderate to high volatility.
+
+**Factors to consider (latest available data):**
+- Recent major economic news and upcoming events (within 2–3 hours) – e.g., NFP, CPI, GDP, PMI, central bank meetings
+- Latest geopolitical events affecting USD, EUR, JPY, GBP
+- Technical trends (key support/resistance, turning points, timeframe 1H/4H)
+- Currency correlations (e.g., EUR/USD vs USD/CHF)
+- Session-specific suitability – at 14:00 UTC+7, pairs with EUR, GBP, USD are most active
+
+**Candidate symbols:** {", ".join(AI_MAJOR_PAIRS)}
+
+**Output format:**
+Return ONLY a valid JSON object. No explanations, no markdown, no extra text before or after.
+DeepSeek-R1: You must NOT output your reasoning chain – only the final JSON.
+
+**JSON schema:**
+{{
+  "timestamp": "YYYY-MM-DD HH:MM:SS",
+  "recommendations": [
+    {{
+      "symbol": "EURUSD",
+      "rating": 1,
+      "reason": "Short reason (one sentence, max 80 chars)"
+    }},
+    {{
+      "symbol": "GBPUSD",
+      "rating": 2,
+      "reason": "..."
+    }}
+  ]
+}}
+
+**Rating scale:**
+- rating 1 = Most tradable (high profit probability, low-medium risk)
+- rating 2 = Very tradable
+- rating 3 = Moderately tradable
+- rating 4 = Caution (high risk or unclear signals)
+- rating 5 = Avoid trading
+
+**Rules:**
+- Include only pairs with rating 1, 2, or 3 (minimum 3 pairs, maximum 7 pairs)
+- Each reason must reference the 2:00 PM session (e.g., London-NY overlap, upcoming news, 1H chart pattern)
+- Use current date for "timestamp": {now.strftime("%Y-%m-%d")}
+
+Now, analyze the Forex market and return only the JSON."""
+
+
+def run_daily_ai_market_scan_once():
+    if not AI_DAILY_SCAN_ENABLED:
+        return
+
+    now = datetime.now()
+    today = now.strftime("%Y-%m-%d")
+    if now.hour < AI_SCAN_HOUR:
+        return
+
+    state = read_ai_state()
+    if state.get("last_scan_date") == today:
+        return
+
+    if not DEEPSEEK_API_KEY:
+        print(f"[{datetime.now()}] 🧠 Skip DeepSeek daily scan: missing DEEPSEEK_API_KEY", flush=True)
+        state["last_scan_date"] = today
+        state["last_scan_at"] = now.strftime("%Y-%m-%d %H:%M:%S")
+        state["last_scan_error"] = "missing DEEPSEEK_API_KEY"
+        write_ai_state(state)
+        return
+    if OpenAI is None:
+        print(f"[{datetime.now()}] 🧠 Skip DeepSeek daily scan: openai package not installed", flush=True)
+        state["last_scan_date"] = today
+        state["last_scan_at"] = now.strftime("%Y-%m-%d %H:%M:%S")
+        state["last_scan_error"] = "openai package not installed"
+        write_ai_state(state)
+        return
+
+    try:
+        print(f"[{datetime.now()}] 🧠 DeepSeek daily forex scan starting...", flush=True)
+        client = OpenAI(api_key=DEEPSEEK_API_KEY, base_url="https://api.deepseek.com/v1")
+        resp = client.chat.completions.create(
+            model=DEEPSEEK_MODEL,
+            messages=[{"role": "user", "content": build_daily_ai_prompt()}],
+            temperature=0.2,
+            max_tokens=700,
+        )
+        result = clean_ai_json(resp.choices[0].message.content)
+        result.setdefault("timestamp", now.strftime("%Y-%m-%d %H:%M:%S"))
+
+        AI_RECOMMENDATION_LOG.parent.mkdir(parents=True, exist_ok=True)
+        with AI_RECOMMENDATION_LOG.open("a", encoding="utf-8") as f:
+            f.write(json.dumps(result, ensure_ascii=False) + "\n")
+
+        state["last_scan_date"] = today
+        state["last_scan_at"] = now.strftime("%Y-%m-%d %H:%M:%S")
+        state["last_recommendations"] = result.get("recommendations", [])
+        write_ai_state(state)
+
+        print(f"[{datetime.now()}] 🧠 DeepSeek recommendations: {json.dumps(result, ensure_ascii=False)}", flush=True)
+    except Exception as e:
+        print(f"[{datetime.now()}] 🧠 DeepSeek daily scan failed: {e}", flush=True)
+
+
+# =========================================================
 # POSITION FILTER
 # =========================================================
 def has_open_position():
@@ -550,6 +716,8 @@ def run_bot():
 
     while True:
         try:
+            run_daily_ai_market_scan_once()
+
             if not pass_session_filter():
                 if should_exit_after_session():
                     print(f"[{datetime.now()}] 🌙 Session ended, bot exiting")
