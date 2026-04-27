@@ -51,6 +51,8 @@ class Config:
     MAX_ATR_PCT = 0.0090
     MIN_VOLUME_RATIO = 0.65
     BREAKOUT_LOOKBACK = 20
+    IMPULSE_LOOKBACK = 6
+    IMPULSE_MOVE_PCT = 0.006
 
     SL_ATR = 1.25
     TP_ATR_NORMAL = 1.8
@@ -377,6 +379,39 @@ def breakout_side(df_15m):
     return None, ""
 
 
+def impulse_side(df_5m, df_15m, df_1h):
+    row_5m = last_closed(df_5m)
+    lookback = df_5m.iloc[-Config.IMPULSE_LOOKBACK - 2:-2]
+    if len(lookback) < Config.IMPULSE_LOOKBACK:
+        return None, ""
+
+    move_from_high = (row_5m.close - lookback["high"].max()) / lookback["high"].max()
+    move_from_low = (row_5m.close - lookback["low"].min()) / lookback["low"].min()
+    row_15m = last_closed(df_15m)
+    row_1h = last_closed(df_1h)
+
+    sell = (
+        move_from_high <= -Config.IMPULSE_MOVE_PCT
+        and row_5m.close < row_5m.ema20
+        and row_15m.close < row_15m.ema20
+        and row_1h.close < row_1h.ema20
+        and row_5m.rsi > 22
+    )
+    buy = (
+        move_from_low >= Config.IMPULSE_MOVE_PCT
+        and row_5m.close > row_5m.ema20
+        and row_15m.close > row_15m.ema20
+        and row_1h.close > row_1h.ema20
+        and row_5m.rsi < 78
+    )
+
+    if sell:
+        return "SELL", f"5m impulse breakdown {move_from_high*100:.2f}% from recent high"
+    if buy:
+        return "BUY", f"5m impulse breakout {move_from_low*100:.2f}% from recent low"
+    return None, ""
+
+
 def generate_signal(symbol, market):
     row_5m = last_closed(market["5m"])
     prev_5m = previous(market["5m"])
@@ -404,8 +439,18 @@ def generate_signal(symbol, market):
         signal_type = "breakout"
         reasons.append(breakout_reason)
 
+    impulse, impulse_reason = impulse_side(market["5m"], market["15m"], market["1h"])
+    if side is None and impulse:
+        side = impulse
+        signal_type = "impulse"
+        reasons.append(impulse_reason)
+
     if side is None:
-        return None, "15m/1h trend not aligned"
+        return None, (
+            "15m/1h trend not aligned and no impulse "
+            f"15m_close={row_15m.close:.2f} 15m_ema20={row_15m.ema20:.2f} "
+            f"1h_close={row_1h.close:.2f} 1h_ema20={row_1h.ema20:.2f} 1h_ema50={row_1h.ema50:.2f}"
+        )
 
     momentum = (row_5m.close - prev_5m.close) / prev_5m.close
     if side == "BUY":
@@ -423,7 +468,7 @@ def generate_signal(symbol, market):
         return None, f"5m entry not ready side={side} close={row_5m.close:.2f} ema20={row_5m.ema20:.2f} momentum={momentum:.5f}"
 
     score = 45
-    score += 12 if signal_type == "breakout" else 8 if signal_type == "reclaim" else 5
+    score += 12 if signal_type == "breakout" else 10 if signal_type == "impulse" else 8 if signal_type == "reclaim" else 5
     score += 8 if row_5m.vol_ratio >= 1.0 else 4 if row_5m.vol_ratio >= Config.MIN_VOLUME_RATIO else -8
     score += 7 if abs(momentum) >= 0.0008 else 3 if abs(momentum) >= 0.00025 else 0
     score += 8 if row_15m.close > row_15m.ema20 > row_15m.ema50 and side == "BUY" else 0
