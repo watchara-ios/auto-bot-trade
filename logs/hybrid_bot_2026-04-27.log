@@ -1837,3 +1837,137 @@
 2026-04-27 14:49:10,021 - INFO - 📈 ETHUSDT | 1m close=2319.01 ema20=2319.04 ema50=2319.83 rsi=50.0 atr=0.40 atr%=0.02 vol=0.04 DOWN | 5m close=2319.01 ema20=2325.45 ema50=2344.30 rsi=56.3 atr=2.51 atr%=0.11 vol=0.17 DOWN | 15m close=2319.01 ema20=2348.44 ema50=2357.90 rsi=16.4 atr=23.47 atr%=1.01 vol=0.98 DOWN | 1h close=2321.30 ema20=2355.76 ema50=2342.07 rsi=42.2 atr=22.33 atr%=0.96 vol=1.32 DOWN
 2026-04-27 14:49:12,168 - INFO - 🔎 --- SOLUSDT ---
 2026-04-27 14:49:15,158 - INFO - 📈 SOLUSDT | 1m close=85.46 ema20=85.46 ema50=85.56 rsi=50.0 atr=0.13 atr%=0.15 vol=0.01 DOWN | 5m close=85.46 ema20=85.77 ema50=86.32 rsi=36.9 atr=0.16 atr%=0.19 vol=0.16 DOWN | 15m close=85.46 ema20=86.33 ema50=86.64 rsi=4.6 atr=0.64 atr%=0.75 vol=0.11 DOWN | 1h close=85.72 ema20=86.72 ema50=86.51 rsi=40.9 atr=0.70 atr%=0.81 vol=2.03 DOWN
+2026-04-27 14:49:52,957 - INFO - ════════════════════════════════════════════════════════════════
+2026-04-27 14:49:52,957 - INFO - 🤖 Hybrid BTC/ETH/SOL bot started
+2026-04-27 14:49:52,957 - INFO - 🧪 DRY_RUN=False | 🧠 AI_VALIDATOR=False | symbols=BTCUSDT,ETHUSDT,SOLUSDT
+2026-04-27 14:49:52,958 - INFO - ════════════════════════════════════════════════════════════════
+2026-04-27 14:49:53,696 - INFO - ⏱️ Time synced offset=-83ms
+2026-04-27 14:49:54,436 - INFO - ✅ Set margin BTCUSDT: already ISOLATED
+2026-04-27 14:49:55,112 - INFO - ⚙️ Set leverage BTCUSDT=1x
+2026-04-27 14:49:55,806 - INFO - ✅ Set margin ETHUSDT: already ISOLATED
+2026-04-27 14:49:56,483 - INFO - ⚙️ Set leverage ETHUSDT=1x
+2026-04-27 14:49:57,174 - INFO - ✅ Set margin SOLUSDT: already ISOLATED
+2026-04-27 14:49:57,862 - INFO - ⚙️ Set leverage SOLUSDT=1x
+2026-04-27 14:49:58,557 - INFO - 📊 Balance=5010.56 | daily=0.08%/10% | trades_today=6
+2026-04-27 14:49:58,558 - INFO - 🚦 New entries paused: max trades per day reached. Existing positions still managed.
+2026-04-27 14:49:58,558 - INFO - 🔎 --- BTCUSDT ---
+2026-04-27 14:50:02,045 - INFO - 📈 BTCUSDT | 1m close=77670.00 ema20=77665.26 ema50=77669.94 rsi=59.7 atr=8.59 atr%=0.01 vol=0.07 UP | 5m close=77662.00 ema20=77762.43 ema50=78128.67 rsi=50.9 atr=54.89 atr%=0.07 vol=0.07 DOWN | 15m close=77662.00 ema20=78186.43 ema50=78347.43 rsi=23.8 atr=453.98 atr%=0.58 vol=0.64 DOWN | 1h close=77555.10 ema20=78288.70 ema50=78022.59 rsi=43.9 atr=541.81 atr%=0.70 vol=1.32 DOWN
+2026-04-27 14:50:04,287 - INFO - 🔎 --- ETHUSDT ---
+2026-04-27 14:50:13,546 - INFO - 📈 ETHUSDT | 1m close=2319.01 ema20=2319.04 ema50=2319.83 rsi=50.0 atr=0.40 atr%=0.02 vol=0.04 DOWN | 5m close=2319.01 ema20=2325.45 ema50=2344.30 rsi=56.3 atr=2.51 atr%=0.11 vol=0.17 DOWN | 15m close=2319.01 ema20=2348.44 ema50=2357.90 rsi=16.4 atr=23.47 atr%=1.01 vol=0.98 DOWN | 1h close=2321.30 ema20=2355.76 ema50=2342.07 rsi=42.2 atr=22.33 atr%=0.96 vol=1.32 DOWN
+2026-04-27 14:50:17,830 - INFO - 🔎 --- SOLUSDT ---
+2026-04-27 14:50:23,113 - INFO - 📈 SOLUSDT | 1m close=85.46 ema20=85.46 ema50=85.55 rsi=50.0 atr=0.13 atr%=0.15 vol=0.96 DOWN | 5m close=85.46 ema20=85.74 ema50=86.28 rsi=43.7 atr=0.15 atr%=0.18 vol=0.23 DOWN | 15m close=85.46 ema20=86.33 ema50=86.64 rsi=4.6 atr=0.64 atr%=0.75 vol=0.11 DOWN | 1h close=85.72 ema20=86.72 ema50=86.51 rsi=40.9 atr=0.70 atr%=0.81 vol=2.03 DOWN
+2026-04-27 14:50:55,995 - INFO - 📊 Balance=5010.56 | daily=0.08%/10% | trades_today=6
+2026-04-27 14:50:55,996 - INFO - 🚦 New entries paused: max trades per day reached. Existing positions still managed.
+2026-04-27 14:50:55,996 - INFO - 🔎 --- BTCUSDT ---
+2026-04-27 14:50:59,317 - INFO - 📈 BTCUSDT | 1m close=77649.40 ema20=77663.75 ema50=77669.14 rsi=34.5 atr=10.46 atr%=0.01 vol=3.49 DOWN | 5m close=77649.40 ema20=77751.66 ema50=78109.87 rsi=62.6 atr=49.39 atr%=0.06 vol=0.75 DOWN | 15m close=77662.00 ema20=78186.43 ema50=78347.43 rsi=23.8 atr=453.98 atr%=0.58 vol=0.64 DOWN | 1h close=77555.10 ema20=78288.70 ema50=78022.59 rsi=43.9 atr=541.81 atr%=0.70 vol=1.32 DOWN
+2026-04-27 14:51:01,469 - INFO - 🔎 --- ETHUSDT ---
+2026-04-27 14:51:04,744 - INFO - 📈 ETHUSDT | 1m close=2319.01 ema20=2319.03 ema50=2319.80 rsi=54.5 atr=0.28 atr%=0.01 vol=3.54 DOWN | 5m close=2319.01 ema20=2324.83 ema50=2343.31 rsi=57.6 atr=2.46 atr%=0.11 vol=1.05 DOWN | 15m close=2319.01 ema20=2348.44 ema50=2357.90 rsi=16.4 atr=23.47 atr%=1.01 vol=0.98 DOWN | 1h close=2321.30 ema20=2355.76 ema50=2342.07 rsi=42.2 atr=22.33 atr%=0.96 vol=1.32 DOWN
+2026-04-27 14:51:06,934 - INFO - 🔎 --- SOLUSDT ---
+2026-04-27 14:51:09,945 - INFO - 📈 SOLUSDT | 1m close=85.46 ema20=85.46 ema50=85.55 rsi=50.0 atr=0.13 atr%=0.15 vol=0.96 DOWN | 5m close=85.46 ema20=85.74 ema50=86.28 rsi=43.7 atr=0.15 atr%=0.18 vol=0.23 DOWN | 15m close=85.46 ema20=86.33 ema50=86.64 rsi=4.6 atr=0.64 atr%=0.75 vol=0.11 DOWN | 1h close=85.72 ema20=86.72 ema50=86.51 rsi=40.9 atr=0.70 atr%=0.81 vol=2.03 DOWN
+2026-04-27 14:51:28,928 - WARNING - 🧹 SOLUSDT openAlgoOrders failed, fallback to conditional openOrders: HTTPSConnectionPool(host='demo-fapi.binance.com', port=443): Read timed out. (read timeout=15)
+2026-04-27 14:52:02,644 - INFO - 📊 Balance=5010.56 | daily=0.08%/10% | trades_today=6
+2026-04-27 14:52:02,644 - INFO - 🚦 New entries paused: max trades per day reached. Existing positions still managed.
+2026-04-27 14:52:02,644 - INFO - 🔎 --- BTCUSDT ---
+2026-04-27 14:52:13,526 - INFO - 📈 BTCUSDT | 1m close=77667.70 ema20=77661.61 ema50=77667.78 rsi=54.8 atr=13.92 atr%=0.02 vol=1.00 UP | 5m close=77649.40 ema20=77751.66 ema50=78109.87 rsi=62.6 atr=49.39 atr%=0.06 vol=0.75 DOWN | 15m close=77662.00 ema20=78186.43 ema50=78347.43 rsi=23.8 atr=453.98 atr%=0.58 vol=0.64 DOWN | 1h close=77555.10 ema20=78288.70 ema50=78022.59 rsi=43.9 atr=541.81 atr%=0.70 vol=1.32 DOWN
+2026-04-27 14:52:16,999 - INFO - 🔎 --- ETHUSDT ---
+2026-04-27 14:52:20,533 - INFO - 📈 ETHUSDT | 1m close=2319.01 ema20=2319.03 ema50=2319.74 rsi=44.4 atr=0.29 atr%=0.01 vol=0.02 DOWN | 5m close=2319.01 ema20=2324.83 ema50=2343.31 rsi=57.6 atr=2.46 atr%=0.11 vol=1.05 DOWN | 15m close=2319.01 ema20=2348.44 ema50=2357.90 rsi=16.4 atr=23.47 atr%=1.01 vol=0.98 DOWN | 1h close=2321.30 ema20=2355.76 ema50=2342.07 rsi=42.2 atr=22.33 atr%=0.96 vol=1.32 DOWN
+2026-04-27 14:52:22,765 - INFO - 🔎 --- SOLUSDT ---
+2026-04-27 14:52:29,325 - INFO - 📈 SOLUSDT | 1m close=85.46 ema20=85.46 ema50=85.54 rsi=56.9 atr=0.12 atr%=0.14 vol=0.03 UP | 5m close=85.46 ema20=85.74 ema50=86.28 rsi=43.7 atr=0.15 atr%=0.18 vol=0.23 DOWN | 15m close=85.46 ema20=86.33 ema50=86.64 rsi=4.6 atr=0.64 atr%=0.75 vol=0.11 DOWN | 1h close=85.72 ema20=86.72 ema50=86.51 rsi=40.9 atr=0.70 atr%=0.81 vol=2.03 DOWN
+2026-04-27 14:53:07,016 - INFO - 📊 Balance=5010.56 | daily=0.08%/10% | trades_today=6
+2026-04-27 14:53:07,016 - INFO - 🚦 New entries paused: max trades per day reached. Existing positions still managed.
+2026-04-27 14:53:07,016 - INFO - 🔎 --- BTCUSDT ---
+2026-04-27 14:53:17,412 - INFO - 📈 BTCUSDT | 1m close=77667.70 ema20=77661.61 ema50=77667.78 rsi=54.8 atr=13.92 atr%=0.02 vol=1.00 UP | 5m close=77649.40 ema20=77751.66 ema50=78109.87 rsi=62.6 atr=49.39 atr%=0.06 vol=0.75 DOWN | 15m close=77662.00 ema20=78186.43 ema50=78347.43 rsi=23.8 atr=453.98 atr%=0.58 vol=0.64 DOWN | 1h close=77555.10 ema20=78288.70 ema50=78022.59 rsi=43.9 atr=541.81 atr%=0.70 vol=1.32 DOWN
+2026-04-27 14:53:20,465 - INFO - 🔎 --- ETHUSDT ---
+2026-04-27 14:53:23,992 - INFO - 📈 ETHUSDT | 1m close=2319.01 ema20=2319.03 ema50=2319.71 rsi=57.1 atr=0.29 atr%=0.01 vol=0.01 DOWN | 5m close=2319.01 ema20=2324.83 ema50=2343.31 rsi=57.6 atr=2.46 atr%=0.11 vol=1.05 DOWN | 15m close=2319.01 ema20=2348.44 ema50=2357.90 rsi=16.4 atr=23.47 atr%=1.01 vol=0.98 DOWN | 1h close=2321.30 ema20=2355.76 ema50=2342.07 rsi=42.2 atr=22.33 atr%=0.96 vol=1.32 DOWN
+2026-04-27 14:53:26,150 - INFO - 🔎 --- SOLUSDT ---
+2026-04-27 14:53:29,105 - INFO - 📈 SOLUSDT | 1m close=85.46 ema20=85.46 ema50=85.54 rsi=58.9 atr=0.12 atr%=0.14 vol=0.04 UP | 5m close=85.46 ema20=85.74 ema50=86.28 rsi=43.7 atr=0.15 atr%=0.18 vol=0.23 DOWN | 15m close=85.46 ema20=86.33 ema50=86.64 rsi=4.6 atr=0.64 atr%=0.75 vol=0.11 DOWN | 1h close=85.72 ema20=86.72 ema50=86.51 rsi=40.9 atr=0.70 atr%=0.81 vol=2.03 DOWN
+2026-04-27 14:54:01,965 - INFO - 📊 Balance=5010.56 | daily=0.08%/10% | trades_today=6
+2026-04-27 14:54:01,965 - INFO - 🚦 New entries paused: max trades per day reached. Existing positions still managed.
+2026-04-27 14:54:01,965 - INFO - 🔎 --- BTCUSDT ---
+2026-04-27 14:54:05,173 - INFO - 📈 BTCUSDT | 1m close=77670.00 ema20=77663.13 ema50=77667.95 rsi=50.1 atr=12.51 atr%=0.02 vol=1.44 UP | 5m close=77649.40 ema20=77751.66 ema50=78109.87 rsi=62.6 atr=49.39 atr%=0.06 vol=0.75 DOWN | 15m close=77662.00 ema20=78186.43 ema50=78347.43 rsi=23.8 atr=453.98 atr%=0.58 vol=0.64 DOWN | 1h close=77555.10 ema20=78288.70 ema50=78022.59 rsi=43.9 atr=541.81 atr%=0.70 vol=1.32 DOWN
+2026-04-27 14:54:07,860 - INFO - 🔎 --- ETHUSDT ---
+2026-04-27 14:54:11,181 - INFO - 📈 ETHUSDT | 1m close=2319.01 ema20=2319.03 ema50=2319.68 rsi=40.0 atr=0.30 atr%=0.01 vol=1.27 DOWN | 5m close=2319.01 ema20=2324.83 ema50=2343.31 rsi=57.6 atr=2.46 atr%=0.11 vol=1.05 DOWN | 15m close=2319.01 ema20=2348.44 ema50=2357.90 rsi=16.4 atr=23.47 atr%=1.01 vol=0.98 DOWN | 1h close=2321.30 ema20=2355.76 ema50=2342.07 rsi=42.2 atr=22.33 atr%=0.96 vol=1.32 DOWN
+2026-04-27 14:54:13,569 - INFO - 🔎 --- SOLUSDT ---
+2026-04-27 14:54:16,491 - INFO - 📈 SOLUSDT | 1m close=85.46 ema20=85.46 ema50=85.54 rsi=58.9 atr=0.12 atr%=0.14 vol=0.04 UP | 5m close=85.46 ema20=85.74 ema50=86.28 rsi=43.7 atr=0.15 atr%=0.18 vol=0.23 DOWN | 15m close=85.46 ema20=86.33 ema50=86.64 rsi=4.6 atr=0.64 atr%=0.75 vol=0.11 DOWN | 1h close=85.72 ema20=86.72 ema50=86.51 rsi=40.9 atr=0.70 atr%=0.81 vol=2.03 DOWN
+2026-04-27 14:54:50,199 - INFO - 📊 Balance=5010.56 | daily=0.08%/10% | trades_today=6
+2026-04-27 14:54:50,200 - INFO - 🚦 New entries paused: max trades per day reached. Existing positions still managed.
+2026-04-27 14:54:50,200 - INFO - 🔎 --- BTCUSDT ---
+2026-04-27 14:54:55,481 - INFO - 📈 BTCUSDT | 1m close=77670.00 ema20=77663.13 ema50=77667.95 rsi=50.1 atr=12.51 atr%=0.02 vol=1.44 UP | 5m close=77649.40 ema20=77751.66 ema50=78109.87 rsi=62.6 atr=49.39 atr%=0.06 vol=0.75 DOWN | 15m close=77662.00 ema20=78186.43 ema50=78347.43 rsi=23.8 atr=453.98 atr%=0.58 vol=0.64 DOWN | 1h close=77555.10 ema20=78288.70 ema50=78022.59 rsi=43.9 atr=541.81 atr%=0.70 vol=1.32 DOWN
+2026-04-27 14:54:58,850 - INFO - 🔎 --- ETHUSDT ---
+2026-04-27 14:55:03,685 - INFO - 📈 ETHUSDT | 1m close=2319.01 ema20=2319.03 ema50=2319.68 rsi=40.0 atr=0.30 atr%=0.01 vol=1.27 DOWN | 5m close=2319.01 ema20=2324.83 ema50=2343.31 rsi=57.6 atr=2.46 atr%=0.11 vol=1.05 DOWN | 15m close=2319.01 ema20=2348.44 ema50=2357.90 rsi=16.4 atr=23.47 atr%=1.01 vol=0.98 DOWN | 1h close=2321.30 ema20=2355.76 ema50=2342.07 rsi=42.2 atr=22.33 atr%=0.96 vol=1.32 DOWN
+2026-04-27 14:55:06,040 - INFO - 🔎 --- SOLUSDT ---
+2026-04-27 14:55:09,087 - INFO - 📈 SOLUSDT | 1m close=85.39 ema20=85.45 ema50=85.53 rsi=43.4 atr=0.11 atr%=0.13 vol=0.03 DOWN | 5m close=85.39 ema20=85.70 ema50=86.25 rsi=31.9 atr=0.14 atr%=0.16 vol=0.02 DOWN | 15m close=85.46 ema20=86.33 ema50=86.64 rsi=4.6 atr=0.64 atr%=0.75 vol=0.11 DOWN | 1h close=85.72 ema20=86.72 ema50=86.51 rsi=40.9 atr=0.70 atr%=0.81 vol=2.03 DOWN
+2026-04-27 14:55:42,609 - INFO - 📊 Balance=5010.56 | daily=0.08%/10% | trades_today=6
+2026-04-27 14:55:42,610 - INFO - 🚦 New entries paused: max trades per day reached. Existing positions still managed.
+2026-04-27 14:55:42,610 - INFO - 🔎 --- BTCUSDT ---
+2026-04-27 14:55:53,806 - INFO - 📈 BTCUSDT | 1m close=77662.70 ema20=77663.09 ema50=77667.74 rsi=46.1 atr=12.69 atr%=0.02 vol=5.90 DOWN | 5m close=77662.70 ema20=77743.19 ema50=78092.34 rsi=63.7 atr=44.28 atr%=0.06 vol=1.18 DOWN | 15m close=77662.00 ema20=78186.43 ema50=78347.43 rsi=23.8 atr=453.98 atr%=0.58 vol=0.64 DOWN | 1h close=77555.10 ema20=78288.70 ema50=78022.59 rsi=43.9 atr=541.81 atr%=0.70 vol=1.32 DOWN
+2026-04-27 14:55:56,886 - INFO - 🔎 --- ETHUSDT ---
+2026-04-27 14:56:04,284 - INFO - 📈 ETHUSDT | 1m close=2319.03 ema20=2319.03 ema50=2319.65 rsi=80.0 atr=0.31 atr%=0.01 vol=1.25 UP | 5m close=2319.03 ema20=2324.28 ema50=2342.36 rsi=55.6 atr=2.05 atr%=0.09 vol=0.41 DOWN | 15m close=2319.01 ema20=2348.44 ema50=2357.90 rsi=16.4 atr=23.47 atr%=1.01 vol=0.98 DOWN | 1h close=2321.30 ema20=2355.76 ema50=2342.07 rsi=42.2 atr=22.33 atr%=0.96 vol=1.32 DOWN
+2026-04-27 14:56:06,631 - INFO - 🔎 --- SOLUSDT ---
+2026-04-27 14:56:09,606 - INFO - 📈 SOLUSDT | 1m close=85.39 ema20=85.45 ema50=85.53 rsi=43.4 atr=0.11 atr%=0.13 vol=0.03 DOWN | 5m close=85.39 ema20=85.70 ema50=86.25 rsi=31.9 atr=0.14 atr%=0.16 vol=0.02 DOWN | 15m close=85.46 ema20=86.33 ema50=86.64 rsi=4.6 atr=0.64 atr%=0.75 vol=0.11 DOWN | 1h close=85.72 ema20=86.72 ema50=86.51 rsi=40.9 atr=0.70 atr%=0.81 vol=2.03 DOWN
+2026-04-27 14:56:42,454 - INFO - 📊 Balance=5010.56 | daily=0.08%/10% | trades_today=6
+2026-04-27 14:56:42,454 - INFO - 🚦 New entries paused: max trades per day reached. Existing positions still managed.
+2026-04-27 14:56:42,454 - INFO - 🔎 --- BTCUSDT ---
+2026-04-27 14:56:45,881 - INFO - 📈 BTCUSDT | 1m close=77670.00 ema20=77663.75 ema50=77667.83 rsi=50.0 atr=12.64 atr%=0.02 vol=1.62 UP | 5m close=77662.70 ema20=77743.19 ema50=78092.34 rsi=63.7 atr=44.28 atr%=0.06 vol=1.18 DOWN | 15m close=77662.00 ema20=78186.43 ema50=78347.43 rsi=23.8 atr=453.98 atr%=0.58 vol=0.64 DOWN | 1h close=77555.10 ema20=78288.70 ema50=78022.59 rsi=43.9 atr=541.81 atr%=0.70 vol=1.32 DOWN
+2026-04-27 14:56:48,576 - INFO - 🔎 --- ETHUSDT ---
+2026-04-27 14:56:53,174 - INFO - 📈 ETHUSDT | 1m close=2319.01 ema20=2319.02 ema50=2319.63 rsi=57.1 atr=0.30 atr%=0.01 vol=0.01 DOWN | 5m close=2319.03 ema20=2324.28 ema50=2342.36 rsi=55.6 atr=2.05 atr%=0.09 vol=0.41 DOWN | 15m close=2319.01 ema20=2348.44 ema50=2357.90 rsi=16.4 atr=23.47 atr%=1.01 vol=0.98 DOWN | 1h close=2321.30 ema20=2355.76 ema50=2342.07 rsi=42.2 atr=22.33 atr%=0.96 vol=1.32 DOWN
+2026-04-27 14:56:55,417 - INFO - 🔎 --- SOLUSDT ---
+2026-04-27 14:56:58,632 - INFO - 📈 SOLUSDT | 1m close=85.40 ema20=85.45 ema50=85.53 rsi=47.1 atr=0.11 atr%=0.13 vol=0.03 DOWN | 5m close=85.39 ema20=85.70 ema50=86.25 rsi=31.9 atr=0.14 atr%=0.16 vol=0.02 DOWN | 15m close=85.46 ema20=86.33 ema50=86.64 rsi=4.6 atr=0.64 atr%=0.75 vol=0.11 DOWN | 1h close=85.72 ema20=86.72 ema50=86.51 rsi=40.9 atr=0.70 atr%=0.81 vol=2.03 DOWN
+2026-04-27 14:57:32,267 - INFO - 📊 Balance=5010.56 | daily=0.08%/10% | trades_today=6
+2026-04-27 14:57:32,268 - INFO - 🚦 New entries paused: max trades per day reached. Existing positions still managed.
+2026-04-27 14:57:32,268 - INFO - 🔎 --- BTCUSDT ---
+2026-04-27 14:58:20,059 - INFO - 📈 BTCUSDT | 1m close=77670.00 ema20=77664.89 ema50=77668.00 rsi=54.3 atr=11.59 atr%=0.01 vol=0.88 UP | 5m close=77662.70 ema20=77743.19 ema50=78092.34 rsi=63.7 atr=44.28 atr%=0.06 vol=1.18 DOWN | 15m close=77662.00 ema20=78186.43 ema50=78347.43 rsi=23.8 atr=453.98 atr%=0.58 vol=0.64 DOWN | 1h close=77555.10 ema20=78288.70 ema50=78022.59 rsi=43.9 atr=541.81 atr%=0.70 vol=1.32 DOWN
+2026-04-27 14:58:22,732 - INFO - 🔎 --- ETHUSDT ---
+2026-04-27 14:58:26,112 - INFO - 📈 ETHUSDT | 1m close=2319.00 ema20=2319.00 ema50=2319.57 rsi=49.1 atr=0.43 atr%=0.02 vol=0.65 DOWN | 5m close=2319.03 ema20=2324.28 ema50=2342.36 rsi=55.6 atr=2.05 atr%=0.09 vol=0.41 DOWN | 15m close=2319.01 ema20=2348.44 ema50=2357.90 rsi=16.4 atr=23.47 atr%=1.01 vol=0.98 DOWN | 1h close=2321.30 ema20=2355.76 ema50=2342.07 rsi=42.2 atr=22.33 atr%=0.96 vol=1.32 DOWN
+2026-04-27 14:58:28,474 - INFO - 🔎 --- SOLUSDT ---
+2026-04-27 14:58:31,721 - INFO - 📈 SOLUSDT | 1m close=85.37 ema20=85.44 ema50=85.52 rsi=47.3 atr=0.10 atr%=0.12 vol=1.42 DOWN | 5m close=85.39 ema20=85.70 ema50=86.25 rsi=31.9 atr=0.14 atr%=0.16 vol=0.02 DOWN | 15m close=85.46 ema20=86.33 ema50=86.64 rsi=4.6 atr=0.64 atr%=0.75 vol=0.11 DOWN | 1h close=85.72 ema20=86.72 ema50=86.51 rsi=40.9 atr=0.70 atr%=0.81 vol=2.03 DOWN
+2026-04-27 14:59:08,577 - INFO - 📊 Balance=5010.56 | daily=0.08%/10% | trades_today=6
+2026-04-27 14:59:08,577 - INFO - 🚦 New entries paused: max trades per day reached. Existing positions still managed.
+2026-04-27 14:59:08,578 - INFO - 🔎 --- BTCUSDT ---
+2026-04-27 14:59:25,881 - INFO - 📈 BTCUSDT | 1m close=77668.70 ema20=77665.25 ema50=77668.03 rsi=53.5 atr=11.20 atr%=0.01 vol=0.35 UP | 5m close=77662.70 ema20=77743.19 ema50=78092.34 rsi=63.7 atr=44.28 atr%=0.06 vol=1.18 DOWN | 15m close=77662.00 ema20=78186.43 ema50=78347.43 rsi=23.8 atr=453.98 atr%=0.58 vol=0.64 DOWN | 1h close=77555.10 ema20=78288.70 ema50=78022.59 rsi=43.9 atr=541.81 atr%=0.70 vol=1.32 DOWN
+2026-04-27 14:59:28,130 - INFO - 🔎 --- ETHUSDT ---
+2026-04-27 14:59:31,317 - INFO - 📈 ETHUSDT | 1m close=2315.73 ema20=2318.69 ema50=2319.42 rsi=6.8 atr=0.68 atr%=0.03 vol=6.73 DOWN | 5m close=2319.03 ema20=2324.28 ema50=2342.36 rsi=55.6 atr=2.05 atr%=0.09 vol=0.41 DOWN | 15m close=2319.01 ema20=2348.44 ema50=2357.90 rsi=16.4 atr=23.47 atr%=1.01 vol=0.98 DOWN | 1h close=2321.30 ema20=2355.76 ema50=2342.07 rsi=42.2 atr=22.33 atr%=0.96 vol=1.32 DOWN
+2026-04-27 14:59:33,698 - INFO - 🔎 --- SOLUSDT ---
+2026-04-27 14:59:37,486 - INFO - 📈 SOLUSDT | 1m close=85.32 ema20=85.43 ema50=85.51 rsi=37.0 atr=0.10 atr%=0.12 vol=9.91 DOWN | 5m close=85.39 ema20=85.70 ema50=86.25 rsi=31.9 atr=0.14 atr%=0.16 vol=0.02 DOWN | 15m close=85.46 ema20=86.33 ema50=86.64 rsi=4.6 atr=0.64 atr%=0.75 vol=0.11 DOWN | 1h close=85.72 ema20=86.72 ema50=86.51 rsi=40.9 atr=0.70 atr%=0.81 vol=2.03 DOWN
+2026-04-27 15:00:10,782 - INFO - 📊 Balance=5010.56 | daily=0.08%/10% | trades_today=6
+2026-04-27 15:00:10,783 - INFO - 🚦 New entries paused: max trades per day reached. Existing positions still managed.
+2026-04-27 15:00:10,783 - INFO - 🔎 --- BTCUSDT ---
+2026-04-27 15:00:16,004 - INFO - 📈 BTCUSDT | 1m close=77669.10 ema20=77665.62 ema50=77668.07 rsi=49.5 atr=12.86 atr%=0.02 vol=5.63 UP | 5m close=77669.10 ema20=77736.13 ema50=78075.74 rsi=51.6 atr=38.87 atr%=0.05 vol=1.35 DOWN | 15m close=77669.10 ema20=78137.16 ema50=78320.84 rsi=21.4 atr=442.71 atr%=0.57 vol=0.62 DOWN | 1h close=77669.10 ema20=78229.69 ema50=78008.74 rsi=44.9 atr=544.00 atr%=0.70 vol=0.53 DOWN
+2026-04-27 15:00:20,164 - INFO - 🔎 --- ETHUSDT ---
+2026-04-27 15:00:26,495 - INFO - 📈 ETHUSDT | 1m close=2318.02 ema20=2318.63 ema50=2319.37 rsi=41.9 atr=0.88 atr%=0.04 vol=4.93 DOWN | 5m close=2318.02 ema20=2323.68 ema50=2341.40 rsi=46.8 atr=2.12 atr%=0.09 vol=1.75 DOWN | 15m close=2318.02 ema20=2345.54 ema50=2356.34 rsi=16.3 atr=23.30 atr%=1.01 vol=0.68 DOWN | 1h close=2318.02 ema20=2352.16 ema50=2341.12 rsi=40.0 atr=22.31 atr%=0.96 vol=0.59 DOWN
+2026-04-27 15:00:28,755 - INFO - 🔎 --- SOLUSDT ---
+2026-04-27 15:00:31,833 - INFO - 📈 SOLUSDT | 1m close=85.24 ema20=85.41 ema50=85.50 rsi=36.4 atr=0.11 atr%=0.13 vol=10.68 DOWN | 5m close=85.24 ema20=85.66 ema50=86.21 rsi=28.9 atr=0.14 atr%=0.16 vol=1.78 DOWN | 15m close=85.24 ema20=86.22 ema50=86.59 rsi=4.2 atr=0.64 atr%=0.75 vol=0.14 DOWN | 1h close=85.24 ema20=86.58 ema50=86.46 rsi=35.7 atr=0.71 atr%=0.84 vol=0.30 DOWN
+2026-04-27 15:01:06,531 - INFO - 📊 Balance=5010.56 | daily=0.08%/10% | trades_today=6
+2026-04-27 15:01:06,532 - INFO - 🚦 New entries paused: max trades per day reached. Existing positions still managed.
+2026-04-27 15:01:06,532 - INFO - 🔎 --- BTCUSDT ---
+2026-04-27 15:01:12,542 - INFO - 📈 BTCUSDT | 1m close=77669.10 ema20=77665.95 ema50=77668.11 rsi=49.5 atr=14.90 atr%=0.02 vol=0.01 UP | 5m close=77669.10 ema20=77736.13 ema50=78075.74 rsi=51.6 atr=38.87 atr%=0.05 vol=1.35 DOWN | 15m close=77669.10 ema20=78137.16 ema50=78320.84 rsi=21.4 atr=442.71 atr%=0.57 vol=0.62 DOWN | 1h close=77669.10 ema20=78229.69 ema50=78008.74 rsi=44.9 atr=544.00 atr%=0.70 vol=0.53 DOWN
+2026-04-27 15:01:14,927 - INFO - 🔎 --- ETHUSDT ---
+2026-04-27 15:01:18,664 - INFO - 📈 ETHUSDT | 1m close=2318.01 ema20=2318.57 ema50=2319.31 rsi=41.8 atr=0.89 atr%=0.04 vol=1.49 DOWN | 5m close=2318.02 ema20=2323.68 ema50=2341.40 rsi=46.8 atr=2.12 atr%=0.09 vol=1.75 DOWN | 15m close=2318.02 ema20=2345.54 ema50=2356.34 rsi=16.3 atr=23.30 atr%=1.01 vol=0.68 DOWN | 1h close=2318.02 ema20=2352.16 ema50=2341.12 rsi=40.0 atr=22.31 atr%=0.96 vol=0.59 DOWN
+2026-04-27 15:01:20,904 - INFO - 🔎 --- SOLUSDT ---
+2026-04-27 15:01:24,752 - INFO - 📈 SOLUSDT | 1m close=85.20 ema20=85.39 ema50=85.49 rsi=29.1 atr=0.11 atr%=0.13 vol=1.50 DOWN | 5m close=85.24 ema20=85.66 ema50=86.21 rsi=28.9 atr=0.14 atr%=0.16 vol=1.78 DOWN | 15m close=85.24 ema20=86.22 ema50=86.59 rsi=4.2 atr=0.64 atr%=0.75 vol=0.14 DOWN | 1h close=85.24 ema20=86.58 ema50=86.46 rsi=35.7 atr=0.71 atr%=0.84 vol=0.30 DOWN
+2026-04-27 15:02:02,863 - INFO - 📊 Balance=5010.56 | daily=0.08%/10% | trades_today=6
+2026-04-27 15:02:02,863 - INFO - 🚦 New entries paused: max trades per day reached. Existing positions still managed.
+2026-04-27 15:02:02,864 - INFO - 🔎 --- BTCUSDT ---
+2026-04-27 15:02:07,277 - INFO - 📈 BTCUSDT | 1m close=77669.10 ema20=77665.95 ema50=77668.11 rsi=49.5 atr=14.90 atr%=0.02 vol=0.01 UP | 5m close=77669.10 ema20=77736.13 ema50=78075.74 rsi=51.6 atr=38.87 atr%=0.05 vol=1.35 DOWN | 15m close=77669.10 ema20=78137.16 ema50=78320.84 rsi=21.4 atr=442.71 atr%=0.57 vol=0.62 DOWN | 1h close=77669.10 ema20=78229.69 ema50=78008.74 rsi=44.9 atr=544.00 atr%=0.70 vol=0.53 DOWN
+2026-04-27 15:02:10,388 - INFO - 🔎 --- ETHUSDT ---
+2026-04-27 15:02:14,205 - INFO - 📈 ETHUSDT | 1m close=2315.05 ema20=2318.23 ema50=2319.15 rsi=28.1 atr=1.10 atr%=0.05 vol=3.29 DOWN | 5m close=2318.02 ema20=2323.68 ema50=2341.40 rsi=46.8 atr=2.12 atr%=0.09 vol=1.75 DOWN | 15m close=2318.02 ema20=2345.54 ema50=2356.34 rsi=16.3 atr=23.30 atr%=1.01 vol=0.68 DOWN | 1h close=2318.02 ema20=2352.16 ema50=2341.12 rsi=40.0 atr=22.31 atr%=0.96 vol=0.59 DOWN
+2026-04-27 15:02:16,594 - INFO - 🔎 --- SOLUSDT ---
+2026-04-27 15:02:19,576 - INFO - 📈 SOLUSDT | 1m close=85.22 ema20=85.37 ema50=85.48 rsi=27.8 atr=0.13 atr%=0.15 vol=3.29 DOWN | 5m close=85.24 ema20=85.66 ema50=86.21 rsi=28.9 atr=0.14 atr%=0.16 vol=1.78 DOWN | 15m close=85.24 ema20=86.22 ema50=86.59 rsi=4.2 atr=0.64 atr%=0.75 vol=0.14 DOWN | 1h close=85.24 ema20=86.58 ema50=86.46 rsi=35.7 atr=0.71 atr%=0.84 vol=0.30 DOWN
+2026-04-27 15:02:52,651 - INFO - 📊 Balance=5010.56 | daily=0.08%/10% | trades_today=6
+2026-04-27 15:02:52,652 - INFO - 🚦 New entries paused: max trades per day reached. Existing positions still managed.
+2026-04-27 15:02:52,652 - INFO - 🔎 --- BTCUSDT ---
+2026-04-27 15:02:56,137 - INFO - 📈 BTCUSDT | 1m close=77669.10 ema20=77666.25 ema50=77668.15 rsi=49.5 atr=18.69 atr%=0.02 vol=2.50 UP | 5m close=77669.10 ema20=77736.13 ema50=78075.74 rsi=51.6 atr=38.87 atr%=0.05 vol=1.35 DOWN | 15m close=77669.10 ema20=78137.16 ema50=78320.84 rsi=21.4 atr=442.71 atr%=0.57 vol=0.62 DOWN | 1h close=77669.10 ema20=78229.69 ema50=78008.74 rsi=44.9 atr=544.00 atr%=0.70 vol=0.53 DOWN
+2026-04-27 15:02:58,718 - INFO - 🔎 --- ETHUSDT ---
+2026-04-27 15:03:02,979 - INFO - 📈 ETHUSDT | 1m close=2315.05 ema20=2318.23 ema50=2319.15 rsi=28.1 atr=1.10 atr%=0.05 vol=3.29 DOWN | 5m close=2318.02 ema20=2323.68 ema50=2341.40 rsi=46.8 atr=2.12 atr%=0.09 vol=1.75 DOWN | 15m close=2318.02 ema20=2345.54 ema50=2356.34 rsi=16.3 atr=23.30 atr%=1.01 vol=0.68 DOWN | 1h close=2318.02 ema20=2352.16 ema50=2341.12 rsi=40.0 atr=22.31 atr%=0.96 vol=0.59 DOWN
+2026-04-27 15:03:05,170 - INFO - 🔎 --- SOLUSDT ---
+2026-04-27 15:03:08,222 - INFO - 📈 SOLUSDT | 1m close=85.22 ema20=85.37 ema50=85.48 rsi=27.8 atr=0.13 atr%=0.15 vol=3.29 DOWN | 5m close=85.24 ema20=85.66 ema50=86.21 rsi=28.9 atr=0.14 atr%=0.16 vol=1.78 DOWN | 15m close=85.24 ema20=86.22 ema50=86.59 rsi=4.2 atr=0.64 atr%=0.75 vol=0.14 DOWN | 1h close=85.24 ema20=86.58 ema50=86.46 rsi=35.7 atr=0.71 atr%=0.84 vol=0.30 DOWN
+2026-04-27 15:04:40,359 - WARNING - 💥 Loop error: HTTPSConnectionPool(host='demo-fapi.binance.com', port=443): Max retries exceeded with url: /fapi/v2/balance?timestamp=1777277024071&recvWindow=10000&signature=87767d888b3b7d662f2cf18865f5bce237ab182fc8c69eaba9a53a89c1cbb5f3 (Caused by ConnectTimeoutError(<HTTPSConnection(host='demo-fapi.binance.com', port=443) at 0x216b7d1b250>, 'Connection to demo-fapi.binance.com timed out. (connect timeout=15)'))
+2026-04-27 15:05:10,366 - WARNING - 💥 Loop error: HTTPSConnectionPool(host='demo-fapi.binance.com', port=443): Max retries exceeded with url: /fapi/v2/balance?timestamp=1777277110277&recvWindow=10000&signature=ab3a3ef3b64b6fbfc8992634a688dac604290055f47666191eba3d4c676e070b (Caused by NameResolutionError("HTTPSConnection(host='demo-fapi.binance.com', port=443): Failed to resolve 'demo-fapi.binance.com' ([Errno 11001] getaddrinfo failed)"))
+2026-04-27 15:05:41,396 - INFO - 📊 Balance=5010.56 | daily=0.08%/10% | trades_today=6
+2026-04-27 15:05:41,396 - INFO - 🚦 New entries paused: max trades per day reached. Existing positions still managed.
+2026-04-27 15:05:41,396 - INFO - 🔎 --- BTCUSDT ---
+2026-04-27 15:05:45,415 - INFO - 📈 BTCUSDT | 1m close=77669.10 ema20=77666.30 ema50=77667.93 rsi=71.8 atr=24.37 atr%=0.03 vol=0.04 UP | 5m close=77669.10 ema20=77729.75 ema50=78059.79 rsi=52.9 atr=42.46 atr%=0.05 vol=0.55 DOWN | 15m close=77669.10 ema20=78137.16 ema50=78320.84 rsi=21.4 atr=442.71 atr%=0.57 vol=0.62 DOWN | 1h close=77669.10 ema20=78229.69 ema50=78008.74 rsi=44.9 atr=544.00 atr%=0.70 vol=0.53 DOWN
+2026-04-27 15:05:48,153 - INFO - 🔎 --- ETHUSDT ---
+2026-04-27 15:05:52,320 - INFO - 📈 ETHUSDT | 1m close=2318.05 ema20=2318.15 ema50=2319.01 rsi=46.2 atr=1.22 atr%=0.05 vol=0.24 DOWN | 5m close=2318.05 ema20=2323.15 ema50=2340.49 rsi=3.4 atr=1.99 atr%=0.09 vol=1.60 DOWN | 15m close=2318.02 ema20=2345.54 ema50=2356.34 rsi=16.3 atr=23.30 atr%=1.01 vol=0.68 DOWN | 1h close=2318.02 ema20=2352.16 ema50=2341.12 rsi=40.0 atr=22.31 atr%=0.96 vol=0.59 DOWN
+2026-04-27 15:05:56,116 - INFO - 🔎 --- SOLUSDT ---
+2026-04-27 15:06:00,476 - INFO - 📈 SOLUSDT | 1m close=85.29 ema20=85.35 ema50=85.45 rsi=41.4 atr=0.15 atr%=0.17 vol=0.99 DOWN | 5m close=85.29 ema20=85.62 ema50=86.17 rsi=21.7 atr=0.14 atr%=0.17 vol=0.90 DOWN | 15m close=85.24 ema20=86.22 ema50=86.59 rsi=4.2 atr=0.64 atr%=0.75 vol=0.14 DOWN | 1h close=85.24 ema20=86.58 ema50=86.46 rsi=35.7 atr=0.71 atr%=0.84 vol=0.30 DOWN
