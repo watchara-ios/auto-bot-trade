@@ -56,6 +56,7 @@ class Config:
     TP_ATR_NORMAL = 1.8
     TP_ATR_STRONG = 2.4
     TRAILING_ATR = 0.9
+    TRIGGER_GUARD_PCT = 0.0005
 
     USE_AI_VALIDATOR = os.getenv("HYBRID_USE_AI", "false").lower() == "true"
     DEEPSEEK_KEY = os.getenv("DEEPSEEK_API_KEY")
@@ -224,13 +225,42 @@ class Binance:
         return Binance.signed("POST", "/fapi/v1/order", params)
 
     @staticmethod
-    def stop_order(symbol, side, stop_price, qty, order_type):
+    def stop_order(symbol, side, stop_price, qty, order_type, position_side=None, auto_close=False):
+        pos = Binance.position(symbol)
+        current = pos["mark"] or pos["entry"]
+        if current <= 0:
+            current = stop_price
+
+        trigger_price = round(stop_price, 2)
+        if position_side == "BUY":
+            if order_type == "STOP_MARKET" and trigger_price >= current:
+                if auto_close:
+                    warn(f"🚪 {symbol} long SL already crossed ({trigger_price} >= {current:.2f}); closing market")
+                    return Binance.market_order(symbol, side, qty, reduce_only=True)
+                trigger_price = round(current * (1 - Config.TRIGGER_GUARD_PCT), 2)
+            elif order_type == "TAKE_PROFIT_MARKET" and trigger_price <= current:
+                if auto_close:
+                    warn(f"💰 {symbol} long TP already reached ({trigger_price} <= {current:.2f}); closing market")
+                    return Binance.market_order(symbol, side, qty, reduce_only=True)
+                trigger_price = round(current * (1 + Config.TRIGGER_GUARD_PCT), 2)
+        elif position_side == "SELL":
+            if order_type == "STOP_MARKET" and trigger_price <= current:
+                if auto_close:
+                    warn(f"🚪 {symbol} short SL already crossed ({trigger_price} <= {current:.2f}); closing market")
+                    return Binance.market_order(symbol, side, qty, reduce_only=True)
+                trigger_price = round(current * (1 + Config.TRIGGER_GUARD_PCT), 2)
+            elif order_type == "TAKE_PROFIT_MARKET" and trigger_price >= current:
+                if auto_close:
+                    warn(f"💰 {symbol} short TP already reached ({trigger_price} >= {current:.2f}); closing market")
+                    return Binance.market_order(symbol, side, qty, reduce_only=True)
+                trigger_price = round(current * (1 - Config.TRIGGER_GUARD_PCT), 2)
+
         params = {
             "algoType": "CONDITIONAL",
             "symbol": symbol,
             "side": side,
             "type": order_type,
-            "triggerPrice": round(stop_price, 2),
+            "triggerPrice": trigger_price,
             "quantity": qty,
             "reduceOnly": "true",
             "workingType": "CONTRACT_PRICE",
@@ -578,8 +608,8 @@ def ensure_protection(symbol, pos, market):
         tp = entry - atr_val * Config.TP_ATR_NORMAL
     qty = round_qty(symbol, amt)
     warn(f"🛡️ {symbol} has unprotected position; placing emergency SL/TP side={side} qty={qty} sl={sl:.2f} tp={tp:.2f}")
-    Binance.stop_order(symbol, exit_side, sl, qty, "STOP_MARKET")
-    Binance.stop_order(symbol, exit_side, tp, qty, "TAKE_PROFIT_MARKET")
+    Binance.stop_order(symbol, exit_side, sl, qty, "STOP_MARKET", position_side=side, auto_close=True)
+    Binance.stop_order(symbol, exit_side, tp, qty, "TAKE_PROFIT_MARKET", position_side=side, auto_close=True)
 
 
 def execute_signal(signal, balance, state):
@@ -608,8 +638,8 @@ def execute_signal(signal, balance, state):
         f"type={signal['type']} entry~{signal['entry']:.2f} sl={signal['sl']:.2f} tp={signal['tp']:.2f}"
     )
     Binance.market_order(symbol, signal["side"], qty)
-    Binance.stop_order(symbol, signal["exit_side"], signal["sl"], qty, "STOP_MARKET")
-    Binance.stop_order(symbol, signal["exit_side"], signal["tp"], qty, "TAKE_PROFIT_MARKET")
+    Binance.stop_order(symbol, signal["exit_side"], signal["sl"], qty, "STOP_MARKET", position_side=signal["side"])
+    Binance.stop_order(symbol, signal["exit_side"], signal["tp"], qty, "TAKE_PROFIT_MARKET", position_side=signal["side"])
 
     state["trades_today"] = state.get("trades_today", 0) + 1
     state.setdefault("last_trade_time", {})[symbol] = time.time()
