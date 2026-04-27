@@ -79,6 +79,38 @@ AI_MAJOR_PAIRS = [
     "GBPJPY",
     "XAUUSD",
 ]
+AI_SYMBOL_UNIVERSE_LIMIT = int(os.getenv("FOREX_AI_SYMBOL_UNIVERSE_LIMIT", "30"))
+AI_ALLOWED_BASE_SYMBOLS = [
+    "EURUSD",
+    "GBPUSD",
+    "USDJPY",
+    "USDCHF",
+    "USDCAD",
+    "AUDUSD",
+    "NZDUSD",
+    "EURJPY",
+    "GBPJPY",
+    "EURGBP",
+    "EURCHF",
+    "EURCAD",
+    "EURAUD",
+    "EURNZD",
+    "GBPCHF",
+    "GBPCAD",
+    "GBPAUD",
+    "GBPNZD",
+    "AUDJPY",
+    "CADJPY",
+    "CHFJPY",
+    "NZDJPY",
+    "AUDCAD",
+    "AUDCHF",
+    "AUDNZD",
+    "CADCHF",
+    "NZDCAD",
+    "NZDCHF",
+    "XAUUSD",
+]
 
 # Quality filters
 MAX_SPREAD_POINTS = 80
@@ -172,6 +204,39 @@ def select_trading_symbol(preferred_symbol, reason=""):
             flush=True,
         )
     return SYMBOL
+
+
+def normalize_symbol_name(symbol_name):
+    upper_name = symbol_name.upper()
+    if "XAU" in upper_name or "GOLD" in upper_name:
+        return "XAUUSD"
+
+    letters = "".join(ch for ch in upper_name if ch.isalpha())
+    for base_symbol in AI_ALLOWED_BASE_SYMBOLS:
+        if letters.startswith(base_symbol):
+            return base_symbol
+    return None
+
+
+def get_ai_candidate_symbols():
+    all_symbols = mt5.symbols_get()
+    if not all_symbols:
+        return AI_MAJOR_PAIRS
+
+    available = {}
+    for item in all_symbols:
+        base_symbol = normalize_symbol_name(item.name)
+        if not base_symbol:
+            continue
+        if base_symbol not in available:
+            available[base_symbol] = item.name
+
+    ordered = []
+    for symbol in AI_MAJOR_PAIRS + AI_ALLOWED_BASE_SYMBOLS:
+        if symbol in available and symbol not in ordered:
+            ordered.append(symbol)
+
+    return ordered[:AI_SYMBOL_UNIVERSE_LIMIT] or AI_MAJOR_PAIRS
 
 
 # =========================================================
@@ -411,7 +476,7 @@ def clean_ai_json(content):
     return json.loads(content.strip())
 
 
-def build_daily_ai_prompt():
+def build_daily_ai_prompt(candidate_symbols):
     now = datetime.now()
     return f"""You are a professional Forex analyst. Every day at 14:00 (Thailand time, UTC+7), you analyze the current market situation and rate major currency pairs based on the criteria below.
 
@@ -424,7 +489,7 @@ def build_daily_ai_prompt():
 - Currency correlations (e.g., EUR/USD vs USD/CHF)
 - Session-specific suitability – at 14:00 UTC+7, pairs with EUR, GBP, USD are most active
 
-**Candidate symbols:** {", ".join(AI_MAJOR_PAIRS)}
+**Candidate symbols available in this MT5 account:** {", ".join(candidate_symbols)}
 
 **Output format:**
 Return ONLY a valid JSON object. No explanations, no markdown, no extra text before or after.
@@ -462,13 +527,14 @@ DeepSeek-R1: You must NOT output your reasoning chain – only the final JSON.
 Now, analyze the Forex market and return only the JSON."""
 
 
-def build_ai_watchlist(recommendations):
+def build_ai_watchlist(recommendations, candidate_symbols=None):
+    candidate_symbols = candidate_symbols or get_ai_candidate_symbols()
     ranked = sorted(
         [r for r in recommendations if int(r.get("rating", 99)) in {1, 2, 3}],
         key=lambda r: (
             int(r.get("rating", 99)),
-            AI_MAJOR_PAIRS.index(str(r.get("symbol", "")).upper())
-            if str(r.get("symbol", "")).upper() in AI_MAJOR_PAIRS
+            candidate_symbols.index(str(r.get("symbol", "")).upper())
+            if str(r.get("symbol", "")).upper() in candidate_symbols
             else 999,
         ),
     )
@@ -577,10 +643,12 @@ def run_daily_ai_market_scan_once():
 
     try:
         print(f"[{datetime.now()}] 🧠 DeepSeek daily forex scan starting...", flush=True)
+        candidate_symbols = get_ai_candidate_symbols()
+        print(f"[{datetime.now()}] 🧠 MT5 candidate symbols for AI: {', '.join(candidate_symbols)}", flush=True)
         client = OpenAI(api_key=DEEPSEEK_API_KEY, base_url="https://api.deepseek.com/v1")
         resp = client.chat.completions.create(
             model=DEEPSEEK_MODEL,
-            messages=[{"role": "user", "content": build_daily_ai_prompt()}],
+            messages=[{"role": "user", "content": build_daily_ai_prompt(candidate_symbols)}],
             temperature=0.2,
             max_tokens=700,
         )
@@ -593,8 +661,9 @@ def run_daily_ai_market_scan_once():
 
         state["last_scan_date"] = today
         state["last_scan_at"] = now.strftime("%Y-%m-%d %H:%M:%S")
+        state["candidate_universe"] = candidate_symbols
         state["last_recommendations"] = result.get("recommendations", [])
-        watchlist = build_ai_watchlist(state["last_recommendations"])
+        watchlist = build_ai_watchlist(state["last_recommendations"], candidate_symbols)
         if watchlist:
             state["candidate_symbols"] = [item["symbol"] for item in watchlist]
             state["candidate_recommendations"] = watchlist
