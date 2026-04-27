@@ -94,9 +94,11 @@ MIN_VOLUME_MULT = 1.0
 # =========================================================
 def resolve_symbol(preferred_symbol):
     candidates = [preferred_symbol]
-    for alias in SYMBOL_ALIASES:
-        if alias not in candidates:
-            candidates.append(alias)
+    preferred_upper = preferred_symbol.upper()
+    if preferred_upper.startswith("XAU") or "GOLD" in preferred_upper:
+        for alias in SYMBOL_ALIASES:
+            if alias not in candidates:
+                candidates.append(alias)
 
     for name in candidates:
         info = mt5.symbol_info(name)
@@ -145,6 +147,31 @@ def connect_mt5():
         symbol_info = mt5.symbol_info(SYMBOL)
 
     print(f"[{datetime.now()}] ✅ Connected MT5 | Symbol={SYMBOL}", flush=True)
+
+
+def select_trading_symbol(preferred_symbol, reason=""):
+    global SYMBOL
+
+    resolved_symbol, symbol_info = resolve_symbol(preferred_symbol)
+    if not symbol_info.visible:
+        if not mt5.symbol_select(resolved_symbol, True):
+            raise RuntimeError(f"Cannot select symbol in Market Watch: {resolved_symbol} | {mt5.last_error()}")
+
+    old_symbol = SYMBOL
+    SYMBOL = resolved_symbol
+    if old_symbol != SYMBOL:
+        print(
+            f"[{datetime.now()}] 🎯 Trading symbol switched: {old_symbol} -> {SYMBOL}"
+            + (f" | {reason}" if reason else ""),
+            flush=True,
+        )
+    else:
+        print(
+            f"[{datetime.now()}] 🎯 Trading symbol selected: {SYMBOL}"
+            + (f" | {reason}" if reason else ""),
+            flush=True,
+        )
+    return SYMBOL
 
 
 # =========================================================
@@ -435,6 +462,38 @@ DeepSeek-R1: You must NOT output your reasoning chain – only the final JSON.
 Now, analyze the Forex market and return only the JSON."""
 
 
+def choose_ai_trading_symbol(recommendations):
+    ranked = sorted(
+        [r for r in recommendations if int(r.get("rating", 99)) in {1, 2, 3}],
+        key=lambda r: (int(r.get("rating", 99)), AI_MAJOR_PAIRS.index(r["symbol"]) if r.get("symbol") in AI_MAJOR_PAIRS else 999),
+    )
+
+    errors = []
+    for rec in ranked:
+        symbol = str(rec.get("symbol", "")).strip().upper()
+        if not symbol:
+            continue
+        try:
+            selected = select_trading_symbol(symbol, f"AI rating={rec.get('rating')} reason={rec.get('reason', '')}")
+            return selected, rec
+        except Exception as e:
+            errors.append(f"{symbol}: {e}")
+
+    print(f"[{datetime.now()}] 🧠 No AI recommended symbol is available in MT5: {' | '.join(errors)}", flush=True)
+    return None, None
+
+
+def apply_ai_selected_symbol_from_state():
+    state = read_ai_state()
+    selected_symbol = state.get("selected_symbol")
+    if not selected_symbol:
+        return
+    try:
+        select_trading_symbol(selected_symbol, "loaded from today's AI state")
+    except Exception as e:
+        print(f"[{datetime.now()}] 🧠 Cannot apply AI selected symbol {selected_symbol}: {e}", flush=True)
+
+
 def run_daily_ai_market_scan_once():
     if not AI_DAILY_SCAN_ENABLED:
         return
@@ -446,6 +505,14 @@ def run_daily_ai_market_scan_once():
 
     state = read_ai_state()
     if state.get("last_scan_date") == today:
+        if not state.get("selected_symbol") and state.get("last_recommendations"):
+            selected_symbol, selected_rec = choose_ai_trading_symbol(state["last_recommendations"])
+            if selected_symbol:
+                state["selected_symbol"] = selected_symbol
+                state["selected_recommendation"] = selected_rec
+                write_ai_state(state)
+        elif state.get("selected_symbol") and SYMBOL != state.get("selected_symbol"):
+            apply_ai_selected_symbol_from_state()
         return
 
     if not DEEPSEEK_API_KEY:
@@ -482,6 +549,10 @@ def run_daily_ai_market_scan_once():
         state["last_scan_date"] = today
         state["last_scan_at"] = now.strftime("%Y-%m-%d %H:%M:%S")
         state["last_recommendations"] = result.get("recommendations", [])
+        selected_symbol, selected_rec = choose_ai_trading_symbol(state["last_recommendations"])
+        if selected_symbol:
+            state["selected_symbol"] = selected_symbol
+            state["selected_recommendation"] = selected_rec
         write_ai_state(state)
 
         print(f"[{datetime.now()}] 🧠 DeepSeek recommendations: {json.dumps(result, ensure_ascii=False)}", flush=True)
@@ -709,6 +780,7 @@ def run_bot():
         flush=True,
     )
     connect_mt5()
+    apply_ai_selected_symbol_from_state()
 
     last_entry_candle_time = None
 
