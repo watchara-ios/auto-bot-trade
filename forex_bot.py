@@ -1,3 +1,4 @@
+import os
 import time
 from datetime import datetime, time as dtime
 import MetaTrader5 as mt5
@@ -33,9 +34,13 @@ MAX_DAILY_LOSS_PERCENT = 3.0
 CHECK_INTERVAL_SECONDS = 30
 
 # เทรดเฉพาะช่วงเวลาไทยโดยประมาณ
-TRADE_START_HOUR = 14
-TRADE_END_HOUR = 23
-BLOCK_ENTRY_HOURS = {15, 17, 19}  # ชั่วโมงที่ history แพ้หนัก ลดการ overtrade ก่อน
+TRADE_START_HOUR = int(os.getenv("FOREX_TRADE_START_HOUR", "14"))
+TRADE_END_HOUR = int(os.getenv("FOREX_TRADE_END_HOUR", "23"))
+BLOCK_ENTRY_HOURS = {
+    int(hour.strip())
+    for hour in os.getenv("FOREX_BLOCK_ENTRY_HOURS", "").split(",")
+    if hour.strip()
+}
 EXIT_AFTER_SESSION_END = True
 
 DRY_RUN = True   # True = ไม่ยิง order จริง / False = ยิงจริง
@@ -285,6 +290,7 @@ def pass_session_filter():
     hour = now.hour
 
     if hour in BLOCK_ENTRY_HOURS:
+        print(f"[{datetime.now()}] ⛔ Entry blocked by FOREX_BLOCK_ENTRY_HOURS={sorted(BLOCK_ENTRY_HOURS)}")
         return False
 
     if TRADE_START_HOUR <= hour <= TRADE_END_HOUR:

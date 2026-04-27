@@ -15,7 +15,7 @@ if (-not $Python) {
     throw "Python was not found in PATH. Install Python or edit this script and set `$Python to python.exe."
 }
 
-$ActionCommand = "cd /d `"$BotDir`" && `"$Python`" `"$BotFile`" >> `"$LogFile`" 2>&1"
+$ActionCommand = "cd /d `"$BotDir`" && `"$Python`" -u `"$BotFile`" >> `"$LogFile`" 2>&1"
 $Action = New-ScheduledTaskAction -Execute "cmd.exe" -Argument "/c $ActionCommand"
 $Trigger = New-ScheduledTaskTrigger -Weekly -DaysOfWeek Monday,Tuesday,Wednesday,Thursday,Friday -At 14:00
 $Settings = New-ScheduledTaskSettingsSet -AllowStartIfOnBatteries -DontStopIfGoingOnBatteries -StartWhenAvailable
