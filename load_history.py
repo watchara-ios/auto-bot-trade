@@ -61,7 +61,7 @@ def download_all(symbol="BTCUSDT", interval="1h", days=30):
 
 
 # ===== RUN =====
-df = download_all(days=7)  # เปลี่ยนเป็น 365 ได้
-df.to_csv("bitcoin_7d_1h.csv", index=False)
+df = download_all(days=365)  # เปลี่ยนเป็น 365 ได้
+df.to_csv("bitcoin_365d_1h.csv", index=False)
 
 print("✅ Saved csv")

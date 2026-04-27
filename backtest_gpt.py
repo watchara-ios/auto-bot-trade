@@ -2,15 +2,15 @@ import pandas as pd
 import numpy as np
 
 # =====================
-# BACKTEST V20 - BALANCED EDGE
+# BACKTEST V21 - MARKET STRUCTURE CONTINUATION
 # =====================
-VERSION = "V20_BALANCED_EDGE"
+VERSION = "V21_MARKET_STRUCTURE_CONTINUATION"
 START_BALANCE = 1000.0
 
 # Risk / Reward
 RISK = 0.005
-RR = 2.1                 # V20: balanced reward, less overfit than V19
-SL_ATR = 1.2
+RR = 1.8
+SL_ATR = 1.1
 TP_ATR = SL_ATR * RR
 
 # Daily Control
@@ -33,21 +33,23 @@ COOLDOWN_BARS = 5        # V20: balanced cooldown
 # Quality Filters
 MIN_ATR_PCT = 0.0012
 MAX_ATR_PCT = 0.0120
-MIN_VOLUME_RATIO = 0.7   # V20: loosen volume filter
-EMA_GAP_MIN = 0.0010     # V20: keep trend quality but less strict
+MIN_VOLUME_RATIO = 0.8
+EMA_GAP_MIN = 0.0008
 MIN_TP_FEE_MULTIPLE = 8  # V20: still avoid tiny TP after fee
 MOMENTUM_LOOKBACK = 3
 MIN_MOMENTUM_PCT = 0.0005
 MIN_EMA20_DISTANCE = 0.0003
 
 # Optional anti-chop filter
-MIN_BODY_RATIO = 0.35    # V20: less strict anti-chop filter
+MIN_BODY_RATIO = 0.35
+PULLBACK_EMA_TOL = 0.0015
+SWING_LOOKBACK = 2
 
 # Files
-LOG_FILE = "log_v20.csv"
-EQUITY_FILE = "equity_v20.csv"
-DAILY_FILE = "daily_v20.csv"
-MONTHLY_FILE = "monthly_v20.csv"
+LOG_FILE = "log_v21_structure.csv"
+EQUITY_FILE = "equity_v21_structure.csv"
+DAILY_FILE = "daily_v21_structure.csv"
+MONTHLY_FILE = "monthly_v21_structure.csv"
 
 
 # =====================
@@ -97,6 +99,36 @@ def to_h1(df: pd.DataFrame) -> pd.DataFrame:
         "close": "last",
         "volume": "sum",
     }).dropna()
+
+
+def to_m15(df: pd.DataFrame) -> pd.DataFrame:
+    return df.resample("15min").agg({
+        "open": "first",
+        "high": "max",
+        "low": "min",
+        "close": "last",
+        "volume": "sum",
+    }).dropna()
+
+
+def add_confirmed_swings(df: pd.DataFrame, lookback: int = SWING_LOOKBACK) -> pd.DataFrame:
+    df = df.copy()
+    window = lookback * 2 + 1
+
+    pivot_low = df["low"].shift(lookback)
+    pivot_high = df["high"].shift(lookback)
+    rolling_low = df["low"].rolling(window).min()
+    rolling_high = df["high"].rolling(window).max()
+
+    df["new_swing_low"] = np.where(pivot_low == rolling_low, pivot_low, np.nan)
+    df["new_swing_high"] = np.where(pivot_high == rolling_high, pivot_high, np.nan)
+    df["swing_low"] = pd.Series(df["new_swing_low"], index=df.index).ffill()
+    df["swing_high"] = pd.Series(df["new_swing_high"], index=df.index).ffill()
+    df["prev_swing_low"] = pd.Series(df["new_swing_low"], index=df.index).ffill().shift(1)
+    df["prev_swing_high"] = pd.Series(df["new_swing_high"], index=df.index).ffill().shift(1)
+    df["higher_low"] = df["swing_low"] > df["prev_swing_low"]
+    df["lower_high"] = df["swing_high"] < df["prev_swing_high"]
+    return df
 
 
 # =====================
@@ -161,10 +193,15 @@ def build_monthly_report(daily_df: pd.DataFrame) -> pd.DataFrame:
 def backtest(df: pd.DataFrame) -> dict:
     df = df.copy()
     df_h1 = to_h1(df)
+    df_m15 = to_m15(df)
 
     df_h1["ema50"] = ema(df_h1["close"], 50)
     df_h1["ema200"] = ema(df_h1["close"], 200)
     df_h1["ema_gap"] = (df_h1["ema50"] - df_h1["ema200"]).abs() / df_h1["close"]
+
+    df_m15["ema20"] = ema(df_m15["close"], 20)
+    df_m15["ema50"] = ema(df_m15["close"], 50)
+    df_m15 = add_confirmed_swings(df_m15)
 
     df["ema20"] = ema(df["close"], 20)
     df["ema50"] = ema(df["close"], 50)
@@ -293,39 +330,50 @@ def backtest(df: pd.DataFrame) -> dict:
         if row["body_ratio"] < MIN_BODY_RATIO:
             continue
 
-        # H1 trend
+        # H1/M15 trend and market structure
         h1_rows = df_h1[df_h1.index <= time]
         if h1_rows.empty:
             continue
         h1 = h1_rows.iloc[-1]
 
-        trend_up = h1["ema50"] > h1["ema200"]
-        trend_down = h1["ema50"] < h1["ema200"]
+        m15_rows = df_m15[df_m15.index <= time]
+        if m15_rows.empty:
+            continue
+        m15 = m15_rows.iloc[-1]
+
+        trend_up = h1["ema50"] > h1["ema200"] and h1["close"] > h1["ema50"]
+        trend_down = h1["ema50"] < h1["ema200"] and h1["close"] < h1["ema50"]
+        m15_up = m15["ema20"] > m15["ema50"] and bool(m15["higher_low"])
+        m15_down = m15["ema20"] < m15["ema50"] and bool(m15["lower_high"])
 
         if h1["ema_gap"] < EMA_GAP_MIN:
             continue
-        if not (trend_up or trend_down):
+        if not ((trend_up and m15_up) or (trend_down and m15_down)):
             continue
 
         prev = df.iloc[i - 1]
         signal = None
 
-        # Core entry from V16/V18 + balanced V20 confirmation
-        if trend_up:
+        # Market structure continuation:
+        # BUY: H1 up, M15 higher-low structure, M5 pullback near EMA20 then breaks prev high.
+        if trend_up and m15_up:
+            pulled_back = row["low"] <= row["ema20"] * (1 + PULLBACK_EMA_TOL)
             if (
-                price < row["ema20"]
+                pulled_back
                 and price > prev["high"]
                 and row["momentum"] > 0
-                and price > row["ema50"]
+                and price > row["ema20"] > row["ema50"]
             ):
                 signal = "BUY"
 
-        if trend_down:
+        # SELL: H1 down, M15 lower-high structure, M5 pullback near EMA20 then breaks prev low.
+        if trend_down and m15_down:
+            pulled_back = row["high"] >= row["ema20"] * (1 - PULLBACK_EMA_TOL)
             if (
-                price > row["ema20"]
+                pulled_back
                 and price < prev["low"]
                 and row["momentum"] < 0
-                and price < row["ema50"]
+                and price < row["ema20"] < row["ema50"]
             ):
                 signal = "SELL"
 
