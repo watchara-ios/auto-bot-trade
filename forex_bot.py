@@ -8,7 +8,8 @@ import numpy as np
 # =========================================================
 # CONFIG
 # =========================================================
-SYMBOL = "XAUUSD"          # แก้ตามชื่อ symbol ใน MT5 เช่น XAUUSD, BTCUSD, EURUSD
+SYMBOL = "XAUUSD"          # แก้ตามชื่อ symbol ใน MT5 เช่น XAUUSD, XAUUSDm, GOLD, EURUSD
+SYMBOL_ALIASES = ["XAUUSD", "GOLD"]
 LOT = 0.01
 
 # Multi Timeframe
@@ -23,10 +24,10 @@ EMA_SLOW = 50
 EMA_BIG = 200
 RSI_PERIOD = 14
 
-RR = 1.0
+RR = 1.5
 SL_BUFFER_POINTS = 100
 
-MAX_TRADES_PER_DAY = 5
+MAX_TRADES_PER_DAY = 2
 MAX_DAILY_LOSS_PERCENT = 3.0
 
 CHECK_INTERVAL_SECONDS = 30
@@ -34,23 +35,72 @@ CHECK_INTERVAL_SECONDS = 30
 # เทรดเฉพาะช่วงเวลาไทยโดยประมาณ
 TRADE_START_HOUR = 14
 TRADE_END_HOUR = 23
+BLOCK_ENTRY_HOURS = {15, 17, 19}  # ชั่วโมงที่ history แพ้หนัก ลดการ overtrade ก่อน
 
 DRY_RUN = True   # True = ไม่ยิง order จริง / False = ยิงจริง
+
+# Quality filters
+MAX_SPREAD_POINTS = 80
+MIN_TREND_GAP_PCT = 0.00035
+MIN_M5_ATR_POINTS = 120
+MAX_M5_ATR_POINTS = 1200
+MIN_BODY_RATIO = 0.35
+MIN_VOLUME_MULT = 1.0
 
 
 # =========================================================
 # MT5 CONNECT
 # =========================================================
+def resolve_symbol(preferred_symbol):
+    candidates = [preferred_symbol]
+    for alias in SYMBOL_ALIASES:
+        if alias not in candidates:
+            candidates.append(alias)
+
+    for name in candidates:
+        info = mt5.symbol_info(name)
+        if info is not None:
+            return name, info
+
+    all_symbols = mt5.symbols_get()
+    if all_symbols is None:
+        raise RuntimeError(f"Cannot load MT5 symbols: {mt5.last_error()}")
+
+    names = [s.name for s in all_symbols]
+    upper_names = [(name, name.upper()) for name in names]
+
+    for alias in candidates:
+        alias_upper = alias.upper()
+        for name, upper_name in upper_names:
+            if upper_name.startswith(alias_upper):
+                return name, mt5.symbol_info(name)
+
+    for alias in candidates:
+        alias_upper = alias.upper()
+        for name, upper_name in upper_names:
+            if alias_upper in upper_name:
+                return name, mt5.symbol_info(name)
+
+    gold_like = [name for name, upper_name in upper_names if "XAU" in upper_name or "GOLD" in upper_name]
+    sample = ", ".join(gold_like[:20]) if gold_like else ", ".join(names[:20])
+    raise RuntimeError(f"Symbol not found: {preferred_symbol}. Available similar symbols: {sample}")
+
+
 def connect_mt5():
+    global SYMBOL
+
     if not mt5.initialize():
         raise RuntimeError(f"MT5 initialize failed: {mt5.last_error()}")
 
-    symbol_info = mt5.symbol_info(SYMBOL)
-    if symbol_info is None:
-        raise RuntimeError(f"Symbol not found: {SYMBOL}")
+    resolved_symbol, symbol_info = resolve_symbol(SYMBOL)
+    if resolved_symbol != SYMBOL:
+        print(f"🔎 Symbol resolved: {SYMBOL} -> {resolved_symbol}")
+        SYMBOL = resolved_symbol
 
     if not symbol_info.visible:
-        mt5.symbol_select(SYMBOL, True)
+        if not mt5.symbol_select(SYMBOL, True):
+            raise RuntimeError(f"Cannot select symbol in Market Watch: {SYMBOL} | {mt5.last_error()}")
+        symbol_info = mt5.symbol_info(SYMBOL)
 
     print(f"✅ Connected MT5 | Symbol={SYMBOL}")
 
@@ -92,6 +142,16 @@ def add_indicators(df):
     df["rsi"] = 100 - (100 / (1 + rs))
 
     df["vol_avg"] = df["volume"].rolling(20).mean()
+    df["ema20_50_gap_pct"] = abs(df["ema20"] - df["ema50"]) / df["close"]
+    df["body_ratio"] = abs(df["close"] - df["open"]) / (df["high"] - df["low"]).replace(0, np.nan)
+
+    prev_close = df["close"].shift(1)
+    tr = pd.concat([
+        df["high"] - df["low"],
+        (df["high"] - prev_close).abs(),
+        (df["low"] - prev_close).abs()
+    ], axis=1).max(axis=1)
+    df["atr"] = tr.rolling(14).mean()
 
     return df
 
@@ -132,6 +192,9 @@ def get_last_sr(df):
 # =========================================================
 def detect_trend(df):
     last = df.iloc[-2]  # ใช้แท่งปิดแล้ว ไม่ใช้แท่งกำลังวิ่ง
+
+    if last["ema20_50_gap_pct"] < MIN_TREND_GAP_PCT:
+        return "SIDEWAY"
 
     if last["close"] > last["ema20"] > last["ema50"] and last["close"] > last["ema200"]:
         return "UP"
@@ -220,10 +283,30 @@ def pass_session_filter():
     now = datetime.now()
     hour = now.hour
 
+    if hour in BLOCK_ENTRY_HOURS:
+        return False
+
     if TRADE_START_HOUR <= hour <= TRADE_END_HOUR:
         return True
 
     return False
+
+
+def get_spread_points():
+    tick = mt5.symbol_info_tick(SYMBOL)
+    info = mt5.symbol_info(SYMBOL)
+    if tick is None or info is None or info.point <= 0:
+        return None
+    return (tick.ask - tick.bid) / info.point
+
+
+def pass_spread_filter():
+    spread_points = get_spread_points()
+    if spread_points is None:
+        return False, "No tick/spread info"
+    if spread_points > MAX_SPREAD_POINTS:
+        return False, f"Spread too wide: {spread_points:.1f} points > {MAX_SPREAD_POINTS}"
+    return True, f"Spread OK: {spread_points:.1f} points"
 
 
 # =========================================================
@@ -262,31 +345,57 @@ def generate_signal():
         "rsi_m5": float(entry_candle["rsi"]),
         "volume": float(entry_candle["volume"]),
         "vol_avg": float(entry_candle["vol_avg"]) if not np.isnan(entry_candle["vol_avg"]) else 0,
+        "atr_points": None,
+        "body_ratio": float(entry_candle["body_ratio"]) if not np.isnan(entry_candle["body_ratio"]) else 0,
+        "h1_gap_pct": float(df_h1.iloc[-2]["ema20_50_gap_pct"]),
+        "m15_gap_pct": float(df_m15.iloc[-2]["ema20_50_gap_pct"]),
         "support": support,
         "resistance": resistance,
         "reason": ""
     }
 
+    info = mt5.symbol_info(SYMBOL)
+    point = info.point if info and info.point > 0 else 0
+    atr_points = float(entry_candle["atr"] / point) if point and not np.isnan(entry_candle["atr"]) else 0
+    signal["atr_points"] = round(atr_points, 1)
+
+    quality_failures = []
+    if atr_points < MIN_M5_ATR_POINTS or atr_points > MAX_M5_ATR_POINTS:
+        quality_failures.append(f"ATR points {atr_points:.1f} outside {MIN_M5_ATR_POINTS}-{MAX_M5_ATR_POINTS}")
+    if signal["body_ratio"] < MIN_BODY_RATIO:
+        quality_failures.append(f"body ratio {signal['body_ratio']:.2f} < {MIN_BODY_RATIO}")
+    if signal["volume"] < signal["vol_avg"] * MIN_VOLUME_MULT:
+        quality_failures.append(f"volume {signal['volume']:.0f} < avg*{MIN_VOLUME_MULT}")
+    if signal["h1_gap_pct"] < MIN_TREND_GAP_PCT or signal["m15_gap_pct"] < MIN_TREND_GAP_PCT:
+        quality_failures.append(
+            f"trend gap weak H1={signal['h1_gap_pct']:.5f} M15={signal['m15_gap_pct']:.5f}"
+        )
+    if quality_failures:
+        signal["reason"] = "Quality filter fail: " + "; ".join(quality_failures)
+        return signal, df_m5
+
     # BUY setup
     buy_condition = (
         h1_trend == "UP"
         and m15_trend == "UP"
+        and m15_bos in ["BULLISH_BOS", "NO_BOS"]
         and entry_candle["close"] > entry_candle["ema20"]
         and entry_candle["ema20"] > entry_candle["ema50"]
-        and 40 <= entry_candle["rsi"] <= 68
-        and entry_candle["volume"] >= entry_candle["vol_avg"] * 0.8
+        and 45 <= entry_candle["rsi"] <= 65
         and entry_candle["close"] > prev_candle["close"]
+        and entry_candle["close"] > prev_candle["high"]
     )
 
     # SELL setup
     sell_condition = (
         h1_trend == "DOWN"
         and m15_trend == "DOWN"
+        and m15_bos in ["BEARISH_BOS", "NO_BOS"]
         and entry_candle["close"] < entry_candle["ema20"]
         and entry_candle["ema20"] < entry_candle["ema50"]
-        and 32 <= entry_candle["rsi"] <= 60
-        and entry_candle["volume"] >= entry_candle["vol_avg"] * 0.8
+        and 35 <= entry_candle["rsi"] <= 55
         and entry_candle["close"] < prev_candle["close"]
+        and entry_candle["close"] < prev_candle["low"]
     )
 
     if buy_condition:
@@ -317,12 +426,18 @@ def calculate_tp_sl(signal):
 
     support = signal["support"]
     resistance = signal["resistance"]
+    atr_distance = max(signal.get("atr_points") or MIN_M5_ATR_POINTS, MIN_M5_ATR_POINTS) * point
+    min_stop = MIN_M5_ATR_POINTS * point * 0.8
+    max_stop = MAX_M5_ATR_POINTS * point
 
     if side == "BUY":
         if support:
             sl = support - SL_BUFFER_POINTS * point
         else:
-            sl = entry - 900 * point
+            sl = entry - atr_distance
+
+        if abs(entry - sl) < min_stop or abs(entry - sl) > max_stop:
+            sl = entry - atr_distance
 
         risk = abs(entry - sl)
         tp = entry + risk * RR
@@ -331,7 +446,10 @@ def calculate_tp_sl(signal):
         if resistance:
             sl = resistance + SL_BUFFER_POINTS * point
         else:
-            sl = entry + 900 * point
+            sl = entry + atr_distance
+
+        if abs(entry - sl) < min_stop or abs(entry - sl) > max_stop:
+            sl = entry + atr_distance
 
         risk = abs(entry - sl)
         tp = entry - risk * RR
@@ -415,6 +533,12 @@ def run_bot():
         try:
             if not pass_session_filter():
                 print(f"[{datetime.now()}] ⏳ Outside trading session")
+                time.sleep(CHECK_INTERVAL_SECONDS)
+                continue
+
+            spread_ok, spread_msg = pass_spread_filter()
+            if not spread_ok:
+                print(f"[{datetime.now()}] ⏸ {spread_msg}")
                 time.sleep(CHECK_INTERVAL_SECONDS)
                 continue
 
