@@ -188,6 +188,21 @@ class Binance:
         return Binance.signed("GET", "/fapi/v1/openOrders", {"symbol": symbol})
 
     @staticmethod
+    def open_algo_orders(symbol):
+        try:
+            return Binance.signed("GET", "/fapi/v1/openAlgoOrders", {"symbol": symbol})
+        except Exception as e:
+            warn(f"🧹 {symbol} openAlgoOrders failed, fallback to conditional openOrders: {e}")
+            return Binance.signed("GET", "/fapi/v1/openOrders", {"symbol": symbol, "conditional": "true"})
+
+    @staticmethod
+    def cancel_all_open_orders(symbol, conditional=False):
+        params = {"symbol": symbol}
+        if conditional:
+            params["conditional"] = "true"
+        return Binance.signed("DELETE", "/fapi/v1/allOpenOrders", params)
+
+    @staticmethod
     def exchange_info(symbol):
         data = Binance.public_get("/fapi/v1/exchangeInfo")
         for item in data["symbols"]:
@@ -586,10 +601,16 @@ def ensure_protection(symbol, pos, market):
     if amt <= 0:
         return
     try:
-        orders = Binance.open_orders(symbol) if not Config.DRY_RUN else []
-        has_reduce = any(str(o.get("reduceOnly")).lower() == "true" for o in orders)
+        regular_orders = Binance.open_orders(symbol) if not Config.DRY_RUN else []
+        algo_orders = Binance.open_algo_orders(symbol) if not Config.DRY_RUN else []
+        orders = regular_orders + algo_orders
+        has_reduce = any(
+            str(o.get("reduceOnly")).lower() == "true"
+            or str(o.get("closePosition")).lower() == "true"
+            for o in orders
+        )
         if has_reduce:
-            log(f"🛡️ {symbol} position protected by reduce-only open order")
+            log(f"🛡️ {symbol} position protected by reduce-only/algo order (orders={len(orders)})")
             return
     except Exception as e:
         warn(f"🛡️ {symbol} cannot inspect open orders: {e}")
@@ -610,6 +631,24 @@ def ensure_protection(symbol, pos, market):
     warn(f"🛡️ {symbol} has unprotected position; placing emergency SL/TP side={side} qty={qty} sl={sl:.2f} tp={tp:.2f}")
     Binance.stop_order(symbol, exit_side, sl, qty, "STOP_MARKET", position_side=side, auto_close=True)
     Binance.stop_order(symbol, exit_side, tp, qty, "TAKE_PROFIT_MARKET", position_side=side, auto_close=True)
+
+
+def cleanup_orphan_orders(symbol):
+    if Config.DRY_RUN:
+        return
+    try:
+        regular_orders = Binance.open_orders(symbol)
+        algo_orders = Binance.open_algo_orders(symbol)
+        total = len(regular_orders) + len(algo_orders)
+        if total <= 0:
+            return
+        warn(f"🧹 {symbol} has no position but {total} open orders remain; canceling")
+        if regular_orders:
+            Binance.cancel_all_open_orders(symbol)
+        if algo_orders:
+            Binance.cancel_all_open_orders(symbol, conditional=True)
+    except Exception as e:
+        warn(f"🧹 {symbol} orphan order cleanup failed: {e}")
 
 
 def execute_signal(signal, balance, state):
@@ -700,6 +739,7 @@ def main():
                     log(f"📌 {symbol} existing position amount={pos['amount']} entry={pos['entry']} mark={pos['mark']}")
                     ensure_protection(symbol, pos, market)
                     continue
+                cleanup_orphan_orders(symbol)
 
                 if not open_allowed:
                     continue
