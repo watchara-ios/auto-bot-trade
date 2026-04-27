@@ -41,6 +41,7 @@ class Config:
     MAX_OPEN_SYMBOLS = 3
     MAX_TRADES_PER_DAY = 6
     MAX_DAILY_LOSS_PCT = 0.04
+    DAILY_PROFIT_TARGET_PCT = 0.10
     MAX_TOTAL_EXPOSURE_PCT = 60.0
     RISK_PER_TRADE = 0.006
 
@@ -225,18 +226,19 @@ class Binance:
     @staticmethod
     def stop_order(symbol, side, stop_price, qty, order_type):
         params = {
+            "algoType": "CONDITIONAL",
             "symbol": symbol,
             "side": side,
             "type": order_type,
-            "stopPrice": round(stop_price, 2),
+            "triggerPrice": round(stop_price, 2),
             "quantity": qty,
             "reduceOnly": "true",
-            "workingType": "MARK_PRICE",
+            "workingType": "CONTRACT_PRICE",
         }
         if Config.DRY_RUN:
-            log(f"🧪 DRY_RUN {order_type} {params}")
+            log(f"🧪 DRY_RUN algo {order_type} {params}")
             return {"dry_run": True, **params}
-        return Binance.signed("POST", "/fapi/v1/order", params)
+        return Binance.signed("POST", "/fapi/v1/algoOrder", params)
 
 
 def ema(s, n):
@@ -530,6 +532,8 @@ def can_open_new(state, balance):
     daily_ret = (balance - day_start) / day_start if day_start else 0.0
     if daily_ret <= -Config.MAX_DAILY_LOSS_PCT:
         return False, f"daily loss stop {daily_ret:.2%}"
+    if daily_ret >= Config.DAILY_PROFIT_TARGET_PCT:
+        return False, f"daily profit target reached {daily_ret:.2%}"
     if state.get("trades_today", 0) >= Config.MAX_TRADES_PER_DAY:
         return False, "max trades per day reached"
     open_symbols, exposure = account_snapshot(balance)
@@ -538,6 +542,13 @@ def can_open_new(state, balance):
     if exposure >= Config.MAX_TOTAL_EXPOSURE_PCT:
         return False, f"total exposure {exposure:.2f}% >= {Config.MAX_TOTAL_EXPOSURE_PCT}%"
     return True, "ok"
+
+
+def daily_return_pct(state, balance):
+    day_start = float(state.get("day_start_balance") or balance)
+    if day_start <= 0:
+        return 0.0
+    return (balance - day_start) / day_start * 100
 
 
 def ensure_protection(symbol, pos, market):
@@ -639,7 +650,11 @@ def main():
         try:
             balance = Binance.balance()
             reset_day(state, balance)
-            log(f"📊 Balance={balance:.2f} | trades_today={state.get('trades_today', 0)}")
+            daily_ret = daily_return_pct(state, balance)
+            log(
+                f"📊 Balance={balance:.2f} | daily={daily_ret:.2f}%/"
+                f"{Config.DAILY_PROFIT_TARGET_PCT*100:.0f}% | trades_today={state.get('trades_today', 0)}"
+            )
 
             open_allowed, open_reason = can_open_new(state, balance)
             if not open_allowed:
