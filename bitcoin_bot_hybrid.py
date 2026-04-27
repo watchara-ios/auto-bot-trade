@@ -550,7 +550,13 @@ Return {{"action":"ALLOW" or "BLOCK","reason":"short"}}. Block only on obvious c
 def load_state():
     if Path(Config.STATE_FILE).exists():
         return json.loads(Path(Config.STATE_FILE).read_text(encoding="utf-8"))
-    state = {"date": datetime.now().strftime("%Y-%m-%d"), "day_start_balance": None, "trades_today": 0, "last_trade_time": {}}
+    state = {
+        "date": datetime.now().strftime("%Y-%m-%d"),
+        "day_start_balance": None,
+        "trades_today": 0,
+        "last_trade_time": {},
+        "dry_run": Config.DRY_RUN,
+    }
     save_state(state)
     return state
 
@@ -561,14 +567,26 @@ def save_state(state):
 
 def reset_day(state, balance):
     today = datetime.now().strftime("%Y-%m-%d")
+    if state.get("dry_run") != Config.DRY_RUN:
+        log(
+            f"🔄 Runtime mode changed dry_run={state.get('dry_run')} -> {Config.DRY_RUN}; "
+            "resetting daily counters"
+        )
+        state["dry_run"] = Config.DRY_RUN
+        state["day_start_balance"] = balance
+        state["trades_today"] = 0
+        state["last_trade_time"] = {}
+        save_state(state)
     if state.get("date") != today:
         state["date"] = today
         state["day_start_balance"] = balance
         state["trades_today"] = 0
         state["last_trade_time"] = {}
+        state["dry_run"] = Config.DRY_RUN
         save_state(state)
     if state.get("day_start_balance") is None:
         state["day_start_balance"] = balance
+        state["dry_run"] = Config.DRY_RUN
         save_state(state)
 
 
@@ -725,9 +743,13 @@ def execute_signal(signal, balance, state):
     Binance.stop_order(symbol, signal["exit_side"], signal["sl"], qty, "STOP_MARKET", position_side=signal["side"])
     Binance.stop_order(symbol, signal["exit_side"], signal["tp"], qty, "TAKE_PROFIT_MARKET", position_side=signal["side"])
 
-    state["trades_today"] = state.get("trades_today", 0) + 1
-    state.setdefault("last_trade_time", {})[symbol] = time.time()
-    save_state(state)
+    if Config.DRY_RUN:
+        log("🧪 DRY_RUN signal recorded only in trade log; not counting toward live daily trade limit")
+    else:
+        state["trades_today"] = state.get("trades_today", 0) + 1
+        state.setdefault("last_trade_time", {})[symbol] = time.time()
+        state["dry_run"] = Config.DRY_RUN
+        save_state(state)
     append_trade({
         "time": datetime.now().isoformat(timespec="seconds"),
         "symbol": symbol,
