@@ -8,6 +8,11 @@ import MetaTrader5 as mt5
 import pandas as pd
 import numpy as np
 
+if hasattr(sys.stdout, "reconfigure"):
+    sys.stdout.reconfigure(encoding="utf-8", errors="replace")
+if hasattr(sys.stderr, "reconfigure"):
+    sys.stderr.reconfigure(encoding="utf-8", errors="replace")
+
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 from donchian_core import DonchianCoreConfig, latest_signal
 

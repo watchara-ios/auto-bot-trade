@@ -17,7 +17,12 @@ if not exist "%LOG_DIR%" mkdir "%LOG_DIR%"
 >> "%LOG_FILE%" echo USER=%USERNAME%
 >> "%LOG_FILE%" echo COMPUTER=%COMPUTERNAME%
 if "%FOREX_DRY_RUN%"=="" set "FOREX_DRY_RUN=true"
+set "PYTHONUTF8=1"
+set "PYTHONIOENCODING=utf-8"
+chcp 65001 >nul 2>nul
 >> "%LOG_FILE%" echo FOREX_DRY_RUN=%FOREX_DRY_RUN%
+>> "%LOG_FILE%" echo PYTHONUTF8=%PYTHONUTF8%
+>> "%LOG_FILE%" echo PYTHONIOENCODING=%PYTHONIOENCODING%
 
 cd /d "%BOT_DIR%"
 if errorlevel 1 (
