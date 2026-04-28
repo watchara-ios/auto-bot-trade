@@ -2,6 +2,7 @@ import json
 import os
 import sys
 import time
+import builtins
 from datetime import datetime, time as dtime
 from pathlib import Path
 import MetaTrader5 as mt5
@@ -12,6 +13,37 @@ if hasattr(sys.stdout, "reconfigure"):
     sys.stdout.reconfigure(encoding="utf-8", errors="replace")
 if hasattr(sys.stderr, "reconfigure"):
     sys.stderr.reconfigure(encoding="utf-8", errors="replace")
+
+
+LOG_REPLACEMENTS = {
+    "🔌": "[CONNECT]",
+    "🔎": "[SCAN]",
+    "✅": "[OK]",
+    "⛔": "[BLOCK]",
+    "🧠": "[AI]",
+    "❌": "[ERROR]",
+    "🧪": "[DRY_RUN]",
+    "📌": "[ORDER]",
+    "🚀": "[START]",
+    "🌙": "[SESSION]",
+    "⏳": "[WAIT]",
+    "👀": "[WATCHLIST]",
+    "⏸": "[NO_TRADE]",
+    "🛑": "[STOP]",
+    "🎯": "[SELECT]",
+}
+
+
+def _log_safe(value):
+    text = str(value)
+    for src, dst in LOG_REPLACEMENTS.items():
+        text = text.replace(src, dst)
+    return text.encode("ascii", errors="ignore").decode("ascii")
+
+
+def print(*args, **kwargs):
+    builtins.print(*[_log_safe(arg) for arg in args], **kwargs)
+
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 from donchian_core import DonchianCoreConfig, latest_signal
@@ -59,7 +91,7 @@ SL_BUFFER_POINTS = 100
 MAX_TRADES_PER_DAY = 2
 MAX_DAILY_LOSS_PERCENT = 3.0
 
-CHECK_INTERVAL_SECONDS = int(os.getenv("FOREX_CHECK_INTERVAL_SECONDS", "300"))
+CHECK_INTERVAL_SECONDS = int(os.getenv("FOREX_CHECK_INTERVAL_SECONDS", "60"))
 
 # เทรดเฉพาะช่วงเวลาไทยโดยประมาณ
 TRADE_START_HOUR = int(os.getenv("FOREX_TRADE_START_HOUR", "14"))
@@ -76,6 +108,7 @@ DRY_RUN = os.getenv("FOREX_DRY_RUN", "true").lower() == "true"
 # DeepSeek daily market scan
 AI_DAILY_SCAN_ENABLED = os.getenv("FOREX_AI_DAILY_SCAN_ENABLED", "true").lower() == "true"
 REQUIRE_AI_WATCHLIST = os.getenv("FOREX_REQUIRE_AI_WATCHLIST", "true").lower() == "true"
+AI_SCAN_ON_BOT_START = os.getenv("FOREX_AI_SCAN_ON_BOT_START", "true").lower() == "true"
 DEEPSEEK_API_KEY = os.getenv("DEEPSEEK_API_KEY")
 DEEPSEEK_MODEL = os.getenv("FOREX_DEEPSEEK_MODEL", "deepseek-reasoner")
 AI_SCAN_HOUR = int(os.getenv("FOREX_AI_SCAN_HOUR", str(TRADE_START_HOUR)))
@@ -635,7 +668,7 @@ def apply_ai_selected_symbol_from_state():
         print(f"[{datetime.now()}] 🧠 Cannot apply AI selected symbol {selected_symbol}: {e}", flush=True)
 
 
-def run_daily_ai_market_scan_once():
+def run_daily_ai_market_scan_once(force=False):
     if not AI_DAILY_SCAN_ENABLED:
         return
 
@@ -645,7 +678,12 @@ def run_daily_ai_market_scan_once():
         return
 
     state = read_ai_state()
-    if state.get("last_scan_date") == today:
+    if state.get("last_scan_date") == today and not force:
+        print(
+            f"[{datetime.now()}] [AI] Using cached daily forex scan from "
+            f"{state.get('last_scan_at', 'unknown')} | symbols={', '.join(state.get('candidate_symbols', []))}",
+            flush=True,
+        )
         if not state.get("candidate_symbols") and state.get("last_recommendations"):
             watchlist = build_ai_watchlist(state["last_recommendations"])
             if watchlist:
@@ -656,7 +694,10 @@ def run_daily_ai_market_scan_once():
                 write_ai_state(state)
         return
 
-    # New trading day: do not let stale recommendations become today's watchlist.
+    if force and state.get("last_scan_date") == today:
+        print(f"[{datetime.now()}] [AI] Forcing DeepSeek scan on bot start", flush=True)
+
+    # New scan: do not let stale recommendations become today's watchlist.
     state.pop("candidate_symbols", None)
     state.pop("candidate_recommendations", None)
     state.pop("selected_symbol", None)
@@ -876,6 +917,7 @@ def run_bot():
     last_entry_candle_time = {}
 
     print(f"[{datetime.now()}] 🚀 Bot started", flush=True)
+    run_daily_ai_market_scan_once(force=AI_SCAN_ON_BOT_START)
 
     while True:
         try:
