@@ -78,6 +78,8 @@ def prepare_timeframes(m1: pd.DataFrame, m5: pd.DataFrame, m15: pd.DataFrame, co
     m15 = to_indexed_ohlcv(m15)
     m1, m5, m15 = bt.calculate_indicators(m1, m5, m15, cfg)
     m5 = bt.align_timeframes(m5, m15)
+    m5["m15_ema_fast"] = m15["ema_fast"].shift(1).reindex(m5.index, method="ffill")
+    m5["m15_ema_slow"] = m15["ema_slow"].shift(1).reindex(m5.index, method="ffill")
     return m1, m5, cfg
 
 

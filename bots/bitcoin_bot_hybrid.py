@@ -17,6 +17,7 @@ from dotenv import load_dotenv
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 from donchian_core import DonchianCoreConfig, latest_signal
+from demo_testcase_logger import log_demo_testcase
 
 try:
     from openai import OpenAI
@@ -434,6 +435,16 @@ def generate_signal(symbol, market):
     )
 
 
+def core_config():
+    return DonchianCoreConfig(
+        tier_a_risk=Config.TIER_A_RISK,
+        tier_b_risk=Config.TIER_B_RISK,
+        rr=Config.RR,
+        donchian_n=Config.DONCHIAN_N,
+        adx_min=Config.ADX_MIN,
+    )
+
+
 def ai_validate(signal, market):
     if not Config.USE_AI_VALIDATOR or not Config.DEEPSEEK_KEY or OpenAI is None:
         return True, "AI disabled"
@@ -732,14 +743,36 @@ def main():
 
                 pos = Binance.position(symbol)
                 if abs(pos["amount"]) > 0:
+                    log_demo_testcase(
+                        "bitcoin_demo",
+                        symbol,
+                        market["1m"],
+                        market["5m"],
+                        market["15m"],
+                        core_config(),
+                        external_blocked_by="OPEN_POSITION_EXISTS",
+                        external_block_reason=f"position amount={pos['amount']}",
+                    )
                     log(f"📌 {symbol} existing position amount={pos['amount']} entry={pos['entry']} mark={pos['mark']}")
                     ensure_protection(symbol, pos, market)
                     continue
                 cleanup_orphan_orders(symbol)
 
                 if not open_allowed:
+                    block = "DAILY_TRADE_LIMIT" if "max trades" in open_reason else "RISK_LIMIT"
+                    log_demo_testcase(
+                        "bitcoin_demo",
+                        symbol,
+                        market["1m"],
+                        market["5m"],
+                        market["15m"],
+                        core_config(),
+                        external_blocked_by=block,
+                        external_block_reason=open_reason,
+                    )
                     continue
 
+                log_demo_testcase("bitcoin_demo", symbol, market["1m"], market["5m"], market["15m"], core_config())
                 signal, reason = generate_signal(symbol, market)
                 if not signal:
                     log(f"⏸️ {symbol} no entry: {reason}")

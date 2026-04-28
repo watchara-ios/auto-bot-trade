@@ -47,6 +47,7 @@ def print(*args, **kwargs):
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 from donchian_core import DonchianCoreConfig, latest_signal
+from demo_testcase_logger import log_demo_testcase
 
 try:
     from dotenv import load_dotenv
@@ -777,13 +778,7 @@ def has_any_open_position(symbols):
 # SIGNAL LOGIC
 # =========================================================
 def generate_signal():
-    core_config = DonchianCoreConfig(
-        tier_a_risk=TIER_A_RISK_PERCENT / 100,
-        tier_b_risk=TIER_B_RISK_PERCENT / 100,
-        rr=RR,
-        donchian_n=DONCHIAN_N,
-        adx_min=ADX_MIN,
-    )
+    core_config = forex_core_config()
     df_m1 = get_ohlcv(SYMBOL, TF_EXEC, BARS)
     df_m5 = get_ohlcv(SYMBOL, TF_ENTRY, BARS)
     df_m15 = get_ohlcv(SYMBOL, TF_TREND, BARS)
@@ -801,6 +796,41 @@ def generate_signal():
     signal["price"] = signal["entry"]
     signal["reason"] = signal["reason"]
     return signal, df_m5
+
+
+def forex_core_config():
+    return DonchianCoreConfig(
+        tier_a_risk=TIER_A_RISK_PERCENT / 100,
+        tier_b_risk=TIER_B_RISK_PERCENT / 100,
+        rr=RR,
+        donchian_n=DONCHIAN_N,
+        adx_min=ADX_MIN,
+    )
+
+
+def log_forex_demo_testcase(external_blocked_by="", external_block_reason="", spread_points=None):
+    info = mt5.symbol_info(SYMBOL)
+    tick = mt5.symbol_info_tick(SYMBOL)
+    spread = {}
+    if info is not None and tick is not None and info.point > 0:
+        spread_value = tick.ask - tick.bid
+        mid = (tick.ask + tick.bid) / 2
+        spread = {
+            "spread": spread_value,
+            "spread_points": spread_points if spread_points is not None else spread_value / info.point,
+            "spread_pct": spread_value / mid if mid else 0.0,
+        }
+    log_demo_testcase(
+        "forex_demo",
+        SYMBOL,
+        get_ohlcv(SYMBOL, TF_EXEC, BARS),
+        get_ohlcv(SYMBOL, TF_ENTRY, BARS),
+        get_ohlcv(SYMBOL, TF_TREND, BARS),
+        forex_core_config(),
+        external_blocked_by=external_blocked_by,
+        external_block_reason=external_block_reason,
+        spread=spread,
+    )
 
 
 # =========================================================
@@ -953,18 +983,22 @@ def run_bot():
 
                     spread_ok, spread_msg = pass_spread_filter()
                     if not spread_ok:
+                        log_forex_demo_testcase("SPREAD_TOO_HIGH", spread_msg, get_spread_points())
                         print(f"[{datetime.now()}] ⏸ {SYMBOL} {spread_msg}")
                         continue
 
                     risk_ok, risk_msg = pass_daily_risk_filter()
                     if not risk_ok:
+                        log_forex_demo_testcase("DAILY_TRADE_LIMIT", risk_msg)
                         print(f"[{datetime.now()}] 🛑 {SYMBOL} {risk_msg}")
                         continue
 
                     if has_open_position():
+                        log_forex_demo_testcase("OPEN_POSITION_EXISTS", f"{SYMBOL} has open MT5 position")
                         print(f"[{datetime.now()}] 📌 {SYMBOL} existing position detected, skip")
                         continue
 
+                    log_forex_demo_testcase()
                     signal, df_m5 = generate_signal()
 
                     current_candle_time = signal["time"]
