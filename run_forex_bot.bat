@@ -1,4 +1,2 @@
 @echo off
-cd /d "%~dp0"
-python forex_bot.py
-pause
+powershell -ExecutionPolicy Bypass -File "%~dp0scripts\run_forex_bot.ps1"

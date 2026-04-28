@@ -1,0 +1,1 @@
+signal_id,symbol,signal_time,side,status,spread,spread_pct,estimated_slippage,entry,sl,tp,backtest_entry,backtest_sl,backtest_tp

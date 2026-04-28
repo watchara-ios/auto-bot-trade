@@ -1,0 +1,1 @@
+signal_id,symbol,side,signal_time,entry_time,exit_time,entry,sl,tp,exit,qty,pnl,result,reason,spread,spread_pct,estimated_slippage,backtest_entry,backtest_sl,backtest_tp,live_vs_backtest_entry_diff
