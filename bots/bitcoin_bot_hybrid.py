@@ -18,6 +18,7 @@ from dotenv import load_dotenv
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 from donchian_core import DonchianCoreConfig, latest_signal
 from demo_testcase_logger import log_demo_testcase
+from notifier import notify_bot_started, notify_error, notify_order_opened, notify_order_result
 
 try:
     from openai import OpenAI
@@ -674,7 +675,20 @@ def execute_signal(signal, balance, state):
         f"risk={signal.get('risk_pct', Config.TIER_A_RISK)*100:.2f}% "
         f"type={signal['type']} entry~{signal['entry']:.2f} sl={signal['sl']:.2f} tp={signal['tp']:.2f}"
     )
-    Binance.market_order(symbol, signal["side"], qty)
+    notify_order_opened(
+        "BINANCE",
+        symbol,
+        signal["side"],
+        qty,
+        signal["entry"],
+        signal["sl"],
+        signal["tp"],
+        tier=signal.get("tier", ""),
+        risk_pct=signal.get("risk_pct", Config.TIER_A_RISK),
+        dry_run=Config.DRY_RUN,
+    )
+    order_result = Binance.market_order(symbol, signal["side"], qty)
+    notify_order_result("BINANCE", symbol, signal["side"], order_result, dry_run=Config.DRY_RUN)
     Binance.stop_order(symbol, signal["exit_side"], signal["sl"], qty, "STOP_MARKET", position_side=signal["side"])
     Binance.stop_order(symbol, signal["exit_side"], signal["tp"], qty, "TAKE_PROFIT_MARKET", position_side=signal["side"])
 
@@ -719,6 +733,11 @@ def main():
         f"strategy=Donchian{Config.DONCHIAN_N}+M15 ADX/BOS RR=1:{Config.RR:g} | symbols={','.join(Config.SYMBOLS)}"
     )
     log("═" * 64)
+    notify_bot_started(
+        "Binance Donchian Bot",
+        "DRY_RUN" if Config.DRY_RUN else "LIVE/DEMO",
+        f"Symbols: <code>{','.join(Config.SYMBOLS)}</code>",
+    )
     setup()
     state = load_state()
 
@@ -785,6 +804,7 @@ def main():
             break
         except Exception as e:
             warn(f"💥 Loop error: {e}")
+            notify_error("BINANCE", str(e))
             if "-1021" in str(e):
                 Binance.sync_time()
 

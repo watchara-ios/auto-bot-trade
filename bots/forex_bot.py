@@ -48,6 +48,7 @@ def print(*args, **kwargs):
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 from donchian_core import DonchianCoreConfig, latest_signal
 from demo_testcase_logger import log_demo_testcase
+from notifier import notify_bot_started, notify_error, notify_order_opened, notify_order_result
 
 try:
     from dotenv import load_dotenv
@@ -925,10 +926,35 @@ def send_order(signal, tp_sl):
     if DRY_RUN:
         print("🧪 DRY_RUN ORDER")
         print(request)
+        notify_order_opened(
+            "FOREX",
+            SYMBOL,
+            side,
+            lot,
+            price,
+            tp_sl["sl"],
+            tp_sl["tp"],
+            tier=signal.get("tier", ""),
+            risk_pct=signal.get("risk_pct", TIER_A_RISK_PERCENT / 100),
+            dry_run=True,
+        )
         return request
 
     result = mt5.order_send(request)
     print("📌 ORDER RESULT:", result)
+    notify_order_opened(
+        "FOREX",
+        SYMBOL,
+        side,
+        lot,
+        price,
+        tp_sl["sl"],
+        tp_sl["tp"],
+        tier=signal.get("tier", ""),
+        risk_pct=signal.get("risk_pct", TIER_A_RISK_PERCENT / 100),
+        dry_run=False,
+    )
+    notify_order_result("FOREX", SYMBOL, side, result, dry_run=False)
     return result
 
 
@@ -943,6 +969,11 @@ def run_bot():
         flush=True,
     )
     connect_mt5()
+    notify_bot_started(
+        "Forex Donchian Bot",
+        "DRY_RUN" if DRY_RUN else "LIVE/DEMO",
+        f"Session: <code>{TRADE_START_HOUR}:00-{TRADE_END_HOUR}:59</code>",
+    )
 
     last_entry_candle_time = {}
 
@@ -1028,6 +1059,7 @@ def run_bot():
 
                 except Exception as e:
                     print(f"[{datetime.now()}] ❌ {preferred_symbol} analysis error: {e}", flush=True)
+                    notify_error("FOREX", f"{preferred_symbol} analysis error: {e}")
 
             if not order_sent:
                 print(f"[{datetime.now()}] ⏳ No order from AI watchlist this round", flush=True)
@@ -1040,6 +1072,7 @@ def run_bot():
 
         except Exception as e:
             print("❌ ERROR:", e)
+            notify_error("FOREX", str(e))
             time.sleep(CHECK_INTERVAL_SECONDS)
 
     mt5.shutdown()
