@@ -1,11 +1,15 @@
 import json
 import os
+import sys
 import time
 from datetime import datetime, time as dtime
 from pathlib import Path
 import MetaTrader5 as mt5
 import pandas as pd
 import numpy as np
+
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+from donchian_core import DonchianCoreConfig, latest_signal
 
 try:
     from dotenv import load_dotenv
@@ -28,10 +32,10 @@ SYMBOL = "XAUUSD"          # แก้ตามชื่อ symbol ใน MT5 �
 SYMBOL_ALIASES = ["XAUUSD", "GOLD"]
 LOT = 0.01
 
-# Multi Timeframe
-TF_TREND = mt5.TIMEFRAME_H1
-TF_SETUP = mt5.TIMEFRAME_M15
+# Multi Timeframe: M15 trend, M5 signal, M1 execution confirmation
+TF_TREND = mt5.TIMEFRAME_M15
 TF_ENTRY = mt5.TIMEFRAME_M5
+TF_EXEC = mt5.TIMEFRAME_M1
 
 BARS = 500
 
@@ -40,7 +44,11 @@ EMA_SLOW = 50
 EMA_BIG = 200
 RSI_PERIOD = 14
 
-RR = 3.0
+RR = 2.0
+TIER_A_RISK_PERCENT = 0.25
+TIER_B_RISK_PERCENT = 1.0
+DONCHIAN_N = 20
+ADX_MIN = 20.0
 SL_BUFFER_POINTS = 100
 
 MAX_TRADES_PER_DAY = 2
@@ -58,7 +66,7 @@ BLOCK_ENTRY_HOURS = {
 }
 EXIT_AFTER_SESSION_END = True
 
-DRY_RUN = True   # True = ไม่ยิง order จริง / False = ยิงจริง
+DRY_RUN = os.getenv("FOREX_DRY_RUN", "true").lower() == "true"
 
 # DeepSeek daily market scan
 AI_DAILY_SCAN_ENABLED = os.getenv("FOREX_AI_DAILY_SCAN_ENABLED", "true").lower() == "true"
@@ -723,94 +731,29 @@ def has_any_open_position(symbols):
 # SIGNAL LOGIC
 # =========================================================
 def generate_signal():
-    df_h1 = add_swing_levels(add_indicators(get_ohlcv(SYMBOL, TF_TREND, BARS)))
-    df_m15 = add_swing_levels(add_indicators(get_ohlcv(SYMBOL, TF_SETUP, BARS)))
-    df_m5 = add_swing_levels(add_indicators(get_ohlcv(SYMBOL, TF_ENTRY, BARS)))
-
-    h1_trend = detect_trend(df_h1)
-    m15_trend = detect_trend(df_m15)
-    m15_bos = detect_bos(df_m15)
-
-    entry_candle = df_m5.iloc[-2]
-    prev_candle = df_m5.iloc[-3]
-
-    support, resistance = get_last_sr(df_m5.iloc[:-2])
-
-    signal = {
-        "time": entry_candle["time"],
-        "symbol": SYMBOL,
-        "side": "NO_TRADE",
-        "price": float(entry_candle["close"]),
-        "h1_trend": h1_trend,
-        "m15_trend": m15_trend,
-        "m15_bos": m15_bos,
-        "rsi_m5": float(entry_candle["rsi"]),
-        "volume": float(entry_candle["volume"]),
-        "vol_avg": float(entry_candle["vol_avg"]) if not np.isnan(entry_candle["vol_avg"]) else 0,
-        "atr_points": None,
-        "body_ratio": float(entry_candle["body_ratio"]) if not np.isnan(entry_candle["body_ratio"]) else 0,
-        "h1_gap_pct": float(df_h1.iloc[-2]["ema20_50_gap_pct"]),
-        "m15_gap_pct": float(df_m15.iloc[-2]["ema20_50_gap_pct"]),
-        "support": support,
-        "resistance": resistance,
-        "reason": ""
-    }
-
-    info = mt5.symbol_info(SYMBOL)
-    point = info.point if info and info.point > 0 else 0
-    atr_points = float(entry_candle["atr"] / point) if point and not np.isnan(entry_candle["atr"]) else 0
-    signal["atr_points"] = round(atr_points, 1)
-
-    quality_failures = []
-    if atr_points < MIN_M5_ATR_POINTS or atr_points > MAX_M5_ATR_POINTS:
-        quality_failures.append(f"ATR points {atr_points:.1f} outside {MIN_M5_ATR_POINTS}-{MAX_M5_ATR_POINTS}")
-    if signal["body_ratio"] < MIN_BODY_RATIO:
-        quality_failures.append(f"body ratio {signal['body_ratio']:.2f} < {MIN_BODY_RATIO}")
-    if signal["volume"] < signal["vol_avg"] * MIN_VOLUME_MULT:
-        quality_failures.append(f"volume {signal['volume']:.0f} < avg*{MIN_VOLUME_MULT}")
-    if signal["h1_gap_pct"] < MIN_TREND_GAP_PCT or signal["m15_gap_pct"] < MIN_TREND_GAP_PCT:
-        quality_failures.append(
-            f"trend gap weak H1={signal['h1_gap_pct']:.5f} M15={signal['m15_gap_pct']:.5f}"
-        )
-    if quality_failures:
-        signal["reason"] = "Quality filter fail: " + "; ".join(quality_failures)
-        return signal, df_m5
-
-    # BUY setup
-    buy_condition = (
-        h1_trend == "UP"
-        and m15_trend == "UP"
-        and m15_bos in ["BULLISH_BOS", "NO_BOS"]
-        and entry_candle["close"] > entry_candle["ema20"]
-        and entry_candle["ema20"] > entry_candle["ema50"]
-        and 45 <= entry_candle["rsi"] <= 65
-        and entry_candle["close"] > prev_candle["close"]
-        and entry_candle["close"] > prev_candle["high"]
+    core_config = DonchianCoreConfig(
+        tier_a_risk=TIER_A_RISK_PERCENT / 100,
+        tier_b_risk=TIER_B_RISK_PERCENT / 100,
+        rr=RR,
+        donchian_n=DONCHIAN_N,
+        adx_min=ADX_MIN,
     )
+    df_m1 = get_ohlcv(SYMBOL, TF_EXEC, BARS)
+    df_m5 = get_ohlcv(SYMBOL, TF_ENTRY, BARS)
+    df_m15 = get_ohlcv(SYMBOL, TF_TREND, BARS)
+    signal, reason, candle_time = latest_signal(SYMBOL, df_m1, df_m5, df_m15, core_config)
+    if signal is None:
+        return {
+            "time": candle_time if candle_time is not None else datetime.now(),
+            "symbol": SYMBOL,
+            "side": "NO_TRADE",
+            "price": float(df_m5.iloc[-2]["close"]) if len(df_m5) >= 2 else 0.0,
+            "reason": reason,
+        }, df_m5
 
-    # SELL setup
-    sell_condition = (
-        h1_trend == "DOWN"
-        and m15_trend == "DOWN"
-        and m15_bos in ["BEARISH_BOS", "NO_BOS"]
-        and entry_candle["close"] < entry_candle["ema20"]
-        and entry_candle["ema20"] < entry_candle["ema50"]
-        and 35 <= entry_candle["rsi"] <= 55
-        and entry_candle["close"] < prev_candle["close"]
-        and entry_candle["close"] < prev_candle["low"]
-    )
-
-    if buy_condition:
-        signal["side"] = "BUY"
-        signal["reason"] = "H1 UP + M15 UP + M5 pullback continuation"
-
-    elif sell_condition:
-        signal["side"] = "SELL"
-        signal["reason"] = "H1 DOWN + M15 DOWN + M5 pullback continuation"
-
-    else:
-        signal["reason"] = "No clean multi-timeframe setup"
-
+    signal["time"] = pd.Timestamp(signal["candle_time"])
+    signal["price"] = signal["entry"]
+    signal["reason"] = signal["reason"]
     return signal, df_m5
 
 
@@ -821,54 +764,46 @@ def calculate_tp_sl(signal):
     info = mt5.symbol_info(SYMBOL)
     if info is None:
         raise RuntimeError("No symbol info")
-
-    point = info.point
-    entry = signal["price"]
-    side = signal["side"]
-
-    support = signal["support"]
-    resistance = signal["resistance"]
-    atr_distance = max(signal.get("atr_points") or MIN_M5_ATR_POINTS, MIN_M5_ATR_POINTS) * point
-    min_stop = MIN_M5_ATR_POINTS * point * 0.8
-    max_stop = MAX_M5_ATR_POINTS * point
-
-    if side == "BUY":
-        if support:
-            sl = support - SL_BUFFER_POINTS * point
-        else:
-            sl = entry - atr_distance
-
-        if abs(entry - sl) < min_stop or abs(entry - sl) > max_stop:
-            sl = entry - atr_distance
-
-        risk = abs(entry - sl)
-        tp = entry + risk * RR
-
-    elif side == "SELL":
-        if resistance:
-            sl = resistance + SL_BUFFER_POINTS * point
-        else:
-            sl = entry + atr_distance
-
-        if abs(entry - sl) < min_stop or abs(entry - sl) > max_stop:
-            sl = entry + atr_distance
-
-        risk = abs(entry - sl)
-        tp = entry - risk * RR
-
-    else:
+    if signal["side"] == "NO_TRADE":
         return None
 
     digits = info.digits
-
     return {
-        "entry": round(entry, digits),
-        "sl": round(sl, digits),
-        "tp": round(tp, digits),
-        "risk_points": round(abs(entry - sl) / point, 1),
-        "reward_points": round(abs(tp - entry) / point, 1),
-        "rr": RR
+        "entry": round(float(signal["entry"]), digits),
+        "sl": round(float(signal["sl"]), digits),
+        "tp": round(float(signal["tp"]), digits),
+        "risk_points": round(abs(float(signal["entry"]) - float(signal["sl"])) / info.point, 1),
+        "reward_points": round(abs(float(signal["tp"]) - float(signal["entry"])) / info.point, 1),
+        "rr": RR,
+        "tier": signal.get("tier"),
+        "risk_pct": signal.get("risk_pct"),
     }
+
+
+def calculate_risk_lot(signal, tp_sl):
+    account = mt5.account_info()
+    info = mt5.symbol_info(SYMBOL)
+    if account is None or info is None:
+        return LOT
+
+    risk_pct = float(signal.get("risk_pct", TIER_A_RISK_PERCENT / 100))
+    risk_money = account.balance * risk_pct
+    stop_distance = abs(float(tp_sl["entry"]) - float(tp_sl["sl"]))
+    if stop_distance <= 0 or info.trade_tick_size <= 0 or info.trade_tick_value <= 0:
+        return LOT
+
+    loss_per_lot = (stop_distance / info.trade_tick_size) * info.trade_tick_value
+    if loss_per_lot <= 0:
+        return LOT
+
+    raw_lot = risk_money / loss_per_lot
+    step = info.volume_step or 0.01
+    min_lot = info.volume_min or step
+    max_lot = info.volume_max or raw_lot
+    lot = np.floor(raw_lot / step) * step
+    lot = min(max(lot, min_lot), max_lot)
+    digits = max(0, int(round(-np.log10(step)))) if step < 1 else 0
+    return round(float(lot), digits)
 
 
 # =========================================================
@@ -895,17 +830,18 @@ def send_order(signal, tp_sl):
     else:
         return None
 
+    lot = calculate_risk_lot(signal, tp_sl)
     request = {
         "action": mt5.TRADE_ACTION_DEAL,
         "symbol": SYMBOL,
-        "volume": LOT,
+        "volume": lot,
         "type": order_type,
         "price": price,
         "sl": tp_sl["sl"],
         "tp": tp_sl["tp"],
         "deviation": 30,
         "magic": 20260424,
-        "comment": "MTF_PRO_BOT",
+        "comment": f"DONCHIAN_T{signal.get('tier', 'A')}",
         "type_time": mt5.ORDER_TIME_GTC,
         "type_filling": mt5.ORDER_FILLING_IOC,
     }

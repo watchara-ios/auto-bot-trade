@@ -1,4 +1,5 @@
 import os
+import sys
 import time
 import hmac
 import json
@@ -14,6 +15,9 @@ import pandas as pd
 import requests
 from dotenv import load_dotenv
 
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+from donchian_core import DonchianCoreConfig, latest_signal
+
 try:
     from openai import OpenAI
 except Exception:
@@ -24,13 +28,13 @@ load_dotenv()
 
 
 class Config:
-    API_KEY = os.getenv("BINANCE_API_KEY")
-    SECRET = os.getenv("BINANCE_SECRET")
+    API_KEY = os.getenv("BINANCE_API_KEY") or os.getenv("BINANCE2_API_KEY")
+    SECRET = os.getenv("BINANCE_SECRET") or os.getenv("BINANCE2_SECRET")
     BASE_URL = "https://demo-fapi.binance.com"
 
     SYMBOLS = ["BTCUSDT", "ETHUSDT", "SOLUSDT"]
-    TIMEFRAMES = ("1m", "5m", "15m", "1h")
-    KLINE_LIMIT = 250
+    TIMEFRAMES = ("1m", "5m", "15m")
+    KLINE_LIMIT = 1200
 
     DRY_RUN = os.getenv("HYBRID_DRY_RUN", "true").lower() == "true"
     LEVERAGE = 1
@@ -38,25 +42,20 @@ class Config:
 
     POLL_SECONDS = 30
     ENTRY_COOLDOWN = 300
-    MAX_OPEN_SYMBOLS = 3
-    MAX_TRADES_PER_DAY = 6
+    MAX_OPEN_SYMBOLS = 1
+    MAX_TRADES_PER_DAY = 2
     MAX_DAILY_LOSS_PCT = 0.04
     DAILY_PROFIT_TARGET_PCT = 0.10
     MAX_TOTAL_EXPOSURE_PCT = 60.0
-    RISK_PER_TRADE = 0.006
+    TIER_A_RISK = 0.0025
+    TIER_B_RISK = 0.01
+    RR = 2.0
+    DONCHIAN_N = 20
+    ADX_MIN = 20.0
 
-    MIN_SCORE = 58
-    STRONG_SCORE = 72
-    MIN_ATR_PCT = 0.0010
-    MAX_ATR_PCT = 0.0090
-    MIN_VOLUME_RATIO = 0.65
-    BREAKOUT_LOOKBACK = 20
-    IMPULSE_LOOKBACK = 6
-    IMPULSE_MOVE_PCT = 0.006
-
-    SL_ATR = 1.25
-    TP_ATR_NORMAL = SL_ATR * 3
-    TP_ATR_STRONG = SL_ATR * 3
+    SL_ATR = 1.0
+    TP_ATR_NORMAL = SL_ATR * RR
+    TP_ATR_STRONG = SL_ATR * RR
     TRAILING_ATR = 0.9
     TRIGGER_GUARD_PCT = 0.0005
 
@@ -413,121 +412,45 @@ def impulse_side(df_5m, df_15m, df_1h):
 
 
 def generate_signal(symbol, market):
-    row_5m = last_closed(market["5m"])
-    prev_5m = previous(market["5m"])
-    row_15m = last_closed(market["15m"])
-    row_1h = last_closed(market["1h"])
-
-    if any(pd.isna(row_5m[x]) for x in ["atr", "atr_pct", "vol_ratio", "rsi", "ema20"]):
-        return None, "5m indicators not ready"
-    if any(pd.isna(row_15m[x]) for x in ["ema20", "ema50", "rsi"]):
-        return None, "15m indicators not ready"
-    if any(pd.isna(row_1h[x]) for x in ["ema20", "ema50"]):
-        return None, "1h indicators not ready"
-
-    atr_pct = float(row_5m.atr_pct)
-    if not (Config.MIN_ATR_PCT <= atr_pct <= Config.MAX_ATR_PCT):
-        return None, f"ATR filter fail atr%={atr_pct*100:.2f}"
-
-    side = trend_side(row_15m, row_1h)
-    signal_type = "trend"
-    reasons = []
-
-    breakout, breakout_reason = breakout_side(market["15m"])
-    if breakout:
-        side = breakout
-        signal_type = "breakout"
-        reasons.append(breakout_reason)
-
-    impulse, impulse_reason = impulse_side(market["5m"], market["15m"], market["1h"])
-    if side is None and impulse:
-        side = impulse
-        signal_type = "impulse"
-        reasons.append(impulse_reason)
-
-    if side is None:
-        return None, (
-            "15m/1h trend not aligned and no impulse "
-            f"15m_close={row_15m.close:.2f} 15m_ema20={row_15m.ema20:.2f} "
-            f"1h_close={row_1h.close:.2f} 1h_ema20={row_1h.ema20:.2f} 1h_ema50={row_1h.ema50:.2f}"
-        )
-
-    momentum = (row_5m.close - prev_5m.close) / prev_5m.close
-    if side == "BUY":
-        entry_ok = row_5m.close > row_5m.ema20 and momentum > -0.0002 and row_5m.rsi < 76
-        reclaim = prev_5m.close <= prev_5m.ema20 and row_5m.close > row_5m.ema20
-    else:
-        entry_ok = row_5m.close < row_5m.ema20 and momentum < 0.0002 and row_5m.rsi > 24
-        reclaim = prev_5m.close >= prev_5m.ema20 and row_5m.close < row_5m.ema20
-
-    if reclaim and signal_type == "trend":
-        signal_type = "reclaim"
-        reasons.append("5m reclaimed EMA20 in aligned 15m/1h trend")
-
-    if not entry_ok:
-        return None, f"5m entry not ready side={side} close={row_5m.close:.2f} ema20={row_5m.ema20:.2f} momentum={momentum:.5f}"
-
-    score = 45
-    score += 12 if signal_type == "breakout" else 10 if signal_type == "impulse" else 8 if signal_type == "reclaim" else 5
-    score += 8 if row_5m.vol_ratio >= 1.0 else 4 if row_5m.vol_ratio >= Config.MIN_VOLUME_RATIO else -8
-    score += 7 if abs(momentum) >= 0.0008 else 3 if abs(momentum) >= 0.00025 else 0
-    score += 8 if row_15m.close > row_15m.ema20 > row_15m.ema50 and side == "BUY" else 0
-    score += 8 if row_15m.close < row_15m.ema20 < row_15m.ema50 and side == "SELL" else 0
-    score += 7 if row_1h.close > row_1h.ema50 and side == "BUY" else 0
-    score += 7 if row_1h.close < row_1h.ema50 and side == "SELL" else 0
-    score -= 6 if row_5m.vol_ratio < Config.MIN_VOLUME_RATIO else 0
-
-    score = max(0, min(100, score))
-    if score < Config.MIN_SCORE:
-        return None, f"score too low {score} side={side} type={signal_type}"
-
-    rr = Config.TP_ATR_STRONG if score >= Config.STRONG_SCORE else Config.TP_ATR_NORMAL
-    entry = float(row_5m.close)
-    stop_distance = float(row_5m.atr) * Config.SL_ATR
-    take_distance = float(row_5m.atr) * rr
-    if side == "BUY":
-        sl = entry - stop_distance
-        tp = entry + take_distance
-        exit_side = "SELL"
-    else:
-        sl = entry + stop_distance
-        tp = entry - take_distance
-        exit_side = "BUY"
-
-    signal = {
-        "symbol": symbol,
-        "side": side,
-        "exit_side": exit_side,
-        "entry": entry,
-        "sl": sl,
-        "tp": tp,
-        "atr": float(row_5m.atr),
-        "atr_pct": atr_pct,
-        "score": score,
-        "type": signal_type,
-        "reason": "; ".join(reasons) or "aligned trend",
-    }
-    return signal, f"SIGNAL {side} score={score} type={signal_type} entry={entry:.2f} sl={sl:.2f} tp={tp:.2f}"
+    core_config = DonchianCoreConfig(
+        tier_a_risk=Config.TIER_A_RISK,
+        tier_b_risk=Config.TIER_B_RISK,
+        rr=Config.RR,
+        donchian_n=Config.DONCHIAN_N,
+        adx_min=Config.ADX_MIN,
+    )
+    signal, reason, _ = latest_signal(
+        symbol,
+        market["1m"],
+        market["5m"],
+        market["15m"],
+        core_config,
+    )
+    if not signal:
+        return None, reason
+    return signal, (
+        f"SIGNAL {signal['side']} tier={signal['tier']} score={signal['score']} "
+        f"entry={signal['entry']:.2f} sl={signal['sl']:.2f} tp={signal['tp']:.2f} | {signal['reason']}"
+    )
 
 
 def ai_validate(signal, market):
     if not Config.USE_AI_VALIDATOR or not Config.DEEPSEEK_KEY or OpenAI is None:
         return True, "AI disabled"
-    if signal["score"] >= Config.STRONG_SCORE:
+    if signal.get("tier") == "B":
         return True, "strong technical score"
     try:
         client = OpenAI(api_key=Config.DEEPSEEK_KEY, base_url="https://api.deepseek.com/v1")
         row_5m = last_closed(market["5m"])
         row_15m = last_closed(market["15m"])
-        row_1h = last_closed(market["1h"])
         prompt = f"""Validate this crypto futures setup. Return strict JSON only.
 Symbol: {signal['symbol']}
 Side: {signal['side']}
 Type: {signal['type']}
-Score: {signal['score']}
+Tier: {signal.get('tier')}
+Breakout strength score: {signal.get('breakout_strength_score')}
 5m close={row_5m.close:.2f} ema20={row_5m.ema20:.2f} rsi={row_5m.rsi:.1f} atr_pct={row_5m.atr_pct:.4f} vol_ratio={row_5m.vol_ratio:.2f}
 15m close={row_15m.close:.2f} ema20={row_15m.ema20:.2f} ema50={row_15m.ema50:.2f} rsi={row_15m.rsi:.1f}
-1h close={row_1h.close:.2f} ema20={row_1h.ema20:.2f} ema50={row_1h.ema50:.2f} ema200={row_1h.ema200:.2f}
 Return {{"action":"ALLOW" or "BLOCK","reason":"short"}}. Block only on obvious contradiction or extreme chop."""
         resp = client.chat.completions.create(
             model=Config.AI_MODEL,
@@ -615,7 +538,7 @@ def round_qty(symbol, qty):
 
 
 def quantity_for_signal(symbol, balance, signal):
-    risk_amount = balance * Config.RISK_PER_TRADE
+    risk_amount = balance * float(signal.get("risk_pct", Config.TIER_A_RISK))
     stop_distance = abs(signal["entry"] - signal["sl"])
     if stop_distance <= 0:
         return 0.0
@@ -736,7 +659,8 @@ def execute_signal(signal, balance, state):
         return
 
     log(
-        f"🚀 OPEN {symbol} {signal['side']} qty={qty} score={signal['score']} "
+        f"🚀 OPEN {symbol} {signal['side']} qty={qty} tier={signal.get('tier')} "
+        f"risk={signal.get('risk_pct', Config.TIER_A_RISK)*100:.2f}% "
         f"type={signal['type']} entry~{signal['entry']:.2f} sl={signal['sl']:.2f} tp={signal['tp']:.2f}"
     )
     Binance.market_order(symbol, signal["side"], qty)
@@ -759,6 +683,8 @@ def execute_signal(signal, balance, state):
         "sl": signal["sl"],
         "tp": signal["tp"],
         "score": signal["score"],
+        "tier": signal.get("tier"),
+        "risk_pct": signal.get("risk_pct"),
         "type": signal["type"],
         "dry_run": Config.DRY_RUN,
         "reason": signal["reason"],
@@ -776,8 +702,11 @@ def setup():
 
 def main():
     log("═" * 64)
-    log("🤖 Hybrid BTC/ETH/SOL bot started")
-    log(f"🧪 DRY_RUN={Config.DRY_RUN} | 🧠 AI_VALIDATOR={Config.USE_AI_VALIDATOR} | symbols={','.join(Config.SYMBOLS)}")
+    log("🤖 Hybrid Donchian BTC/ETH/SOL bot started")
+    log(
+        f"🧪 DRY_RUN={Config.DRY_RUN} | 🧠 AI_VALIDATOR={Config.USE_AI_VALIDATOR} | "
+        f"strategy=Donchian{Config.DONCHIAN_N}+M15 ADX/BOS RR=1:{Config.RR:g} | symbols={','.join(Config.SYMBOLS)}"
+    )
     log("═" * 64)
     setup()
     state = load_state()
