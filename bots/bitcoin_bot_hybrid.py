@@ -7,7 +7,7 @@ import hashlib
 import logging
 from logging.handlers import TimedRotatingFileHandler
 from pathlib import Path
-from datetime import datetime, timedelta
+from datetime import datetime, timedelta, timezone
 from urllib.parse import urlencode
 
 import numpy as np
@@ -645,7 +645,7 @@ def daily_return_pct(state, balance):
 
 
 def utc_now():
-    return datetime.utcnow()
+    return datetime.now(timezone.utc)
 
 
 def entry_session_active(now=None):
@@ -665,7 +665,7 @@ def seconds_until_next_entry_session(now=None):
         if candidate > now:
             return max(1, int((candidate - now).total_seconds()))
     tomorrow = now.date() + timedelta(days=1)
-    candidate = datetime.combine(tomorrow, datetime.min.time()).replace(hour=allowed_hours[0])
+    candidate = datetime.combine(tomorrow, datetime.min.time()).replace(tzinfo=timezone.utc, hour=allowed_hours[0])
     return max(1, int((candidate - now).total_seconds()))
 
 
