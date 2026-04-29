@@ -1,7 +1,7 @@
 {
-  "date": "2026-04-27",
+  "date": "2026-04-29",
   "day_start_balance": 5010.55983996,
   "trades_today": 0,
   "last_trade_time": {},
-  "dry_run": false
+  "dry_run": true
 }
