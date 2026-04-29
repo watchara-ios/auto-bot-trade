@@ -99,6 +99,14 @@ def notify_error(market: str, message: str):
     )
 
 
+def notify_reconnected(market: str, message: str = "Connection restored"):
+    return notify(
+        f"✅ <b>{market} RECONNECTED</b>\n"
+        f"<code>{_short(message, 500)}</code>\n"
+        f"Time: <code>{datetime.now().strftime('%Y-%m-%d %H:%M:%S')}</code>"
+    )
+
+
 def _fmt(value):
     try:
         return f"{float(value):.6f}".rstrip("0").rstrip(".")

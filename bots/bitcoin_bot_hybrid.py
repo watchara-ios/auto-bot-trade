@@ -7,7 +7,7 @@ import hashlib
 import logging
 from logging.handlers import TimedRotatingFileHandler
 from pathlib import Path
-from datetime import datetime
+from datetime import datetime, timedelta
 from urllib.parse import urlencode
 
 import numpy as np
@@ -18,7 +18,7 @@ from dotenv import load_dotenv
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 from donchian_core import DonchianCoreConfig, latest_signal
 from demo_testcase_logger import log_demo_testcase
-from notifier import notify_bot_started, notify_error, notify_order_opened, notify_order_result
+from notifier import notify_bot_started, notify_error, notify_order_opened, notify_order_result, notify_reconnected
 
 try:
     from openai import OpenAI
@@ -32,18 +32,24 @@ load_dotenv()
 class Config:
     API_KEY = os.getenv("BINANCE_API_KEY") or os.getenv("BINANCE2_API_KEY")
     SECRET = os.getenv("BINANCE_SECRET") or os.getenv("BINANCE2_SECRET")
-    BASE_URL = "https://demo-fapi.binance.com"
+    BASE_URL = os.getenv("BINANCE_BASE_URL", "https://demo-fapi.binance.com").rstrip("/")
 
     # Micro-edge config is validated on BTCUSDT BUY-only. Override with HYBRID_SYMBOLS if needed.
     SYMBOLS = [s.strip().upper() for s in os.getenv("HYBRID_SYMBOLS", "BTCUSDT").split(",") if s.strip()]
     TIMEFRAMES = ("1m", "5m", "15m")
-    KLINE_LIMIT = 1200
+    KLINE_LIMIT = int(os.getenv("HYBRID_KLINE_LIMIT", "600"))
 
     DRY_RUN = os.getenv("HYBRID_DRY_RUN", "true").lower() == "true"
     LEVERAGE = 1
     MARGIN_TYPE = "ISOLATED"
 
-    POLL_SECONDS = 30
+    POLL_SECONDS = int(os.getenv("HYBRID_POLL_SECONDS", "30"))
+    OUTSIDE_SESSION_SLEEP_SECONDS = int(os.getenv("HYBRID_OUTSIDE_SESSION_SLEEP_SECONDS", "300"))
+    CONNECTION_RETRY_SLEEP_SECONDS = int(os.getenv("HYBRID_CONNECTION_RETRY_SLEEP_SECONDS", "20"))
+    DISCONNECT_NOTIFY_COOLDOWN_SECONDS = int(os.getenv("HYBRID_DISCONNECT_NOTIFY_COOLDOWN_SECONDS", "300"))
+    REQUEST_RETRIES = int(os.getenv("HYBRID_REQUEST_RETRIES", "3"))
+    LOG_TIMEFRAME_SUMMARY = os.getenv("HYBRID_LOG_TIMEFRAME_SUMMARY", "false").lower() == "true"
+    ENABLE_DEMO_TESTCASE_LOG = os.getenv("HYBRID_ENABLE_DEMO_TESTCASE_LOG", "false").lower() == "true"
     ENTRY_COOLDOWN = 300
     MAX_OPEN_SYMBOLS = 1
     MAX_TRADES_PER_DAY = 2
@@ -57,7 +63,11 @@ class Config:
     ADX_MIN = 20.0
     ADX_MAX = 30.0
     ALLOWED_SIDE = "BUY"
-    SESSION_HOURS_UTC = (8, 9, 10, 11, 12, 13)
+    SESSION_HOURS_UTC = tuple(
+        int(h.strip())
+        for h in os.getenv("HYBRID_SESSION_HOURS_UTC", "8,9,10,11,12").split(",")
+        if h.strip()
+    )
     ATR_PERCENTILE_MIN = 65.0
     VOLUME_MULT = 1.2
     REQUIRE_ATR_EXPANSION = True
@@ -109,6 +119,7 @@ def warn(msg):
 
 class Binance:
     time_offset = 0
+    _exchange_info_cache = {}
 
     @classmethod
     def sync_time(cls):
@@ -131,28 +142,47 @@ class Binance:
 
     @staticmethod
     def public_get(path, params=None):
-        r = requests.get(f"{Config.BASE_URL}{path}", params=params or {}, timeout=15)
-        r.raise_for_status()
-        return r.json()
+        last_error = None
+        for attempt in range(Config.REQUEST_RETRIES):
+            try:
+                r = requests.get(f"{Config.BASE_URL}{path}", params=params or {}, timeout=15)
+                r.raise_for_status()
+                return r.json()
+            except Exception as e:
+                last_error = e
+                if attempt < Config.REQUEST_RETRIES - 1:
+                    time.sleep(min(2 ** attempt, 5))
+        raise RuntimeError(f"Binance public request failed {path}: {last_error}")
 
     @staticmethod
     def signed(method, path, params=None):
-        params = params or {}
-        params["timestamp"] = int(time.time() * 1000) + Binance.time_offset
-        params["recvWindow"] = 10000
-        url = f"{Config.BASE_URL}{path}?{Binance.sign(params)}"
-        if method == "GET":
-            r = requests.get(url, headers=Binance.headers(), timeout=15)
-        elif method == "POST":
-            r = requests.post(url, headers=Binance.headers(), timeout=15)
-        elif method == "DELETE":
-            r = requests.delete(url, headers=Binance.headers(), timeout=15)
-        else:
-            raise ValueError(method)
-        data = r.json()
-        if r.status_code >= 400:
-            raise RuntimeError(f"Binance error {r.status_code}: {data}")
-        return data
+        base_params = dict(params or {})
+        last_error = None
+        for attempt in range(Config.REQUEST_RETRIES):
+            try:
+                signed_params = dict(base_params)
+                signed_params["timestamp"] = int(time.time() * 1000) + Binance.time_offset
+                signed_params["recvWindow"] = 10000
+                url = f"{Config.BASE_URL}{path}?{Binance.sign(signed_params)}"
+                if method == "GET":
+                    r = requests.get(url, headers=Binance.headers(), timeout=15)
+                elif method == "POST":
+                    r = requests.post(url, headers=Binance.headers(), timeout=15)
+                elif method == "DELETE":
+                    r = requests.delete(url, headers=Binance.headers(), timeout=15)
+                else:
+                    raise ValueError(method)
+                data = r.json()
+                if r.status_code >= 400:
+                    raise RuntimeError(f"Binance error {r.status_code}: {data}")
+                return data
+            except Exception as e:
+                last_error = e
+                if "-1021" in str(e):
+                    Binance.sync_time()
+                if attempt < Config.REQUEST_RETRIES - 1:
+                    time.sleep(min(2 ** attempt, 5))
+        raise RuntimeError(f"Binance signed request failed {path}: {last_error}")
 
     @staticmethod
     def get_klines(symbol, interval, limit=250):
@@ -215,9 +245,12 @@ class Binance:
 
     @staticmethod
     def exchange_info(symbol):
+        if symbol in Binance._exchange_info_cache:
+            return Binance._exchange_info_cache[symbol]
         data = Binance.public_get("/fapi/v1/exchangeInfo")
         for item in data["symbols"]:
             if item["symbol"] == symbol:
+                Binance._exchange_info_cache[symbol] = item
                 return item
         raise RuntimeError(f"Symbol not found: {symbol}")
 
@@ -333,7 +366,7 @@ def prepare(df):
 
 
 def fetch_market(symbol):
-    return {tf: prepare(Binance.get_klines(symbol, tf, Config.KLINE_LIMIT)) for tf in Config.TIMEFRAMES}
+    return {tf: Binance.get_klines(symbol, tf, Config.KLINE_LIMIT) for tf in Config.TIMEFRAMES}
 
 
 def last_closed(df):
@@ -345,9 +378,11 @@ def previous(df):
 
 
 def summarize_timeframes(symbol, market):
+    if not Config.LOG_TIMEFRAME_SUMMARY:
+        return
     parts = []
     for tf in Config.TIMEFRAMES:
-        row = last_closed(market[tf])
+        row = last_closed(prepare(market[tf]))
         trend = "UP" if row.close > row.ema20 else "DOWN" if row.close < row.ema20 else "FLAT"
         parts.append(
             f"{tf} close={row.close:.2f} ema20={row.ema20:.2f} ema50={row.ema50:.2f} "
@@ -437,6 +472,12 @@ def generate_signal(symbol, market):
     )
 
 
+def maybe_log_demo_testcase(*args, **kwargs):
+    if not Config.ENABLE_DEMO_TESTCASE_LOG:
+        return
+    log_demo_testcase(*args, **kwargs)
+
+
 def core_config():
     return DonchianCoreConfig(
         allowed_side=Config.ALLOWED_SIDE,
@@ -461,8 +502,8 @@ def ai_validate(signal, market):
         return True, "strong technical score"
     try:
         client = OpenAI(api_key=Config.DEEPSEEK_KEY, base_url="https://api.deepseek.com/v1")
-        row_5m = last_closed(market["5m"])
-        row_15m = last_closed(market["15m"])
+        row_5m = last_closed(prepare(market["5m"]))
+        row_15m = last_closed(prepare(market["15m"]))
         prompt = f"""Validate this crypto futures setup. Return strict JSON only.
 Symbol: {signal['symbol']}
 Side: {signal['side']}
@@ -566,11 +607,12 @@ def quantity_for_signal(symbol, balance, signal):
     return round_qty(symbol, qty)
 
 
-def account_snapshot(balance):
+def account_snapshot(balance, positions_by_symbol=None):
+    positions_by_symbol = positions_by_symbol or get_positions_by_symbol()
     open_symbols = []
     exposure = 0.0
     for symbol in Config.SYMBOLS:
-        pos = Binance.position(symbol)
+        pos = positions_by_symbol.get(symbol, {"amount": 0.0, "entry": 0.0, "mark": 0.0})
         amt = abs(pos["amount"])
         if amt > 0:
             open_symbols.append(symbol)
@@ -578,7 +620,7 @@ def account_snapshot(balance):
     return open_symbols, exposure
 
 
-def can_open_new(state, balance):
+def can_open_new(state, balance, positions_by_symbol=None):
     day_start = float(state.get("day_start_balance") or balance)
     daily_ret = (balance - day_start) / day_start if day_start else 0.0
     if daily_ret <= -Config.MAX_DAILY_LOSS_PCT:
@@ -587,7 +629,7 @@ def can_open_new(state, balance):
         return False, f"daily profit target reached {daily_ret:.2%}"
     if state.get("trades_today", 0) >= Config.MAX_TRADES_PER_DAY:
         return False, "max trades per day reached"
-    open_symbols, exposure = account_snapshot(balance)
+    open_symbols, exposure = account_snapshot(balance, positions_by_symbol)
     if len(open_symbols) >= Config.MAX_OPEN_SYMBOLS:
         return False, f"max open symbols {len(open_symbols)}/{Config.MAX_OPEN_SYMBOLS}"
     if exposure >= Config.MAX_TOTAL_EXPOSURE_PCT:
@@ -600,6 +642,78 @@ def daily_return_pct(state, balance):
     if day_start <= 0:
         return 0.0
     return (balance - day_start) / day_start * 100
+
+
+def utc_now():
+    return datetime.utcnow()
+
+
+def entry_session_active(now=None):
+    now = now or utc_now()
+    return now.hour in Config.SESSION_HOURS_UTC
+
+
+def seconds_until_next_entry_session(now=None):
+    now = now or utc_now()
+    if entry_session_active(now):
+        return 0
+    allowed_hours = sorted(Config.SESSION_HOURS_UTC)
+    if not allowed_hours:
+        return Config.OUTSIDE_SESSION_SLEEP_SECONDS
+    for hour in allowed_hours:
+        candidate = now.replace(hour=hour, minute=0, second=0, microsecond=0)
+        if candidate > now:
+            return max(1, int((candidate - now).total_seconds()))
+    tomorrow = now.date() + timedelta(days=1)
+    candidate = datetime.combine(tomorrow, datetime.min.time()).replace(hour=allowed_hours[0])
+    return max(1, int((candidate - now).total_seconds()))
+
+
+def get_positions_by_symbol():
+    positions = {}
+    for p in Binance.positions():
+        symbol = p.get("symbol")
+        if symbol:
+            positions[symbol] = {
+                "amount": float(p.get("positionAmt", 0)),
+                "entry": float(p.get("entryPrice", 0)),
+                "mark": float(p.get("markPrice", 0)),
+                "raw": p,
+            }
+    return positions
+
+
+def active_positions(positions_by_symbol):
+    return {
+        symbol: pos
+        for symbol, pos in positions_by_symbol.items()
+        if symbol in Config.SYMBOLS and abs(pos.get("amount", 0)) > 0
+    }
+
+
+def mark_loop_connected(state):
+    if state.get("connection_down"):
+        notify_reconnected("BINANCE", "Main loop recovered and Binance API responded")
+        log("✅ Binance connection recovered")
+        state["connection_down"] = False
+        state["last_disconnect_notify"] = 0
+        save_state(state)
+        return
+    state["connection_down"] = False
+    state["last_disconnect_notify"] = 0
+
+
+def mark_loop_disconnected(state, error):
+    now = time.time()
+    should_notify = (
+        not state.get("connection_down")
+        or now - float(state.get("last_disconnect_notify") or 0) >= Config.DISCONNECT_NOTIFY_COOLDOWN_SECONDS
+    )
+    state["connection_down"] = True
+    if should_notify:
+        notify_error("BINANCE", f"Disconnected / loop error: {error}")
+        state["last_disconnect_notify"] = now
+    save_state(state)
 
 
 def ensure_protection(symbol, pos, market):
@@ -626,7 +740,8 @@ def ensure_protection(symbol, pos, market):
     entry = pos["entry"] or pos["mark"] or row_5m.close
     side = "BUY" if pos["amount"] > 0 else "SELL"
     exit_side = "SELL" if side == "BUY" else "BUY"
-    atr_val = float(row_5m.atr) if not pd.isna(row_5m.atr) else entry * 0.003
+    atr_series = atr(market["5m"])
+    atr_val = float(atr_series.iloc[-2]) if len(atr_series) >= 2 and not pd.isna(atr_series.iloc[-2]) else entry * 0.003
     if side == "BUY":
         sl = entry - atr_val * Config.SL_ATR
         tp = entry + atr_val * Config.TP_ATR_NORMAL
@@ -657,7 +772,7 @@ def cleanup_orphan_orders(symbol):
         warn(f"🧹 {symbol} orphan order cleanup failed: {e}")
 
 
-def execute_signal(signal, balance, state):
+def execute_signal(signal, balance, state, market):
     symbol = signal["symbol"]
     pos = Binance.position(symbol)
     if abs(pos["amount"]) > 0:
@@ -673,7 +788,7 @@ def execute_signal(signal, balance, state):
         log(f"⏸️ {symbol} skip entry: qty too small")
         return
 
-    allowed, reason = ai_validate(signal, fetch_market(symbol))
+    allowed, reason = ai_validate(signal, market)
     if not allowed:
         log(f"🧠 {symbol} AI blocked signal: {reason}")
         return
@@ -741,7 +856,12 @@ def main():
         f"strategy=MicroEdge Donchian{Config.DONCHIAN_N} {Config.ALLOWED_SIDE} "
         f"ADX {Config.ADX_MIN:g}-{Config.ADX_MAX:g} ATRpct>={Config.ATR_PERCENTILE_MIN:g} "
         f"UTC={','.join(map(str, Config.SESSION_HOURS_UTC))} RR=1:{Config.RR:g} | "
-        f"symbols={','.join(Config.SYMBOLS)}"
+        f"symbols={','.join(Config.SYMBOLS)} | base_url={Config.BASE_URL}"
+    )
+    log(
+        f"⚡ Fast mode: kline_limit={Config.KLINE_LIMIT}, poll={Config.POLL_SECONDS}s, "
+        f"outside_session_sleep={Config.OUTSIDE_SESSION_SLEEP_SECONDS}s, "
+        f"summary_log={Config.LOG_TIMEFRAME_SUMMARY}, testcase_log={Config.ENABLE_DEMO_TESTCASE_LOG}"
     )
     log("═" * 64)
     notify_bot_started(
@@ -756,13 +876,28 @@ def main():
         try:
             balance = Binance.balance()
             reset_day(state, balance)
+            positions_by_symbol = get_positions_by_symbol()
+            mark_loop_connected(state)
             daily_ret = daily_return_pct(state, balance)
+            session_active = entry_session_active()
+            open_positions = active_positions(positions_by_symbol)
             log(
                 f"📊 Balance={balance:.2f} | daily={daily_ret:.2f}%/"
-                f"{Config.DAILY_PROFIT_TARGET_PCT*100:.0f}% | trades_today={state.get('trades_today', 0)}"
+                f"{Config.DAILY_PROFIT_TARGET_PCT*100:.0f}% | trades_today={state.get('trades_today', 0)} | "
+                f"session_active={session_active}"
             )
 
-            open_allowed, open_reason = can_open_new(state, balance)
+            if not session_active and not open_positions:
+                sleep_for = min(Config.OUTSIDE_SESSION_SLEEP_SECONDS, seconds_until_next_entry_session())
+                log(f"🌙 Outside entry session and no open position; sleeping {sleep_for}s")
+                save_state(state)
+                time.sleep(sleep_for)
+                continue
+
+            open_allowed, open_reason = can_open_new(state, balance, positions_by_symbol)
+            if not session_active:
+                open_allowed = False
+                open_reason = "outside entry session"
             if not open_allowed:
                 log(f"🚦 New entries paused: {open_reason}. Existing positions still managed.")
 
@@ -771,9 +906,9 @@ def main():
                 market = fetch_market(symbol)
                 summarize_timeframes(symbol, market)
 
-                pos = Binance.position(symbol)
+                pos = positions_by_symbol.get(symbol, {"amount": 0.0, "entry": 0.0, "mark": 0.0, "raw": None})
                 if abs(pos["amount"]) > 0:
-                    log_demo_testcase(
+                    maybe_log_demo_testcase(
                         "bitcoin_demo",
                         symbol,
                         market["1m"],
@@ -790,7 +925,7 @@ def main():
 
                 if not open_allowed:
                     block = "DAILY_TRADE_LIMIT" if "max trades" in open_reason else "RISK_LIMIT"
-                    log_demo_testcase(
+                    maybe_log_demo_testcase(
                         "bitcoin_demo",
                         symbol,
                         market["1m"],
@@ -802,22 +937,24 @@ def main():
                     )
                     continue
 
-                log_demo_testcase("bitcoin_demo", symbol, market["1m"], market["5m"], market["15m"], core_config())
+                maybe_log_demo_testcase("bitcoin_demo", symbol, market["1m"], market["5m"], market["15m"], core_config())
                 signal, reason = generate_signal(symbol, market)
                 if not signal:
                     log(f"⏸️ {symbol} no entry: {reason}")
                     continue
                 log(f"✅ {symbol} {reason}")
-                execute_signal(signal, balance, state)
+                execute_signal(signal, balance, state, market)
 
         except KeyboardInterrupt:
             warn("🛑 Bot stopped by user")
             break
         except Exception as e:
             warn(f"💥 Loop error: {e}")
-            notify_error("BINANCE", str(e))
+            mark_loop_disconnected(state, e)
             if "-1021" in str(e):
                 Binance.sync_time()
+            time.sleep(Config.CONNECTION_RETRY_SLEEP_SECONDS)
+            continue
 
         time.sleep(Config.POLL_SECONDS)
 
