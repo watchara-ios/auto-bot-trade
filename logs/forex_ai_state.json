@@ -1,0 +1,108 @@
+{
+  "last_scan_date": "2026-04-29",
+  "last_scan_at": "2026-04-29 14:00:15",
+  "last_recommendations": [
+    {
+      "symbol": "EURUSD",
+      "rating": 1,
+      "reason": "London-NY overlap bullish breakout; 1H trendline support holds."
+    },
+    {
+      "symbol": "GBPUSD",
+      "rating": 2,
+      "reason": "Consolidating near 1.2650; UK data risk within 2 hours."
+    },
+    {
+      "symbol": "USDJPY",
+      "rating": 3,
+      "reason": "Range-bound in 151-152 zone; low volatility expected."
+    },
+    {
+      "symbol": "XAUUSD",
+      "rating": 2,
+      "reason": "Safe-haven demand amid geopolitical uncertainty; 4H uptrend."
+    },
+    {
+      "symbol": "EURJPY",
+      "rating": 3,
+      "reason": "Correlated moves; waiting for clearer signal from EURUSD."
+    }
+  ],
+  "candidate_universe": [
+    "EURUSD",
+    "GBPUSD",
+    "USDJPY",
+    "USDCHF",
+    "USDCAD",
+    "AUDUSD",
+    "NZDUSD",
+    "EURJPY",
+    "GBPJPY",
+    "XAUUSD",
+    "EURGBP",
+    "EURCHF",
+    "EURCAD",
+    "EURAUD",
+    "EURNZD",
+    "GBPCHF",
+    "GBPCAD",
+    "GBPAUD",
+    "GBPNZD",
+    "AUDJPY",
+    "CADJPY",
+    "CHFJPY",
+    "NZDJPY",
+    "AUDCAD",
+    "AUDCHF",
+    "AUDNZD",
+    "CADCHF",
+    "NZDCAD",
+    "NZDCHF"
+  ],
+  "candidate_symbols": [
+    "EURUSD",
+    "GBPUSD",
+    "XAUUSD",
+    "USDJPY",
+    "EURJPY"
+  ],
+  "candidate_recommendations": [
+    {
+      "symbol": "EURUSD",
+      "rating": 1,
+      "reason": "London-NY overlap bullish breakout; 1H trendline support holds.",
+      "source_symbol": "EURUSD"
+    },
+    {
+      "symbol": "GBPUSD",
+      "rating": 2,
+      "reason": "Consolidating near 1.2650; UK data risk within 2 hours.",
+      "source_symbol": "GBPUSD"
+    },
+    {
+      "symbol": "XAUUSD",
+      "rating": 2,
+      "reason": "Safe-haven demand amid geopolitical uncertainty; 4H uptrend.",
+      "source_symbol": "XAUUSD"
+    },
+    {
+      "symbol": "USDJPY",
+      "rating": 3,
+      "reason": "Range-bound in 151-152 zone; low volatility expected.",
+      "source_symbol": "USDJPY"
+    },
+    {
+      "symbol": "EURJPY",
+      "rating": 3,
+      "reason": "Correlated moves; waiting for clearer signal from EURUSD.",
+      "source_symbol": "EURJPY"
+    }
+  ],
+  "selected_symbol": "EURUSD",
+  "selected_recommendation": {
+    "symbol": "EURUSD",
+    "rating": 1,
+    "reason": "London-NY overlap bullish breakout; 1H trendline support holds.",
+    "source_symbol": "EURUSD"
+  }
+}
