@@ -276,6 +276,29 @@ def reconnect_mt5(state, error):
     print(f"[{datetime.now()}] ✅ MT5 reconnected", flush=True)
 
 
+def notify_forex_started():
+    extra = (
+        f"Symbol: <code>{SYMBOL}</code>\n"
+        f"Session: <code>{TRADE_START_HOUR}:00-{TRADE_END_HOUR}:59</code>\n"
+        f"Interval: <code>{CHECK_INTERVAL_SECONDS}s</code>\n"
+        f"AI scan: <code>{AI_DAILY_SCAN_ENABLED}</code>\n"
+        f"Require AI watchlist: <code>{REQUIRE_AI_WATCHLIST}</code>"
+    )
+    sent = notify_bot_started(
+        "Forex Donchian Bot",
+        "DRY_RUN" if DRY_RUN else "LIVE/DEMO",
+        extra,
+    )
+    if sent:
+        print(f"[{datetime.now()}] ✅ Telegram startup notification sent", flush=True)
+    else:
+        print(
+            f"[{datetime.now()}] ⏳ Telegram startup notification skipped "
+            "(missing TELEGRAM_BOT_TOKEN/TELEGRAM_CHAT_ID or send failed)",
+            flush=True,
+        )
+
+
 def select_trading_symbol(preferred_symbol, reason=""):
     global SYMBOL
 
@@ -1014,12 +1037,12 @@ def run_bot():
         f"interval={CHECK_INTERVAL_SECONDS}s | DRY_RUN={DRY_RUN}",
         flush=True,
     )
-    connect_mt5()
-    notify_bot_started(
-        "Forex Donchian Bot",
-        "DRY_RUN" if DRY_RUN else "LIVE/DEMO",
-        f"Session: <code>{TRADE_START_HOUR}:00-{TRADE_END_HOUR}:59</code>",
-    )
+    try:
+        connect_mt5()
+    except Exception as e:
+        notify_error("FOREX", f"Startup failed before MT5 connection: {e}")
+        raise
+    notify_forex_started()
 
     last_entry_candle_time = {}
     runtime_state = {
