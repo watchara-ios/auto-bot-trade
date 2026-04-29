@@ -1,8 +1,6 @@
 {
   "balance": 982.59354703125,
-  "processed_m5": {
-    "BTCUSDT": "2025-04-30 21:45:00"
-  },
+  "processed_m5": "2026-04-29 06:15:00",
   "open_trade": null,
   "closed_signal_ids": [
     "BTCUSDT-2025-04-27T21:40:00-BUY",
