@@ -7534,3 +7534,11 @@ SIGNAL: {'time': Timestamp('2026-04-29 14:20:00'), 'symbol': 'EURJPY', 'side': '
 [2026-04-29 18:56:35.159465] [ERROR] USDJPY analysis error: Cannot load MT5 symbols: (-10001, 'IPC send failed')
 [2026-04-29 18:56:35.159546] [ERROR] EURJPY analysis error: Cannot load MT5 symbols: (-10001, 'IPC send failed')
 [2026-04-29 18:56:35.159616] [WAIT] No order from AI watchlist this round
+[2026-04-29 18:57:35.161071] [AI] Using cached daily forex scan from 2026-04-29 14:00:15 | symbols=EURUSD, GBPUSD, XAUUSD, USDJPY, EURJPY
+[2026-04-29 18:57:35.161542] [WATCHLIST] AI watchlist scan: EURUSD, GBPUSD, XAUUSD, USDJPY, EURJPY
+[2026-04-29 18:57:35.161631] [ERROR] EURUSD analysis error: Cannot load MT5 symbols: (-10001, 'IPC send failed')
+[2026-04-29 18:57:35.161708] [ERROR] GBPUSD analysis error: Cannot load MT5 symbols: (-10001, 'IPC send failed')
+[2026-04-29 18:57:35.161780] [ERROR] XAUUSD analysis error: Cannot load MT5 symbols: (-10001, 'IPC send failed')
+[2026-04-29 18:57:35.161912] [ERROR] USDJPY analysis error: Cannot load MT5 symbols: (-10001, 'IPC send failed')
+[2026-04-29 18:57:35.161986] [ERROR] EURJPY analysis error: Cannot load MT5 symbols: (-10001, 'IPC send failed')
+[2026-04-29 18:57:35.162032] [WAIT] No order from AI watchlist this round
