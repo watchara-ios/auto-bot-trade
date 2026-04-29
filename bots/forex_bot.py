@@ -513,6 +513,8 @@ def pass_daily_risk_filter():
     account = mt5.account_info()
     if account is None:
         return False, "No account info"
+    if float(account.balance) <= 0:
+        return False, f"Invalid account balance: {account.balance}"
 
     today_orders = get_today_orders_count()
     today_profit = get_today_profit()
@@ -522,10 +524,15 @@ def pass_daily_risk_filter():
     if today_orders >= MAX_TRADES_PER_DAY:
         return False, f"Max trades reached: {today_orders}/{MAX_TRADES_PER_DAY}"
 
-    if today_profit <= -max_loss_money:
-        return False, f"Daily loss limit reached: {today_profit:.2f}"
+    # A flat PnL of 0.00 must be allowed. The previous <= comparison
+    # blocked trading when max_loss_money was 0 or rounded near 0.
+    if today_profit < -max_loss_money:
+        return False, (
+            f"Daily loss limit reached: pnl={today_profit:.2f} "
+            f"limit=-{max_loss_money:.2f}"
+        )
 
-    return True, "Daily risk OK"
+    return True, f"Daily risk OK: pnl={today_profit:.2f} limit=-{max_loss_money:.2f}"
 
 
 # =========================================================
