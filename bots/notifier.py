@@ -6,12 +6,22 @@ import requests
 
 class TelegramNotifier:
     def __init__(self):
+        self.token = None
+        self.chat_id = None
+        self.enabled = False
+        self.last_error = ""
+        self.refresh()
+
+    def refresh(self):
         self.token = os.getenv("TELEGRAM_BOT_TOKEN")
         self.chat_id = os.getenv("TELEGRAM_CHAT_ID")
         self.enabled = bool(self.token and self.chat_id)
 
     def send(self, message: str) -> bool:
+        self.refresh()
+        self.last_error = ""
         if not self.enabled:
+            self.last_error = "missing TELEGRAM_BOT_TOKEN or TELEGRAM_CHAT_ID"
             return False
         try:
             resp = requests.post(
@@ -24,8 +34,12 @@ class TelegramNotifier:
                 },
                 timeout=10,
             )
-            return resp.status_code == 200 and resp.json().get("ok", False)
-        except Exception:
+            ok = resp.status_code == 200 and resp.json().get("ok", False)
+            if not ok:
+                self.last_error = f"telegram http={resp.status_code} body={_short(resp.text, 500)}"
+            return ok
+        except Exception as e:
+            self.last_error = str(e)
             return False
 
 
@@ -34,6 +48,10 @@ notifier = TelegramNotifier()
 
 def notify(message: str) -> bool:
     return notifier.send(message)
+
+
+def notify_last_error() -> str:
+    return notifier.last_error
 
 
 def notify_bot_started(name: str, mode: str, extra: str = ""):

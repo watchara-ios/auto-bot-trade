@@ -45,11 +45,13 @@ def print(*args, **kwargs):
     builtins.print(*[_log_safe(arg) for arg in args], **kwargs)
 
 
-sys.path.insert(0, str(Path(__file__).resolve().parent))
+BOT_DIR = Path(__file__).resolve().parent
+PROJECT_ROOT = BOT_DIR.parent
+sys.path.insert(0, str(BOT_DIR))
 from donchian_core import DonchianCoreConfig, latest_signal
 from demo_testcase_logger import log_demo_testcase
 from notifier import notify_bot_started, notify_error, notify_order_opened, notify_order_result
-from notifier import notify_reconnected
+from notifier import notify_last_error, notify_reconnected
 
 try:
     from dotenv import load_dotenv
@@ -62,7 +64,8 @@ except ImportError:
     OpenAI = None
 
 if load_dotenv:
-    load_dotenv()
+    env_path = PROJECT_ROOT / ".env"
+    load_dotenv(env_path if env_path.exists() else None)
 
 
 # =========================================================
@@ -295,7 +298,7 @@ def notify_forex_started(phase="READY"):
     else:
         print(
             f"[{datetime.now()}] ⏳ Telegram startup notification skipped "
-            "(missing TELEGRAM_BOT_TOKEN/TELEGRAM_CHAT_ID or send failed)",
+            f"({notify_last_error() or 'send failed'})",
             flush=True,
         )
 
