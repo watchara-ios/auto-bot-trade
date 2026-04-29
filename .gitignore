@@ -1,0 +1,16 @@
+.DS_Store
+__pycache__/
+*.py[cod]
+
+# Local secrets and runtime state. Existing tracked files are left untouched.
+.env.local
+*.log
+logs/*.bak_*
+
+# Large downloaded market data and generated reports.
+data/*_2022_2025_*.csv
+data/ethereum_*.csv
+data/solana_*.csv
+reports/realistic_donchian/
+reports/pullback_structure/
+reports/liquidity_sweep_reclaim/

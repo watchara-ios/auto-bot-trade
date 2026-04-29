@@ -34,7 +34,8 @@ class Config:
     SECRET = os.getenv("BINANCE_SECRET") or os.getenv("BINANCE2_SECRET")
     BASE_URL = "https://demo-fapi.binance.com"
 
-    SYMBOLS = ["BTCUSDT", "ETHUSDT", "SOLUSDT"]
+    # Micro-edge config is validated on BTCUSDT BUY-only. Override with HYBRID_SYMBOLS if needed.
+    SYMBOLS = [s.strip().upper() for s in os.getenv("HYBRID_SYMBOLS", "BTCUSDT").split(",") if s.strip()]
     TIMEFRAMES = ("1m", "5m", "15m")
     KLINE_LIMIT = 1200
 
@@ -54,6 +55,13 @@ class Config:
     RR = 2.0
     DONCHIAN_N = 20
     ADX_MIN = 20.0
+    ADX_MAX = 30.0
+    ALLOWED_SIDE = "BUY"
+    SESSION_HOURS_UTC = (8, 9, 10, 11, 12, 13)
+    ATR_PERCENTILE_MIN = 65.0
+    VOLUME_MULT = 1.2
+    REQUIRE_ATR_EXPANSION = True
+    ATR_EXPANSION_PERIOD = 50
 
     SL_ATR = 1.0
     TP_ATR_NORMAL = SL_ATR * RR
@@ -414,19 +422,12 @@ def impulse_side(df_5m, df_15m, df_1h):
 
 
 def generate_signal(symbol, market):
-    core_config = DonchianCoreConfig(
-        tier_a_risk=Config.TIER_A_RISK,
-        tier_b_risk=Config.TIER_B_RISK,
-        rr=Config.RR,
-        donchian_n=Config.DONCHIAN_N,
-        adx_min=Config.ADX_MIN,
-    )
     signal, reason, _ = latest_signal(
         symbol,
         market["1m"],
         market["5m"],
         market["15m"],
-        core_config,
+        core_config(),
     )
     if not signal:
         return None, reason
@@ -438,11 +439,18 @@ def generate_signal(symbol, market):
 
 def core_config():
     return DonchianCoreConfig(
+        allowed_side=Config.ALLOWED_SIDE,
         tier_a_risk=Config.TIER_A_RISK,
         tier_b_risk=Config.TIER_B_RISK,
         rr=Config.RR,
         donchian_n=Config.DONCHIAN_N,
         adx_min=Config.ADX_MIN,
+        adx_max=Config.ADX_MAX,
+        session_hours_utc=Config.SESSION_HOURS_UTC,
+        atr_percentile_min=Config.ATR_PERCENTILE_MIN,
+        volume_mult=Config.VOLUME_MULT,
+        require_atr_expansion=Config.REQUIRE_ATR_EXPANSION,
+        atr_expansion_period=Config.ATR_EXPANSION_PERIOD,
     )
 
 
@@ -730,7 +738,10 @@ def main():
     log("🤖 Hybrid Donchian BTC/ETH/SOL bot started")
     log(
         f"🧪 DRY_RUN={Config.DRY_RUN} | 🧠 AI_VALIDATOR={Config.USE_AI_VALIDATOR} | "
-        f"strategy=Donchian{Config.DONCHIAN_N}+M15 ADX/BOS RR=1:{Config.RR:g} | symbols={','.join(Config.SYMBOLS)}"
+        f"strategy=MicroEdge Donchian{Config.DONCHIAN_N} {Config.ALLOWED_SIDE} "
+        f"ADX {Config.ADX_MIN:g}-{Config.ADX_MAX:g} ATRpct>={Config.ATR_PERCENTILE_MIN:g} "
+        f"UTC={','.join(map(str, Config.SESSION_HOURS_UTC))} RR=1:{Config.RR:g} | "
+        f"symbols={','.join(Config.SYMBOLS)}"
     )
     log("═" * 64)
     notify_bot_started(
