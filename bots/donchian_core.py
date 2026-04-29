@@ -14,11 +14,18 @@ import backtest_multi_tf_lorentzian_andean as bt
 
 @dataclass
 class DonchianCoreConfig:
+    allowed_side: str = ""
     ema_fast: int = 50
     ema_slow: int = 200
     donchian_n: int = 20
     adx_min: float = 20.0
+    adx_max: Optional[float] = None
     require_adx_rising: bool = True
+    session_hours_utc: tuple[int, ...] = ()
+    atr_percentile_min: Optional[float] = None
+    volume_mult: float = 0.0
+    require_atr_expansion: bool = False
+    atr_expansion_period: int = 50
     swing_lookback: int = 8
     rr: float = 2.0
     tier_a_risk: float = 0.0025
@@ -80,6 +87,10 @@ def prepare_timeframes(m1: pd.DataFrame, m5: pd.DataFrame, m15: pd.DataFrame, co
     m5 = bt.align_timeframes(m5, m15)
     m5["m15_ema_fast"] = m15["ema_fast"].shift(1).reindex(m5.index, method="ffill")
     m5["m15_ema_slow"] = m15["ema_slow"].shift(1).reindex(m5.index, method="ffill")
+    m5["atr_percentile_100"] = m5["atr"].rolling(100).apply(
+        lambda values: pd.Series(values).rank(pct=True).iloc[-1] * 100,
+        raw=False,
+    )
     return m1, m5, cfg
 
 
@@ -164,6 +175,30 @@ def signal_from_closed_row(symbol: str, row: pd.Series, cfg: bt.Config) -> tuple
     }, "signal"
 
 
+def apply_micro_edge_filters(row: pd.Series, side: str, config: DonchianCoreConfig) -> Optional[str]:
+    if config.allowed_side and side != config.allowed_side:
+        return f"side blocked allowed={config.allowed_side} got={side}"
+    if config.session_hours_utc and row.name.hour not in config.session_hours_utc:
+        return "outside 08-13 UTC session"
+    adx = float(row.get("m15_adx", 0) or 0)
+    if config.adx_max is not None and adx >= config.adx_max:
+        return f"M15 ADX too high {adx:.2f} >= {config.adx_max}"
+    atr_pctile = row.get("atr_percentile_100", np.nan)
+    if config.atr_percentile_min is not None:
+        if pd.isna(atr_pctile) or atr_pctile < config.atr_percentile_min:
+            return f"ATR percentile below {config.atr_percentile_min:g}: {atr_pctile:.1f}"
+    volume_ratio = row.get("volume_ratio", np.nan)
+    if config.volume_mult > 0:
+        if pd.isna(volume_ratio) or volume_ratio < config.volume_mult:
+            return f"volume ratio below {config.volume_mult:g}: {volume_ratio:.2f}"
+    if config.require_atr_expansion:
+        expansion_col = f"atr_expansion_{config.atr_expansion_period}"
+        expansion = row.get(expansion_col, np.nan)
+        if pd.isna(expansion) or expansion <= 1.0:
+            return f"ATR not expanding {expansion_col}={expansion:.2f}"
+    return None
+
+
 def add_entry_sl_tp(signal: dict, row: pd.Series, entry: float, rr: float) -> dict:
     atr_value = float(row["atr"])
     if signal["side"] == "BUY":
@@ -192,6 +227,9 @@ def latest_signal(symbol: str, m1: pd.DataFrame, m5: pd.DataFrame, m15: pd.DataF
     signal, reason = signal_from_closed_row(symbol, row, cfg)
     if signal is None:
         return None, reason, row_time
+    block_reason = apply_micro_edge_filters(row, signal["side"], config)
+    if block_reason:
+        return None, block_reason, row_time
 
     entry_time, entry = bt.confirm_m1(m1_ready, signal_time, signal["side"], cfg)
     if entry_time is None:
