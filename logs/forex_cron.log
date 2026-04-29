@@ -7542,3 +7542,408 @@ SIGNAL: {'time': Timestamp('2026-04-29 14:20:00'), 'symbol': 'EURJPY', 'side': '
 [2026-04-29 18:57:35.161912] [ERROR] USDJPY analysis error: Cannot load MT5 symbols: (-10001, 'IPC send failed')
 [2026-04-29 18:57:35.161986] [ERROR] EURJPY analysis error: Cannot load MT5 symbols: (-10001, 'IPC send failed')
 [2026-04-29 18:57:35.162032] [WAIT] No order from AI watchlist this round
+[2026-04-29 18:58:35.163552] [AI] Using cached daily forex scan from 2026-04-29 14:00:15 | symbols=EURUSD, GBPUSD, XAUUSD, USDJPY, EURJPY
+[2026-04-29 18:58:35.164044] [WATCHLIST] AI watchlist scan: EURUSD, GBPUSD, XAUUSD, USDJPY, EURJPY
+[2026-04-29 18:58:35.164160] [ERROR] EURUSD analysis error: Cannot load MT5 symbols: (-10001, 'IPC send failed')
+[2026-04-29 18:58:35.164239] [ERROR] GBPUSD analysis error: Cannot load MT5 symbols: (-10001, 'IPC send failed')
+[2026-04-29 18:58:35.164322] [ERROR] XAUUSD analysis error: Cannot load MT5 symbols: (-10001, 'IPC send failed')
+[2026-04-29 18:58:35.164599] [ERROR] USDJPY analysis error: Cannot load MT5 symbols: (-10001, 'IPC send failed')
+[2026-04-29 18:58:35.164657] [ERROR] EURJPY analysis error: Cannot load MT5 symbols: (-10001, 'IPC send failed')
+[2026-04-29 18:58:35.164699] [WAIT] No order from AI watchlist this round
+[2026-04-29 18:59:35.166052] [AI] Using cached daily forex scan from 2026-04-29 14:00:15 | symbols=EURUSD, GBPUSD, XAUUSD, USDJPY, EURJPY
+[2026-04-29 18:59:35.166692] [WATCHLIST] AI watchlist scan: EURUSD, GBPUSD, XAUUSD, USDJPY, EURJPY
+[2026-04-29 18:59:35.166834] [ERROR] EURUSD analysis error: Cannot load MT5 symbols: (-10001, 'IPC send failed')
+[2026-04-29 18:59:35.166955] [ERROR] GBPUSD analysis error: Cannot load MT5 symbols: (-10001, 'IPC send failed')
+[2026-04-29 18:59:35.167047] [ERROR] XAUUSD analysis error: Cannot load MT5 symbols: (-10001, 'IPC send failed')
+[2026-04-29 18:59:35.167114] [ERROR] USDJPY analysis error: Cannot load MT5 symbols: (-10001, 'IPC send failed')
+[2026-04-29 18:59:35.167177] [ERROR] EURJPY analysis error: Cannot load MT5 symbols: (-10001, 'IPC send failed')
+[2026-04-29 18:59:35.167223] [WAIT] No order from AI watchlist this round
+[2026-04-29 19:00:35.168735] [AI] Using cached daily forex scan from 2026-04-29 14:00:15 | symbols=EURUSD, GBPUSD, XAUUSD, USDJPY, EURJPY
+[2026-04-29 19:00:35.169128] [WATCHLIST] AI watchlist scan: EURUSD, GBPUSD, XAUUSD, USDJPY, EURJPY
+[2026-04-29 19:00:35.169214] [ERROR] EURUSD analysis error: Cannot load MT5 symbols: (-10001, 'IPC send failed')
+[2026-04-29 19:00:35.169284] [ERROR] GBPUSD analysis error: Cannot load MT5 symbols: (-10001, 'IPC send failed')
+[2026-04-29 19:00:35.169357] [ERROR] XAUUSD analysis error: Cannot load MT5 symbols: (-10001, 'IPC send failed')
+[2026-04-29 19:00:35.169469] [ERROR] USDJPY analysis error: Cannot load MT5 symbols: (-10001, 'IPC send failed')
+[2026-04-29 19:00:35.169533] [ERROR] EURJPY analysis error: Cannot load MT5 symbols: (-10001, 'IPC send failed')
+[2026-04-29 19:00:35.169575] [WAIT] No order from AI watchlist this round
+[2026-04-29 19:01:35.171108] [AI] Using cached daily forex scan from 2026-04-29 14:00:15 | symbols=EURUSD, GBPUSD, XAUUSD, USDJPY, EURJPY
+[2026-04-29 19:01:35.171890] [WATCHLIST] AI watchlist scan: EURUSD, GBPUSD, XAUUSD, USDJPY, EURJPY
+[2026-04-29 19:01:35.172063] [ERROR] EURUSD analysis error: Cannot load MT5 symbols: (-10001, 'IPC send failed')
+[2026-04-29 19:01:35.172206] [ERROR] GBPUSD analysis error: Cannot load MT5 symbols: (-10001, 'IPC send failed')
+[2026-04-29 19:01:35.172414] [ERROR] XAUUSD analysis error: Cannot load MT5 symbols: (-10001, 'IPC send failed')
+[2026-04-29 19:01:35.172604] [ERROR] USDJPY analysis error: Cannot load MT5 symbols: (-10001, 'IPC send failed')
+[2026-04-29 19:01:35.172781] [ERROR] EURJPY analysis error: Cannot load MT5 symbols: (-10001, 'IPC send failed')
+[2026-04-29 19:01:35.172899] [WAIT] No order from AI watchlist this round
+[2026-04-29 19:02:35.180904] [AI] Using cached daily forex scan from 2026-04-29 14:00:15 | symbols=EURUSD, GBPUSD, XAUUSD, USDJPY, EURJPY
+[2026-04-29 19:02:35.181689] [WATCHLIST] AI watchlist scan: EURUSD, GBPUSD, XAUUSD, USDJPY, EURJPY
+[2026-04-29 19:02:35.181809] [ERROR] EURUSD analysis error: Cannot load MT5 symbols: (-10001, 'IPC send failed')
+[2026-04-29 19:02:35.181900] [ERROR] GBPUSD analysis error: Cannot load MT5 symbols: (-10001, 'IPC send failed')
+[2026-04-29 19:02:35.181985] [ERROR] XAUUSD analysis error: Cannot load MT5 symbols: (-10001, 'IPC send failed')
+[2026-04-29 19:02:35.182056] [ERROR] USDJPY analysis error: Cannot load MT5 symbols: (-10001, 'IPC send failed')
+[2026-04-29 19:02:35.182129] [ERROR] EURJPY analysis error: Cannot load MT5 symbols: (-10001, 'IPC send failed')
+[2026-04-29 19:02:35.182180] [WAIT] No order from AI watchlist this round
+[2026-04-29 19:03:35.184006] [AI] Using cached daily forex scan from 2026-04-29 14:00:15 | symbols=EURUSD, GBPUSD, XAUUSD, USDJPY, EURJPY
+[2026-04-29 19:03:35.184824] [WATCHLIST] AI watchlist scan: EURUSD, GBPUSD, XAUUSD, USDJPY, EURJPY
+[2026-04-29 19:03:35.184993] [ERROR] EURUSD analysis error: Cannot load MT5 symbols: (-10001, 'IPC send failed')
+[2026-04-29 19:03:35.185167] [ERROR] GBPUSD analysis error: Cannot load MT5 symbols: (-10001, 'IPC send failed')
+[2026-04-29 19:03:35.185251] [ERROR] XAUUSD analysis error: Cannot load MT5 symbols: (-10001, 'IPC send failed')
+[2026-04-29 19:03:35.185324] [ERROR] USDJPY analysis error: Cannot load MT5 symbols: (-10001, 'IPC send failed')
+[2026-04-29 19:03:35.185444] [ERROR] EURJPY analysis error: Cannot load MT5 symbols: (-10001, 'IPC send failed')
+[2026-04-29 19:03:35.185532] [WAIT] No order from AI watchlist this round
+[2026-04-29 19:04:35.187078] [AI] Using cached daily forex scan from 2026-04-29 14:00:15 | symbols=EURUSD, GBPUSD, XAUUSD, USDJPY, EURJPY
+[2026-04-29 19:04:35.187583] [WATCHLIST] AI watchlist scan: EURUSD, GBPUSD, XAUUSD, USDJPY, EURJPY
+[2026-04-29 19:04:35.187697] [ERROR] EURUSD analysis error: Cannot load MT5 symbols: (-10001, 'IPC send failed')
+[2026-04-29 19:04:35.187778] [ERROR] GBPUSD analysis error: Cannot load MT5 symbols: (-10001, 'IPC send failed')
+[2026-04-29 19:04:35.188635] [ERROR] XAUUSD analysis error: Cannot load MT5 symbols: (-10001, 'IPC send failed')
+[2026-04-29 19:04:35.188733] [ERROR] USDJPY analysis error: Cannot load MT5 symbols: (-10001, 'IPC send failed')
+[2026-04-29 19:04:35.188790] [ERROR] EURJPY analysis error: Cannot load MT5 symbols: (-10001, 'IPC send failed')
+[2026-04-29 19:04:35.188832] [WAIT] No order from AI watchlist this round
+[2026-04-29 19:05:35.191005] [AI] Using cached daily forex scan from 2026-04-29 14:00:15 | symbols=EURUSD, GBPUSD, XAUUSD, USDJPY, EURJPY
+[2026-04-29 19:05:35.199449] [WATCHLIST] AI watchlist scan: EURUSD, GBPUSD, XAUUSD, USDJPY, EURJPY
+[2026-04-29 19:05:35.199561] [ERROR] EURUSD analysis error: Cannot load MT5 symbols: (-10001, 'IPC send failed')
+[2026-04-29 19:05:35.199633] [ERROR] GBPUSD analysis error: Cannot load MT5 symbols: (-10001, 'IPC send failed')
+[2026-04-29 19:05:35.199699] [ERROR] XAUUSD analysis error: Cannot load MT5 symbols: (-10001, 'IPC send failed')
+[2026-04-29 19:05:35.200201] [ERROR] USDJPY analysis error: Cannot load MT5 symbols: (-10001, 'IPC send failed')
+[2026-04-29 19:05:35.200286] [ERROR] EURJPY analysis error: Cannot load MT5 symbols: (-10001, 'IPC send failed')
+[2026-04-29 19:05:35.200331] [WAIT] No order from AI watchlist this round
+[2026-04-29 19:06:35.202014] [AI] Using cached daily forex scan from 2026-04-29 14:00:15 | symbols=EURUSD, GBPUSD, XAUUSD, USDJPY, EURJPY
+[2026-04-29 19:06:35.202517] [WATCHLIST] AI watchlist scan: EURUSD, GBPUSD, XAUUSD, USDJPY, EURJPY
+[2026-04-29 19:06:35.202635] [ERROR] EURUSD analysis error: Cannot load MT5 symbols: (-10001, 'IPC send failed')
+[2026-04-29 19:06:35.202719] [ERROR] GBPUSD analysis error: Cannot load MT5 symbols: (-10001, 'IPC send failed')
+[2026-04-29 19:06:35.202894] [ERROR] XAUUSD analysis error: Cannot load MT5 symbols: (-10001, 'IPC send failed')
+[2026-04-29 19:06:35.202968] [ERROR] USDJPY analysis error: Cannot load MT5 symbols: (-10001, 'IPC send failed')
+[2026-04-29 19:06:35.203031] [ERROR] EURJPY analysis error: Cannot load MT5 symbols: (-10001, 'IPC send failed')
+[2026-04-29 19:06:35.203079] [WAIT] No order from AI watchlist this round
+[2026-04-29 19:07:35.204105] [AI] Using cached daily forex scan from 2026-04-29 14:00:15 | symbols=EURUSD, GBPUSD, XAUUSD, USDJPY, EURJPY
+[2026-04-29 19:07:35.204412] [WATCHLIST] AI watchlist scan: EURUSD, GBPUSD, XAUUSD, USDJPY, EURJPY
+[2026-04-29 19:07:35.204482] [ERROR] EURUSD analysis error: Cannot load MT5 symbols: (-10001, 'IPC send failed')
+[2026-04-29 19:07:35.204540] [ERROR] GBPUSD analysis error: Cannot load MT5 symbols: (-10001, 'IPC send failed')
+[2026-04-29 19:07:35.204595] [ERROR] XAUUSD analysis error: Cannot load MT5 symbols: (-10001, 'IPC send failed')
+[2026-04-29 19:07:35.204641] [ERROR] USDJPY analysis error: Cannot load MT5 symbols: (-10001, 'IPC send failed')
+[2026-04-29 19:07:35.204684] [ERROR] EURJPY analysis error: Cannot load MT5 symbols: (-10001, 'IPC send failed')
+[2026-04-29 19:07:35.204717] [WAIT] No order from AI watchlist this round
+[2026-04-29 19:08:35.206079] [AI] Using cached daily forex scan from 2026-04-29 14:00:15 | symbols=EURUSD, GBPUSD, XAUUSD, USDJPY, EURJPY
+[2026-04-29 19:08:35.206727] [WATCHLIST] AI watchlist scan: EURUSD, GBPUSD, XAUUSD, USDJPY, EURJPY
+[2026-04-29 19:08:35.206860] [ERROR] EURUSD analysis error: Cannot load MT5 symbols: (-10001, 'IPC send failed')
+[2026-04-29 19:08:35.206974] [ERROR] GBPUSD analysis error: Cannot load MT5 symbols: (-10001, 'IPC send failed')
+[2026-04-29 19:08:35.207085] [ERROR] XAUUSD analysis error: Cannot load MT5 symbols: (-10001, 'IPC send failed')
+[2026-04-29 19:08:35.207183] [ERROR] USDJPY analysis error: Cannot load MT5 symbols: (-10001, 'IPC send failed')
+[2026-04-29 19:08:35.207299] [ERROR] EURJPY analysis error: Cannot load MT5 symbols: (-10001, 'IPC send failed')
+[2026-04-29 19:08:35.207370] [WAIT] No order from AI watchlist this round
+[2026-04-29 19:09:35.209049] [AI] Using cached daily forex scan from 2026-04-29 14:00:15 | symbols=EURUSD, GBPUSD, XAUUSD, USDJPY, EURJPY
+[2026-04-29 19:09:35.209862] [WATCHLIST] AI watchlist scan: EURUSD, GBPUSD, XAUUSD, USDJPY, EURJPY
+[2026-04-29 19:09:35.210026] [ERROR] EURUSD analysis error: Cannot load MT5 symbols: (-10001, 'IPC send failed')
+[2026-04-29 19:09:35.210145] [ERROR] GBPUSD analysis error: Cannot load MT5 symbols: (-10001, 'IPC send failed')
+[2026-04-29 19:09:35.210253] [ERROR] XAUUSD analysis error: Cannot load MT5 symbols: (-10001, 'IPC send failed')
+[2026-04-29 19:09:35.210431] [ERROR] USDJPY analysis error: Cannot load MT5 symbols: (-10001, 'IPC send failed')
+[2026-04-29 19:09:35.210544] [ERROR] EURJPY analysis error: Cannot load MT5 symbols: (-10001, 'IPC send failed')
+[2026-04-29 19:09:35.210615] [WAIT] No order from AI watchlist this round
+[2026-04-29 19:10:35.212171] [AI] Using cached daily forex scan from 2026-04-29 14:00:15 | symbols=EURUSD, GBPUSD, XAUUSD, USDJPY, EURJPY
+[2026-04-29 19:10:35.212922] [WATCHLIST] AI watchlist scan: EURUSD, GBPUSD, XAUUSD, USDJPY, EURJPY
+[2026-04-29 19:10:35.213082] [ERROR] EURUSD analysis error: Cannot load MT5 symbols: (-10001, 'IPC send failed')
+[2026-04-29 19:10:35.213237] [ERROR] GBPUSD analysis error: Cannot load MT5 symbols: (-10001, 'IPC send failed')
+[2026-04-29 19:10:35.213364] [ERROR] XAUUSD analysis error: Cannot load MT5 symbols: (-10001, 'IPC send failed')
+[2026-04-29 19:10:35.213480] [ERROR] USDJPY analysis error: Cannot load MT5 symbols: (-10001, 'IPC send failed')
+[2026-04-29 19:10:35.213594] [ERROR] EURJPY analysis error: Cannot load MT5 symbols: (-10001, 'IPC send failed')
+[2026-04-29 19:10:35.213704] [WAIT] No order from AI watchlist this round
+[2026-04-29 19:11:35.215079] [AI] Using cached daily forex scan from 2026-04-29 14:00:15 | symbols=EURUSD, GBPUSD, XAUUSD, USDJPY, EURJPY
+[2026-04-29 19:11:35.215465] [WATCHLIST] AI watchlist scan: EURUSD, GBPUSD, XAUUSD, USDJPY, EURJPY
+[2026-04-29 19:11:35.215531] [ERROR] EURUSD analysis error: Cannot load MT5 symbols: (-10001, 'IPC send failed')
+[2026-04-29 19:11:35.215584] [ERROR] GBPUSD analysis error: Cannot load MT5 symbols: (-10001, 'IPC send failed')
+[2026-04-29 19:11:35.215631] [ERROR] XAUUSD analysis error: Cannot load MT5 symbols: (-10001, 'IPC send failed')
+[2026-04-29 19:11:35.215674] [ERROR] USDJPY analysis error: Cannot load MT5 symbols: (-10001, 'IPC send failed')
+[2026-04-29 19:11:35.215716] [ERROR] EURJPY analysis error: Cannot load MT5 symbols: (-10001, 'IPC send failed')
+[2026-04-29 19:11:35.215746] [WAIT] No order from AI watchlist this round
+
+============================================================
+[Wed 04/29/2026 19:49:48.45] Forex bot launcher started
+BOT_DIR=C:\Users\watch\auto-bot-trade
+BOT_FILE=C:\Users\watch\auto-bot-trade\forex_bot.py
+USER=watch
+COMPUTER=3PM
+FOREX_DRY_RUN=true
+FOREX_AI_SCAN_ON_BOT_START=true
+FOREX_CHECK_INTERVAL_SECONDS=60
+PYTHONUTF8=1
+PYTHONIOENCODING=utf-8
+[Wed 04/29/2026 19:49:48.60] Python command: py -3
+[Wed 04/29/2026 19:49:48.60] Starting forex_bot.py
+[2026-04-29 19:49:51.322288] [START] Forex bot booting | pid=27660 | cwd=C:\Users\watch\auto-bot-trade | session=14:00-23:59 | blocked_hours=[] | interval=60s | DRY_RUN=True
+[2026-04-29 19:49:51.322484] [CONNECT] Connecting MT5...
+[2026-04-29 19:49:51.364264] [SCAN] Symbol resolved: XAUUSD -> XAUUSDm
+[2026-04-29 19:49:51.364622] [OK] Connected MT5 | Symbol=XAUUSDm
+[2026-04-29 19:49:51.364713] [START] Bot started
+[2026-04-29 19:49:51.365327] [AI] Forcing DeepSeek scan on bot start
+[2026-04-29 19:49:51.365386] [AI] DeepSeek daily forex scan starting...
+[2026-04-29 19:49:51.372174] [AI] MT5 candidate symbols for AI: EURUSD, GBPUSD, USDJPY, USDCHF, USDCAD, AUDUSD, NZDUSD, EURJPY, GBPJPY, XAUUSD, EURGBP, EURCHF, EURCAD, EURAUD, EURNZD, GBPCHF, GBPCAD, GBPAUD, GBPNZD, AUDJPY, CADJPY, CHFJPY, NZDJPY, AUDCAD, AUDCHF, AUDNZD, CADCHF, NZDCAD, NZDCHF
+[2026-04-29 19:50:01.723918] [AI] DeepSeek daily scan failed: Unterminated string starting at: line 25 column 17 (char 668)
+[2026-04-29 19:50:01.725090] [AI] Using cached daily forex scan from 2026-04-29 14:00:15 | symbols=EURUSD, GBPUSD, XAUUSD, USDJPY, EURJPY
+[2026-04-29 19:50:01.725559] [WATCHLIST] AI watchlist scan: EURUSD, GBPUSD, XAUUSD, USDJPY, EURJPY
+[2026-04-29 19:50:01.730180] [SELECT] Trading symbol switched: XAUUSDm -> EURUSDm | AI watchlist candidate
+[2026-04-29 19:50:01.730295] [SCAN] Analyzing EURUSDm
+[2026-04-29 19:50:02.446728] [STOP] EURUSDm Daily loss limit reached: 0.00
+[2026-04-29 19:50:02.451477] [SELECT] Trading symbol switched: EURUSDm -> GBPUSDm | AI watchlist candidate
+[2026-04-29 19:50:02.451584] [SCAN] Analyzing GBPUSDm
+[2026-04-29 19:50:03.105124] [STOP] GBPUSDm Daily loss limit reached: 0.00
+[2026-04-29 19:50:03.109743] [SELECT] Trading symbol switched: GBPUSDm -> XAUUSDm | AI watchlist candidate
+[2026-04-29 19:50:03.109835] [SCAN] Analyzing XAUUSDm
+[2026-04-29 19:50:03.896246] [NO_TRADE] XAUUSDm Spread too wide: 280.0 points > 80
+[2026-04-29 19:50:03.901201] [SELECT] Trading symbol switched: XAUUSDm -> USDJPYm | AI watchlist candidate
+[2026-04-29 19:50:03.901337] [SCAN] Analyzing USDJPYm
+[2026-04-29 19:50:04.630077] [STOP] USDJPYm Daily loss limit reached: 0.00
+[2026-04-29 19:50:04.637024] [SELECT] Trading symbol switched: USDJPYm -> EURJPYm | AI watchlist candidate
+[2026-04-29 19:50:04.637162] [SCAN] Analyzing EURJPYm
+[2026-04-29 19:50:05.338599] [STOP] EURJPYm Daily loss limit reached: 0.00
+[2026-04-29 19:50:05.338687] [WAIT] No order from AI watchlist this round
+[2026-04-29 19:51:05.340769] [AI] Using cached daily forex scan from 2026-04-29 14:00:15 | symbols=EURUSD, GBPUSD, XAUUSD, USDJPY, EURJPY
+[2026-04-29 19:51:05.341197] [WATCHLIST] AI watchlist scan: EURUSD, GBPUSD, XAUUSD, USDJPY, EURJPY
+[2026-04-29 19:51:05.346820] [SELECT] Trading symbol switched: EURJPYm -> EURUSDm | AI watchlist candidate
+[2026-04-29 19:51:05.346928] [SCAN] Analyzing EURUSDm
+[2026-04-29 19:51:05.714656] [STOP] EURUSDm Daily loss limit reached: 0.00
+[2026-04-29 19:51:05.719173] [SELECT] Trading symbol switched: EURUSDm -> GBPUSDm | AI watchlist candidate
+[2026-04-29 19:51:05.719265] [SCAN] Analyzing GBPUSDm
+[2026-04-29 19:51:06.083628] [STOP] GBPUSDm Daily loss limit reached: 0.00
+[2026-04-29 19:51:06.087812] [SELECT] Trading symbol switched: GBPUSDm -> XAUUSDm | AI watchlist candidate
+[2026-04-29 19:51:06.087904] [SCAN] Analyzing XAUUSDm
+[2026-04-29 19:51:06.441464] [NO_TRADE] XAUUSDm Spread too wide: 280.0 points > 80
+[2026-04-29 19:51:06.446046] [SELECT] Trading symbol switched: XAUUSDm -> USDJPYm | AI watchlist candidate
+[2026-04-29 19:51:06.446153] [SCAN] Analyzing USDJPYm
+[2026-04-29 19:51:06.803558] [STOP] USDJPYm Daily loss limit reached: 0.00
+[2026-04-29 19:51:06.808238] [SELECT] Trading symbol switched: USDJPYm -> EURJPYm | AI watchlist candidate
+[2026-04-29 19:51:06.808329] [SCAN] Analyzing EURJPYm
+[2026-04-29 19:51:07.167263] [STOP] EURJPYm Daily loss limit reached: 0.00
+[2026-04-29 19:51:07.167322] [WAIT] No order from AI watchlist this round
+[2026-04-29 19:52:07.169121] [AI] Using cached daily forex scan from 2026-04-29 14:00:15 | symbols=EURUSD, GBPUSD, XAUUSD, USDJPY, EURJPY
+[2026-04-29 19:52:07.169514] [WATCHLIST] AI watchlist scan: EURUSD, GBPUSD, XAUUSD, USDJPY, EURJPY
+[2026-04-29 19:52:07.174819] [SELECT] Trading symbol switched: EURJPYm -> EURUSDm | AI watchlist candidate
+[2026-04-29 19:52:07.174919] [SCAN] Analyzing EURUSDm
+[2026-04-29 19:52:07.529342] [STOP] EURUSDm Daily loss limit reached: 0.00
+[2026-04-29 19:52:07.533893] [SELECT] Trading symbol switched: EURUSDm -> GBPUSDm | AI watchlist candidate
+[2026-04-29 19:52:07.533988] [SCAN] Analyzing GBPUSDm
+[2026-04-29 19:52:07.884314] [STOP] GBPUSDm Daily loss limit reached: 0.00
+[2026-04-29 19:52:07.888872] [SELECT] Trading symbol switched: GBPUSDm -> XAUUSDm | AI watchlist candidate
+[2026-04-29 19:52:07.888959] [SCAN] Analyzing XAUUSDm
+[2026-04-29 19:52:08.258345] [NO_TRADE] XAUUSDm Spread too wide: 280.0 points > 80
+[2026-04-29 19:52:08.262687] [SELECT] Trading symbol switched: XAUUSDm -> USDJPYm | AI watchlist candidate
+[2026-04-29 19:52:08.262788] [SCAN] Analyzing USDJPYm
+[2026-04-29 19:52:08.607796] [STOP] USDJPYm Daily loss limit reached: 0.00
+[2026-04-29 19:52:08.612354] [SELECT] Trading symbol switched: USDJPYm -> EURJPYm | AI watchlist candidate
+[2026-04-29 19:52:08.612445] [SCAN] Analyzing EURJPYm
+[2026-04-29 19:52:08.966532] [STOP] EURJPYm Daily loss limit reached: 0.00
+[2026-04-29 19:52:08.966586] [WAIT] No order from AI watchlist this round
+[2026-04-29 19:53:08.968446] [AI] Using cached daily forex scan from 2026-04-29 14:00:15 | symbols=EURUSD, GBPUSD, XAUUSD, USDJPY, EURJPY
+[2026-04-29 19:53:08.968810] [WATCHLIST] AI watchlist scan: EURUSD, GBPUSD, XAUUSD, USDJPY, EURJPY
+[2026-04-29 19:53:08.973021] [SELECT] Trading symbol switched: EURJPYm -> EURUSDm | AI watchlist candidate
+[2026-04-29 19:53:08.973117] [SCAN] Analyzing EURUSDm
+[2026-04-29 19:53:09.327488] [STOP] EURUSDm Daily loss limit reached: 0.00
+[2026-04-29 19:53:09.332200] [SELECT] Trading symbol switched: EURUSDm -> GBPUSDm | AI watchlist candidate
+[2026-04-29 19:53:09.332297] [SCAN] Analyzing GBPUSDm
+[2026-04-29 19:53:09.680096] [STOP] GBPUSDm Daily loss limit reached: 0.00
+[2026-04-29 19:53:09.685075] [SELECT] Trading symbol switched: GBPUSDm -> XAUUSDm | AI watchlist candidate
+[2026-04-29 19:53:09.685164] [SCAN] Analyzing XAUUSDm
+[2026-04-29 19:53:10.031274] [NO_TRADE] XAUUSDm Spread too wide: 280.0 points > 80
+[2026-04-29 19:53:10.036023] [SELECT] Trading symbol switched: XAUUSDm -> USDJPYm | AI watchlist candidate
+[2026-04-29 19:53:10.036113] [SCAN] Analyzing USDJPYm
+[2026-04-29 19:53:10.387419] [STOP] USDJPYm Daily loss limit reached: 0.00
+[2026-04-29 19:53:10.392175] [SELECT] Trading symbol switched: USDJPYm -> EURJPYm | AI watchlist candidate
+[2026-04-29 19:53:10.392255] [SCAN] Analyzing EURJPYm
+[2026-04-29 19:53:10.747499] [STOP] EURJPYm Daily loss limit reached: 0.00
+[2026-04-29 19:53:10.747555] [WAIT] No order from AI watchlist this round
+[2026-04-29 19:54:10.749381] [AI] Using cached daily forex scan from 2026-04-29 14:00:15 | symbols=EURUSD, GBPUSD, XAUUSD, USDJPY, EURJPY
+[2026-04-29 19:54:10.750012] [WATCHLIST] AI watchlist scan: EURUSD, GBPUSD, XAUUSD, USDJPY, EURJPY
+[2026-04-29 19:54:10.755594] [SELECT] Trading symbol switched: EURJPYm -> EURUSDm | AI watchlist candidate
+[2026-04-29 19:54:10.755695] [SCAN] Analyzing EURUSDm
+[2026-04-29 19:54:11.108514] [STOP] EURUSDm Daily loss limit reached: 0.00
+[2026-04-29 19:54:11.115196] [SELECT] Trading symbol switched: EURUSDm -> GBPUSDm | AI watchlist candidate
+[2026-04-29 19:54:11.115329] [SCAN] Analyzing GBPUSDm
+[2026-04-29 19:54:11.469921] [STOP] GBPUSDm Daily loss limit reached: 0.00
+[2026-04-29 19:54:11.474488] [SELECT] Trading symbol switched: GBPUSDm -> XAUUSDm | AI watchlist candidate
+[2026-04-29 19:54:11.474580] [SCAN] Analyzing XAUUSDm
+[2026-04-29 19:54:11.830754] [NO_TRADE] XAUUSDm Spread too wide: 280.0 points > 80
+[2026-04-29 19:54:11.835563] [SELECT] Trading symbol switched: XAUUSDm -> USDJPYm | AI watchlist candidate
+[2026-04-29 19:54:11.835653] [SCAN] Analyzing USDJPYm
+[2026-04-29 19:54:12.213008] [STOP] USDJPYm Daily loss limit reached: 0.00
+[2026-04-29 19:54:12.217787] [SELECT] Trading symbol switched: USDJPYm -> EURJPYm | AI watchlist candidate
+[2026-04-29 19:54:12.217879] [SCAN] Analyzing EURJPYm
+[2026-04-29 19:54:12.590643] [STOP] EURJPYm Daily loss limit reached: 0.00
+[2026-04-29 19:54:12.590710] [WAIT] No order from AI watchlist this round
+[2026-04-29 19:55:12.592610] [AI] Using cached daily forex scan from 2026-04-29 14:00:15 | symbols=EURUSD, GBPUSD, XAUUSD, USDJPY, EURJPY
+[2026-04-29 19:55:12.593054] [WATCHLIST] AI watchlist scan: EURUSD, GBPUSD, XAUUSD, USDJPY, EURJPY
+[2026-04-29 19:55:12.598413] [SELECT] Trading symbol switched: EURJPYm -> EURUSDm | AI watchlist candidate
+[2026-04-29 19:55:12.598518] [SCAN] Analyzing EURUSDm
+[2026-04-29 19:55:12.988845] [STOP] EURUSDm Daily loss limit reached: 0.00
+[2026-04-29 19:55:12.993605] [SELECT] Trading symbol switched: EURUSDm -> GBPUSDm | AI watchlist candidate
+[2026-04-29 19:55:12.993699] [SCAN] Analyzing GBPUSDm
+[2026-04-29 19:55:13.432392] [STOP] GBPUSDm Daily loss limit reached: 0.00
+[2026-04-29 19:55:13.436883] [SELECT] Trading symbol switched: GBPUSDm -> XAUUSDm | AI watchlist candidate
+[2026-04-29 19:55:13.436981] [SCAN] Analyzing XAUUSDm
+[2026-04-29 19:55:13.820995] [NO_TRADE] XAUUSDm Spread too wide: 280.0 points > 80
+[2026-04-29 19:55:13.827041] [SELECT] Trading symbol switched: XAUUSDm -> USDJPYm | AI watchlist candidate
+[2026-04-29 19:55:13.827144] [SCAN] Analyzing USDJPYm
+[2026-04-29 19:55:14.208757] [STOP] USDJPYm Daily loss limit reached: 0.00
+[2026-04-29 19:55:14.213368] [SELECT] Trading symbol switched: USDJPYm -> EURJPYm | AI watchlist candidate
+[2026-04-29 19:55:14.213474] [SCAN] Analyzing EURJPYm
+[2026-04-29 19:55:14.601409] [STOP] EURJPYm Daily loss limit reached: 0.00
+[2026-04-29 19:55:14.601479] [WAIT] No order from AI watchlist this round
+[2026-04-29 19:56:14.603385] [AI] Using cached daily forex scan from 2026-04-29 14:00:15 | symbols=EURUSD, GBPUSD, XAUUSD, USDJPY, EURJPY
+[2026-04-29 19:56:14.603767] [WATCHLIST] AI watchlist scan: EURUSD, GBPUSD, XAUUSD, USDJPY, EURJPY
+[2026-04-29 19:56:14.609159] [SELECT] Trading symbol switched: EURJPYm -> EURUSDm | AI watchlist candidate
+[2026-04-29 19:56:14.609275] [SCAN] Analyzing EURUSDm
+[2026-04-29 19:56:14.979309] [STOP] EURUSDm Daily loss limit reached: 0.00
+[2026-04-29 19:56:14.986974] [SELECT] Trading symbol switched: EURUSDm -> GBPUSDm | AI watchlist candidate
+[2026-04-29 19:56:14.987083] [SCAN] Analyzing GBPUSDm
+[2026-04-29 19:56:15.344992] [STOP] GBPUSDm Daily loss limit reached: 0.00
+[2026-04-29 19:56:15.349655] [SELECT] Trading symbol switched: GBPUSDm -> XAUUSDm | AI watchlist candidate
+[2026-04-29 19:56:15.349811] [SCAN] Analyzing XAUUSDm
+[2026-04-29 19:56:15.706749] [NO_TRADE] XAUUSDm Spread too wide: 280.0 points > 80
+[2026-04-29 19:56:15.711483] [SELECT] Trading symbol switched: XAUUSDm -> USDJPYm | AI watchlist candidate
+[2026-04-29 19:56:15.711593] [SCAN] Analyzing USDJPYm
+[2026-04-29 19:56:16.070574] [STOP] USDJPYm Daily loss limit reached: 0.00
+[2026-04-29 19:56:16.075067] [SELECT] Trading symbol switched: USDJPYm -> EURJPYm | AI watchlist candidate
+[2026-04-29 19:56:16.075159] [SCAN] Analyzing EURJPYm
+[2026-04-29 19:56:16.435078] [STOP] EURJPYm Daily loss limit reached: 0.00
+[2026-04-29 19:56:16.435146] [WAIT] No order from AI watchlist this round
+[2026-04-29 19:57:16.437377] [AI] Using cached daily forex scan from 2026-04-29 14:00:15 | symbols=EURUSD, GBPUSD, XAUUSD, USDJPY, EURJPY
+[2026-04-29 19:57:16.437763] [WATCHLIST] AI watchlist scan: EURUSD, GBPUSD, XAUUSD, USDJPY, EURJPY
+[2026-04-29 19:57:16.443708] [SELECT] Trading symbol switched: EURJPYm -> EURUSDm | AI watchlist candidate
+[2026-04-29 19:57:16.443818] [SCAN] Analyzing EURUSDm
+[2026-04-29 19:57:16.808851] [STOP] EURUSDm Daily loss limit reached: 0.00
+[2026-04-29 19:57:16.813264] [SELECT] Trading symbol switched: EURUSDm -> GBPUSDm | AI watchlist candidate
+[2026-04-29 19:57:16.813356] [SCAN] Analyzing GBPUSDm
+[2026-04-29 19:57:17.176801] [STOP] GBPUSDm Daily loss limit reached: 0.00
+[2026-04-29 19:57:17.181130] [SELECT] Trading symbol switched: GBPUSDm -> XAUUSDm | AI watchlist candidate
+[2026-04-29 19:57:17.181224] [SCAN] Analyzing XAUUSDm
+[2026-04-29 19:57:17.543474] [NO_TRADE] XAUUSDm Spread too wide: 280.0 points > 80
+[2026-04-29 19:57:17.548033] [SELECT] Trading symbol switched: XAUUSDm -> USDJPYm | AI watchlist candidate
+[2026-04-29 19:57:17.548125] [SCAN] Analyzing USDJPYm
+[2026-04-29 19:57:17.908327] [STOP] USDJPYm Daily loss limit reached: 0.00
+[2026-04-29 19:57:17.912938] [SELECT] Trading symbol switched: USDJPYm -> EURJPYm | AI watchlist candidate
+[2026-04-29 19:57:17.913033] [SCAN] Analyzing EURJPYm
+[2026-04-29 19:57:18.270297] [STOP] EURJPYm Daily loss limit reached: 0.00
+[2026-04-29 19:57:18.270350] [WAIT] No order from AI watchlist this round
+[2026-04-29 19:58:18.272456] [AI] Using cached daily forex scan from 2026-04-29 14:00:15 | symbols=EURUSD, GBPUSD, XAUUSD, USDJPY, EURJPY
+[2026-04-29 19:58:18.272927] [WATCHLIST] AI watchlist scan: EURUSD, GBPUSD, XAUUSD, USDJPY, EURJPY
+[2026-04-29 19:58:18.278153] [SELECT] Trading symbol switched: EURJPYm -> EURUSDm | AI watchlist candidate
+[2026-04-29 19:58:18.278247] [SCAN] Analyzing EURUSDm
+[2026-04-29 19:58:18.633191] [STOP] EURUSDm Daily loss limit reached: 0.00
+[2026-04-29 19:58:18.637655] [SELECT] Trading symbol switched: EURUSDm -> GBPUSDm | AI watchlist candidate
+[2026-04-29 19:58:18.637751] [SCAN] Analyzing GBPUSDm
+[2026-04-29 19:58:19.004176] [STOP] GBPUSDm Daily loss limit reached: 0.00
+[2026-04-29 19:58:19.008579] [SELECT] Trading symbol switched: GBPUSDm -> XAUUSDm | AI watchlist candidate
+[2026-04-29 19:58:19.008672] [SCAN] Analyzing XAUUSDm
+[2026-04-29 19:58:19.365635] [NO_TRADE] XAUUSDm Spread too wide: 280.0 points > 80
+[2026-04-29 19:58:19.370010] [SELECT] Trading symbol switched: XAUUSDm -> USDJPYm | AI watchlist candidate
+[2026-04-29 19:58:19.370104] [SCAN] Analyzing USDJPYm
+[2026-04-29 19:58:19.716943] [STOP] USDJPYm Daily loss limit reached: 0.00
+[2026-04-29 19:58:19.721710] [SELECT] Trading symbol switched: USDJPYm -> EURJPYm | AI watchlist candidate
+[2026-04-29 19:58:19.721799] [SCAN] Analyzing EURJPYm
+[2026-04-29 19:58:20.081393] [STOP] EURJPYm Daily loss limit reached: 0.00
+[2026-04-29 19:58:20.081448] [WAIT] No order from AI watchlist this round
+[2026-04-29 19:59:20.083732] [AI] Using cached daily forex scan from 2026-04-29 14:00:15 | symbols=EURUSD, GBPUSD, XAUUSD, USDJPY, EURJPY
+[2026-04-29 19:59:20.084209] [WATCHLIST] AI watchlist scan: EURUSD, GBPUSD, XAUUSD, USDJPY, EURJPY
+[2026-04-29 19:59:20.089473] [SELECT] Trading symbol switched: EURJPYm -> EURUSDm | AI watchlist candidate
+[2026-04-29 19:59:20.089567] [SCAN] Analyzing EURUSDm
+[2026-04-29 19:59:20.447925] [STOP] EURUSDm Daily loss limit reached: 0.00
+[2026-04-29 19:59:20.452625] [SELECT] Trading symbol switched: EURUSDm -> GBPUSDm | AI watchlist candidate
+[2026-04-29 19:59:20.452720] [SCAN] Analyzing GBPUSDm
+[2026-04-29 19:59:20.809618] [STOP] GBPUSDm Daily loss limit reached: 0.00
+[2026-04-29 19:59:20.814468] [SELECT] Trading symbol switched: GBPUSDm -> XAUUSDm | AI watchlist candidate
+[2026-04-29 19:59:20.814577] [SCAN] Analyzing XAUUSDm
+[2026-04-29 19:59:21.180129] [NO_TRADE] XAUUSDm Spread too wide: 280.0 points > 80
+[2026-04-29 19:59:21.187318] [SELECT] Trading symbol switched: XAUUSDm -> USDJPYm | AI watchlist candidate
+[2026-04-29 19:59:21.187442] [SCAN] Analyzing USDJPYm
+[2026-04-29 19:59:21.582554] [STOP] USDJPYm Daily loss limit reached: 0.00
+[2026-04-29 19:59:21.587201] [SELECT] Trading symbol switched: USDJPYm -> EURJPYm | AI watchlist candidate
+[2026-04-29 19:59:21.587293] [SCAN] Analyzing EURJPYm
+[2026-04-29 19:59:22.019995] [STOP] EURJPYm Daily loss limit reached: 0.00
+[2026-04-29 19:59:22.020059] [WAIT] No order from AI watchlist this round
+[2026-04-29 20:00:22.021901] [AI] Using cached daily forex scan from 2026-04-29 14:00:15 | symbols=EURUSD, GBPUSD, XAUUSD, USDJPY, EURJPY
+[2026-04-29 20:00:22.022300] [WATCHLIST] AI watchlist scan: EURUSD, GBPUSD, XAUUSD, USDJPY, EURJPY
+[2026-04-29 20:00:22.027365] [SELECT] Trading symbol switched: EURJPYm -> EURUSDm | AI watchlist candidate
+[2026-04-29 20:00:22.027455] [SCAN] Analyzing EURUSDm
+[2026-04-29 20:00:22.422407] [STOP] EURUSDm Daily loss limit reached: 0.00
+[2026-04-29 20:00:22.426760] [SELECT] Trading symbol switched: EURUSDm -> GBPUSDm | AI watchlist candidate
+[2026-04-29 20:00:22.426854] [SCAN] Analyzing GBPUSDm
+[2026-04-29 20:00:22.820172] [STOP] GBPUSDm Daily loss limit reached: 0.00
+[2026-04-29 20:00:22.824935] [SELECT] Trading symbol switched: GBPUSDm -> XAUUSDm | AI watchlist candidate
+[2026-04-29 20:00:22.825030] [SCAN] Analyzing XAUUSDm
+[2026-04-29 20:00:23.203961] [NO_TRADE] XAUUSDm Spread too wide: 280.0 points > 80
+[2026-04-29 20:00:23.208706] [SELECT] Trading symbol switched: XAUUSDm -> USDJPYm | AI watchlist candidate
+[2026-04-29 20:00:23.208816] [SCAN] Analyzing USDJPYm
+[2026-04-29 20:00:23.591078] [STOP] USDJPYm Daily loss limit reached: 0.00
+[2026-04-29 20:00:23.596694] [SELECT] Trading symbol switched: USDJPYm -> EURJPYm | AI watchlist candidate
+[2026-04-29 20:00:23.596822] [SCAN] Analyzing EURJPYm
+[2026-04-29 20:00:23.976695] [STOP] EURJPYm Daily loss limit reached: 0.00
+[2026-04-29 20:00:23.976756] [WAIT] No order from AI watchlist this round
+[2026-04-29 20:01:23.978838] [AI] Using cached daily forex scan from 2026-04-29 14:00:15 | symbols=EURUSD, GBPUSD, XAUUSD, USDJPY, EURJPY
+[2026-04-29 20:01:23.979381] [WATCHLIST] AI watchlist scan: EURUSD, GBPUSD, XAUUSD, USDJPY, EURJPY
+[2026-04-29 20:01:23.985767] [SELECT] Trading symbol switched: EURJPYm -> EURUSDm | AI watchlist candidate
+[2026-04-29 20:01:23.985883] [SCAN] Analyzing EURUSDm
+[2026-04-29 20:01:24.348405] [STOP] EURUSDm Daily loss limit reached: 0.00
+[2026-04-29 20:01:24.353095] [SELECT] Trading symbol switched: EURUSDm -> GBPUSDm | AI watchlist candidate
+[2026-04-29 20:01:24.353191] [SCAN] Analyzing GBPUSDm
+[2026-04-29 20:01:24.708209] [STOP] GBPUSDm Daily loss limit reached: 0.00
+[2026-04-29 20:01:24.712713] [SELECT] Trading symbol switched: GBPUSDm -> XAUUSDm | AI watchlist candidate
+[2026-04-29 20:01:24.712807] [SCAN] Analyzing XAUUSDm
+[2026-04-29 20:01:25.068090] [NO_TRADE] XAUUSDm Spread too wide: 280.0 points > 80
+[2026-04-29 20:01:25.072893] [SELECT] Trading symbol switched: XAUUSDm -> USDJPYm | AI watchlist candidate
+[2026-04-29 20:01:25.073000] [SCAN] Analyzing USDJPYm
+[2026-04-29 20:01:25.434417] [STOP] USDJPYm Daily loss limit reached: 0.00
+[2026-04-29 20:01:25.438800] [SELECT] Trading symbol switched: USDJPYm -> EURJPYm | AI watchlist candidate
+[2026-04-29 20:01:25.438897] [SCAN] Analyzing EURJPYm
+[2026-04-29 20:01:25.800784] [STOP] EURJPYm Daily loss limit reached: 0.00
+[2026-04-29 20:01:25.800855] [WAIT] No order from AI watchlist this round
+[2026-04-29 20:02:25.802767] [AI] Using cached daily forex scan from 2026-04-29 14:00:15 | symbols=EURUSD, GBPUSD, XAUUSD, USDJPY, EURJPY
+[2026-04-29 20:02:25.803192] [WATCHLIST] AI watchlist scan: EURUSD, GBPUSD, XAUUSD, USDJPY, EURJPY
+[2026-04-29 20:02:25.808617] [SELECT] Trading symbol switched: EURJPYm -> EURUSDm | AI watchlist candidate
+[2026-04-29 20:02:25.808715] [SCAN] Analyzing EURUSDm
+[2026-04-29 20:02:26.170361] [STOP] EURUSDm Daily loss limit reached: 0.00
+[2026-04-29 20:02:26.174840] [SELECT] Trading symbol switched: EURUSDm -> GBPUSDm | AI watchlist candidate
+[2026-04-29 20:02:26.174934] [SCAN] Analyzing GBPUSDm
+[2026-04-29 20:02:26.542077] [STOP] GBPUSDm Daily loss limit reached: 0.00
+[2026-04-29 20:02:26.546623] [SELECT] Trading symbol switched: GBPUSDm -> XAUUSDm | AI watchlist candidate
+[2026-04-29 20:02:26.546723] [SCAN] Analyzing XAUUSDm
+[2026-04-29 20:02:26.898194] [NO_TRADE] XAUUSDm Spread too wide: 280.0 points > 80
+[2026-04-29 20:02:26.902972] [SELECT] Trading symbol switched: XAUUSDm -> USDJPYm | AI watchlist candidate
+[2026-04-29 20:02:26.903141] [SCAN] Analyzing USDJPYm
+[2026-04-29 20:02:27.263091] [STOP] USDJPYm Daily loss limit reached: 0.00
+[2026-04-29 20:02:27.267402] [SELECT] Trading symbol switched: USDJPYm -> EURJPYm | AI watchlist candidate
+[2026-04-29 20:02:27.267493] [SCAN] Analyzing EURJPYm
+[2026-04-29 20:02:27.628353] [STOP] EURJPYm Daily loss limit reached: 0.00
+[2026-04-29 20:02:27.628406] [WAIT] No order from AI watchlist this round
+[2026-04-29 20:03:27.630691] [AI] Using cached daily forex scan from 2026-04-29 14:00:15 | symbols=EURUSD, GBPUSD, XAUUSD, USDJPY, EURJPY
+[2026-04-29 20:03:27.631120] [WATCHLIST] AI watchlist scan: EURUSD, GBPUSD, XAUUSD, USDJPY, EURJPY
+[2026-04-29 20:03:27.636515] [SELECT] Trading symbol switched: EURJPYm -> EURUSDm | AI watchlist candidate
+[2026-04-29 20:03:27.636608] [SCAN] Analyzing EURUSDm
+[2026-04-29 20:03:27.992373] [STOP] EURUSDm Daily loss limit reached: 0.00
+[2026-04-29 20:03:27.996914] [SELECT] Trading symbol switched: EURUSDm -> GBPUSDm | AI watchlist candidate
+[2026-04-29 20:03:27.997006] [SCAN] Analyzing GBPUSDm
+[2026-04-29 20:03:28.349703] [STOP] GBPUSDm Daily loss limit reached: 0.00
+[2026-04-29 20:03:28.354047] [SELECT] Trading symbol switched: GBPUSDm -> XAUUSDm | AI watchlist candidate
+[2026-04-29 20:03:28.354141] [SCAN] Analyzing XAUUSDm
+[2026-04-29 20:03:28.712128] [NO_TRADE] XAUUSDm Spread too wide: 280.0 points > 80
+[2026-04-29 20:03:28.717139] [SELECT] Trading symbol switched: XAUUSDm -> USDJPYm | AI watchlist candidate
+[2026-04-29 20:03:28.717237] [SCAN] Analyzing USDJPYm
+[2026-04-29 20:03:29.079537] [STOP] USDJPYm Daily loss limit reached: 0.00
+[2026-04-29 20:03:29.084172] [SELECT] Trading symbol switched: USDJPYm -> EURJPYm | AI watchlist candidate
+[2026-04-29 20:03:29.084262] [SCAN] Analyzing EURJPYm
+[2026-04-29 20:03:29.429360] [STOP] EURJPYm Daily loss limit reached: 0.00
+[2026-04-29 20:03:29.429415] [WAIT] No order from AI watchlist this round
+[2026-04-29 20:04:29.431459] [AI] Using cached daily forex scan from 2026-04-29 14:00:15 | symbols=EURUSD, GBPUSD, XAUUSD, USDJPY, EURJPY
+[2026-04-29 20:04:29.431949] [WATCHLIST] AI watchlist scan: EURUSD, GBPUSD, XAUUSD, USDJPY, EURJPY
+[2026-04-29 20:04:29.437218] [SELECT] Trading symbol switched: EURJPYm -> EURUSDm | AI watchlist candidate
+[2026-04-29 20:04:29.437313] [SCAN] Analyzing EURUSDm
+[2026-04-29 20:04:29.778530] [STOP] EURUSDm Daily loss limit reached: 0.00
+[2026-04-29 20:04:29.783717] [SELECT] Trading symbol switched: EURUSDm -> GBPUSDm | AI watchlist candidate
+[2026-04-29 20:04:29.783816] [SCAN] Analyzing GBPUSDm
+[2026-04-29 20:04:30.138486] [STOP] GBPUSDm Daily loss limit reached: 0.00
+[2026-04-29 20:04:30.143576] [SELECT] Trading symbol switched: GBPUSDm -> XAUUSDm | AI watchlist candidate
+[2026-04-29 20:04:30.143675] [SCAN] Analyzing XAUUSDm
+[2026-04-29 20:04:30.486394] [NO_TRADE] XAUUSDm Spread too wide: 280.0 points > 80
+[2026-04-29 20:04:30.491050] [SELECT] Trading symbol switched: XAUUSDm -> USDJPYm | AI watchlist candidate
+[2026-04-29 20:04:30.491145] [SCAN] Analyzing USDJPYm
+[2026-04-29 20:04:30.847384] [STOP] USDJPYm Daily loss limit reached: 0.00
+[2026-04-29 20:04:30.857332] [SELECT] Trading symbol switched: USDJPYm -> EURJPYm | AI watchlist candidate
+[2026-04-29 20:04:30.857430] [SCAN] Analyzing EURJPYm
+[2026-04-29 20:04:31.204822] [STOP] EURJPYm Daily loss limit reached: 0.00
+[2026-04-29 20:04:31.204880] [WAIT] No order from AI watchlist this round
