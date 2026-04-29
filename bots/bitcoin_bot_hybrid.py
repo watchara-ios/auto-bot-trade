@@ -7,7 +7,7 @@ import hashlib
 import logging
 from logging.handlers import TimedRotatingFileHandler
 from pathlib import Path
-from datetime import datetime, timedelta
+from datetime import datetime, timedelta, timezone
 from urllib.parse import urlencode
 
 import numpy as np
@@ -84,7 +84,7 @@ class Config:
     AI_MODEL = "deepseek-chat"
 
     LOG_DIR = Path("logs")
-    LOG_FILE = LOG_DIR / f"hybrid_bot_{datetime.now().strftime('%Y-%m-%d')}.log"
+    LOG_FILE = LOG_DIR / "hybrid_bot.log"
     TRADE_LOG = LOG_DIR / "hybrid_trades.csv"
     STATE_FILE = LOG_DIR / "hybrid_state.json"
 
@@ -575,6 +575,19 @@ def reset_day(state, balance):
 
 
 def append_trade(row):
+    expected_header = list(row.keys())
+    if Config.TRADE_LOG.exists():
+        try:
+            first_line = Config.TRADE_LOG.read_text(encoding="utf-8", errors="ignore").splitlines()[0]
+            existing_header = first_line.split(",")
+            if existing_header != expected_header:
+                backup = Config.TRADE_LOG.with_name(
+                    f"{Config.TRADE_LOG.stem}.schema_bak_{datetime.now().strftime('%Y%m%d_%H%M%S')}.csv"
+                )
+                Config.TRADE_LOG.rename(backup)
+                warn(f"🧾 Trade log schema changed; rotated old file to {backup}")
+        except Exception as e:
+            warn(f"🧾 Could not inspect trade log schema: {e}")
     pd.DataFrame([row]).to_csv(
         Config.TRADE_LOG,
         mode="a",
@@ -645,7 +658,7 @@ def daily_return_pct(state, balance):
 
 
 def utc_now():
-    return datetime.utcnow()
+    return datetime.now(timezone.utc)
 
 
 def entry_session_active(now=None):
@@ -665,7 +678,7 @@ def seconds_until_next_entry_session(now=None):
         if candidate > now:
             return max(1, int((candidate - now).total_seconds()))
     tomorrow = now.date() + timedelta(days=1)
-    candidate = datetime.combine(tomorrow, datetime.min.time()).replace(hour=allowed_hours[0])
+    candidate = datetime.combine(tomorrow, datetime.min.time()).replace(tzinfo=timezone.utc, hour=allowed_hours[0])
     return max(1, int((candidate - now).total_seconds()))
 
 
@@ -816,7 +829,10 @@ def execute_signal(signal, balance, state, market):
     Binance.stop_order(symbol, signal["exit_side"], signal["tp"], qty, "TAKE_PROFIT_MARKET", position_side=signal["side"])
 
     if Config.DRY_RUN:
-        log("🧪 DRY_RUN signal recorded only in trade log; not counting toward live daily trade limit")
+        log("🧪 DRY_RUN signal recorded only in trade log; daily trade limit is not consumed")
+        state.setdefault("last_trade_time", {})[symbol] = time.time()
+        state["dry_run"] = Config.DRY_RUN
+        save_state(state)
     else:
         state["trades_today"] = state.get("trades_today", 0) + 1
         state.setdefault("last_trade_time", {})[symbol] = time.time()

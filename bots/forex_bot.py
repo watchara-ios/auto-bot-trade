@@ -49,6 +49,7 @@ sys.path.insert(0, str(Path(__file__).resolve().parent))
 from donchian_core import DonchianCoreConfig, latest_signal
 from demo_testcase_logger import log_demo_testcase
 from notifier import notify_bot_started, notify_error, notify_order_opened, notify_order_result
+from notifier import notify_reconnected
 
 try:
     from dotenv import load_dotenv
@@ -94,6 +95,8 @@ MAX_TRADES_PER_DAY = 2
 MAX_DAILY_LOSS_PERCENT = 3.0
 
 CHECK_INTERVAL_SECONDS = int(os.getenv("FOREX_CHECK_INTERVAL_SECONDS", "60"))
+MT5_RECONNECT_SLEEP_SECONDS = int(os.getenv("FOREX_MT5_RECONNECT_SLEEP_SECONDS", "10"))
+MT5_DISCONNECT_NOTIFY_COOLDOWN_SECONDS = int(os.getenv("FOREX_MT5_DISCONNECT_NOTIFY_COOLDOWN_SECONDS", "300"))
 
 # เทรดเฉพาะช่วงเวลาไทยโดยประมาณ
 TRADE_START_HOUR = int(os.getenv("FOREX_TRADE_START_HOUR", "14"))
@@ -214,6 +217,10 @@ def connect_mt5():
     global SYMBOL
 
     print(f"[{datetime.now()}] 🔌 Connecting MT5...", flush=True)
+    try:
+        mt5.shutdown()
+    except Exception:
+        pass
     if not mt5.initialize():
         raise RuntimeError(f"MT5 initialize failed: {mt5.last_error()}")
 
@@ -228,6 +235,45 @@ def connect_mt5():
         symbol_info = mt5.symbol_info(SYMBOL)
 
     print(f"[{datetime.now()}] ✅ Connected MT5 | Symbol={SYMBOL}", flush=True)
+
+
+def is_mt5_connection_error(error):
+    text = str(error)
+    return (
+        "IPC send failed" in text
+        or "IPC" in text
+        or "-10001" in text
+        or "No account info" in text
+        or "Cannot load MT5 symbols" in text
+    )
+
+
+def mt5_ping():
+    terminal = mt5.terminal_info()
+    account = mt5.account_info()
+    if terminal is None or account is None:
+        raise RuntimeError(f"MT5 ping failed: {mt5.last_error()}")
+    return True
+
+
+def reconnect_mt5(state, error):
+    now_ts = time.time()
+    should_notify = (
+        not state.get("mt5_down")
+        or now_ts - float(state.get("last_mt5_disconnect_notify") or 0) >= MT5_DISCONNECT_NOTIFY_COOLDOWN_SECONDS
+    )
+    state["mt5_down"] = True
+    if should_notify:
+        notify_error("FOREX", f"MT5 disconnected: {error}")
+        state["last_mt5_disconnect_notify"] = now_ts
+
+    print(f"[{datetime.now()}] 🔌 MT5 disconnected, reconnecting in {MT5_RECONNECT_SLEEP_SECONDS}s: {error}", flush=True)
+    time.sleep(MT5_RECONNECT_SLEEP_SECONDS)
+    connect_mt5()
+    mt5_ping()
+    state["mt5_down"] = False
+    notify_reconnected("FOREX", "MT5 terminal connection restored")
+    print(f"[{datetime.now()}] ✅ MT5 reconnected", flush=True)
 
 
 def select_trading_symbol(preferred_symbol, reason=""):
@@ -976,12 +1022,21 @@ def run_bot():
     )
 
     last_entry_candle_time = {}
+    runtime_state = {
+        "mt5_down": False,
+        "last_mt5_disconnect_notify": 0,
+    }
 
     print(f"[{datetime.now()}] 🚀 Bot started", flush=True)
     run_daily_ai_market_scan_once(force=AI_SCAN_ON_BOT_START)
 
     while True:
         try:
+            mt5_ping()
+            if runtime_state.get("mt5_down"):
+                runtime_state["mt5_down"] = False
+                notify_reconnected("FOREX", "MT5 terminal connection restored")
+
             run_daily_ai_market_scan_once()
 
             if not pass_session_filter():
@@ -1059,6 +1114,10 @@ def run_bot():
 
                 except Exception as e:
                     print(f"[{datetime.now()}] ❌ {preferred_symbol} analysis error: {e}", flush=True)
+                    if is_mt5_connection_error(e):
+                        reconnect_mt5(runtime_state, e)
+                        order_sent = False
+                        break
                     notify_error("FOREX", f"{preferred_symbol} analysis error: {e}")
 
             if not order_sent:
@@ -1072,7 +1131,14 @@ def run_bot():
 
         except Exception as e:
             print("❌ ERROR:", e)
-            notify_error("FOREX", str(e))
+            if is_mt5_connection_error(e):
+                try:
+                    reconnect_mt5(runtime_state, e)
+                except Exception as reconnect_error:
+                    print(f"[{datetime.now()}] ❌ MT5 reconnect failed: {reconnect_error}", flush=True)
+                    notify_error("FOREX", f"MT5 reconnect failed: {reconnect_error}")
+            else:
+                notify_error("FOREX", str(e))
             time.sleep(CHECK_INTERVAL_SECONDS)
 
     mt5.shutdown()
