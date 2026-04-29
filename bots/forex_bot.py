@@ -276,8 +276,9 @@ def reconnect_mt5(state, error):
     print(f"[{datetime.now()}] ✅ MT5 reconnected", flush=True)
 
 
-def notify_forex_started():
+def notify_forex_started(phase="READY"):
     extra = (
+        f"Status: <code>{phase}</code>\n"
         f"Symbol: <code>{SYMBOL}</code>\n"
         f"Session: <code>{TRADE_START_HOUR}:00-{TRADE_END_HOUR}:59</code>\n"
         f"Interval: <code>{CHECK_INTERVAL_SECONDS}s</code>\n"
@@ -290,7 +291,7 @@ def notify_forex_started():
         extra,
     )
     if sent:
-        print(f"[{datetime.now()}] ✅ Telegram startup notification sent", flush=True)
+        print(f"[{datetime.now()}] ✅ Telegram startup notification sent ({phase})", flush=True)
     else:
         print(
             f"[{datetime.now()}] ⏳ Telegram startup notification skipped "
@@ -1044,12 +1045,13 @@ def run_bot():
         f"interval={CHECK_INTERVAL_SECONDS}s | DRY_RUN={DRY_RUN}",
         flush=True,
     )
+    notify_forex_started("BOOTING")
     try:
         connect_mt5()
     except Exception as e:
         notify_error("FOREX", f"Startup failed before MT5 connection: {e}")
         raise
-    notify_forex_started()
+    notify_forex_started("READY")
 
     last_entry_candle_time = {}
     runtime_state = {
