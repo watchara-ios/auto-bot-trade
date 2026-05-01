@@ -1,31 +1,31 @@
 {
-  "last_scan_date": "2026-04-29",
-  "last_scan_at": "2026-04-29 14:00:15",
+  "last_scan_date": "2026-05-01",
+  "last_scan_at": "2026-05-01 14:02:54",
   "last_recommendations": [
     {
       "symbol": "EURUSD",
-      "rating": 1,
-      "reason": "London-NY overlap bullish breakout; 1H trendline support holds."
+      "rating": 2,
+      "reason": "London-NY overlap provides liquidity; 1H shows bullish flag near 1.1050 support."
     },
     {
       "symbol": "GBPUSD",
-      "rating": 2,
-      "reason": "Consolidating near 1.2650; UK data risk within 2 hours."
+      "rating": 1,
+      "reason": "Strong momentum from UK data; 4H trendline breakout aligns with high session volatility."
     },
     {
       "symbol": "USDJPY",
       "rating": 3,
-      "reason": "Range-bound in 151-152 zone; low volatility expected."
+      "reason": "Rangebound on 1H; awaiting BoJ hints; moderate trading during overlap."
+    },
+    {
+      "symbol": "USDCHF",
+      "rating": 2,
+      "reason": "Weak USD supports bearish bias; 1H resistance at 0.9130 holds."
     },
     {
       "symbol": "XAUUSD",
-      "rating": 2,
-      "reason": "Safe-haven demand amid geopolitical uncertainty; 4H uptrend."
-    },
-    {
-      "symbol": "EURJPY",
       "rating": 3,
-      "reason": "Correlated moves; waiting for clearer signal from EURUSD."
+      "reason": "Safe-haven demand stable; 1H consolidation near $2340; watch for breakout."
     }
   ],
   "candidate_universe": [
@@ -60,49 +60,49 @@
     "NZDCHF"
   ],
   "candidate_symbols": [
-    "EURUSD",
-    "GBPUSD",
-    "XAUUSD",
-    "USDJPY",
-    "EURJPY"
+    "GBPUSDm",
+    "EURUSDm",
+    "USDCHFm",
+    "USDJPYm",
+    "XAUUSDm"
   ],
   "candidate_recommendations": [
     {
-      "symbol": "EURUSD",
+      "symbol": "GBPUSDm",
       "rating": 1,
-      "reason": "London-NY overlap bullish breakout; 1H trendline support holds.",
-      "source_symbol": "EURUSD"
-    },
-    {
-      "symbol": "GBPUSD",
-      "rating": 2,
-      "reason": "Consolidating near 1.2650; UK data risk within 2 hours.",
+      "reason": "Strong momentum from UK data; 4H trendline breakout aligns with high session volatility.",
       "source_symbol": "GBPUSD"
     },
     {
-      "symbol": "XAUUSD",
+      "symbol": "EURUSDm",
       "rating": 2,
-      "reason": "Safe-haven demand amid geopolitical uncertainty; 4H uptrend.",
-      "source_symbol": "XAUUSD"
+      "reason": "London-NY overlap provides liquidity; 1H shows bullish flag near 1.1050 support.",
+      "source_symbol": "EURUSD"
     },
     {
-      "symbol": "USDJPY",
+      "symbol": "USDCHFm",
+      "rating": 2,
+      "reason": "Weak USD supports bearish bias; 1H resistance at 0.9130 holds.",
+      "source_symbol": "USDCHF"
+    },
+    {
+      "symbol": "USDJPYm",
       "rating": 3,
-      "reason": "Range-bound in 151-152 zone; low volatility expected.",
+      "reason": "Rangebound on 1H; awaiting BoJ hints; moderate trading during overlap.",
       "source_symbol": "USDJPY"
     },
     {
-      "symbol": "EURJPY",
+      "symbol": "XAUUSDm",
       "rating": 3,
-      "reason": "Correlated moves; waiting for clearer signal from EURUSD.",
-      "source_symbol": "EURJPY"
+      "reason": "Safe-haven demand stable; 1H consolidation near $2340; watch for breakout.",
+      "source_symbol": "XAUUSD"
     }
   ],
-  "selected_symbol": "EURUSD",
+  "selected_symbol": "GBPUSDm",
   "selected_recommendation": {
-    "symbol": "EURUSD",
+    "symbol": "GBPUSDm",
     "rating": 1,
-    "reason": "London-NY overlap bullish breakout; 1H trendline support holds.",
-    "source_symbol": "EURUSD"
+    "reason": "Strong momentum from UK data; 4H trendline breakout aligns with high session volatility.",
+    "source_symbol": "GBPUSD"
   }
 }
