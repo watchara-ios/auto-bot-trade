@@ -112,6 +112,10 @@ BLOCK_ENTRY_HOURS = {
 EXIT_AFTER_SESSION_END = True
 
 DRY_RUN = os.getenv("FOREX_DRY_RUN", "true").lower() == "true"
+MT5_LOGIN = os.getenv("MT5_LOGIN", "").strip()
+MT5_PASSWORD = os.getenv("MT5_PASSWORD", "").strip()
+MT5_SERVER = os.getenv("MT5_SERVER", "").strip()
+MT5_EXPLICIT_LOGIN = os.getenv("FOREX_MT5_EXPLICIT_LOGIN", "true").lower() == "true"
 
 # DeepSeek daily market scan
 AI_DAILY_SCAN_ENABLED = os.getenv("FOREX_AI_DAILY_SCAN_ENABLED", "true").lower() == "true"
@@ -179,6 +183,25 @@ MIN_VOLUME_MULT = 1.0
 # =========================================================
 # MT5 CONNECT
 # =========================================================
+def mt5_account_snapshot(account=None):
+    account = account or mt5.account_info()
+    if account is None:
+        return f"No account info | last_error={mt5.last_error()}"
+
+    fields = {
+        "login": getattr(account, "login", ""),
+        "server": getattr(account, "server", ""),
+        "name": getattr(account, "name", ""),
+        "currency": getattr(account, "currency", ""),
+        "trade_allowed": getattr(account, "trade_allowed", ""),
+        "trade_expert": getattr(account, "trade_expert", ""),
+        "balance": getattr(account, "balance", ""),
+        "equity": getattr(account, "equity", ""),
+        "margin_free": getattr(account, "margin_free", ""),
+    }
+    return " | ".join(f"{key}={value}" for key, value in fields.items())
+
+
 def resolve_symbol(preferred_symbol):
     candidates = [preferred_symbol]
     preferred_upper = preferred_symbol.upper()
@@ -227,6 +250,26 @@ def connect_mt5():
     if not mt5.initialize():
         raise RuntimeError(f"MT5 initialize failed: {mt5.last_error()}")
 
+    if MT5_EXPLICIT_LOGIN:
+        if MT5_LOGIN and MT5_PASSWORD and MT5_SERVER:
+            try:
+                login_id = int(MT5_LOGIN)
+            except ValueError as exc:
+                raise RuntimeError("MT5_LOGIN must be numeric") from exc
+
+            if not mt5.login(login_id, password=MT5_PASSWORD, server=MT5_SERVER):
+                raise RuntimeError(f"MT5 login failed: {mt5.last_error()}")
+            print(
+                f"[{datetime.now()}] ✅ MT5 login OK | login={login_id} | server={MT5_SERVER}",
+                flush=True,
+            )
+        else:
+            print(
+                f"[{datetime.now()}] ⏳ MT5 explicit login skipped "
+                f"(missing MT5_LOGIN/MT5_PASSWORD/MT5_SERVER)",
+                flush=True,
+            )
+
     resolved_symbol, symbol_info = resolve_symbol(SYMBOL)
     if resolved_symbol != SYMBOL:
         print(f"[{datetime.now()}] 🔎 Symbol resolved: {SYMBOL} -> {resolved_symbol}", flush=True)
@@ -238,6 +281,7 @@ def connect_mt5():
         symbol_info = mt5.symbol_info(SYMBOL)
 
     print(f"[{datetime.now()}] ✅ Connected MT5 | Symbol={SYMBOL}", flush=True)
+    print(f"[{datetime.now()}] 🔎 MT5 account: {mt5_account_snapshot()}", flush=True)
 
 
 def is_mt5_connection_error(error):
@@ -516,9 +560,9 @@ def get_today_profit():
 def pass_daily_risk_filter():
     account = mt5.account_info()
     if account is None:
-        return False, "No account info"
+        return False, f"No account info | last_error={mt5.last_error()}"
     if float(account.balance) <= 0:
-        return False, f"Invalid account balance: {account.balance}"
+        return False, f"Invalid account balance: {account.balance} | {mt5_account_snapshot(account)}"
 
     today_orders = get_today_orders_count()
     today_profit = get_today_profit()
