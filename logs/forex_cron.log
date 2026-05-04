@@ -35944,3 +35944,939 @@ PYTHONIOENCODING=utf-8
 [2026-05-01 23:47:44.827915] [SCAN] Analyzing XAUUSDm
 [2026-05-01 23:47:45.223990] [NO_TRADE] XAUUSDm Spread too wide: 280.0 points > 80
 [2026-05-01 23:47:45.224048] [WAIT] No order from AI watchlist this round
+[2026-05-01 23:48:45.225511] [AI] Using cached daily forex scan from 2026-05-01 14:02:54 | symbols=GBPUSDm, EURUSDm, USDCHFm, USDJPYm, XAUUSDm
+[2026-05-01 23:48:45.226128] [WATCHLIST] AI watchlist scan: GBPUSDm, EURUSDm, USDCHFm, USDJPYm, XAUUSDm
+[2026-05-01 23:48:45.226348] [SELECT] Trading symbol switched: XAUUSDm -> GBPUSDm | AI watchlist candidate
+[2026-05-01 23:48:45.226408] [SCAN] Analyzing GBPUSDm
+[2026-05-01 23:48:45.773695] [STOP] GBPUSDm Invalid account balance: 0.0
+[2026-05-01 23:48:45.773853] [SELECT] Trading symbol switched: GBPUSDm -> EURUSDm | AI watchlist candidate
+[2026-05-01 23:48:45.773895] [SCAN] Analyzing EURUSDm
+[2026-05-01 23:48:46.262354] [STOP] EURUSDm Invalid account balance: 0.0
+[2026-05-01 23:48:46.262513] [SELECT] Trading symbol switched: EURUSDm -> USDCHFm | AI watchlist candidate
+[2026-05-01 23:48:46.262552] [SCAN] Analyzing USDCHFm
+[2026-05-01 23:48:46.789062] [STOP] USDCHFm Invalid account balance: 0.0
+[2026-05-01 23:48:46.789223] [SELECT] Trading symbol switched: USDCHFm -> USDJPYm | AI watchlist candidate
+[2026-05-01 23:48:46.789263] [SCAN] Analyzing USDJPYm
+[2026-05-01 23:48:47.224710] [STOP] USDJPYm Invalid account balance: 0.0
+[2026-05-01 23:48:47.224875] [SELECT] Trading symbol switched: USDJPYm -> XAUUSDm | AI watchlist candidate
+[2026-05-01 23:48:47.224916] [SCAN] Analyzing XAUUSDm
+[2026-05-01 23:48:47.725620] [NO_TRADE] XAUUSDm Spread too wide: 280.0 points > 80
+[2026-05-01 23:48:47.725751] [WAIT] No order from AI watchlist this round
+[2026-05-01 23:49:47.727479] [AI] Using cached daily forex scan from 2026-05-01 14:02:54 | symbols=GBPUSDm, EURUSDm, USDCHFm, USDJPYm, XAUUSDm
+[2026-05-01 23:49:47.728156] [WATCHLIST] AI watchlist scan: GBPUSDm, EURUSDm, USDCHFm, USDJPYm, XAUUSDm
+[2026-05-01 23:49:47.728421] [SELECT] Trading symbol switched: XAUUSDm -> GBPUSDm | AI watchlist candidate
+[2026-05-01 23:49:47.728483] [SCAN] Analyzing GBPUSDm
+[2026-05-01 23:49:48.180956] [STOP] GBPUSDm Invalid account balance: 0.0
+[2026-05-01 23:49:48.181150] [SELECT] Trading symbol switched: GBPUSDm -> EURUSDm | AI watchlist candidate
+[2026-05-01 23:49:48.181209] [SCAN] Analyzing EURUSDm
+[2026-05-01 23:49:48.630643] [STOP] EURUSDm Invalid account balance: 0.0
+[2026-05-01 23:49:48.630818] [SELECT] Trading symbol switched: EURUSDm -> USDCHFm | AI watchlist candidate
+[2026-05-01 23:49:48.630864] [SCAN] Analyzing USDCHFm
+[2026-05-01 23:49:49.085586] [STOP] USDCHFm Invalid account balance: 0.0
+[2026-05-01 23:49:49.085758] [SELECT] Trading symbol switched: USDCHFm -> USDJPYm | AI watchlist candidate
+[2026-05-01 23:49:49.085805] [SCAN] Analyzing USDJPYm
+[2026-05-01 23:49:49.538841] [STOP] USDJPYm Invalid account balance: 0.0
+[2026-05-01 23:49:49.539013] [SELECT] Trading symbol switched: USDJPYm -> XAUUSDm | AI watchlist candidate
+[2026-05-01 23:49:49.539057] [SCAN] Analyzing XAUUSDm
+[2026-05-01 23:49:49.976802] [NO_TRADE] XAUUSDm Spread too wide: 280.0 points > 80
+[2026-05-01 23:49:49.976865] [WAIT] No order from AI watchlist this round
+[2026-05-01 23:50:49.980159] [AI] Using cached daily forex scan from 2026-05-01 14:02:54 | symbols=GBPUSDm, EURUSDm, USDCHFm, USDJPYm, XAUUSDm
+[2026-05-01 23:50:49.981083] [WATCHLIST] AI watchlist scan: GBPUSDm, EURUSDm, USDCHFm, USDJPYm, XAUUSDm
+[2026-05-01 23:50:49.981441] [SELECT] Trading symbol switched: XAUUSDm -> GBPUSDm | AI watchlist candidate
+[2026-05-01 23:50:49.981547] [SCAN] Analyzing GBPUSDm
+[2026-05-01 23:50:50.370475] [STOP] GBPUSDm Invalid account balance: 0.0
+[2026-05-01 23:50:50.370694] [SELECT] Trading symbol switched: GBPUSDm -> EURUSDm | AI watchlist candidate
+[2026-05-01 23:50:50.370758] [SCAN] Analyzing EURUSDm
+[2026-05-01 23:50:50.769287] [STOP] EURUSDm Invalid account balance: 0.0
+[2026-05-01 23:50:50.769446] [SELECT] Trading symbol switched: EURUSDm -> USDCHFm | AI watchlist candidate
+[2026-05-01 23:50:50.769486] [SCAN] Analyzing USDCHFm
+[2026-05-01 23:50:51.157299] [STOP] USDCHFm Invalid account balance: 0.0
+[2026-05-01 23:50:51.157457] [SELECT] Trading symbol switched: USDCHFm -> USDJPYm | AI watchlist candidate
+[2026-05-01 23:50:51.157498] [SCAN] Analyzing USDJPYm
+[2026-05-01 23:50:51.547661] [STOP] USDJPYm Invalid account balance: 0.0
+[2026-05-01 23:50:51.547818] [SELECT] Trading symbol switched: USDJPYm -> XAUUSDm | AI watchlist candidate
+[2026-05-01 23:50:51.547859] [SCAN] Analyzing XAUUSDm
+[2026-05-01 23:50:51.936696] [NO_TRADE] XAUUSDm Spread too wide: 280.0 points > 80
+[2026-05-01 23:50:51.936758] [WAIT] No order from AI watchlist this round
+[2026-05-01 23:51:51.939484] [AI] Using cached daily forex scan from 2026-05-01 14:02:54 | symbols=GBPUSDm, EURUSDm, USDCHFm, USDJPYm, XAUUSDm
+[2026-05-01 23:51:51.940323] [WATCHLIST] AI watchlist scan: GBPUSDm, EURUSDm, USDCHFm, USDJPYm, XAUUSDm
+[2026-05-01 23:51:51.940700] [SELECT] Trading symbol switched: XAUUSDm -> GBPUSDm | AI watchlist candidate
+[2026-05-01 23:51:51.940806] [SCAN] Analyzing GBPUSDm
+[2026-05-01 23:51:52.306076] [STOP] GBPUSDm Invalid account balance: 0.0
+[2026-05-01 23:51:52.306226] [SELECT] Trading symbol switched: GBPUSDm -> EURUSDm | AI watchlist candidate
+[2026-05-01 23:51:52.306265] [SCAN] Analyzing EURUSDm
+[2026-05-01 23:51:52.658923] [STOP] EURUSDm Invalid account balance: 0.0
+[2026-05-01 23:51:52.659077] [SELECT] Trading symbol switched: EURUSDm -> USDCHFm | AI watchlist candidate
+[2026-05-01 23:51:52.659118] [SCAN] Analyzing USDCHFm
+[2026-05-01 23:51:53.021667] [STOP] USDCHFm Invalid account balance: 0.0
+[2026-05-01 23:51:53.021817] [SELECT] Trading symbol switched: USDCHFm -> USDJPYm | AI watchlist candidate
+[2026-05-01 23:51:53.021856] [SCAN] Analyzing USDJPYm
+[2026-05-01 23:51:53.388273] [STOP] USDJPYm Invalid account balance: 0.0
+[2026-05-01 23:51:53.388440] [SELECT] Trading symbol switched: USDJPYm -> XAUUSDm | AI watchlist candidate
+[2026-05-01 23:51:53.388500] [SCAN] Analyzing XAUUSDm
+[2026-05-01 23:51:53.739791] [NO_TRADE] XAUUSDm Spread too wide: 280.0 points > 80
+[2026-05-01 23:51:53.739850] [WAIT] No order from AI watchlist this round
+[2026-05-01 23:52:53.742957] [AI] Using cached daily forex scan from 2026-05-01 14:02:54 | symbols=GBPUSDm, EURUSDm, USDCHFm, USDJPYm, XAUUSDm
+[2026-05-01 23:52:53.743582] [WATCHLIST] AI watchlist scan: GBPUSDm, EURUSDm, USDCHFm, USDJPYm, XAUUSDm
+[2026-05-01 23:52:53.743848] [SELECT] Trading symbol switched: XAUUSDm -> GBPUSDm | AI watchlist candidate
+[2026-05-01 23:52:53.743936] [SCAN] Analyzing GBPUSDm
+[2026-05-01 23:52:54.097145] [STOP] GBPUSDm Invalid account balance: 0.0
+[2026-05-01 23:52:54.097298] [SELECT] Trading symbol switched: GBPUSDm -> EURUSDm | AI watchlist candidate
+[2026-05-01 23:52:54.097344] [SCAN] Analyzing EURUSDm
+[2026-05-01 23:52:54.461625] [STOP] EURUSDm Invalid account balance: 0.0
+[2026-05-01 23:52:54.461782] [SELECT] Trading symbol switched: EURUSDm -> USDCHFm | AI watchlist candidate
+[2026-05-01 23:52:54.461823] [SCAN] Analyzing USDCHFm
+[2026-05-01 23:52:54.817654] [STOP] USDCHFm Invalid account balance: 0.0
+[2026-05-01 23:52:54.817812] [SELECT] Trading symbol switched: USDCHFm -> USDJPYm | AI watchlist candidate
+[2026-05-01 23:52:54.817852] [SCAN] Analyzing USDJPYm
+[2026-05-01 23:52:55.175902] [STOP] USDJPYm Invalid account balance: 0.0
+[2026-05-01 23:52:55.176053] [SELECT] Trading symbol switched: USDJPYm -> XAUUSDm | AI watchlist candidate
+[2026-05-01 23:52:55.176093] [SCAN] Analyzing XAUUSDm
+[2026-05-01 23:52:55.542558] [NO_TRADE] XAUUSDm Spread too wide: 280.0 points > 80
+[2026-05-01 23:52:55.542631] [WAIT] No order from AI watchlist this round
+[2026-05-01 23:53:55.545614] [AI] Using cached daily forex scan from 2026-05-01 14:02:54 | symbols=GBPUSDm, EURUSDm, USDCHFm, USDJPYm, XAUUSDm
+[2026-05-01 23:53:55.546446] [WATCHLIST] AI watchlist scan: GBPUSDm, EURUSDm, USDCHFm, USDJPYm, XAUUSDm
+[2026-05-01 23:53:55.546789] [SELECT] Trading symbol switched: XAUUSDm -> GBPUSDm | AI watchlist candidate
+[2026-05-01 23:53:55.546893] [SCAN] Analyzing GBPUSDm
+[2026-05-01 23:53:55.904871] [STOP] GBPUSDm Invalid account balance: 0.0
+[2026-05-01 23:53:55.905029] [SELECT] Trading symbol switched: GBPUSDm -> EURUSDm | AI watchlist candidate
+[2026-05-01 23:53:55.905073] [SCAN] Analyzing EURUSDm
+[2026-05-01 23:53:56.268104] [STOP] EURUSDm Invalid account balance: 0.0
+[2026-05-01 23:53:56.268265] [SELECT] Trading symbol switched: EURUSDm -> USDCHFm | AI watchlist candidate
+[2026-05-01 23:53:56.268308] [SCAN] Analyzing USDCHFm
+[2026-05-01 23:53:56.633057] [STOP] USDCHFm Invalid account balance: 0.0
+[2026-05-01 23:53:56.633215] [SELECT] Trading symbol switched: USDCHFm -> USDJPYm | AI watchlist candidate
+[2026-05-01 23:53:56.633259] [SCAN] Analyzing USDJPYm
+[2026-05-01 23:53:56.988638] [STOP] USDJPYm Invalid account balance: 0.0
+[2026-05-01 23:53:56.988812] [SELECT] Trading symbol switched: USDJPYm -> XAUUSDm | AI watchlist candidate
+[2026-05-01 23:53:56.988859] [SCAN] Analyzing XAUUSDm
+[2026-05-01 23:53:57.350950] [NO_TRADE] XAUUSDm Spread too wide: 280.0 points > 80
+[2026-05-01 23:53:57.351009] [WAIT] No order from AI watchlist this round
+[2026-05-01 23:54:57.353588] [AI] Using cached daily forex scan from 2026-05-01 14:02:54 | symbols=GBPUSDm, EURUSDm, USDCHFm, USDJPYm, XAUUSDm
+[2026-05-01 23:54:57.354408] [WATCHLIST] AI watchlist scan: GBPUSDm, EURUSDm, USDCHFm, USDJPYm, XAUUSDm
+[2026-05-01 23:54:57.354788] [SELECT] Trading symbol switched: XAUUSDm -> GBPUSDm | AI watchlist candidate
+[2026-05-01 23:54:57.354893] [SCAN] Analyzing GBPUSDm
+[2026-05-01 23:54:57.709491] [STOP] GBPUSDm Invalid account balance: 0.0
+[2026-05-01 23:54:57.709639] [SELECT] Trading symbol switched: GBPUSDm -> EURUSDm | AI watchlist candidate
+[2026-05-01 23:54:57.709678] [SCAN] Analyzing EURUSDm
+[2026-05-01 23:54:58.060077] [STOP] EURUSDm Invalid account balance: 0.0
+[2026-05-01 23:54:58.060255] [SELECT] Trading symbol switched: EURUSDm -> USDCHFm | AI watchlist candidate
+[2026-05-01 23:54:58.060307] [SCAN] Analyzing USDCHFm
+[2026-05-01 23:54:58.410491] [STOP] USDCHFm Invalid account balance: 0.0
+[2026-05-01 23:54:58.410653] [SELECT] Trading symbol switched: USDCHFm -> USDJPYm | AI watchlist candidate
+[2026-05-01 23:54:58.410693] [SCAN] Analyzing USDJPYm
+[2026-05-01 23:54:58.768983] [STOP] USDJPYm Invalid account balance: 0.0
+[2026-05-01 23:54:58.769150] [SELECT] Trading symbol switched: USDJPYm -> XAUUSDm | AI watchlist candidate
+[2026-05-01 23:54:58.769192] [SCAN] Analyzing XAUUSDm
+[2026-05-01 23:54:59.121906] [NO_TRADE] XAUUSDm Spread too wide: 280.0 points > 80
+[2026-05-01 23:54:59.121994] [WAIT] No order from AI watchlist this round
+[2026-05-01 23:55:59.124606] [AI] Using cached daily forex scan from 2026-05-01 14:02:54 | symbols=GBPUSDm, EURUSDm, USDCHFm, USDJPYm, XAUUSDm
+[2026-05-01 23:55:59.125382] [WATCHLIST] AI watchlist scan: GBPUSDm, EURUSDm, USDCHFm, USDJPYm, XAUUSDm
+[2026-05-01 23:55:59.125724] [SELECT] Trading symbol switched: XAUUSDm -> GBPUSDm | AI watchlist candidate
+[2026-05-01 23:55:59.125827] [SCAN] Analyzing GBPUSDm
+[2026-05-01 23:55:59.528720] [STOP] GBPUSDm Invalid account balance: 0.0
+[2026-05-01 23:55:59.528885] [SELECT] Trading symbol switched: GBPUSDm -> EURUSDm | AI watchlist candidate
+[2026-05-01 23:55:59.528927] [SCAN] Analyzing EURUSDm
+[2026-05-01 23:55:59.934214] [STOP] EURUSDm Invalid account balance: 0.0
+[2026-05-01 23:55:59.934373] [SELECT] Trading symbol switched: EURUSDm -> USDCHFm | AI watchlist candidate
+[2026-05-01 23:55:59.934414] [SCAN] Analyzing USDCHFm
+[2026-05-01 23:56:00.335632] [STOP] USDCHFm Invalid account balance: 0.0
+[2026-05-01 23:56:00.335793] [SELECT] Trading symbol switched: USDCHFm -> USDJPYm | AI watchlist candidate
+[2026-05-01 23:56:00.335833] [SCAN] Analyzing USDJPYm
+[2026-05-01 23:56:00.738404] [STOP] USDJPYm Invalid account balance: 0.0
+[2026-05-01 23:56:00.738561] [SELECT] Trading symbol switched: USDJPYm -> XAUUSDm | AI watchlist candidate
+[2026-05-01 23:56:00.738600] [SCAN] Analyzing XAUUSDm
+[2026-05-01 23:56:01.132636] [NO_TRADE] XAUUSDm Spread too wide: 280.0 points > 80
+[2026-05-01 23:56:01.132700] [WAIT] No order from AI watchlist this round
+[2026-05-01 23:57:01.135736] [AI] Using cached daily forex scan from 2026-05-01 14:02:54 | symbols=GBPUSDm, EURUSDm, USDCHFm, USDJPYm, XAUUSDm
+[2026-05-01 23:57:01.136364] [WATCHLIST] AI watchlist scan: GBPUSDm, EURUSDm, USDCHFm, USDJPYm, XAUUSDm
+[2026-05-01 23:57:01.136649] [SELECT] Trading symbol switched: XAUUSDm -> GBPUSDm | AI watchlist candidate
+[2026-05-01 23:57:01.136734] [SCAN] Analyzing GBPUSDm
+[2026-05-01 23:57:01.485277] [STOP] GBPUSDm Invalid account balance: 0.0
+[2026-05-01 23:57:01.485440] [SELECT] Trading symbol switched: GBPUSDm -> EURUSDm | AI watchlist candidate
+[2026-05-01 23:57:01.485484] [SCAN] Analyzing EURUSDm
+[2026-05-01 23:57:01.851752] [STOP] EURUSDm Invalid account balance: 0.0
+[2026-05-01 23:57:01.851921] [SELECT] Trading symbol switched: EURUSDm -> USDCHFm | AI watchlist candidate
+[2026-05-01 23:57:01.851967] [SCAN] Analyzing USDCHFm
+[2026-05-01 23:57:02.481413] [STOP] USDCHFm Invalid account balance: 0.0
+[2026-05-01 23:57:02.481567] [SELECT] Trading symbol switched: USDCHFm -> USDJPYm | AI watchlist candidate
+[2026-05-01 23:57:02.481606] [SCAN] Analyzing USDJPYm
+[2026-05-01 23:57:02.847104] [STOP] USDJPYm Invalid account balance: 0.0
+[2026-05-01 23:57:02.847263] [SELECT] Trading symbol switched: USDJPYm -> XAUUSDm | AI watchlist candidate
+[2026-05-01 23:57:02.847304] [SCAN] Analyzing XAUUSDm
+[2026-05-01 23:57:03.210844] [NO_TRADE] XAUUSDm Spread too wide: 280.0 points > 80
+[2026-05-01 23:57:03.210898] [WAIT] No order from AI watchlist this round
+[2026-05-01 23:58:03.214125] [AI] Using cached daily forex scan from 2026-05-01 14:02:54 | symbols=GBPUSDm, EURUSDm, USDCHFm, USDJPYm, XAUUSDm
+[2026-05-01 23:58:03.215113] [WATCHLIST] AI watchlist scan: GBPUSDm, EURUSDm, USDCHFm, USDJPYm, XAUUSDm
+[2026-05-01 23:58:03.215470] [SELECT] Trading symbol switched: XAUUSDm -> GBPUSDm | AI watchlist candidate
+[2026-05-01 23:58:03.215597] [SCAN] Analyzing GBPUSDm
+[2026-05-01 23:58:03.567384] [STOP] GBPUSDm Invalid account balance: 0.0
+[2026-05-01 23:58:03.567538] [SELECT] Trading symbol switched: GBPUSDm -> EURUSDm | AI watchlist candidate
+[2026-05-01 23:58:03.567585] [SCAN] Analyzing EURUSDm
+[2026-05-01 23:58:03.925838] [STOP] EURUSDm Invalid account balance: 0.0
+[2026-05-01 23:58:03.926009] [SELECT] Trading symbol switched: EURUSDm -> USDCHFm | AI watchlist candidate
+[2026-05-01 23:58:03.926054] [SCAN] Analyzing USDCHFm
+[2026-05-01 23:58:04.302098] [STOP] USDCHFm Invalid account balance: 0.0
+[2026-05-01 23:58:04.302257] [SELECT] Trading symbol switched: USDCHFm -> USDJPYm | AI watchlist candidate
+[2026-05-01 23:58:04.302296] [SCAN] Analyzing USDJPYm
+[2026-05-01 23:58:04.668979] [STOP] USDJPYm Invalid account balance: 0.0
+[2026-05-01 23:58:04.669163] [SELECT] Trading symbol switched: USDJPYm -> XAUUSDm | AI watchlist candidate
+[2026-05-01 23:58:04.669218] [SCAN] Analyzing XAUUSDm
+[2026-05-01 23:58:05.020413] [NO_TRADE] XAUUSDm Spread too wide: 360.0 points > 80
+[2026-05-01 23:58:05.020470] [WAIT] No order from AI watchlist this round
+[2026-05-01 23:59:05.022234] [AI] Using cached daily forex scan from 2026-05-01 14:02:54 | symbols=GBPUSDm, EURUSDm, USDCHFm, USDJPYm, XAUUSDm
+[2026-05-01 23:59:05.022621] [WATCHLIST] AI watchlist scan: GBPUSDm, EURUSDm, USDCHFm, USDJPYm, XAUUSDm
+[2026-05-01 23:59:05.022797] [SELECT] Trading symbol switched: XAUUSDm -> GBPUSDm | AI watchlist candidate
+[2026-05-01 23:59:05.022849] [SCAN] Analyzing GBPUSDm
+[2026-05-01 23:59:05.377920] [STOP] GBPUSDm Invalid account balance: 0.0
+[2026-05-01 23:59:05.378065] [SELECT] Trading symbol switched: GBPUSDm -> EURUSDm | AI watchlist candidate
+[2026-05-01 23:59:05.378105] [SCAN] Analyzing EURUSDm
+[2026-05-01 23:59:05.742936] [STOP] EURUSDm Invalid account balance: 0.0
+[2026-05-01 23:59:05.743095] [SELECT] Trading symbol switched: EURUSDm -> USDCHFm | AI watchlist candidate
+[2026-05-01 23:59:05.743137] [SCAN] Analyzing USDCHFm
+[2026-05-01 23:59:06.120535] [STOP] USDCHFm Invalid account balance: 0.0
+[2026-05-01 23:59:06.120687] [SELECT] Trading symbol switched: USDCHFm -> USDJPYm | AI watchlist candidate
+[2026-05-01 23:59:06.120727] [SCAN] Analyzing USDJPYm
+[2026-05-01 23:59:06.472363] [STOP] USDJPYm Invalid account balance: 0.0
+[2026-05-01 23:59:06.472560] [SELECT] Trading symbol switched: USDJPYm -> XAUUSDm | AI watchlist candidate
+[2026-05-01 23:59:06.472616] [SCAN] Analyzing XAUUSDm
+[2026-05-01 23:59:06.817471] [NO_TRADE] XAUUSDm Spread too wide: 280.0 points > 80
+[2026-05-01 23:59:06.817533] [WAIT] No order from AI watchlist this round
+[2026-05-02 00:00:06.819500] [WAIT] Outside trading session
+[2026-05-02 00:01:06.821643] [WAIT] Outside trading session
+[2026-05-02 00:02:06.823855] [WAIT] Outside trading session
+[2026-05-02 00:03:06.826330] [WAIT] Outside trading session
+[2026-05-02 00:04:06.828550] [WAIT] Outside trading session
+[2026-05-02 00:05:06.830533] [WAIT] Outside trading session
+[2026-05-02 00:06:06.832698] [WAIT] Outside trading session
+[2026-05-02 00:07:06.834841] [WAIT] Outside trading session
+[2026-05-02 00:08:06.836913] [WAIT] Outside trading session
+[2026-05-02 00:09:06.838939] [WAIT] Outside trading session
+[2026-05-02 00:10:06.841108] [WAIT] Outside trading session
+[2026-05-02 00:11:06.843571] [WAIT] Outside trading session
+[2026-05-02 00:12:06.845649] [WAIT] Outside trading session
+[2026-05-02 00:13:06.847985] [WAIT] Outside trading session
+[2026-05-02 00:14:06.850097] [WAIT] Outside trading session
+[2026-05-02 00:15:06.852467] [WAIT] Outside trading session
+[2026-05-02 00:16:06.854726] [WAIT] Outside trading session
+[2026-05-02 00:17:06.856935] [WAIT] Outside trading session
+[2026-05-02 00:18:06.859432] [WAIT] Outside trading session
+[2026-05-02 00:19:06.861638] [WAIT] Outside trading session
+[2026-05-02 00:20:06.863440] [WAIT] Outside trading session
+[2026-05-02 00:21:06.865524] [WAIT] Outside trading session
+[2026-05-02 00:22:06.867634] [WAIT] Outside trading session
+[2026-05-02 00:23:06.869546] [WAIT] Outside trading session
+[2026-05-02 00:24:06.871370] [WAIT] Outside trading session
+[2026-05-02 00:25:06.873534] [WAIT] Outside trading session
+[2026-05-02 00:26:06.875720] [WAIT] Outside trading session
+[2026-05-02 00:27:06.877916] [WAIT] Outside trading session
+[2026-05-02 00:28:06.880334] [WAIT] Outside trading session
+[2026-05-02 00:29:06.882534] [WAIT] Outside trading session
+[2026-05-02 00:30:06.884865] [WAIT] Outside trading session
+[2026-05-02 00:31:06.887095] [WAIT] Outside trading session
+[2026-05-02 00:32:06.889306] [WAIT] Outside trading session
+[2026-05-02 00:33:06.891679] [WAIT] Outside trading session
+[2026-05-02 00:34:06.893935] [WAIT] Outside trading session
+[2026-05-02 00:35:06.896335] [WAIT] Outside trading session
+[2026-05-02 00:36:06.898590] [WAIT] Outside trading session
+[2026-05-02 00:37:06.900966] [WAIT] Outside trading session
+[2026-05-02 00:38:06.903406] [WAIT] Outside trading session
+[2026-05-02 00:39:06.905261] [WAIT] Outside trading session
+[2026-05-02 00:40:06.907121] [WAIT] Outside trading session
+[2026-05-02 00:41:06.908707] [WAIT] Outside trading session
+[2026-05-02 00:42:06.910458] [WAIT] Outside trading session
+[2026-05-02 00:43:06.912698] [WAIT] Outside trading session
+[2026-05-02 00:44:06.914988] [WAIT] Outside trading session
+[2026-05-02 00:45:06.916343] [WAIT] Outside trading session
+[2026-05-02 00:46:06.918219] [WAIT] Outside trading session
+[2026-05-02 00:47:06.920175] [WAIT] Outside trading session
+[2026-05-02 00:48:06.921783] [WAIT] Outside trading session
+[2026-05-02 00:49:06.923626] [WAIT] Outside trading session
+[2026-05-02 00:50:06.924648] [WAIT] Outside trading session
+[2026-05-02 00:51:06.926322] [WAIT] Outside trading session
+[2026-05-02 00:52:06.927962] [WAIT] Outside trading session
+[2026-05-02 00:53:06.929751] [WAIT] Outside trading session
+[2026-05-02 00:54:06.931896] [WAIT] Outside trading session
+[2026-05-02 00:55:06.934059] [WAIT] Outside trading session
+[2026-05-02 00:56:06.936158] [WAIT] Outside trading session
+[2026-05-02 00:57:06.938370] [WAIT] Outside trading session
+[2026-05-02 00:58:06.940798] [WAIT] Outside trading session
+[2026-05-02 00:59:06.942529] [WAIT] Outside trading session
+[2026-05-02 01:00:06.944213] [WAIT] Outside trading session
+[2026-05-02 01:01:06.945777] [WAIT] Outside trading session
+[2026-05-02 01:02:06.947385] [WAIT] Outside trading session
+[2026-05-02 01:03:06.949342] [WAIT] Outside trading session
+[2026-05-02 01:04:06.951481] [WAIT] Outside trading session
+[2026-05-02 01:05:06.953584] [WAIT] Outside trading session
+[2026-05-02 01:06:06.956109] [WAIT] Outside trading session
+[2026-05-02 01:07:06.958231] [WAIT] Outside trading session
+[2026-05-02 01:08:06.960633] [WAIT] Outside trading session
+[2026-05-02 01:09:06.962503] [WAIT] Outside trading session
+[2026-05-02 01:10:06.964685] [WAIT] Outside trading session
+[2026-05-02 01:11:06.967027] [WAIT] Outside trading session
+[2026-05-02 01:12:06.969065] [WAIT] Outside trading session
+[2026-05-02 01:13:06.971272] [WAIT] Outside trading session
+[2026-05-02 01:14:06.973247] [WAIT] Outside trading session
+[2026-05-02 01:15:06.975028] [WAIT] Outside trading session
+[2026-05-02 01:16:06.976995] [WAIT] Outside trading session
+[2026-05-02 01:17:06.979092] [WAIT] Outside trading session
+[2026-05-02 01:18:06.981254] [WAIT] Outside trading session
+[2026-05-02 01:19:06.983333] [WAIT] Outside trading session
+[2026-05-02 01:20:06.985664] [WAIT] Outside trading session
+[2026-05-02 01:21:06.987723] [WAIT] Outside trading session
+[2026-05-02 01:22:06.989822] [WAIT] Outside trading session
+[2026-05-02 01:23:06.991695] [WAIT] Outside trading session
+[2026-05-02 01:24:06.993315] [WAIT] Outside trading session
+[2026-05-02 01:25:06.995479] [WAIT] Outside trading session
+[2026-05-02 01:26:06.996401] [WAIT] Outside trading session
+[2026-05-02 01:27:06.998449] [WAIT] Outside trading session
+[2026-05-02 01:28:07.000884] [WAIT] Outside trading session
+[2026-05-02 01:29:07.002974] [WAIT] Outside trading session
+[2026-05-02 01:30:07.005403] [WAIT] Outside trading session
+[2026-05-02 01:31:07.007524] [WAIT] Outside trading session
+[2026-05-02 01:32:07.009742] [WAIT] Outside trading session
+[2026-05-02 01:33:07.012178] [WAIT] Outside trading session
+[2026-05-02 01:34:07.013218] [WAIT] Outside trading session
+[2026-05-02 01:35:07.015268] [WAIT] Outside trading session
+[2026-05-02 01:36:07.017346] [WAIT] Outside trading session
+[2026-05-02 01:37:07.019465] [WAIT] Outside trading session
+[2026-05-02 01:38:07.021796] [WAIT] Outside trading session
+[2026-05-02 01:39:07.024020] [WAIT] Outside trading session
+[2026-05-02 01:40:07.026218] [WAIT] Outside trading session
+[2026-05-02 01:41:07.028398] [WAIT] Outside trading session
+[2026-05-02 01:42:07.030567] [WAIT] Outside trading session
+[2026-05-02 01:43:07.032528] [WAIT] Outside trading session
+[2026-05-02 01:44:07.034659] [WAIT] Outside trading session
+[2026-05-02 01:45:07.036852] [WAIT] Outside trading session
+[2026-05-02 01:46:07.038950] [WAIT] Outside trading session
+[2026-05-02 01:47:07.040101] [WAIT] Outside trading session
+[2026-05-02 01:48:07.041697] [WAIT] Outside trading session
+[2026-05-02 01:49:07.043783] [WAIT] Outside trading session
+[2026-05-02 01:50:07.045905] [WAIT] Outside trading session
+[2026-05-02 01:51:07.048094] [WAIT] Outside trading session
+[2026-05-02 01:52:07.050211] [WAIT] Outside trading session
+[2026-05-02 01:53:07.052060] [WAIT] Outside trading session
+[2026-05-02 01:54:07.054299] [WAIT] Outside trading session
+[2026-05-02 01:55:07.056319] [WAIT] Outside trading session
+[2026-05-02 01:56:07.058480] [WAIT] Outside trading session
+[2026-05-02 01:57:07.060700] [WAIT] Outside trading session
+[2026-05-02 01:58:07.063016] [WAIT] Outside trading session
+[2026-05-02 01:59:07.064262] [WAIT] Outside trading session
+[2026-05-02 02:00:07.066279] [WAIT] Outside trading session
+[2026-05-02 02:01:07.068408] [WAIT] Outside trading session
+[2026-05-02 02:02:07.070550] [WAIT] Outside trading session
+[2026-05-02 02:03:07.072665] [WAIT] Outside trading session
+[2026-05-02 02:04:07.074353] [WAIT] Outside trading session
+[2026-05-02 02:05:07.076517] [WAIT] Outside trading session
+[2026-05-02 02:06:07.078628] [WAIT] Outside trading session
+[2026-05-02 02:07:07.080872] [WAIT] Outside trading session
+[2026-05-02 02:08:07.083175] [WAIT] Outside trading session
+[2026-05-02 02:09:07.085277] [WAIT] Outside trading session
+[2026-05-02 02:10:07.087411] [WAIT] Outside trading session
+[2026-05-02 02:11:07.089010] [WAIT] Outside trading session
+[2026-05-02 02:12:07.090933] [WAIT] Outside trading session
+[2026-05-02 02:13:07.092741] [WAIT] Outside trading session
+[2026-05-02 02:14:07.095014] [WAIT] Outside trading session
+[2026-05-02 02:15:07.097120] [WAIT] Outside trading session
+[2026-05-02 02:16:07.099160] [WAIT] Outside trading session
+[2026-05-02 02:17:07.101223] [WAIT] Outside trading session
+[2026-05-02 02:18:07.103499] [WAIT] Outside trading session
+[2026-05-02 02:19:07.105657] [WAIT] Outside trading session
+[2026-05-02 02:20:07.107787] [WAIT] Outside trading session
+[2026-05-02 02:21:07.109137] [WAIT] Outside trading session
+[2026-05-02 02:22:07.111187] [WAIT] Outside trading session
+[2026-05-02 02:23:07.113517] [WAIT] Outside trading session
+[2026-05-02 02:24:07.115473] [WAIT] Outside trading session
+[2026-05-02 02:25:07.117121] [WAIT] Outside trading session
+[2026-05-02 02:26:07.119237] [WAIT] Outside trading session
+[2026-05-02 02:27:07.120932] [WAIT] Outside trading session
+[2026-05-02 02:28:07.123242] [WAIT] Outside trading session
+[2026-05-02 02:29:07.125469] [WAIT] Outside trading session
+[2026-05-02 02:30:07.127849] [WAIT] Outside trading session
+[2026-05-02 02:31:07.130169] [WAIT] Outside trading session
+[2026-05-02 02:32:07.132505] [WAIT] Outside trading session
+[2026-05-02 02:33:07.134736] [WAIT] Outside trading session
+[2026-05-02 02:34:07.136886] [WAIT] Outside trading session
+[2026-05-02 02:35:07.138444] [WAIT] Outside trading session
+[2026-05-02 02:36:07.140700] [WAIT] Outside trading session
+[2026-05-02 02:37:07.142715] [WAIT] Outside trading session
+[2026-05-02 02:38:07.145270] [WAIT] Outside trading session
+[2026-05-02 02:39:07.147069] [WAIT] Outside trading session
+[2026-05-02 02:40:07.149267] [WAIT] Outside trading session
+[2026-05-02 02:41:07.151548] [WAIT] Outside trading session
+[2026-05-02 02:42:07.153747] [WAIT] Outside trading session
+[2026-05-02 02:43:07.156155] [WAIT] Outside trading session
+[2026-05-02 02:44:07.158289] [WAIT] Outside trading session
+[2026-05-02 02:45:07.160458] [WAIT] Outside trading session
+[2026-05-02 02:46:07.162829] [WAIT] Outside trading session
+[2026-05-02 02:47:07.164082] [WAIT] Outside trading session
+[2026-05-02 02:48:07.179599] [WAIT] Outside trading session
+[2026-05-04 16:06:09.511299] [AI] DeepSeek daily forex scan starting...
+[2026-05-04 16:06:09.532621] [AI] MT5 candidate symbols for AI: EURUSD, GBPUSD, USDJPY, USDCHF, USDCAD, AUDUSD, NZDUSD, EURJPY, GBPJPY, XAUUSD
+[2026-05-04 16:06:22.274392] [AI] AI MT5 watchlist: GBPUSDm(r1), EURUSDm(r2), USDCHFm(r2), XAUUSDm(r2), USDJPYm(r3), USDCADm(r3)
+[2026-05-04 16:06:22.276371] [AI] DeepSeek recommendations: {"timestamp": "2026-05-04 14:00:00", "recommendations": [{"symbol": "EURUSD", "rating": 2, "reason": "London-NY overlap offers liquidity; 1H shows support near 1.1050."}, {"symbol": "GBPUSD", "rating": 1, "reason": "Bullish momentum on 4H; active session favors GBP volatility."}, {"symbol": "USDJPY", "rating": 3, "reason": "Consolidating near resistance; wait for breakout during overlap."}, {"symbol": "USDCHF", "rating": 2, "reason": "Negative correlation with EURUSD; session liquidity aids entry."}, {"symbol": "USDCAD", "rating": 3, "reason": "Oil news pending; cautious trading in high liquidity window."}, {"symbol": "XAUUSD", "rating": 2, "reason": "Safe-haven demand; volatility picks up during London-NY overlap."}]}
+[2026-05-04 16:06:22.277004] [WATCHLIST] AI watchlist scan: GBPUSDm, EURUSDm, USDCHFm, XAUUSDm, USDJPYm, USDCADm
+[2026-05-04 16:06:22.277244] [SELECT] Trading symbol switched: XAUUSDm -> GBPUSDm | AI watchlist candidate
+[2026-05-04 16:06:22.277377] [SCAN] Analyzing GBPUSDm
+
+==============================
+Time: 2026-05-04 16:06:24.106821
+SIGNAL: {'time': Timestamp('2026-05-04 09:00:00'), 'symbol': 'GBPUSDm', 'side': 'NO_TRADE', 'price': 1.35656, 'reason': 'no Donchian breakout'}
+[NO_TRADE] GBPUSDm No trade
+[2026-05-04 16:06:24.107561] [SELECT] Trading symbol switched: GBPUSDm -> EURUSDm | AI watchlist candidate
+[2026-05-04 16:06:24.107658] [SCAN] Analyzing EURUSDm
+
+==============================
+Time: 2026-05-04 16:06:25.309990
+SIGNAL: {'time': Timestamp('2026-05-04 09:00:00'), 'symbol': 'EURUSDm', 'side': 'NO_TRADE', 'price': 1.17232, 'reason': 'no Donchian breakout'}
+[NO_TRADE] EURUSDm No trade
+[2026-05-04 16:06:25.310261] [SELECT] Trading symbol switched: EURUSDm -> USDCHFm | AI watchlist candidate
+[2026-05-04 16:06:25.310339] [SCAN] Analyzing USDCHFm
+
+==============================
+Time: 2026-05-04 16:06:26.538785
+SIGNAL: {'time': Timestamp('2026-05-04 09:00:00'), 'symbol': 'USDCHFm', 'side': 'NO_TRADE', 'price': 0.78213, 'reason': 'no Donchian breakout'}
+[NO_TRADE] USDCHFm No trade
+[2026-05-04 16:06:26.538994] [SELECT] Trading symbol switched: USDCHFm -> XAUUSDm | AI watchlist candidate
+[2026-05-04 16:06:26.539048] [SCAN] Analyzing XAUUSDm
+[2026-05-04 16:06:27.170534] [NO_TRADE] XAUUSDm Spread too wide: 280.0 points > 80
+[2026-05-04 16:06:27.170776] [SELECT] Trading symbol switched: XAUUSDm -> USDJPYm | AI watchlist candidate
+[2026-05-04 16:06:27.170859] [SCAN] Analyzing USDJPYm
+
+==============================
+Time: 2026-05-04 16:06:28.387598
+SIGNAL: {'time': Timestamp('2026-05-04 09:00:00'), 'symbol': 'USDJPYm', 'side': 'NO_TRADE', 'price': 156.923, 'reason': 'no Donchian breakout'}
+[NO_TRADE] USDJPYm No trade
+[2026-05-04 16:06:28.387871] [SELECT] Trading symbol switched: USDJPYm -> USDCADm | AI watchlist candidate
+[2026-05-04 16:06:28.387929] [SCAN] Analyzing USDCADm
+
+==============================
+Time: 2026-05-04 16:06:29.579827
+SIGNAL: {'time': Timestamp('2026-04-29 17:20:00'), 'symbol': 'USDCADm', 'side': 'NO_TRADE', 'price': 1.36799, 'reason': 'no Donchian breakout'}
+[NO_TRADE] USDCADm No trade
+[2026-05-04 16:06:29.580019] [WAIT] No order from AI watchlist this round
+[2026-05-04 16:07:24.230207] [AI] Using cached daily forex scan from 2026-05-04 16:06:09 | symbols=GBPUSDm, EURUSDm, USDCHFm, XAUUSDm, USDJPYm, USDCADm
+[2026-05-04 16:07:24.230596] [WATCHLIST] AI watchlist scan: GBPUSDm, EURUSDm, USDCHFm, XAUUSDm, USDJPYm, USDCADm
+[2026-05-04 16:07:24.230754] [SELECT] Trading symbol switched: USDCADm -> GBPUSDm | AI watchlist candidate
+[2026-05-04 16:07:24.230797] [SCAN] Analyzing GBPUSDm
+[2026-05-04 16:07:25.072061] [NO_TRADE] GBPUSDm already checked candle 2026-05-04 09:00:00
+[2026-05-04 16:07:25.072273] [SELECT] Trading symbol switched: GBPUSDm -> EURUSDm | AI watchlist candidate
+[2026-05-04 16:07:25.072341] [SCAN] Analyzing EURUSDm
+[2026-05-04 16:07:25.934232] [NO_TRADE] EURUSDm already checked candle 2026-05-04 09:00:00
+[2026-05-04 16:07:25.934421] [SELECT] Trading symbol switched: EURUSDm -> USDCHFm | AI watchlist candidate
+[2026-05-04 16:07:25.934464] [SCAN] Analyzing USDCHFm
+[2026-05-04 16:07:26.850555] [NO_TRADE] USDCHFm already checked candle 2026-05-04 09:00:00
+[2026-05-04 16:07:26.850746] [SELECT] Trading symbol switched: USDCHFm -> XAUUSDm | AI watchlist candidate
+[2026-05-04 16:07:26.850791] [SCAN] Analyzing XAUUSDm
+[2026-05-04 16:07:27.324498] [NO_TRADE] XAUUSDm Spread too wide: 280.0 points > 80
+[2026-05-04 16:07:27.324715] [SELECT] Trading symbol switched: XAUUSDm -> USDJPYm | AI watchlist candidate
+[2026-05-04 16:07:27.324762] [SCAN] Analyzing USDJPYm
+[2026-05-04 16:07:28.389308] [NO_TRADE] USDJPYm already checked candle 2026-05-04 09:00:00
+[2026-05-04 16:07:28.389536] [SELECT] Trading symbol switched: USDJPYm -> USDCADm | AI watchlist candidate
+[2026-05-04 16:07:28.389599] [SCAN] Analyzing USDCADm
+
+==============================
+Time: 2026-05-04 16:07:29.545104
+SIGNAL: {'time': Timestamp('2026-05-04 09:00:00'), 'symbol': 'USDCADm', 'side': 'NO_TRADE', 'price': 1.35977, 'reason': 'no Donchian breakout'}
+[NO_TRADE] USDCADm No trade
+[2026-05-04 16:07:29.545276] [WAIT] No order from AI watchlist this round
+[2026-05-04 16:08:29.547040] [AI] Using cached daily forex scan from 2026-05-04 16:06:09 | symbols=GBPUSDm, EURUSDm, USDCHFm, XAUUSDm, USDJPYm, USDCADm
+[2026-05-04 16:08:29.547470] [WATCHLIST] AI watchlist scan: GBPUSDm, EURUSDm, USDCHFm, XAUUSDm, USDJPYm, USDCADm
+[2026-05-04 16:08:29.547637] [SELECT] Trading symbol switched: USDCADm -> GBPUSDm | AI watchlist candidate
+[2026-05-04 16:08:29.547678] [SCAN] Analyzing GBPUSDm
+[2026-05-04 16:08:30.367038] [NO_TRADE] GBPUSDm already checked candle 2026-05-04 09:00:00
+[2026-05-04 16:08:30.367225] [SELECT] Trading symbol switched: GBPUSDm -> EURUSDm | AI watchlist candidate
+[2026-05-04 16:08:30.367268] [SCAN] Analyzing EURUSDm
+[2026-05-04 16:08:31.176745] [NO_TRADE] EURUSDm already checked candle 2026-05-04 09:00:00
+[2026-05-04 16:08:31.176924] [SELECT] Trading symbol switched: EURUSDm -> USDCHFm | AI watchlist candidate
+[2026-05-04 16:08:31.176965] [SCAN] Analyzing USDCHFm
+[2026-05-04 16:08:31.963696] [NO_TRADE] USDCHFm already checked candle 2026-05-04 09:00:00
+[2026-05-04 16:08:31.963878] [SELECT] Trading symbol switched: USDCHFm -> XAUUSDm | AI watchlist candidate
+[2026-05-04 16:08:31.963919] [SCAN] Analyzing XAUUSDm
+[2026-05-04 16:08:32.328486] [NO_TRADE] XAUUSDm Spread too wide: 280.0 points > 80
+[2026-05-04 16:08:32.328644] [SELECT] Trading symbol switched: XAUUSDm -> USDJPYm | AI watchlist candidate
+[2026-05-04 16:08:32.328685] [SCAN] Analyzing USDJPYm
+[2026-05-04 16:08:33.045551] [NO_TRADE] USDJPYm already checked candle 2026-05-04 09:00:00
+[2026-05-04 16:08:33.045735] [SELECT] Trading symbol switched: USDJPYm -> USDCADm | AI watchlist candidate
+[2026-05-04 16:08:33.045782] [SCAN] Analyzing USDCADm
+[2026-05-04 16:08:33.783885] [NO_TRADE] USDCADm already checked candle 2026-05-04 09:00:00
+[2026-05-04 16:08:33.783978] [WAIT] No order from AI watchlist this round
+[2026-05-04 16:09:33.785916] [AI] Using cached daily forex scan from 2026-05-04 16:06:09 | symbols=GBPUSDm, EURUSDm, USDCHFm, XAUUSDm, USDJPYm, USDCADm
+[2026-05-04 16:09:33.786301] [WATCHLIST] AI watchlist scan: GBPUSDm, EURUSDm, USDCHFm, XAUUSDm, USDJPYm, USDCADm
+[2026-05-04 16:09:33.786484] [SELECT] Trading symbol switched: USDCADm -> GBPUSDm | AI watchlist candidate
+[2026-05-04 16:09:33.786536] [SCAN] Analyzing GBPUSDm
+[2026-05-04 16:09:34.564218] [NO_TRADE] GBPUSDm already checked candle 2026-05-04 09:00:00
+[2026-05-04 16:09:34.564406] [SELECT] Trading symbol switched: GBPUSDm -> EURUSDm | AI watchlist candidate
+[2026-05-04 16:09:34.564449] [SCAN] Analyzing EURUSDm
+[2026-05-04 16:09:35.331405] [NO_TRADE] EURUSDm already checked candle 2026-05-04 09:00:00
+[2026-05-04 16:09:35.331592] [SELECT] Trading symbol switched: EURUSDm -> USDCHFm | AI watchlist candidate
+[2026-05-04 16:09:35.331640] [SCAN] Analyzing USDCHFm
+[2026-05-04 16:09:36.077677] [NO_TRADE] USDCHFm already checked candle 2026-05-04 09:00:00
+[2026-05-04 16:09:36.077866] [SELECT] Trading symbol switched: USDCHFm -> XAUUSDm | AI watchlist candidate
+[2026-05-04 16:09:36.077911] [SCAN] Analyzing XAUUSDm
+[2026-05-04 16:09:36.456133] [NO_TRADE] XAUUSDm Spread too wide: 280.0 points > 80
+[2026-05-04 16:09:36.456286] [SELECT] Trading symbol switched: XAUUSDm -> USDJPYm | AI watchlist candidate
+[2026-05-04 16:09:36.456328] [SCAN] Analyzing USDJPYm
+[2026-05-04 16:09:37.215347] [NO_TRADE] USDJPYm already checked candle 2026-05-04 09:00:00
+[2026-05-04 16:09:37.215566] [SELECT] Trading symbol switched: USDJPYm -> USDCADm | AI watchlist candidate
+[2026-05-04 16:09:37.215648] [SCAN] Analyzing USDCADm
+[2026-05-04 16:09:38.004553] [NO_TRADE] USDCADm already checked candle 2026-05-04 09:00:00
+[2026-05-04 16:09:38.004665] [WAIT] No order from AI watchlist this round
+[2026-05-04 16:10:38.006549] [AI] Using cached daily forex scan from 2026-05-04 16:06:09 | symbols=GBPUSDm, EURUSDm, USDCHFm, XAUUSDm, USDJPYm, USDCADm
+[2026-05-04 16:10:38.007043] [WATCHLIST] AI watchlist scan: GBPUSDm, EURUSDm, USDCHFm, XAUUSDm, USDJPYm, USDCADm
+[2026-05-04 16:10:38.007258] [SELECT] Trading symbol switched: USDCADm -> GBPUSDm | AI watchlist candidate
+[2026-05-04 16:10:38.007314] [SCAN] Analyzing GBPUSDm
+
+==============================
+Time: 2026-05-04 16:10:38.927571
+SIGNAL: {'time': Timestamp('2026-05-04 09:05:00'), 'symbol': 'GBPUSDm', 'side': 'NO_TRADE', 'price': 1.3562, 'reason': 'no Donchian breakout'}
+[NO_TRADE] GBPUSDm No trade
+[2026-05-04 16:10:38.927849] [SELECT] Trading symbol switched: GBPUSDm -> EURUSDm | AI watchlist candidate
+[2026-05-04 16:10:38.927921] [SCAN] Analyzing EURUSDm
+
+==============================
+Time: 2026-05-04 16:10:39.838124
+SIGNAL: {'time': Timestamp('2026-05-04 09:05:00'), 'symbol': 'EURUSDm', 'side': 'NO_TRADE', 'price': 1.1718899999999999, 'reason': 'no Donchian breakout'}
+[NO_TRADE] EURUSDm No trade
+[2026-05-04 16:10:39.838397] [SELECT] Trading symbol switched: EURUSDm -> USDCHFm | AI watchlist candidate
+[2026-05-04 16:10:39.838438] [SCAN] Analyzing USDCHFm
+
+==============================
+Time: 2026-05-04 16:10:41.087482
+SIGNAL: {'time': Timestamp('2026-05-04 09:05:00'), 'symbol': 'USDCHFm', 'side': 'NO_TRADE', 'price': 0.78248, 'reason': 'no Donchian breakout'}
+[NO_TRADE] USDCHFm No trade
+[2026-05-04 16:10:41.087691] [SELECT] Trading symbol switched: USDCHFm -> XAUUSDm | AI watchlist candidate
+[2026-05-04 16:10:41.087763] [SCAN] Analyzing XAUUSDm
+[2026-05-04 16:10:41.650888] [NO_TRADE] XAUUSDm Spread too wide: 280.0 points > 80
+[2026-05-04 16:10:41.651052] [SELECT] Trading symbol switched: XAUUSDm -> USDJPYm | AI watchlist candidate
+[2026-05-04 16:10:41.651095] [SCAN] Analyzing USDJPYm
+
+==============================
+Time: 2026-05-04 16:10:42.802584
+SIGNAL: {'time': Timestamp('2026-05-04 09:05:00'), 'symbol': 'USDJPYm', 'side': 'NO_TRADE', 'price': 156.959, 'reason': 'no Donchian breakout'}
+[NO_TRADE] USDJPYm No trade
+[2026-05-04 16:10:42.802816] [SELECT] Trading symbol switched: USDJPYm -> USDCADm | AI watchlist candidate
+[2026-05-04 16:10:42.802871] [SCAN] Analyzing USDCADm
+
+==============================
+Time: 2026-05-04 16:10:43.952295
+SIGNAL: {'time': Timestamp('2026-05-04 09:05:00'), 'symbol': 'USDCADm', 'side': 'NO_TRADE', 'price': 1.3599999999999999, 'reason': 'no Donchian breakout'}
+[NO_TRADE] USDCADm No trade
+[2026-05-04 16:10:43.952409] [WAIT] No order from AI watchlist this round
+[2026-05-04 16:11:43.957413] [AI] Using cached daily forex scan from 2026-05-04 16:06:09 | symbols=GBPUSDm, EURUSDm, USDCHFm, XAUUSDm, USDJPYm, USDCADm
+[2026-05-04 16:11:43.958216] [WATCHLIST] AI watchlist scan: GBPUSDm, EURUSDm, USDCHFm, XAUUSDm, USDJPYm, USDCADm
+[2026-05-04 16:11:43.958572] [SELECT] Trading symbol switched: USDCADm -> GBPUSDm | AI watchlist candidate
+[2026-05-04 16:11:43.958676] [SCAN] Analyzing GBPUSDm
+[2026-05-04 16:11:45.002393] [NO_TRADE] GBPUSDm already checked candle 2026-05-04 09:05:00
+[2026-05-04 16:11:45.002580] [SELECT] Trading symbol switched: GBPUSDm -> EURUSDm | AI watchlist candidate
+[2026-05-04 16:11:45.002644] [SCAN] Analyzing EURUSDm
+[2026-05-04 16:11:45.982923] [NO_TRADE] EURUSDm already checked candle 2026-05-04 09:05:00
+[2026-05-04 16:11:45.983283] [SELECT] Trading symbol switched: EURUSDm -> USDCHFm | AI watchlist candidate
+[2026-05-04 16:11:45.983416] [SCAN] Analyzing USDCHFm
+[2026-05-04 16:11:46.774870] [NO_TRADE] USDCHFm already checked candle 2026-05-04 09:05:00
+[2026-05-04 16:11:46.775054] [SELECT] Trading symbol switched: USDCHFm -> XAUUSDm | AI watchlist candidate
+[2026-05-04 16:11:46.775098] [SCAN] Analyzing XAUUSDm
+[2026-05-04 16:11:47.173841] [NO_TRADE] XAUUSDm Spread too wide: 280.0 points > 80
+[2026-05-04 16:11:47.174003] [SELECT] Trading symbol switched: XAUUSDm -> USDJPYm | AI watchlist candidate
+[2026-05-04 16:11:47.174043] [SCAN] Analyzing USDJPYm
+[2026-05-04 16:11:47.973647] [NO_TRADE] USDJPYm already checked candle 2026-05-04 09:05:00
+[2026-05-04 16:11:47.973846] [SELECT] Trading symbol switched: USDJPYm -> USDCADm | AI watchlist candidate
+[2026-05-04 16:11:47.973919] [SCAN] Analyzing USDCADm
+[2026-05-04 16:11:48.831791] [NO_TRADE] USDCADm already checked candle 2026-05-04 09:05:00
+[2026-05-04 16:11:48.831894] [WAIT] No order from AI watchlist this round
+[2026-05-04 16:12:48.834020] [AI] Using cached daily forex scan from 2026-05-04 16:06:09 | symbols=GBPUSDm, EURUSDm, USDCHFm, XAUUSDm, USDJPYm, USDCADm
+[2026-05-04 16:12:48.834428] [WATCHLIST] AI watchlist scan: GBPUSDm, EURUSDm, USDCHFm, XAUUSDm, USDJPYm, USDCADm
+[2026-05-04 16:12:48.834613] [SELECT] Trading symbol switched: USDCADm -> GBPUSDm | AI watchlist candidate
+[2026-05-04 16:12:48.834680] [SCAN] Analyzing GBPUSDm
+[2026-05-04 16:12:49.533469] [NO_TRADE] GBPUSDm already checked candle 2026-05-04 09:05:00
+[2026-05-04 16:12:49.533657] [SELECT] Trading symbol switched: GBPUSDm -> EURUSDm | AI watchlist candidate
+[2026-05-04 16:12:49.533697] [SCAN] Analyzing EURUSDm
+[2026-05-04 16:12:50.259974] [NO_TRADE] EURUSDm already checked candle 2026-05-04 09:05:00
+[2026-05-04 16:12:50.260179] [SELECT] Trading symbol switched: EURUSDm -> USDCHFm | AI watchlist candidate
+[2026-05-04 16:12:50.260221] [SCAN] Analyzing USDCHFm
+[2026-05-04 16:12:50.986288] [NO_TRADE] USDCHFm already checked candle 2026-05-04 09:05:00
+[2026-05-04 16:12:50.986484] [SELECT] Trading symbol switched: USDCHFm -> XAUUSDm | AI watchlist candidate
+[2026-05-04 16:12:50.986527] [SCAN] Analyzing XAUUSDm
+[2026-05-04 16:12:51.337630] [NO_TRADE] XAUUSDm Spread too wide: 280.0 points > 80
+[2026-05-04 16:12:51.337788] [SELECT] Trading symbol switched: XAUUSDm -> USDJPYm | AI watchlist candidate
+[2026-05-04 16:12:51.337826] [SCAN] Analyzing USDJPYm
+[2026-05-04 16:12:52.060816] [NO_TRADE] USDJPYm already checked candle 2026-05-04 09:05:00
+[2026-05-04 16:12:52.061019] [SELECT] Trading symbol switched: USDJPYm -> USDCADm | AI watchlist candidate
+[2026-05-04 16:12:52.061062] [SCAN] Analyzing USDCADm
+[2026-05-04 16:12:52.790719] [NO_TRADE] USDCADm already checked candle 2026-05-04 09:05:00
+[2026-05-04 16:12:52.790815] [WAIT] No order from AI watchlist this round
+[2026-05-04 16:13:52.793887] [AI] Using cached daily forex scan from 2026-05-04 16:06:09 | symbols=GBPUSDm, EURUSDm, USDCHFm, XAUUSDm, USDJPYm, USDCADm
+[2026-05-04 16:13:52.794661] [WATCHLIST] AI watchlist scan: GBPUSDm, EURUSDm, USDCHFm, XAUUSDm, USDJPYm, USDCADm
+[2026-05-04 16:13:52.795035] [SELECT] Trading symbol switched: USDCADm -> GBPUSDm | AI watchlist candidate
+[2026-05-04 16:13:52.795135] [SCAN] Analyzing GBPUSDm
+[2026-05-04 16:13:53.514017] [NO_TRADE] GBPUSDm already checked candle 2026-05-04 09:05:00
+[2026-05-04 16:13:53.514216] [SELECT] Trading symbol switched: GBPUSDm -> EURUSDm | AI watchlist candidate
+[2026-05-04 16:13:53.514280] [SCAN] Analyzing EURUSDm
+[2026-05-04 16:13:54.235656] [NO_TRADE] EURUSDm already checked candle 2026-05-04 09:05:00
+[2026-05-04 16:13:54.235886] [SELECT] Trading symbol switched: EURUSDm -> USDCHFm | AI watchlist candidate
+[2026-05-04 16:13:54.235952] [SCAN] Analyzing USDCHFm
+[2026-05-04 16:13:54.953874] [NO_TRADE] USDCHFm already checked candle 2026-05-04 09:05:00
+[2026-05-04 16:13:54.954064] [SELECT] Trading symbol switched: USDCHFm -> XAUUSDm | AI watchlist candidate
+[2026-05-04 16:13:54.954128] [SCAN] Analyzing XAUUSDm
+[2026-05-04 16:13:55.319847] [NO_TRADE] XAUUSDm Spread too wide: 280.0 points > 80
+[2026-05-04 16:13:55.320022] [SELECT] Trading symbol switched: XAUUSDm -> USDJPYm | AI watchlist candidate
+[2026-05-04 16:13:55.320068] [SCAN] Analyzing USDJPYm
+[2026-05-04 16:13:56.030693] [NO_TRADE] USDJPYm already checked candle 2026-05-04 09:05:00
+[2026-05-04 16:13:56.031239] [SELECT] Trading symbol switched: USDJPYm -> USDCADm | AI watchlist candidate
+[2026-05-04 16:13:56.031342] [SCAN] Analyzing USDCADm
+[2026-05-04 16:13:56.750166] [NO_TRADE] USDCADm already checked candle 2026-05-04 09:05:00
+[2026-05-04 16:13:56.750261] [WAIT] No order from AI watchlist this round
+[2026-05-04 16:14:56.751962] [AI] Using cached daily forex scan from 2026-05-04 16:06:09 | symbols=GBPUSDm, EURUSDm, USDCHFm, XAUUSDm, USDJPYm, USDCADm
+[2026-05-04 16:14:56.752329] [WATCHLIST] AI watchlist scan: GBPUSDm, EURUSDm, USDCHFm, XAUUSDm, USDJPYm, USDCADm
+[2026-05-04 16:14:56.752496] [SELECT] Trading symbol switched: USDCADm -> GBPUSDm | AI watchlist candidate
+[2026-05-04 16:14:56.752543] [SCAN] Analyzing GBPUSDm
+[2026-05-04 16:14:57.486114] [NO_TRADE] GBPUSDm already checked candle 2026-05-04 09:05:00
+[2026-05-04 16:14:57.486296] [SELECT] Trading symbol switched: GBPUSDm -> EURUSDm | AI watchlist candidate
+[2026-05-04 16:14:57.486338] [SCAN] Analyzing EURUSDm
+[2026-05-04 16:14:58.236649] [NO_TRADE] EURUSDm already checked candle 2026-05-04 09:05:00
+[2026-05-04 16:14:58.236841] [SELECT] Trading symbol switched: EURUSDm -> USDCHFm | AI watchlist candidate
+[2026-05-04 16:14:58.236886] [SCAN] Analyzing USDCHFm
+[2026-05-04 16:14:58.981629] [NO_TRADE] USDCHFm already checked candle 2026-05-04 09:05:00
+[2026-05-04 16:14:58.981858] [SELECT] Trading symbol switched: USDCHFm -> XAUUSDm | AI watchlist candidate
+[2026-05-04 16:14:58.981916] [SCAN] Analyzing XAUUSDm
+[2026-05-04 16:14:59.357862] [NO_TRADE] XAUUSDm Spread too wide: 280.0 points > 80
+[2026-05-04 16:14:59.358015] [SELECT] Trading symbol switched: XAUUSDm -> USDJPYm | AI watchlist candidate
+[2026-05-04 16:14:59.358056] [SCAN] Analyzing USDJPYm
+[2026-05-04 16:15:00.577796] [NO_TRADE] USDJPYm already checked candle 2026-05-04 09:05:00
+[2026-05-04 16:15:00.578016] [SELECT] Trading symbol switched: USDJPYm -> USDCADm | AI watchlist candidate
+[2026-05-04 16:15:00.578077] [SCAN] Analyzing USDCADm
+
+==============================
+Time: 2026-05-04 16:15:01.475717
+SIGNAL: {'time': Timestamp('2026-05-04 09:10:00'), 'symbol': 'USDCADm', 'side': 'NO_TRADE', 'price': 1.36002, 'reason': 'no Donchian breakout'}
+[NO_TRADE] USDCADm No trade
+[2026-05-04 16:15:01.475816] [WAIT] No order from AI watchlist this round
+[2026-05-04 16:16:01.478946] [AI] Using cached daily forex scan from 2026-05-04 16:06:09 | symbols=GBPUSDm, EURUSDm, USDCHFm, XAUUSDm, USDJPYm, USDCADm
+[2026-05-04 16:16:01.479403] [WATCHLIST] AI watchlist scan: GBPUSDm, EURUSDm, USDCHFm, XAUUSDm, USDJPYm, USDCADm
+[2026-05-04 16:16:01.479610] [SELECT] Trading symbol switched: USDCADm -> GBPUSDm | AI watchlist candidate
+[2026-05-04 16:16:01.479665] [SCAN] Analyzing GBPUSDm
+
+==============================
+Time: 2026-05-04 16:16:02.252964
+SIGNAL: {'time': Timestamp('2026-05-04 09:10:00'), 'symbol': 'GBPUSDm', 'side': 'NO_TRADE', 'price': 1.35614, 'reason': 'no Donchian breakout'}
+[NO_TRADE] GBPUSDm No trade
+[2026-05-04 16:16:02.253151] [SELECT] Trading symbol switched: GBPUSDm -> EURUSDm | AI watchlist candidate
+[2026-05-04 16:16:02.253192] [SCAN] Analyzing EURUSDm
+
+==============================
+Time: 2026-05-04 16:16:03.103754
+SIGNAL: {'time': Timestamp('2026-05-04 09:10:00'), 'symbol': 'EURUSDm', 'side': 'NO_TRADE', 'price': 1.17194, 'reason': 'no Donchian breakout'}
+[NO_TRADE] EURUSDm No trade
+[2026-05-04 16:16:03.104002] [SELECT] Trading symbol switched: EURUSDm -> USDCHFm | AI watchlist candidate
+[2026-05-04 16:16:03.104058] [SCAN] Analyzing USDCHFm
+
+==============================
+Time: 2026-05-04 16:16:03.864391
+SIGNAL: {'time': Timestamp('2026-05-04 09:10:00'), 'symbol': 'USDCHFm', 'side': 'NO_TRADE', 'price': 0.78252, 'reason': 'no Donchian breakout'}
+[NO_TRADE] USDCHFm No trade
+[2026-05-04 16:16:03.864587] [SELECT] Trading symbol switched: USDCHFm -> XAUUSDm | AI watchlist candidate
+[2026-05-04 16:16:03.864658] [SCAN] Analyzing XAUUSDm
+[2026-05-04 16:16:04.263764] [NO_TRADE] XAUUSDm Spread too wide: 280.0 points > 80
+[2026-05-04 16:16:04.263931] [SELECT] Trading symbol switched: XAUUSDm -> USDJPYm | AI watchlist candidate
+[2026-05-04 16:16:04.263972] [SCAN] Analyzing USDJPYm
+
+==============================
+Time: 2026-05-04 16:16:05.012847
+SIGNAL: {'time': Timestamp('2026-05-04 09:10:00'), 'symbol': 'USDJPYm', 'side': 'NO_TRADE', 'price': 156.963, 'reason': 'no Donchian breakout'}
+[NO_TRADE] USDJPYm No trade
+[2026-05-04 16:16:05.013040] [SELECT] Trading symbol switched: USDJPYm -> USDCADm | AI watchlist candidate
+[2026-05-04 16:16:05.013083] [SCAN] Analyzing USDCADm
+[2026-05-04 16:16:05.715993] [NO_TRADE] USDCADm already checked candle 2026-05-04 09:10:00
+[2026-05-04 16:16:05.716117] [WAIT] No order from AI watchlist this round
+[2026-05-04 16:17:05.718217] [AI] Using cached daily forex scan from 2026-05-04 16:06:09 | symbols=GBPUSDm, EURUSDm, USDCHFm, XAUUSDm, USDJPYm, USDCADm
+[2026-05-04 16:17:05.718826] [WATCHLIST] AI watchlist scan: GBPUSDm, EURUSDm, USDCHFm, XAUUSDm, USDJPYm, USDCADm
+[2026-05-04 16:17:05.719064] [SELECT] Trading symbol switched: USDCADm -> GBPUSDm | AI watchlist candidate
+[2026-05-04 16:17:05.719122] [SCAN] Analyzing GBPUSDm
+[2026-05-04 16:17:06.443919] [NO_TRADE] GBPUSDm already checked candle 2026-05-04 09:10:00
+[2026-05-04 16:17:06.444105] [SELECT] Trading symbol switched: GBPUSDm -> EURUSDm | AI watchlist candidate
+[2026-05-04 16:17:06.444145] [SCAN] Analyzing EURUSDm
+[2026-05-04 16:17:07.205450] [NO_TRADE] EURUSDm already checked candle 2026-05-04 09:10:00
+[2026-05-04 16:17:07.205641] [SELECT] Trading symbol switched: EURUSDm -> USDCHFm | AI watchlist candidate
+[2026-05-04 16:17:07.205689] [SCAN] Analyzing USDCHFm
+[2026-05-04 16:17:07.950013] [NO_TRADE] USDCHFm already checked candle 2026-05-04 09:10:00
+[2026-05-04 16:17:07.950209] [SELECT] Trading symbol switched: USDCHFm -> XAUUSDm | AI watchlist candidate
+[2026-05-04 16:17:07.950252] [SCAN] Analyzing XAUUSDm
+[2026-05-04 16:17:08.327001] [NO_TRADE] XAUUSDm Spread too wide: 280.0 points > 80
+[2026-05-04 16:17:08.327190] [SELECT] Trading symbol switched: XAUUSDm -> USDJPYm | AI watchlist candidate
+[2026-05-04 16:17:08.327246] [SCAN] Analyzing USDJPYm
+[2026-05-04 16:17:09.066973] [NO_TRADE] USDJPYm already checked candle 2026-05-04 09:10:00
+[2026-05-04 16:17:09.067161] [SELECT] Trading symbol switched: USDJPYm -> USDCADm | AI watchlist candidate
+[2026-05-04 16:17:09.067203] [SCAN] Analyzing USDCADm
+[2026-05-04 16:17:09.806615] [NO_TRADE] USDCADm already checked candle 2026-05-04 09:10:00
+[2026-05-04 16:17:09.806716] [WAIT] No order from AI watchlist this round
+[2026-05-04 16:18:09.809537] [AI] Using cached daily forex scan from 2026-05-04 16:06:09 | symbols=GBPUSDm, EURUSDm, USDCHFm, XAUUSDm, USDJPYm, USDCADm
+[2026-05-04 16:18:09.809960] [WATCHLIST] AI watchlist scan: GBPUSDm, EURUSDm, USDCHFm, XAUUSDm, USDJPYm, USDCADm
+[2026-05-04 16:18:09.810149] [SELECT] Trading symbol switched: USDCADm -> GBPUSDm | AI watchlist candidate
+[2026-05-04 16:18:09.810201] [SCAN] Analyzing GBPUSDm
+[2026-05-04 16:18:10.537719] [NO_TRADE] GBPUSDm already checked candle 2026-05-04 09:10:00
+[2026-05-04 16:18:10.537905] [SELECT] Trading symbol switched: GBPUSDm -> EURUSDm | AI watchlist candidate
+[2026-05-04 16:18:10.537950] [SCAN] Analyzing EURUSDm
+[2026-05-04 16:18:11.253870] [NO_TRADE] EURUSDm already checked candle 2026-05-04 09:10:00
+[2026-05-04 16:18:11.254062] [SELECT] Trading symbol switched: EURUSDm -> USDCHFm | AI watchlist candidate
+[2026-05-04 16:18:11.254105] [SCAN] Analyzing USDCHFm
+[2026-05-04 16:18:11.970428] [NO_TRADE] USDCHFm already checked candle 2026-05-04 09:10:00
+[2026-05-04 16:18:11.970608] [SELECT] Trading symbol switched: USDCHFm -> XAUUSDm | AI watchlist candidate
+[2026-05-04 16:18:11.970653] [SCAN] Analyzing XAUUSDm
+[2026-05-04 16:18:12.338991] [NO_TRADE] XAUUSDm Spread too wide: 280.0 points > 80
+[2026-05-04 16:18:12.339150] [SELECT] Trading symbol switched: XAUUSDm -> USDJPYm | AI watchlist candidate
+[2026-05-04 16:18:12.339191] [SCAN] Analyzing USDJPYm
+[2026-05-04 16:18:13.056343] [NO_TRADE] USDJPYm already checked candle 2026-05-04 09:10:00
+[2026-05-04 16:18:13.056588] [SELECT] Trading symbol switched: USDJPYm -> USDCADm | AI watchlist candidate
+[2026-05-04 16:18:13.056645] [SCAN] Analyzing USDCADm
+[2026-05-04 16:18:13.776791] [NO_TRADE] USDCADm already checked candle 2026-05-04 09:10:00
+[2026-05-04 16:18:13.776879] [WAIT] No order from AI watchlist this round
+[2026-05-04 16:19:13.778898] [AI] Using cached daily forex scan from 2026-05-04 16:06:09 | symbols=GBPUSDm, EURUSDm, USDCHFm, XAUUSDm, USDJPYm, USDCADm
+[2026-05-04 16:19:13.779310] [WATCHLIST] AI watchlist scan: GBPUSDm, EURUSDm, USDCHFm, XAUUSDm, USDJPYm, USDCADm
+[2026-05-04 16:19:13.779499] [SELECT] Trading symbol switched: USDCADm -> GBPUSDm | AI watchlist candidate
+[2026-05-04 16:19:13.779552] [SCAN] Analyzing GBPUSDm
+[2026-05-04 16:19:14.494820] [NO_TRADE] GBPUSDm already checked candle 2026-05-04 09:10:00
+[2026-05-04 16:19:14.494994] [SELECT] Trading symbol switched: GBPUSDm -> EURUSDm | AI watchlist candidate
+[2026-05-04 16:19:14.495036] [SCAN] Analyzing EURUSDm
+[2026-05-04 16:19:15.212474] [NO_TRADE] EURUSDm already checked candle 2026-05-04 09:10:00
+[2026-05-04 16:19:15.212659] [SELECT] Trading symbol switched: EURUSDm -> USDCHFm | AI watchlist candidate
+[2026-05-04 16:19:15.212702] [SCAN] Analyzing USDCHFm
+[2026-05-04 16:19:15.946972] [NO_TRADE] USDCHFm already checked candle 2026-05-04 09:10:00
+[2026-05-04 16:19:15.947156] [SELECT] Trading symbol switched: USDCHFm -> XAUUSDm | AI watchlist candidate
+[2026-05-04 16:19:15.947199] [SCAN] Analyzing XAUUSDm
+[2026-05-04 16:19:16.304768] [NO_TRADE] XAUUSDm Spread too wide: 280.0 points > 80
+[2026-05-04 16:19:16.304919] [SELECT] Trading symbol switched: XAUUSDm -> USDJPYm | AI watchlist candidate
+[2026-05-04 16:19:16.304961] [SCAN] Analyzing USDJPYm
+[2026-05-04 16:19:17.015204] [NO_TRADE] USDJPYm already checked candle 2026-05-04 09:10:00
+[2026-05-04 16:19:17.015393] [SELECT] Trading symbol switched: USDJPYm -> USDCADm | AI watchlist candidate
+[2026-05-04 16:19:17.015435] [SCAN] Analyzing USDCADm
+[2026-05-04 16:19:17.741803] [NO_TRADE] USDCADm already checked candle 2026-05-04 09:10:00
+[2026-05-04 16:19:17.741896] [WAIT] No order from AI watchlist this round
+[2026-05-04 16:20:17.744309] [AI] Using cached daily forex scan from 2026-05-04 16:06:09 | symbols=GBPUSDm, EURUSDm, USDCHFm, XAUUSDm, USDJPYm, USDCADm
+[2026-05-04 16:20:17.744709] [WATCHLIST] AI watchlist scan: GBPUSDm, EURUSDm, USDCHFm, XAUUSDm, USDJPYm, USDCADm
+[2026-05-04 16:20:17.744892] [SELECT] Trading symbol switched: USDCADm -> GBPUSDm | AI watchlist candidate
+[2026-05-04 16:20:17.744956] [SCAN] Analyzing GBPUSDm
+
+==============================
+Time: 2026-05-04 16:20:18.498878
+SIGNAL: {'time': Timestamp('2026-05-04 09:15:00'), 'symbol': 'GBPUSDm', 'side': 'NO_TRADE', 'price': 1.35611, 'reason': 'no Donchian breakout'}
+[NO_TRADE] GBPUSDm No trade
+[2026-05-04 16:20:18.499071] [SELECT] Trading symbol switched: GBPUSDm -> EURUSDm | AI watchlist candidate
+[2026-05-04 16:20:18.499112] [SCAN] Analyzing EURUSDm
+
+==============================
+Time: 2026-05-04 16:20:19.250756
+SIGNAL: {'time': Timestamp('2026-05-04 09:15:00'), 'symbol': 'EURUSDm', 'side': 'NO_TRADE', 'price': 1.1718899999999999, 'reason': 'no Donchian breakout'}
+[NO_TRADE] EURUSDm No trade
+[2026-05-04 16:20:19.250968] [SELECT] Trading symbol switched: EURUSDm -> USDCHFm | AI watchlist candidate
+[2026-05-04 16:20:19.251009] [SCAN] Analyzing USDCHFm
+
+==============================
+Time: 2026-05-04 16:20:20.002278
+SIGNAL: {'time': Timestamp('2026-05-04 09:15:00'), 'symbol': 'USDCHFm', 'side': 'NO_TRADE', 'price': 0.7824, 'reason': 'no Donchian breakout'}
+[NO_TRADE] USDCHFm No trade
+[2026-05-04 16:20:20.002466] [SELECT] Trading symbol switched: USDCHFm -> XAUUSDm | AI watchlist candidate
+[2026-05-04 16:20:20.002508] [SCAN] Analyzing XAUUSDm
+[2026-05-04 16:20:20.389570] [NO_TRADE] XAUUSDm Spread too wide: 280.0 points > 80
+[2026-05-04 16:20:20.389730] [SELECT] Trading symbol switched: XAUUSDm -> USDJPYm | AI watchlist candidate
+[2026-05-04 16:20:20.389771] [SCAN] Analyzing USDJPYm
+
+==============================
+Time: 2026-05-04 16:20:21.158950
+SIGNAL: {'time': Timestamp('2026-05-04 09:15:00'), 'symbol': 'USDJPYm', 'side': 'NO_TRADE', 'price': 156.975, 'reason': 'no Donchian breakout'}
+[NO_TRADE] USDJPYm No trade
+[2026-05-04 16:20:21.159142] [SELECT] Trading symbol switched: USDJPYm -> USDCADm | AI watchlist candidate
+[2026-05-04 16:20:21.159186] [SCAN] Analyzing USDCADm
+
+==============================
+Time: 2026-05-04 16:20:21.906644
+SIGNAL: {'time': Timestamp('2026-05-04 09:15:00'), 'symbol': 'USDCADm', 'side': 'NO_TRADE', 'price': 1.35987, 'reason': 'no Donchian breakout'}
+[NO_TRADE] USDCADm No trade
+[2026-05-04 16:20:21.906741] [WAIT] No order from AI watchlist this round
+[2026-05-04 16:21:21.908210] [AI] Using cached daily forex scan from 2026-05-04 16:06:09 | symbols=GBPUSDm, EURUSDm, USDCHFm, XAUUSDm, USDJPYm, USDCADm
+[2026-05-04 16:21:21.908624] [WATCHLIST] AI watchlist scan: GBPUSDm, EURUSDm, USDCHFm, XAUUSDm, USDJPYm, USDCADm
+[2026-05-04 16:21:21.908784] [SELECT] Trading symbol switched: USDCADm -> GBPUSDm | AI watchlist candidate
+[2026-05-04 16:21:21.908835] [SCAN] Analyzing GBPUSDm
+[2026-05-04 16:21:22.761635] [NO_TRADE] GBPUSDm already checked candle 2026-05-04 09:15:00
+[2026-05-04 16:21:22.761825] [SELECT] Trading symbol switched: GBPUSDm -> EURUSDm | AI watchlist candidate
+[2026-05-04 16:21:22.761877] [SCAN] Analyzing EURUSDm
+[2026-05-04 16:21:23.742399] [NO_TRADE] EURUSDm already checked candle 2026-05-04 09:15:00
+[2026-05-04 16:21:23.742623] [SELECT] Trading symbol switched: EURUSDm -> USDCHFm | AI watchlist candidate
+[2026-05-04 16:21:23.742675] [SCAN] Analyzing USDCHFm
+[2026-05-04 16:21:24.755886] [NO_TRADE] USDCHFm already checked candle 2026-05-04 09:15:00
+[2026-05-04 16:21:24.756076] [SELECT] Trading symbol switched: USDCHFm -> XAUUSDm | AI watchlist candidate
+[2026-05-04 16:21:24.756121] [SCAN] Analyzing XAUUSDm
+[2026-05-04 16:21:25.148390] [NO_TRADE] XAUUSDm Spread too wide: 280.0 points > 80
+[2026-05-04 16:21:25.148585] [SELECT] Trading symbol switched: XAUUSDm -> USDJPYm | AI watchlist candidate
+[2026-05-04 16:21:25.148634] [SCAN] Analyzing USDJPYm
+[2026-05-04 16:21:26.026867] [NO_TRADE] USDJPYm already checked candle 2026-05-04 09:15:00
+[2026-05-04 16:21:26.027081] [SELECT] Trading symbol switched: USDJPYm -> USDCADm | AI watchlist candidate
+[2026-05-04 16:21:26.027128] [SCAN] Analyzing USDCADm
+[2026-05-04 16:21:26.949513] [NO_TRADE] USDCADm already checked candle 2026-05-04 09:15:00
+[2026-05-04 16:21:26.949642] [WAIT] No order from AI watchlist this round
+[2026-05-04 16:22:26.951345] [AI] Using cached daily forex scan from 2026-05-04 16:06:09 | symbols=GBPUSDm, EURUSDm, USDCHFm, XAUUSDm, USDJPYm, USDCADm
+[2026-05-04 16:22:26.951869] [WATCHLIST] AI watchlist scan: GBPUSDm, EURUSDm, USDCHFm, XAUUSDm, USDJPYm, USDCADm
+[2026-05-04 16:22:26.952078] [SELECT] Trading symbol switched: USDCADm -> GBPUSDm | AI watchlist candidate
+[2026-05-04 16:22:26.952139] [SCAN] Analyzing GBPUSDm
+[2026-05-04 16:22:28.140680] [NO_TRADE] GBPUSDm already checked candle 2026-05-04 09:15:00
+[2026-05-04 16:22:28.140873] [SELECT] Trading symbol switched: GBPUSDm -> EURUSDm | AI watchlist candidate
+[2026-05-04 16:22:28.140934] [SCAN] Analyzing EURUSDm
+[2026-05-04 16:22:29.333094] [NO_TRADE] EURUSDm already checked candle 2026-05-04 09:15:00
+[2026-05-04 16:22:29.333303] [SELECT] Trading symbol switched: EURUSDm -> USDCHFm | AI watchlist candidate
+[2026-05-04 16:22:29.333380] [SCAN] Analyzing USDCHFm
+[2026-05-04 16:22:30.708845] [NO_TRADE] USDCHFm already checked candle 2026-05-04 09:15:00
+[2026-05-04 16:22:30.709078] [SELECT] Trading symbol switched: USDCHFm -> XAUUSDm | AI watchlist candidate
+[2026-05-04 16:22:30.709153] [SCAN] Analyzing XAUUSDm
+[2026-05-04 16:22:31.363350] [NO_TRADE] XAUUSDm Spread too wide: 280.0 points > 80
+[2026-05-04 16:22:31.363565] [SELECT] Trading symbol switched: XAUUSDm -> USDJPYm | AI watchlist candidate
+[2026-05-04 16:22:31.363635] [SCAN] Analyzing USDJPYm
+[2026-05-04 16:22:32.776616] [NO_TRADE] USDJPYm already checked candle 2026-05-04 09:15:00
+[2026-05-04 16:22:32.776844] [SELECT] Trading symbol switched: USDJPYm -> USDCADm | AI watchlist candidate
+[2026-05-04 16:22:32.776923] [SCAN] Analyzing USDCADm
+[2026-05-04 16:22:34.404634] [NO_TRADE] USDCADm already checked candle 2026-05-04 09:15:00
+[2026-05-04 16:22:34.404749] [WAIT] No order from AI watchlist this round
+[2026-05-04 16:23:34.406570] [AI] Using cached daily forex scan from 2026-05-04 16:06:09 | symbols=GBPUSDm, EURUSDm, USDCHFm, XAUUSDm, USDJPYm, USDCADm
+[2026-05-04 16:23:34.407223] [WATCHLIST] AI watchlist scan: GBPUSDm, EURUSDm, USDCHFm, XAUUSDm, USDJPYm, USDCADm
+[2026-05-04 16:23:34.407502] [SELECT] Trading symbol switched: USDCADm -> GBPUSDm | AI watchlist candidate
+[2026-05-04 16:23:34.407573] [SCAN] Analyzing GBPUSDm
+[2026-05-04 16:23:35.560104] [NO_TRADE] GBPUSDm already checked candle 2026-05-04 09:15:00
+[2026-05-04 16:23:35.560302] [SELECT] Trading symbol switched: GBPUSDm -> EURUSDm | AI watchlist candidate
+[2026-05-04 16:23:35.560351] [SCAN] Analyzing EURUSDm
+[2026-05-04 16:23:36.684149] [NO_TRADE] EURUSDm already checked candle 2026-05-04 09:15:00
+[2026-05-04 16:23:36.684353] [SELECT] Trading symbol switched: EURUSDm -> USDCHFm | AI watchlist candidate
+[2026-05-04 16:23:36.684401] [SCAN] Analyzing USDCHFm
+[2026-05-04 16:23:37.828346] [NO_TRADE] USDCHFm already checked candle 2026-05-04 09:15:00
+[2026-05-04 16:23:37.828555] [SELECT] Trading symbol switched: USDCHFm -> XAUUSDm | AI watchlist candidate
+[2026-05-04 16:23:37.828617] [SCAN] Analyzing XAUUSDm
+[2026-05-04 16:23:38.496573] [NO_TRADE] XAUUSDm Spread too wide: 280.0 points > 80
+[2026-05-04 16:23:38.496802] [SELECT] Trading symbol switched: XAUUSDm -> USDJPYm | AI watchlist candidate
+[2026-05-04 16:23:38.496878] [SCAN] Analyzing USDJPYm
+[2026-05-04 16:23:39.707339] [NO_TRADE] USDJPYm already checked candle 2026-05-04 09:15:00
+[2026-05-04 16:23:39.707583] [SELECT] Trading symbol switched: USDJPYm -> USDCADm | AI watchlist candidate
+[2026-05-04 16:23:39.707656] [SCAN] Analyzing USDCADm
+[2026-05-04 16:23:40.762345] [NO_TRADE] USDCADm already checked candle 2026-05-04 09:15:00
+[2026-05-04 16:23:40.762438] [WAIT] No order from AI watchlist this round
+[2026-05-04 16:24:40.764610] [AI] Using cached daily forex scan from 2026-05-04 16:06:09 | symbols=GBPUSDm, EURUSDm, USDCHFm, XAUUSDm, USDJPYm, USDCADm
+[2026-05-04 16:24:40.764999] [WATCHLIST] AI watchlist scan: GBPUSDm, EURUSDm, USDCHFm, XAUUSDm, USDJPYm, USDCADm
+[2026-05-04 16:24:40.765176] [SELECT] Trading symbol switched: USDCADm -> GBPUSDm | AI watchlist candidate
+[2026-05-04 16:24:40.765240] [SCAN] Analyzing GBPUSDm
+[2026-05-04 16:24:41.492121] [NO_TRADE] GBPUSDm already checked candle 2026-05-04 09:15:00
+[2026-05-04 16:24:41.492337] [SELECT] Trading symbol switched: GBPUSDm -> EURUSDm | AI watchlist candidate
+[2026-05-04 16:24:41.492394] [SCAN] Analyzing EURUSDm
+[2026-05-04 16:24:42.208234] [NO_TRADE] EURUSDm already checked candle 2026-05-04 09:15:00
+[2026-05-04 16:24:42.208418] [SELECT] Trading symbol switched: EURUSDm -> USDCHFm | AI watchlist candidate
+[2026-05-04 16:24:42.208462] [SCAN] Analyzing USDCHFm
+[2026-05-04 16:24:42.921710] [NO_TRADE] USDCHFm already checked candle 2026-05-04 09:15:00
+[2026-05-04 16:24:42.921893] [SELECT] Trading symbol switched: USDCHFm -> XAUUSDm | AI watchlist candidate
+[2026-05-04 16:24:42.921935] [SCAN] Analyzing XAUUSDm
+[2026-05-04 16:24:43.281334] [NO_TRADE] XAUUSDm Spread too wide: 280.0 points > 80
+[2026-05-04 16:24:43.281502] [SELECT] Trading symbol switched: XAUUSDm -> USDJPYm | AI watchlist candidate
+[2026-05-04 16:24:43.281543] [SCAN] Analyzing USDJPYm
+[2026-05-04 16:24:44.000430] [NO_TRADE] USDJPYm already checked candle 2026-05-04 09:15:00
+[2026-05-04 16:24:44.000615] [SELECT] Trading symbol switched: USDJPYm -> USDCADm | AI watchlist candidate
+[2026-05-04 16:24:44.000655] [SCAN] Analyzing USDCADm
+[2026-05-04 16:24:44.705028] [NO_TRADE] USDCADm already checked candle 2026-05-04 09:15:00
+[2026-05-04 16:24:44.705117] [WAIT] No order from AI watchlist this round
+[2026-05-04 16:25:44.707799] [AI] Using cached daily forex scan from 2026-05-04 16:06:09 | symbols=GBPUSDm, EURUSDm, USDCHFm, XAUUSDm, USDJPYm, USDCADm
+[2026-05-04 16:25:44.708238] [WATCHLIST] AI watchlist scan: GBPUSDm, EURUSDm, USDCHFm, XAUUSDm, USDJPYm, USDCADm
+[2026-05-04 16:25:44.708418] [SELECT] Trading symbol switched: USDCADm -> GBPUSDm | AI watchlist candidate
+[2026-05-04 16:25:44.708470] [SCAN] Analyzing GBPUSDm
+
+==============================
+Time: 2026-05-04 16:25:45.502701
+SIGNAL: {'time': Timestamp('2026-05-04 09:20:00'), 'symbol': 'GBPUSDm', 'side': 'NO_TRADE', 'price': 1.35578, 'reason': 'ATR too low atr_pct=0.00030'}
+[NO_TRADE] GBPUSDm No trade
+[2026-05-04 16:25:45.502890] [SELECT] Trading symbol switched: GBPUSDm -> EURUSDm | AI watchlist candidate
+[2026-05-04 16:25:45.502931] [SCAN] Analyzing EURUSDm
+
+==============================
+Time: 2026-05-04 16:25:46.253572
+SIGNAL: {'time': Timestamp('2026-05-04 09:20:00'), 'symbol': 'EURUSDm', 'side': 'NO_TRADE', 'price': 1.17159, 'reason': 'no Donchian breakout'}
+[NO_TRADE] EURUSDm No trade
+[2026-05-04 16:25:46.253791] [SELECT] Trading symbol switched: EURUSDm -> USDCHFm | AI watchlist candidate
+[2026-05-04 16:25:46.253831] [SCAN] Analyzing USDCHFm
+
+==============================
+Time: 2026-05-04 16:25:47.027124
+SIGNAL: {'time': Timestamp('2026-05-04 09:20:00'), 'symbol': 'USDCHFm', 'side': 'NO_TRADE', 'price': 0.78277, 'reason': 'no Donchian breakout'}
+[NO_TRADE] USDCHFm No trade
+[2026-05-04 16:25:47.027316] [SELECT] Trading symbol switched: USDCHFm -> XAUUSDm | AI watchlist candidate
+[2026-05-04 16:25:47.027356] [SCAN] Analyzing XAUUSDm
+[2026-05-04 16:25:47.414347] [NO_TRADE] XAUUSDm Spread too wide: 280.0 points > 80
+[2026-05-04 16:25:47.414536] [SELECT] Trading symbol switched: XAUUSDm -> USDJPYm | AI watchlist candidate
+[2026-05-04 16:25:47.414591] [SCAN] Analyzing USDJPYm
+
+==============================
+Time: 2026-05-04 16:25:48.168184
+SIGNAL: {'time': Timestamp('2026-05-04 09:20:00'), 'symbol': 'USDJPYm', 'side': 'NO_TRADE', 'price': 156.984, 'reason': 'ATR too low atr_pct=0.00025'}
+[NO_TRADE] USDJPYm No trade
+[2026-05-04 16:25:48.168389] [SELECT] Trading symbol switched: USDJPYm -> USDCADm | AI watchlist candidate
+[2026-05-04 16:25:48.168432] [SCAN] Analyzing USDCADm
+
+==============================
+Time: 2026-05-04 16:25:48.919450
+SIGNAL: {'time': Timestamp('2026-05-04 09:20:00'), 'symbol': 'USDCADm', 'side': 'NO_TRADE', 'price': 1.36022, 'reason': 'no Donchian breakout'}
+[NO_TRADE] USDCADm No trade
+[2026-05-04 16:25:48.919574] [WAIT] No order from AI watchlist this round
+[2026-05-04 16:26:48.921716] [AI] Using cached daily forex scan from 2026-05-04 16:06:09 | symbols=GBPUSDm, EURUSDm, USDCHFm, XAUUSDm, USDJPYm, USDCADm
+[2026-05-04 16:26:48.922233] [WATCHLIST] AI watchlist scan: GBPUSDm, EURUSDm, USDCHFm, XAUUSDm, USDJPYm, USDCADm
+[2026-05-04 16:26:48.922441] [SELECT] Trading symbol switched: USDCADm -> GBPUSDm | AI watchlist candidate
+[2026-05-04 16:26:48.922494] [SCAN] Analyzing GBPUSDm
+[2026-05-04 16:26:50.692209] [NO_TRADE] GBPUSDm already checked candle 2026-05-04 09:20:00
+[2026-05-04 16:26:50.692410] [SELECT] Trading symbol switched: GBPUSDm -> EURUSDm | AI watchlist candidate
+[2026-05-04 16:26:50.692470] [SCAN] Analyzing EURUSDm
+[2026-05-04 16:26:51.866290] [NO_TRADE] EURUSDm already checked candle 2026-05-04 09:20:00
+[2026-05-04 16:26:51.866511] [SELECT] Trading symbol switched: EURUSDm -> USDCHFm | AI watchlist candidate
+[2026-05-04 16:26:51.866560] [SCAN] Analyzing USDCHFm
+[2026-05-04 16:26:52.983318] [NO_TRADE] USDCHFm already checked candle 2026-05-04 09:20:00
+[2026-05-04 16:26:52.983528] [SELECT] Trading symbol switched: USDCHFm -> XAUUSDm | AI watchlist candidate
+[2026-05-04 16:26:52.983588] [SCAN] Analyzing XAUUSDm
+[2026-05-04 16:26:53.660235] [NO_TRADE] XAUUSDm Spread too wide: 280.0 points > 80
+[2026-05-04 16:26:53.660478] [SELECT] Trading symbol switched: XAUUSDm -> USDJPYm | AI watchlist candidate
+[2026-05-04 16:26:53.660548] [SCAN] Analyzing USDJPYm
+[2026-05-04 16:26:54.836656] [NO_TRADE] USDJPYm already checked candle 2026-05-04 09:20:00
+[2026-05-04 16:26:54.836897] [SELECT] Trading symbol switched: USDJPYm -> USDCADm | AI watchlist candidate
+[2026-05-04 16:26:54.836976] [SCAN] Analyzing USDCADm
+[2026-05-04 16:26:56.287627] [NO_TRADE] USDCADm already checked candle 2026-05-04 09:20:00
+[2026-05-04 16:26:56.287744] [WAIT] No order from AI watchlist this round
+[2026-05-04 16:27:56.293205] [AI] Using cached daily forex scan from 2026-05-04 16:06:09 | symbols=GBPUSDm, EURUSDm, USDCHFm, XAUUSDm, USDJPYm, USDCADm
+[2026-05-04 16:27:56.294116] [WATCHLIST] AI watchlist scan: GBPUSDm, EURUSDm, USDCHFm, XAUUSDm, USDJPYm, USDCADm
+[2026-05-04 16:27:56.295113] [SELECT] Trading symbol switched: USDCADm -> GBPUSDm | AI watchlist candidate
+[2026-05-04 16:27:56.295231] [SCAN] Analyzing GBPUSDm
+[2026-05-04 16:27:57.537383] [NO_TRADE] GBPUSDm already checked candle 2026-05-04 09:20:00
+[2026-05-04 16:27:57.537552] [SELECT] Trading symbol switched: GBPUSDm -> EURUSDm | AI watchlist candidate
+[2026-05-04 16:27:57.537592] [SCAN] Analyzing EURUSDm
+[2026-05-04 16:27:58.338979] [NO_TRADE] EURUSDm already checked candle 2026-05-04 09:20:00
+[2026-05-04 16:27:58.339157] [SELECT] Trading symbol switched: EURUSDm -> USDCHFm | AI watchlist candidate
+[2026-05-04 16:27:58.339200] [SCAN] Analyzing USDCHFm
+[2026-05-04 16:27:59.305108] [NO_TRADE] USDCHFm already checked candle 2026-05-04 09:20:00
+[2026-05-04 16:27:59.305287] [SELECT] Trading symbol switched: USDCHFm -> XAUUSDm | AI watchlist candidate
+[2026-05-04 16:27:59.305330] [SCAN] Analyzing XAUUSDm
+[2026-05-04 16:27:59.714514] [NO_TRADE] XAUUSDm Spread too wide: 280.0 points > 80
+[2026-05-04 16:27:59.714719] [SELECT] Trading symbol switched: XAUUSDm -> USDJPYm | AI watchlist candidate
+[2026-05-04 16:27:59.714776] [SCAN] Analyzing USDJPYm
+[2026-05-04 16:28:00.679864] [NO_TRADE] USDJPYm already checked candle 2026-05-04 09:20:00
+[2026-05-04 16:28:00.680081] [SELECT] Trading symbol switched: USDJPYm -> USDCADm | AI watchlist candidate
+[2026-05-04 16:28:00.680134] [SCAN] Analyzing USDCADm
+[2026-05-04 16:28:02.119077] [NO_TRADE] USDCADm already checked candle 2026-05-04 09:20:00
+[2026-05-04 16:28:02.119188] [WAIT] No order from AI watchlist this round
+[2026-05-04 16:29:02.120736] [AI] Using cached daily forex scan from 2026-05-04 16:06:09 | symbols=GBPUSDm, EURUSDm, USDCHFm, XAUUSDm, USDJPYm, USDCADm
+[2026-05-04 16:29:02.121216] [WATCHLIST] AI watchlist scan: GBPUSDm, EURUSDm, USDCHFm, XAUUSDm, USDJPYm, USDCADm
+[2026-05-04 16:29:02.121469] [SELECT] Trading symbol switched: USDCADm -> GBPUSDm | AI watchlist candidate
+[2026-05-04 16:29:02.121528] [SCAN] Analyzing GBPUSDm
+[2026-05-04 16:29:02.822807] [NO_TRADE] GBPUSDm already checked candle 2026-05-04 09:20:00
+[2026-05-04 16:29:02.822990] [SELECT] Trading symbol switched: GBPUSDm -> EURUSDm | AI watchlist candidate
+[2026-05-04 16:29:02.823031] [SCAN] Analyzing EURUSDm
+[2026-05-04 16:29:03.547547] [NO_TRADE] EURUSDm already checked candle 2026-05-04 09:20:00
+[2026-05-04 16:29:03.547728] [SELECT] Trading symbol switched: EURUSDm -> USDCHFm | AI watchlist candidate
+[2026-05-04 16:29:03.547771] [SCAN] Analyzing USDCHFm
+[2026-05-04 16:29:04.247974] [NO_TRADE] USDCHFm already checked candle 2026-05-04 09:20:00
+[2026-05-04 16:29:04.248158] [SELECT] Trading symbol switched: USDCHFm -> XAUUSDm | AI watchlist candidate
+[2026-05-04 16:29:04.248201] [SCAN] Analyzing XAUUSDm
+[2026-05-04 16:29:04.602142] [NO_TRADE] XAUUSDm Spread too wide: 280.0 points > 80
+[2026-05-04 16:29:04.602290] [SELECT] Trading symbol switched: XAUUSDm -> USDJPYm | AI watchlist candidate
+[2026-05-04 16:29:04.602329] [SCAN] Analyzing USDJPYm
+[2026-05-04 16:29:05.321784] [NO_TRADE] USDJPYm already checked candle 2026-05-04 09:20:00
+[2026-05-04 16:29:05.322010] [SELECT] Trading symbol switched: USDJPYm -> USDCADm | AI watchlist candidate
+[2026-05-04 16:29:05.322067] [SCAN] Analyzing USDCADm
+[2026-05-04 16:29:06.028353] [NO_TRADE] USDCADm already checked candle 2026-05-04 09:20:00
+[2026-05-04 16:29:06.028446] [WAIT] No order from AI watchlist this round

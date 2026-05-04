@@ -1,31 +1,36 @@
 {
-  "last_scan_date": "2026-05-01",
-  "last_scan_at": "2026-05-01 14:02:54",
+  "last_scan_date": "2026-05-04",
+  "last_scan_at": "2026-05-04 16:06:09",
   "last_recommendations": [
     {
       "symbol": "EURUSD",
       "rating": 2,
-      "reason": "London-NY overlap provides liquidity; 1H shows bullish flag near 1.1050 support."
+      "reason": "London-NY overlap offers liquidity; 1H shows support near 1.1050."
     },
     {
       "symbol": "GBPUSD",
       "rating": 1,
-      "reason": "Strong momentum from UK data; 4H trendline breakout aligns with high session volatility."
+      "reason": "Bullish momentum on 4H; active session favors GBP volatility."
     },
     {
       "symbol": "USDJPY",
       "rating": 3,
-      "reason": "Rangebound on 1H; awaiting BoJ hints; moderate trading during overlap."
+      "reason": "Consolidating near resistance; wait for breakout during overlap."
     },
     {
       "symbol": "USDCHF",
       "rating": 2,
-      "reason": "Weak USD supports bearish bias; 1H resistance at 0.9130 holds."
+      "reason": "Negative correlation with EURUSD; session liquidity aids entry."
+    },
+    {
+      "symbol": "USDCAD",
+      "rating": 3,
+      "reason": "Oil news pending; cautious trading in high liquidity window."
     },
     {
       "symbol": "XAUUSD",
-      "rating": 3,
-      "reason": "Safe-haven demand stable; 1H consolidation near $2340; watch for breakout."
+      "rating": 2,
+      "reason": "Safe-haven demand; volatility picks up during London-NY overlap."
     }
   ],
   "candidate_universe": [
@@ -38,71 +43,59 @@
     "NZDUSD",
     "EURJPY",
     "GBPJPY",
-    "XAUUSD",
-    "EURGBP",
-    "EURCHF",
-    "EURCAD",
-    "EURAUD",
-    "EURNZD",
-    "GBPCHF",
-    "GBPCAD",
-    "GBPAUD",
-    "GBPNZD",
-    "AUDJPY",
-    "CADJPY",
-    "CHFJPY",
-    "NZDJPY",
-    "AUDCAD",
-    "AUDCHF",
-    "AUDNZD",
-    "CADCHF",
-    "NZDCAD",
-    "NZDCHF"
+    "XAUUSD"
   ],
   "candidate_symbols": [
     "GBPUSDm",
     "EURUSDm",
     "USDCHFm",
+    "XAUUSDm",
     "USDJPYm",
-    "XAUUSDm"
+    "USDCADm"
   ],
   "candidate_recommendations": [
     {
       "symbol": "GBPUSDm",
       "rating": 1,
-      "reason": "Strong momentum from UK data; 4H trendline breakout aligns with high session volatility.",
+      "reason": "Bullish momentum on 4H; active session favors GBP volatility.",
       "source_symbol": "GBPUSD"
     },
     {
       "symbol": "EURUSDm",
       "rating": 2,
-      "reason": "London-NY overlap provides liquidity; 1H shows bullish flag near 1.1050 support.",
+      "reason": "London-NY overlap offers liquidity; 1H shows support near 1.1050.",
       "source_symbol": "EURUSD"
     },
     {
       "symbol": "USDCHFm",
       "rating": 2,
-      "reason": "Weak USD supports bearish bias; 1H resistance at 0.9130 holds.",
+      "reason": "Negative correlation with EURUSD; session liquidity aids entry.",
       "source_symbol": "USDCHF"
+    },
+    {
+      "symbol": "XAUUSDm",
+      "rating": 2,
+      "reason": "Safe-haven demand; volatility picks up during London-NY overlap.",
+      "source_symbol": "XAUUSD"
     },
     {
       "symbol": "USDJPYm",
       "rating": 3,
-      "reason": "Rangebound on 1H; awaiting BoJ hints; moderate trading during overlap.",
+      "reason": "Consolidating near resistance; wait for breakout during overlap.",
       "source_symbol": "USDJPY"
     },
     {
-      "symbol": "XAUUSDm",
+      "symbol": "USDCADm",
       "rating": 3,
-      "reason": "Safe-haven demand stable; 1H consolidation near $2340; watch for breakout.",
-      "source_symbol": "XAUUSD"
+      "reason": "Oil news pending; cautious trading in high liquidity window.",
+      "source_symbol": "USDCAD"
     }
   ],
   "selected_symbol": "GBPUSDm",
   "selected_recommendation": {
     "symbol": "GBPUSDm",
     "rating": 1,
-    "reason": "Strong momentum from UK data; 4H trendline breakout aligns with high session volatility.",
+    "reason": "Bullish momentum on 4H; active session favors GBP volatility.",
     "source_symbol": "GBPUSD"
   }
 }
