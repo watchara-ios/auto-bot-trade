@@ -94,6 +94,7 @@ class Config:
     ADX_MIN             = float(os.getenv("FOREX_ADX_MIN", "18.0"))   # loosened from 20
     ADX_MAX             = float(os.getenv("FOREX_ADX_MAX", "50.0"))   # was missing → blocked strong trends
     ATR_PERCENTILE_MIN  = float(os.getenv("FOREX_ATR_PCT_MIN", "50.0"))  # loosened from default 65
+    MIN_ATR_PCT         = float(os.getenv("FOREX_MIN_ATR_PCT", "0.0002"))  # fix: was 0.0005 → blocked GBPUSD/USDJPY
     VOLUME_MULT         = float(os.getenv("FOREX_VOLUME_MULT", "1.0"))   # loosened from 1.2
     ALLOWED_SIDE        = os.getenv("FOREX_ALLOWED_SIDE", "BOTH")
     REQUIRE_ATR_EXPANSION = os.getenv("FOREX_REQUIRE_ATR_EXPANSION", "false").lower() == "true"
@@ -102,6 +103,8 @@ class Config:
     MAX_TRADES_PER_DAY    = int(os.getenv("FOREX_MAX_TRADES_PER_DAY", "3"))   # raised from 2
     MAX_DAILY_LOSS_PCT    = float(os.getenv("FOREX_MAX_DAILY_LOSS_PCT", "3.0"))
     MAX_SPREAD_POINTS     = int(os.getenv("FOREX_MAX_SPREAD_POINTS", "80"))
+    # Gold (XAUUSD) spread is quoted in different point units — needs higher limit
+    MAX_SPREAD_POINTS_GOLD = int(os.getenv("FOREX_MAX_SPREAD_POINTS_GOLD", "500"))
     MIN_TREND_GAP_PCT     = float(os.getenv("FOREX_MIN_TREND_GAP_PCT", "0.00035"))
     MIN_M5_ATR_POINTS     = int(os.getenv("FOREX_MIN_M5_ATR_POINTS", "120"))
     MAX_M5_ATR_POINTS     = int(os.getenv("FOREX_MAX_M5_ATR_POINTS", "1200"))
@@ -373,8 +376,10 @@ def pass_spread_filter() -> tuple[bool, str]:
     sp = get_spread_points()
     if sp is None:
         return False, "no tick/spread info"
-    if sp > Config.MAX_SPREAD_POINTS:
-        return False, f"spread {sp:.1f} > {Config.MAX_SPREAD_POINTS} pts"
+    sym = symbol().upper()
+    limit = Config.MAX_SPREAD_POINTS_GOLD if "XAU" in sym or "XAG" in sym else Config.MAX_SPREAD_POINTS
+    if sp > limit:
+        return False, f"spread {sp:.1f} > {limit} pts"
     return True, f"spread OK {sp:.1f} pts"
 
 
@@ -445,6 +450,7 @@ def _core_config() -> DonchianCoreConfig:
         adx_max              = Config.ADX_MAX,
         session_hours_utc    = session_utc,
         atr_percentile_min   = Config.ATR_PERCENTILE_MIN,
+        min_atr_pct          = Config.MIN_ATR_PCT,
         volume_mult          = Config.VOLUME_MULT,
         require_atr_expansion= Config.REQUIRE_ATR_EXPANSION,
     )
