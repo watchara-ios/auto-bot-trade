@@ -56,6 +56,12 @@ class Config:
     exclude_weekdays: tuple[str, ...] = ()
     max_bars_after_donchian_expansion: Optional[int] = None
     seed: int = 42
+    max_hold_minutes: Optional[int] = None
+    use_regime_filter: bool = False
+    regime_adx_min: float = 20.0
+    use_weekly_regime: bool = False
+    weekly_adx_min: float = 25.0
+    weekly_swing_lookback: int = 1
 
 
 def load_csv(path: Path) -> pd.DataFrame:
@@ -166,6 +172,37 @@ def prepare(m5: pd.DataFrame, m15: pd.DataFrame, config: Config) -> pd.DataFrame
         .fillna(False)
         .astype(bool)
     )
+
+    # Daily regime: resample M15 → 1D for higher-timeframe trend/ADX filter
+    d1 = m15.resample("1D").agg(
+        {"open": "first", "high": "max", "low": "min", "close": "last", "volume": "sum"}
+    ).dropna(subset=["open", "close"])
+    d1["d1_adx"] = adx(d1, 14)
+    d1_ema50 = ema(d1["close"], 50)
+    d1_ema200 = ema(d1["close"], 200)
+    d1["d1_trend"] = np.where(d1_ema50 > d1_ema200, 1, np.where(d1_ema50 < d1_ema200, -1, 0))
+    aligned["d1_adx"] = d1["d1_adx"].shift(1).reindex(aligned.index, method="ffill")
+    aligned["d1_trend"] = d1["d1_trend"].shift(1).reindex(aligned.index, method="ffill")
+
+    # Weekly regime: resample M15 → W1 for swing structure (HH+HL / LH+LL) + ADX
+    w1 = m15.resample("W").agg(
+        {"open": "first", "high": "max", "low": "min", "close": "last", "volume": "sum"}
+    ).dropna(subset=["open", "close"])
+    w1["w1_adx"] = adx(w1, 14)
+    w1_hh = w1["high"] > w1["high"].shift(1)
+    w1_hl = w1["low"] > w1["low"].shift(1)
+    w1_lh = w1["high"] < w1["high"].shift(1)
+    w1_ll = w1["low"] < w1["low"].shift(1)
+    w1["w1_bull_1"] = w1_hh & w1_hl
+    w1["w1_bear_1"] = w1_lh & w1_ll
+    # Stricter: 2 consecutive weeks of same structure
+    w1["w1_bull_2"] = w1["w1_bull_1"] & w1["w1_bull_1"].shift(1)
+    w1["w1_bear_2"] = w1["w1_bear_1"] & w1["w1_bear_1"].shift(1)
+    for col in ["w1_adx", "w1_bull_1", "w1_bear_1", "w1_bull_2", "w1_bear_2"]:
+        aligned[col] = (
+            w1[col].shift(1).reindex(aligned.index, method="ffill").fillna(False)
+        )
+
     return aligned
 
 
@@ -185,6 +222,22 @@ def signal(row: pd.Series, config: Config) -> Optional[dict]:
         return None
     if side == "SELL" and row["m15_trend"] != -1:
         return None
+    if config.use_regime_filter:
+        if row.get("d1_adx", 0) <= config.regime_adx_min:
+            return None
+        d1_trend = row.get("d1_trend", 0)
+        if side == "BUY" and d1_trend != 1:
+            return None
+        if side == "SELL" and d1_trend != -1:
+            return None
+    if config.use_weekly_regime:
+        lb = min(max(config.weekly_swing_lookback, 1), 2)
+        if row.get("w1_adx", 0) <= config.weekly_adx_min:
+            return None
+        if side == "BUY" and not bool(row.get(f"w1_bull_{lb}", False)):
+            return None
+        if side == "SELL" and not bool(row.get(f"w1_bear_{lb}", False)):
+            return None
     if row["m15_adx"] <= config.adx_min or not bool(row["m15_adx_rising"]):
         return None
     if config.adx_max is not None and row["m15_adx"] >= config.adx_max:
@@ -256,9 +309,12 @@ def trade_levels(row: pd.Series, entry: float, side: str, config: Config):
     return sl, tp, risk
 
 
-def simulate_exit(m1: pd.DataFrame, entry_time: pd.Timestamp, side: str, sl: float, tp: float):
+def simulate_exit(m1: pd.DataFrame, entry_time: pd.Timestamp, side: str, sl: float, tp: float, max_hold_minutes: Optional[int] = None):
+    cutoff = entry_time + pd.Timedelta(minutes=max_hold_minutes) if max_hold_minutes is not None else None
     window = m1[m1.index >= entry_time]
     for ts, row in window.iterrows():
+        if cutoff is not None and ts >= cutoff:
+            return ts, float(row["close"]), "TIMEOUT"
         if side == "BUY":
             if row["low"] <= sl:
                 return ts, sl, "SL"
@@ -332,7 +388,7 @@ def run_backtest(symbol: str, m1: pd.DataFrame, m5: pd.DataFrame, config: Config
         qty = (risk_base * risk_pct) / risk_dist
         if qty <= 0 or not np.isfinite(qty):
             continue
-        exit_time, exit_price, result = simulate_exit(m1, entry_time, sig["side"], sl, tp)
+        exit_time, exit_price, result = simulate_exit(m1, entry_time, sig["side"], sl, tp, config.max_hold_minutes)
         unavailable_until = exit_time
         if result == "OPEN" or not np.isfinite(exit_price):
             continue
