@@ -45,11 +45,13 @@ def print(*args, **kwargs):
     builtins.print(*[_log_safe(arg) for arg in args], **kwargs)
 
 
-sys.path.insert(0, str(Path(__file__).resolve().parent))
+BOT_DIR = Path(__file__).resolve().parent
+PROJECT_ROOT = BOT_DIR.parent
+sys.path.insert(0, str(BOT_DIR))
 from donchian_core import DonchianCoreConfig, latest_signal
 from demo_testcase_logger import log_demo_testcase
 from notifier import notify_bot_started, notify_error, notify_order_opened, notify_order_result
-from notifier import notify_reconnected
+from notifier import notify_last_error, notify_reconnected
 
 try:
     from dotenv import load_dotenv
@@ -62,7 +64,8 @@ except ImportError:
     OpenAI = None
 
 if load_dotenv:
-    load_dotenv()
+    env_path = PROJECT_ROOT / ".env"
+    load_dotenv(env_path if env_path.exists() else None)
 
 
 # =========================================================
@@ -109,6 +112,10 @@ BLOCK_ENTRY_HOURS = {
 EXIT_AFTER_SESSION_END = True
 
 DRY_RUN = os.getenv("FOREX_DRY_RUN", "true").lower() == "true"
+MT5_LOGIN = os.getenv("MT5_LOGIN", "").strip()
+MT5_PASSWORD = os.getenv("MT5_PASSWORD", "").strip()
+MT5_SERVER = os.getenv("MT5_SERVER", "").strip()
+MT5_EXPLICIT_LOGIN = os.getenv("FOREX_MT5_EXPLICIT_LOGIN", "true").lower() == "true"
 
 # DeepSeek daily market scan
 AI_DAILY_SCAN_ENABLED = os.getenv("FOREX_AI_DAILY_SCAN_ENABLED", "true").lower() == "true"
@@ -176,6 +183,25 @@ MIN_VOLUME_MULT = 1.0
 # =========================================================
 # MT5 CONNECT
 # =========================================================
+def mt5_account_snapshot(account=None):
+    account = account or mt5.account_info()
+    if account is None:
+        return f"No account info | last_error={mt5.last_error()}"
+
+    fields = {
+        "login": getattr(account, "login", ""),
+        "server": getattr(account, "server", ""),
+        "name": getattr(account, "name", ""),
+        "currency": getattr(account, "currency", ""),
+        "trade_allowed": getattr(account, "trade_allowed", ""),
+        "trade_expert": getattr(account, "trade_expert", ""),
+        "balance": getattr(account, "balance", ""),
+        "equity": getattr(account, "equity", ""),
+        "margin_free": getattr(account, "margin_free", ""),
+    }
+    return " | ".join(f"{key}={value}" for key, value in fields.items())
+
+
 def resolve_symbol(preferred_symbol):
     candidates = [preferred_symbol]
     preferred_upper = preferred_symbol.upper()
@@ -224,6 +250,26 @@ def connect_mt5():
     if not mt5.initialize():
         raise RuntimeError(f"MT5 initialize failed: {mt5.last_error()}")
 
+    if MT5_EXPLICIT_LOGIN:
+        if MT5_LOGIN and MT5_PASSWORD and MT5_SERVER:
+            try:
+                login_id = int(MT5_LOGIN)
+            except ValueError as exc:
+                raise RuntimeError("MT5_LOGIN must be numeric") from exc
+
+            if not mt5.login(login_id, password=MT5_PASSWORD, server=MT5_SERVER):
+                raise RuntimeError(f"MT5 login failed: {mt5.last_error()}")
+            print(
+                f"[{datetime.now()}] ✅ MT5 login OK | login={login_id} | server={MT5_SERVER}",
+                flush=True,
+            )
+        else:
+            print(
+                f"[{datetime.now()}] ⏳ MT5 explicit login skipped "
+                f"(missing MT5_LOGIN/MT5_PASSWORD/MT5_SERVER)",
+                flush=True,
+            )
+
     resolved_symbol, symbol_info = resolve_symbol(SYMBOL)
     if resolved_symbol != SYMBOL:
         print(f"[{datetime.now()}] 🔎 Symbol resolved: {SYMBOL} -> {resolved_symbol}", flush=True)
@@ -235,6 +281,7 @@ def connect_mt5():
         symbol_info = mt5.symbol_info(SYMBOL)
 
     print(f"[{datetime.now()}] ✅ Connected MT5 | Symbol={SYMBOL}", flush=True)
+    print(f"[{datetime.now()}] 🔎 MT5 account: {mt5_account_snapshot()}", flush=True)
 
 
 def is_mt5_connection_error(error):
@@ -274,6 +321,30 @@ def reconnect_mt5(state, error):
     state["mt5_down"] = False
     notify_reconnected("FOREX", "MT5 terminal connection restored")
     print(f"[{datetime.now()}] ✅ MT5 reconnected", flush=True)
+
+
+def notify_forex_started(phase="READY"):
+    extra = (
+        f"Status: <code>{phase}</code>\n"
+        f"Symbol: <code>{SYMBOL}</code>\n"
+        f"Session: <code>{TRADE_START_HOUR}:00-{TRADE_END_HOUR}:59</code>\n"
+        f"Interval: <code>{CHECK_INTERVAL_SECONDS}s</code>\n"
+        f"AI scan: <code>{AI_DAILY_SCAN_ENABLED}</code>\n"
+        f"Require AI watchlist: <code>{REQUIRE_AI_WATCHLIST}</code>"
+    )
+    sent = notify_bot_started(
+        "Forex Donchian Bot",
+        "DRY_RUN" if DRY_RUN else "LIVE/DEMO",
+        extra,
+    )
+    if sent:
+        print(f"[{datetime.now()}] ✅ Telegram startup notification sent ({phase})", flush=True)
+    else:
+        print(
+            f"[{datetime.now()}] ⏳ Telegram startup notification skipped "
+            f"({notify_last_error() or 'send failed'})",
+            flush=True,
+        )
 
 
 def select_trading_symbol(preferred_symbol, reason=""):
@@ -489,7 +560,9 @@ def get_today_profit():
 def pass_daily_risk_filter():
     account = mt5.account_info()
     if account is None:
-        return False, "No account info"
+        return False, f"No account info | last_error={mt5.last_error()}"
+    if float(account.balance) <= 0:
+        return False, f"Invalid account balance: {account.balance} | {mt5_account_snapshot(account)}"
 
     today_orders = get_today_orders_count()
     today_profit = get_today_profit()
@@ -499,10 +572,15 @@ def pass_daily_risk_filter():
     if today_orders >= MAX_TRADES_PER_DAY:
         return False, f"Max trades reached: {today_orders}/{MAX_TRADES_PER_DAY}"
 
-    if today_profit <= -max_loss_money:
-        return False, f"Daily loss limit reached: {today_profit:.2f}"
+    # A flat PnL of 0.00 must be allowed. The previous <= comparison
+    # blocked trading when max_loss_money was 0 or rounded near 0.
+    if today_profit < -max_loss_money:
+        return False, (
+            f"Daily loss limit reached: pnl={today_profit:.2f} "
+            f"limit=-{max_loss_money:.2f}"
+        )
 
-    return True, "Daily risk OK"
+    return True, f"Daily risk OK: pnl={today_profit:.2f} limit=-{max_loss_money:.2f}"
 
 
 # =========================================================
@@ -1014,12 +1092,13 @@ def run_bot():
         f"interval={CHECK_INTERVAL_SECONDS}s | DRY_RUN={DRY_RUN}",
         flush=True,
     )
-    connect_mt5()
-    notify_bot_started(
-        "Forex Donchian Bot",
-        "DRY_RUN" if DRY_RUN else "LIVE/DEMO",
-        f"Session: <code>{TRADE_START_HOUR}:00-{TRADE_END_HOUR}:59</code>",
-    )
+    notify_forex_started("BOOTING")
+    try:
+        connect_mt5()
+    except Exception as e:
+        notify_error("FOREX", f"Startup failed before MT5 connection: {e}")
+        raise
+    notify_forex_started("READY")
 
     last_entry_candle_time = {}
     runtime_state = {
