@@ -62,6 +62,20 @@ class Config:
     use_weekly_regime: bool = False
     weekly_adx_min: float = 25.0
     weekly_swing_lookback: int = 1
+    # ── Pro trade management ─────────────────────────────────────────────
+    partial_close_r: float = 0.0      # take partial profit at N×risk (0 = off)
+    partial_close_pct: float = 0.5    # fraction to close at partial target
+    breakeven_r: float = 0.0          # move SL to entry when N×risk in profit (0 = off)
+    # ── Pro signal quality filters ────────────────────────────────────────
+    # Jesse Livermore / ICT: "fresh breakout only, not overextended continuation"
+    require_fresh_breakout: bool = False   # True = skip if prev bar also broke donchian
+    # Man AHL / Winton: trade only in moderate volatility regime
+    atr_percentile_max: Optional[float] = None   # skip if ATR percentile > this (e.g. 85)
+    # Stan Weinstein / Mark Minervini: trend must be accelerating, not decelerating
+    adx_bars_rising: int = 1           # ADX must be rising for at least N consecutive bars
+    # CTA standard (Campbell & Co., Millburn): pause when equity in drawdown
+    equity_curve_filter: bool = False  # True = no new entries when equity < MA
+    equity_curve_ma: int = 20          # lookback bars for equity MA
 
 
 def load_csv(path: Path) -> pd.DataFrame:
@@ -119,6 +133,13 @@ def prepare(m5: pd.DataFrame, m15: pd.DataFrame, config: Config) -> pd.DataFrame
     m15["adx"] = adx(m15, config.adx_period)
     m15["adx_rising"] = m15["adx"] > m15["adx"].shift(1)
     m15["adx_rolling_max50"] = m15["adx"].shift(1).rolling(50).max()
+    # count consecutive bars where ADX is rising (Minervini: accelerating trend)
+    consec = []
+    c = 0
+    for rising in m15["adx_rising"].fillna(False):
+        c = c + 1 if rising else 0
+        consec.append(c)
+    m15["adx_consec_rising"] = consec
 
     m5 = m5.copy()
     m5["atr"] = atr(m5, config.atr_period)
@@ -142,6 +163,12 @@ def prepare(m5: pd.DataFrame, m15: pd.DataFrame, config: Config) -> pd.DataFrame
     m5["bars_since_donchian_expansion"] = bars_since_expansion
     m5["swing_high"] = m5["high"].shift(1).rolling(config.swing_lookback).max()
     m5["swing_low"] = m5["low"].shift(1).rolling(config.swing_lookback).min()
+    # fresh breakout: previous bar did NOT break donchian (Livermore/ICT — avoid late entries)
+    prev_close = m5["close"].shift(1)
+    prev_dc_high = m5["donchian_high"].shift(1)
+    prev_dc_low  = m5["donchian_low"].shift(1)
+    m5["prev_broke_high"] = prev_close > prev_dc_high
+    m5["prev_broke_low"]  = prev_close < prev_dc_low
     candle_range = (m5["high"] - m5["low"]).replace(0, np.nan)
     m5["body"] = (m5["close"] - m5["open"]).abs()
     m5["avg_body20"] = m5["body"].shift(1).rolling(20).mean()
@@ -171,6 +198,19 @@ def prepare(m5: pd.DataFrame, m15: pd.DataFrame, config: Config) -> pd.DataFrame
         .astype("boolean")
         .fillna(False)
         .astype(bool)
+    )
+    aligned["m15_adx_consec_rising"] = (
+        m15["adx_consec_rising"]
+        .shift(1)
+        .reindex(aligned.index, method="ffill")
+        .fillna(0)
+        .astype(int)
+    )
+    aligned["prev_broke_high"] = (
+        m5["prev_broke_high"].shift(1).reindex(aligned.index, method="ffill").fillna(False)
+    )
+    aligned["prev_broke_low"] = (
+        m5["prev_broke_low"].shift(1).reindex(aligned.index, method="ffill").fillna(False)
     )
 
     # Daily regime: resample M15 → 1D for higher-timeframe trend/ADX filter
@@ -242,9 +282,22 @@ def signal(row: pd.Series, config: Config) -> Optional[dict]:
         return None
     if config.adx_max is not None and row["m15_adx"] >= config.adx_max:
         return None
+    # Minervini: ADX must be accelerating for N consecutive bars
+    if config.adx_bars_rising > 1:
+        if int(row.get("m15_adx_consec_rising", 0)) < config.adx_bars_rising:
+            return None
+    # Livermore/ICT: only fresh breakout (prev bar did NOT already break donchian)
+    if config.require_fresh_breakout:
+        if side == "BUY" and bool(row.get("prev_broke_high", False)):
+            return None
+        if side == "SELL" and bool(row.get("prev_broke_low", False)):
+            return None
     if config.use_adaptive_adx_cap and row["m15_adx"] >= row.get("m15_adx_rolling_max50", np.inf):
         return None
     if config.atr_percentile_min is not None and row.get("atr_percentile_100", 0) <= config.atr_percentile_min:
+        return None
+    # Man AHL / Winton: avoid chaotic high-volatility regime
+    if config.atr_percentile_max is not None and row.get("atr_percentile_100", 100) >= config.atr_percentile_max:
         return None
     if (
         config.max_bars_after_donchian_expansion is not None
@@ -330,6 +383,84 @@ def simulate_exit(m1: pd.DataFrame, entry_time: pd.Timestamp, side: str, sl: flo
     return window.index[-1], float(window.iloc[-1]["close"]), "OPEN"
 
 
+def simulate_exit_managed(
+    m1: pd.DataFrame,
+    entry_time: pd.Timestamp,
+    side: str,
+    entry: float,
+    sl: float,
+    tp: float,
+    risk_dist: float,
+    config: Config,
+):
+    """
+    Simulate exit with optional partial close and breakeven stop.
+    Returns list of (exit_time, exit_price, qty_fraction, reason).
+    Final PnL = sum over each tuple: direction * (price - entry) * qty_fraction * base_qty
+    """
+    # Derived levels
+    sign = 1 if side == "BUY" else -1
+    partial_price = (entry + sign * risk_dist * config.partial_close_r
+                     if config.partial_close_r > 0 else None)
+    be_trigger    = (entry + sign * risk_dist * config.breakeven_r
+                     if config.breakeven_r > 0 else None)
+
+    current_sl   = sl
+    partial_done = False
+    remaining    = 1.0
+    exits: list  = []
+
+    cutoff = (entry_time + pd.Timedelta(minutes=config.max_hold_minutes)
+              if config.max_hold_minutes else None)
+    window = m1[m1.index >= entry_time]
+
+    for ts, row in window.iterrows():
+        if cutoff and ts >= cutoff:
+            exits.append((ts, float(row["close"]), remaining, "TIMEOUT"))
+            return exits
+
+        if side == "BUY":
+            # breakeven trigger
+            if be_trigger and not partial_done and row["high"] >= be_trigger:
+                current_sl = max(current_sl, entry)
+            # partial close
+            if partial_price and not partial_done and row["high"] >= partial_price:
+                exits.append((ts, partial_price, config.partial_close_pct, "PARTIAL_TP"))
+                partial_done = True
+                remaining   -= config.partial_close_pct
+                current_sl   = max(current_sl, entry)  # always move to BE on partial
+                if remaining <= 0:
+                    return exits
+            # SL
+            if row["low"] <= current_sl:
+                exits.append((ts, current_sl, remaining, "SL"))
+                return exits
+            # TP
+            if row["high"] >= tp:
+                exits.append((ts, tp, remaining, "TP"))
+                return exits
+        else:  # SELL
+            if be_trigger and not partial_done and row["low"] <= be_trigger:
+                current_sl = min(current_sl, entry)
+            if partial_price and not partial_done and row["low"] <= partial_price:
+                exits.append((ts, partial_price, config.partial_close_pct, "PARTIAL_TP"))
+                partial_done = True
+                remaining   -= config.partial_close_pct
+                current_sl   = min(current_sl, entry)
+                if remaining <= 0:
+                    return exits
+            if row["high"] >= current_sl:
+                exits.append((ts, current_sl, remaining, "SL"))
+                return exits
+            if row["low"] <= tp:
+                exits.append((ts, tp, remaining, "TP"))
+                return exits
+
+    if window.empty:
+        return [(entry_time, np.nan, remaining, "OPEN")]
+    return [(window.index[-1], float(window.iloc[-1]["close"]), remaining, "OPEN")]
+
+
 def run_backtest(symbol: str, m1: pd.DataFrame, m5: pd.DataFrame, config: Config, variant: str, split: str):
     rng = np.random.default_rng(config.seed)
     balance = config.initial_balance
@@ -340,6 +471,7 @@ def run_backtest(symbol: str, m1: pd.DataFrame, m5: pd.DataFrame, config: Config
     daily_trades = {}
     daily_pnl = {}
     unavailable_until = pd.Timestamp.min
+    equity_history: list[float] = []   # for Campbell/Millburn equity-curve filter
 
     for i in range(len(m5) - 1):
         ts = m5.index[i]
@@ -347,8 +479,14 @@ def run_backtest(symbol: str, m1: pd.DataFrame, m5: pd.DataFrame, config: Config
         peak = max(peak, balance)
         max_dd = min(max_dd, (balance - peak) / peak)
         equity.append({"time": ts, "symbol": symbol, "variant": variant, "split": split, "balance": balance, "drawdown_pct": max_dd * 100})
+        equity_history.append(balance)
         if ts <= unavailable_until:
             continue
+        # Campbell & Co. / Millburn: pause entries when equity < its own MA
+        if config.equity_curve_filter and len(equity_history) >= config.equity_curve_ma:
+            eq_ma = np.mean(equity_history[-config.equity_curve_ma:])
+            if balance < eq_ma:
+                continue
         if config.include_utc_hours is not None and ts.hour not in config.include_utc_hours:
             continue
         if config.exclude_utc_hours and ts.hour in config.exclude_utc_hours:
@@ -388,14 +526,29 @@ def run_backtest(symbol: str, m1: pd.DataFrame, m5: pd.DataFrame, config: Config
         qty = (risk_base * risk_pct) / risk_dist
         if qty <= 0 or not np.isfinite(qty):
             continue
-        exit_time, exit_price, result = simulate_exit(m1, entry_time, sig["side"], sl, tp, config.max_hold_minutes)
-        unavailable_until = exit_time
-        if result == "OPEN" or not np.isfinite(exit_price):
-            continue
-        gross = (exit_price - entry) * qty
-        if sig["side"] == "SELL":
-            gross = -gross
-        fees = (entry * qty + exit_price * qty) * config.fee_rate
+        use_managed = config.partial_close_r > 0 or config.breakeven_r > 0
+        if use_managed:
+            events = simulate_exit_managed(m1, entry_time, sig["side"],
+                                           entry, sl, tp, risk_dist, config)
+            last = events[-1]
+            exit_time, exit_price, result = last[0], last[1], last[3]
+            unavailable_until = exit_time
+            if result == "OPEN" or not np.isfinite(exit_price):
+                continue
+            sign = 1 if sig["side"] == "BUY" else -1
+            gross = sum(sign * (ev[1] - entry) * qty * ev[2] for ev in events)
+            fees  = sum((entry * qty * ev[2] + ev[1] * qty * ev[2]) * config.fee_rate
+                        for ev in events)
+        else:
+            exit_time, exit_price, result = simulate_exit(
+                m1, entry_time, sig["side"], sl, tp, config.max_hold_minutes)
+            unavailable_until = exit_time
+            if result == "OPEN" or not np.isfinite(exit_price):
+                continue
+            gross = (exit_price - entry) * qty
+            if sig["side"] == "SELL":
+                gross = -gross
+            fees = (entry * qty + exit_price * qty) * config.fee_rate
         pnl = gross - fees
         balance += pnl
         daily_trades[day] = daily_trades.get(day, 0) + 1

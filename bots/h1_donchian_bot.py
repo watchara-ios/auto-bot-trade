@@ -96,6 +96,8 @@ class Config:
     ENTRY_COOLDOWN        = 3600   # min seconds between entries per symbol (1 H1 bar)
     MAX_OPEN_SYMBOLS      = 1
     TRIGGER_GUARD_PCT     = 0.0005
+    # Pro trade management (Minervini + ICT)
+    BREAKEVEN_R          = 0.5    # move SL to entry when price reaches entry + 0.5×risk
 
     # M15 klines to fetch (resampled → H1+H4 inside)
     KLINE_LIMIT = 1200
@@ -109,7 +111,7 @@ class Config:
 
 Config.LOG_DIR.mkdir(parents=True, exist_ok=True)
 
-# ── Strategy config (proven H1 rr15 — no regime filter) ─────────────────────
+# ── Strategy config: accel2_be05_rr20 (best fold2 OOS avg PF=2.358) ─────────
 STRATEGY_CFG = StrategyConfig(
     adx_min=20.0,
     adx_max=28.0,
@@ -120,7 +122,8 @@ STRATEGY_CFG = StrategyConfig(
     use_volume_filter=True,
     volume_mult=1.2,
     use_atr_expansion=True,
-    rr=1.5,
+    rr=2.0,               # upgraded from 1.5 — backtest avg fold2 PF=2.378
+    adx_bars_rising=2,    # Minervini: ADX must accelerate ≥2 consecutive H4 bars
     max_trades_per_day=Config.MAX_TRADES_PER_DAY,
 )
 
@@ -483,7 +486,9 @@ def _fresh_state() -> dict:
         "day_start_balance": None,
         "trades_today": 0,
         "last_trade_time": {},
-        "last_signal_bar": {},     # symbol → signal_bar_close str (dedup)
+        "last_signal_bar": {},      # symbol → signal_bar_close str (dedup)
+        "be_trigger": {},           # symbol → price level that triggers breakeven move
+        "be_applied": {},           # symbol → bool, True once SL moved to entry
         "dry_run": Config.DRY_RUN,
         "connection_down": False,
         "last_disconnect_notify": 0,
@@ -601,6 +606,55 @@ def cleanup_orphan_orders(symbol: str) -> None:
 
 
 # ─────────────────────────────────────────────
+# Breakeven management  (ICT: "free ride" — move SL to entry at 0.5R)
+# ─────────────────────────────────────────────
+
+def move_sl_to_breakeven(symbol: str, pos: dict) -> None:
+    """Cancel existing SL algo order and replace it at entry (breakeven)."""
+    if Config.DRY_RUN:
+        log(f"{symbol} DRY_RUN: would move SL to breakeven entry={pos['entry']:.4f}")
+        return
+    entry    = pos["entry"]
+    amt      = abs(pos["amount"])
+    side     = "BUY" if pos["amount"] > 0 else "SELL"
+    exit_side = "SELL" if side == "BUY" else "BUY"
+    qty      = round_qty(symbol, amt)
+    try:
+        Binance.cancel_all_orders(symbol, conditional=True)
+        Binance.algo_order(symbol, exit_side, "STOP_MARKET",
+                           entry, qty, side, current_price=pos["mark"])
+        log(f"{symbol} ✅ breakeven: SL moved to entry={entry:.4f}")
+    except Exception as exc:
+        warn(f"{symbol} breakeven move failed: {exc}")
+
+
+def check_breakeven(symbol: str, pos: dict, state: dict) -> None:
+    """Called each cycle when a position is open — applies breakeven once."""
+    if abs(pos["amount"]) <= 0:
+        # position closed — clear breakeven state
+        state.setdefault("be_trigger", {}).pop(symbol, None)
+        state.setdefault("be_applied", {}).pop(symbol, None)
+        return
+
+    if state.get("be_applied", {}).get(symbol, False):
+        return  # already applied this trade
+
+    trigger = state.get("be_trigger", {}).get(symbol)
+    if trigger is None:
+        return  # no trigger recorded for this trade
+
+    mark = pos["mark"]
+    side = "BUY" if pos["amount"] > 0 else "SELL"
+    hit  = (mark >= trigger) if side == "BUY" else (mark <= trigger)
+
+    if hit:
+        log(f"{symbol} price {mark:.4f} reached BE trigger {trigger:.4f} — moving SL")
+        move_sl_to_breakeven(symbol, pos)
+        state.setdefault("be_applied", {})[symbol] = True
+        save_state(state)
+
+
+# ─────────────────────────────────────────────
 # Connection state
 # ─────────────────────────────────────────────
 
@@ -675,6 +729,12 @@ def execute_signal(sig: dict, balance: float, state: dict, pos_amount: float = 0
     state.setdefault("last_trade_time", {})[symbol] = time.time()
     if not Config.DRY_RUN:
         state["trades_today"] = state.get("trades_today", 0) + 1
+    # Record breakeven trigger: entry ± BREAKEVEN_R × risk_dist
+    risk_dist = abs(sig["entry"] - sig["sl"])
+    sign = 1 if sig["side"] == "BUY" else -1
+    state.setdefault("be_trigger", {})[symbol] = round(
+        sig["entry"] + sign * risk_dist * Config.BREAKEVEN_R, 6)
+    state.setdefault("be_applied", {})[symbol] = False
     save_state(state)
 
     _append_trade({
@@ -769,8 +829,12 @@ def main() -> None:
                 pos = positions_by_symbol.get(symbol, {"amount": 0.0, "entry": 0.0, "mark": 0.0})
 
                 if abs(pos["amount"]) > 0:
-                    log(f"{symbol} open pos={pos['amount']:.4f} entry={pos['entry']:.4f} mark={pos['mark']:.4f}")
+                    be_applied = state.get("be_applied", {}).get(symbol, False)
+                    be_trigger = state.get("be_trigger", {}).get(symbol, 0.0)
+                    log(f"{symbol} open pos={pos['amount']:.4f} entry={pos['entry']:.4f} "
+                        f"mark={pos['mark']:.4f} | BE={'✅' if be_applied else f'@{be_trigger:.4f}'}")
                     ensure_protection(symbol, pos)
+                    check_breakeven(symbol, pos, state)
                     continue
 
                 cleanup_orphan_orders(symbol)
