@@ -1,9 +1,0 @@
-{
-  "open_trades": [],
-  "closed_trade_ids": [],
-  "processed_m5": {
-    "BTCUSDT": "2026-04-28 11:15:00"
-  },
-  "pending_signals": [],
-  "balance": 1000.0
-}
