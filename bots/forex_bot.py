@@ -8,7 +8,7 @@ import os
 import sys
 import time
 import builtins
-from datetime import datetime, time as dtime
+from datetime import datetime, time as dtime, timezone
 from pathlib import Path
 
 import MetaTrader5 as mt5
@@ -98,6 +98,17 @@ class Config:
     VOLUME_MULT         = float(os.getenv("FOREX_VOLUME_MULT", "1.0"))   # loosened from 1.2
     ALLOWED_SIDE        = os.getenv("FOREX_ALLOWED_SIDE", "BOTH")
     REQUIRE_ATR_EXPANSION = os.getenv("FOREX_REQUIRE_ATR_EXPANSION", "false").lower() == "true"
+
+    # Pro techniques (Minervini + ICT)
+    ADX_BARS_RISING = int(os.getenv("FOREX_ADX_BARS_RISING", "2"))
+    BREAKEVEN_R     = float(os.getenv("FOREX_BREAKEVEN_R", "0.5"))
+    KILL_ZONE_ONLY  = os.getenv("FOREX_KILL_ZONE_ONLY", "true").lower() == "true"
+    KILL_ZONES_UTC  = [(7, 9), (12, 14)]   # London open, NY open
+    CORR_GROUPS     = [
+        {"EURUSD", "GBPUSD", "EURGBP"},
+        {"USDJPY", "USDCHF", "USDCAD"},
+        {"AUDUSD", "NZDUSD", "AUDNZD"},
+    ]
 
     # Risk
     MAX_TRADES_PER_DAY    = int(os.getenv("FOREX_MAX_TRADES_PER_DAY", "3"))   # raised from 2
@@ -372,6 +383,17 @@ def get_spread_points() -> float | None:
     return (tick.ask - tick.bid) / info.point
 
 
+def pass_kill_zone_filter() -> tuple[bool, str]:
+    if not Config.KILL_ZONE_ONLY:
+        return True, "kill zone filter off"
+    utc_hour = datetime.now(timezone.utc).hour
+    for start, end in Config.KILL_ZONES_UTC:
+        if start <= utc_hour < end:
+            return True, f"in kill zone {start:02d}-{end:02d} UTC"
+    zones = ", ".join(f"{s:02d}-{e:02d}" for s, e in Config.KILL_ZONES_UTC)
+    return False, f"outside kill zones ({zones} UTC)"
+
+
 def pass_spread_filter() -> tuple[bool, str]:
     sp = get_spread_points()
     if sp is None:
@@ -425,6 +447,77 @@ def has_any_open_position(symbols: list[str]) -> tuple[bool, str]:
     return False, ""
 
 
+def has_correlated_position(sym: str) -> tuple[bool, str]:
+    positions = mt5.positions_get() or []
+    if not positions:
+        return False, ""
+    open_syms = {p.symbol.upper() for p in positions}
+    sym_up = sym.upper()
+    for group in Config.CORR_GROUPS:
+        if sym_up in group:
+            conflict = group & open_syms - {sym_up}
+            if conflict:
+                return True, f"correlated position open: {', '.join(conflict)}"
+    return False, ""
+
+
+# ─────────────────────────────────────────────────────────────────────────────
+# Breakeven stop management
+# ─────────────────────────────────────────────────────────────────────────────
+
+def _position_side(pos) -> str:
+    return "BUY" if pos.type == mt5.POSITION_TYPE_BUY else "SELL"
+
+
+def _move_sl_to_breakeven(pos) -> bool:
+    entry = pos.price_open
+    side  = _position_side(pos)
+    if side == "BUY"  and pos.sl >= entry:
+        return True
+    if side == "SELL" and 0 < pos.sl <= entry:
+        return True
+    req = {
+        "action":   mt5.TRADE_ACTION_SLTP,
+        "symbol":   pos.symbol,
+        "position": pos.ticket,
+        "sl":       entry,
+        "tp":       pos.tp,
+    }
+    if Config.DRY_RUN:
+        log(f"[DRY_BE] {pos.symbol} ticket={pos.ticket} sl→entry {entry}")
+        return True
+    result = mt5.order_send(req)
+    ok = result is not None and result.retcode == mt5.TRADE_RETCODE_DONE
+    if ok:
+        log(f"[BE] SL moved to entry {entry} on {pos.symbol} ticket={pos.ticket}")
+    else:
+        warn(f"[BE] Failed: {result}")
+    return ok
+
+
+def check_breakeven_positions(state: dict) -> None:
+    if Config.BREAKEVEN_R <= 0:
+        return
+    for pos in (mt5.positions_get() or []):
+        key = f"be_applied_{pos.ticket}"
+        if state.get(key):
+            continue
+        entry = pos.price_open
+        side  = _position_side(pos)
+        risk  = abs(entry - pos.sl) if pos.sl > 0 else 0
+        if risk <= 0:
+            continue
+        tick = mt5.symbol_info_tick(pos.symbol)
+        if tick is None:
+            continue
+        current  = tick.bid if side == "BUY" else tick.ask
+        be_level = (entry + risk * Config.BREAKEVEN_R if side == "BUY"
+                    else entry - risk * Config.BREAKEVEN_R)
+        triggered = (side == "BUY" and current >= be_level) or (side == "SELL" and current <= be_level)
+        if triggered and _move_sl_to_breakeven(pos):
+            state[key] = True
+
+
 # ─────────────────────────────────────────────────────────────────────────────
 # Signal generation
 # ─────────────────────────────────────────────────────────────────────────────
@@ -453,6 +546,7 @@ def _core_config() -> DonchianCoreConfig:
         min_atr_pct          = Config.MIN_ATR_PCT,
         volume_mult          = Config.VOLUME_MULT,
         require_atr_expansion= Config.REQUIRE_ATR_EXPANSION,
+        adx_bars_rising      = Config.ADX_BARS_RISING,
     )
 
 
@@ -877,6 +971,13 @@ def run_bot() -> None:
                 time.sleep(Config.CHECK_INTERVAL_SECONDS)
                 continue
 
+            # ── ICT Kill Zone filter ──────────────────────────────────────
+            kz_ok, kz_msg = pass_kill_zone_filter()
+            if not kz_ok:
+                log(f"[KZ] {kz_msg}")
+                time.sleep(Config.CHECK_INTERVAL_SECONDS)
+                continue
+
             # ── AI watchlist ──────────────────────────────────────────────
             watchlist = get_trading_watchlist()
             if not watchlist:
@@ -886,9 +987,10 @@ def run_bot() -> None:
 
             log(f"👀 Watchlist: {', '.join(watchlist)}")
 
-            # ── Skip if any position open ─────────────────────────────────
+            # ── Manage open positions (breakeven) ────────────────────────
             has_pos, pos_sym = has_any_open_position(watchlist)
             if has_pos:
+                check_breakeven_positions(state)
                 log(f"📌 Open position on {pos_sym} — skip new entries")
                 time.sleep(Config.CHECK_INTERVAL_SECONDS)
                 continue
@@ -900,6 +1002,11 @@ def run_bot() -> None:
                     select_symbol(preferred, "AI watchlist candidate")
                     sym = symbol()
                     log(f"🔎 Analyzing {sym}")
+
+                    corr_blocked, corr_msg = has_correlated_position(sym)
+                    if corr_blocked:
+                        log(f"[CORR] {sym} blocked: {corr_msg}")
+                        continue
 
                     spread_ok, spread_msg = pass_spread_filter()
                     if not spread_ok:

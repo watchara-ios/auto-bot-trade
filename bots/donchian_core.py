@@ -37,6 +37,8 @@ class DonchianCoreConfig:
     min_atr_pct: float = 0.0005
     max_m1_confirm_candles: int = 5
     entry_latency_m1_candles: int = 1
+    # Pro: Minervini — ADX must accelerate ≥ N consecutive bars before entry
+    adx_bars_rising: int = 1
 
 
 def to_indexed_ohlcv(df: pd.DataFrame) -> pd.DataFrame:
@@ -87,6 +89,24 @@ def prepare_timeframes(m1: pd.DataFrame, m5: pd.DataFrame, m15: pd.DataFrame, co
     m5 = bt.align_timeframes(m5, m15)
     m5["m15_ema_fast"] = m15["ema_fast"].shift(1).reindex(m5.index, method="ffill")
     m5["m15_ema_slow"] = m15["ema_slow"].shift(1).reindex(m5.index, method="ffill")
+
+    # Minervini: consecutive bars M15 ADX is rising
+    if "adx" in m15.columns:
+        _diff = m15["adx"].diff()
+        _cnt, _vals = 0, []
+        for d in _diff:
+            if pd.isna(d) or d <= 0:
+                _cnt = 0
+            else:
+                _cnt += 1
+            _vals.append(_cnt)
+        m15["adx_consec_rising"] = _vals
+        m5["m15_adx_consec_rising"] = (
+            m15["adx_consec_rising"].shift(1)
+            .reindex(m5.index, method="ffill")
+            .fillna(0)
+        )
+
     m5["atr_percentile_100"] = m5["atr"].rolling(100).apply(
         lambda values: pd.Series(values).rank(pct=True).iloc[-1] * 100,
         raw=False,
@@ -196,6 +216,10 @@ def apply_micro_edge_filters(row: pd.Series, side: str, config: DonchianCoreConf
         expansion = row.get(expansion_col, np.nan)
         if pd.isna(expansion) or expansion <= 1.0:
             return f"ATR not expanding {expansion_col}={expansion:.2f}"
+    if config.adx_bars_rising > 1:
+        consec = float(row.get("m15_adx_consec_rising", 0) or 0)
+        if consec < config.adx_bars_rising:
+            return f"M15 ADX consec_rising {int(consec)} < {config.adx_bars_rising} required"
     return None
 
 
