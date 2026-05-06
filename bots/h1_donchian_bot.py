@@ -216,6 +216,9 @@ class Binance:
                 return data
             except Exception as exc:
                 last_exc = exc
+                if "-1003" in str(exc) or "429" in str(exc):
+                    # rate limited — stop retrying immediately, let main loop back off
+                    break
                 if "-1021" in str(exc):
                     Binance.sync_time()
                 if attempt < Config.REQUEST_RETRIES - 1:
@@ -308,9 +311,8 @@ class Binance:
     @staticmethod
     def algo_order(symbol: str, side: str, order_type: str,
                    trigger_price: float, qty: float, position_side: str,
-                   auto_close: bool = False) -> dict:
-        pos = Binance.position(symbol)
-        current = pos["mark"] or pos["entry"] or trigger_price
+                   auto_close: bool = False, current_price: float = 0.0) -> dict:
+        current = current_price or trigger_price
         tp = round(trigger_price, 4)
 
         if position_side == "BUY":
@@ -577,8 +579,8 @@ def ensure_protection(symbol: str, pos: dict) -> None:
     tp = entry + atr_est * STRATEGY_CFG.rr if side == "BUY" else entry - atr_est * STRATEGY_CFG.rr
     qty = round_qty(symbol, abs(pos["amount"]))
     warn(f"{symbol} unprotected — emergency SL={sl:.4f} TP={tp:.4f}")
-    Binance.algo_order(symbol, exit_side, "STOP_MARKET",        sl, qty, side, auto_close=True)
-    Binance.algo_order(symbol, exit_side, "TAKE_PROFIT_MARKET", tp, qty, side, auto_close=True)
+    Binance.algo_order(symbol, exit_side, "STOP_MARKET",        sl, qty, side, auto_close=True, current_price=entry)
+    Binance.algo_order(symbol, exit_side, "TAKE_PROFIT_MARKET", tp, qty, side, auto_close=True, current_price=entry)
 
 
 def cleanup_orphan_orders(symbol: str) -> None:
@@ -624,7 +626,7 @@ def mark_disconnected(state: dict, error: Exception) -> None:
 # Trade execution
 # ─────────────────────────────────────────────
 
-def execute_signal(sig: dict, balance: float, state: dict) -> None:
+def execute_signal(sig: dict, balance: float, state: dict, pos_amount: float = 0.0) -> None:
     symbol = sig["symbol"]
 
     # Dedup: don't re-enter on the same H1 bar
@@ -639,7 +641,7 @@ def execute_signal(sig: dict, balance: float, state: dict) -> None:
         log(f"{symbol} cooldown {remaining}s remaining")
         return
 
-    if abs(Binance.position(symbol)["amount"]) > 0:
+    if abs(pos_amount) > 0:
         log(f"{symbol} position already open — skip")
         return
 
@@ -665,8 +667,8 @@ def execute_signal(sig: dict, balance: float, state: dict) -> None:
     order_result = Binance.market_order(symbol, sig["side"], qty)
     notify_order_result("BINANCE", symbol, sig["side"], order_result, dry_run=Config.DRY_RUN)
 
-    Binance.algo_order(symbol, sig["exit_side"], "STOP_MARKET",        sig["sl"], qty, sig["side"])
-    Binance.algo_order(symbol, sig["exit_side"], "TAKE_PROFIT_MARKET", sig["tp"], qty, sig["side"])
+    Binance.algo_order(symbol, sig["exit_side"], "STOP_MARKET",        sig["sl"], qty, sig["side"], current_price=sig["entry"])
+    Binance.algo_order(symbol, sig["exit_side"], "TAKE_PROFIT_MARKET", sig["tp"], qty, sig["side"], current_price=sig["entry"])
 
     # Update state
     state.setdefault("last_signal_bar", {})[symbol] = sig["signal_bar_close"]
@@ -788,7 +790,7 @@ def main() -> None:
                     f"{symbol} SIGNAL {sig['side']} tier={sig['tier']} "
                     f"bar={sig['signal_bar_close']} adx={sig['adx']} vol={sig['volume_ratio']}x"
                 )
-                execute_signal(sig, balance, state)
+                execute_signal(sig, balance, state, pos_amount=pos.get("amount", 0.0))
 
         except KeyboardInterrupt:
             warn("Stopped by user")
@@ -796,9 +798,14 @@ def main() -> None:
         except Exception as exc:
             warn(f"Loop error: {exc}")
             mark_disconnected(state, exc)
-            if "-1021" in str(exc):
-                Binance.sync_time()
-            time.sleep(Config.CONNECTION_RETRY_SLEEP_SECONDS)
+            if "-1003" in str(exc) or "429" in str(exc):
+                # rate limited — back off 120 s before retrying
+                warn("Rate limited by Binance — sleeping 120 s")
+                time.sleep(120)
+            else:
+                if "-1021" in str(exc):
+                    Binance.sync_time()
+                time.sleep(Config.CONNECTION_RETRY_SLEEP_SECONDS)
             continue
 
         time.sleep(Config.POLL_SECONDS)
