@@ -6,7 +6,7 @@ for %%I in ("%~dp0..") do set "BOT_DIR=%%~fI"
 set "BOT_FILE=%BOT_DIR%\forex_bot.py"
 set "RUN_BAT=%BOT_DIR%\scripts\run_forex_bot.bat"
 set "LOG_DIR=%BOT_DIR%\logs"
-set "LOG_FILE=%LOG_DIR%\forex_cron.log"
+set "LOG_FILE=%LOG_DIR%\forex_control.log"
 
 if not exist "%LOG_DIR%" mkdir "%LOG_DIR%"
 
@@ -38,11 +38,14 @@ echo Scheduled task created: %TASK_NAME%
 echo Runs Monday-Friday at 14:00
 echo Runner: %RUN_BAT%
 echo Log file: %LOG_FILE%
+echo Runtime log: %LOG_DIR%\forex_runtime.log
 echo.
 echo Test now:
 echo   schtasks /Run /TN "%TASK_NAME%"
 echo.
 echo Watch log:
 echo   powershell -Command "Get-Content -Wait '%LOG_FILE%'"
+echo Watch bot runtime:
+echo   powershell -Command "Get-Content -Wait '%LOG_DIR%\forex_runtime.log'"
 echo [%date% %time%] Scheduled task created: %TASK_NAME%>> "%LOG_FILE%"
 pause

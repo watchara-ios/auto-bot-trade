@@ -4,7 +4,7 @@ setlocal EnableExtensions
 set "BOT_DIR=%~dp0.."
 for %%I in ("%BOT_DIR%") do set "BOT_DIR=%%~fI"
 set "LOG_DIR=%BOT_DIR%\logs"
-set "LOG_FILE=%LOG_DIR%\forex_cron.log"
+set "LOG_FILE=%LOG_DIR%\forex_control.log"
 
 if not exist "%LOG_DIR%" mkdir "%LOG_DIR%"
 

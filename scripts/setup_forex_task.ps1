@@ -4,20 +4,20 @@ $TaskName = "Forex Bot"
 $ScriptDir = Split-Path -Parent $MyInvocation.MyCommand.Path
 $BotDir = Split-Path -Parent $ScriptDir
 $BotFile = Join-Path $BotDir "forex_bot.py"
+$RunBat = Join-Path $ScriptDir "run_forex_bot.bat"
 $LogDir = Join-Path $BotDir "logs"
-$LogFile = Join-Path $LogDir "forex_cron.log"
+$LogFile = Join-Path $LogDir "forex_control.log"
+$RuntimeLog = Join-Path $LogDir "forex_runtime.log"
 
 if (!(Test-Path $LogDir)) {
     New-Item -ItemType Directory -Path $LogDir | Out-Null
 }
 
-$Python = (Get-Command python -ErrorAction SilentlyContinue).Source
-if (-not $Python) {
-    throw "Python was not found in PATH. Install Python or edit this script and set `$Python to python.exe."
+if (!(Test-Path $RunBat)) {
+    throw "Runner not found: $RunBat"
 }
 
-$ActionCommand = "cd /d `"$BotDir`" && `"$Python`" -u `"$BotFile`" >> `"$LogFile`" 2>&1"
-$Action = New-ScheduledTaskAction -Execute "cmd.exe" -Argument "/c $ActionCommand"
+$Action = New-ScheduledTaskAction -Execute "cmd.exe" -Argument "/c `"$RunBat`""
 $Trigger = New-ScheduledTaskTrigger -Weekly -DaysOfWeek Monday,Tuesday,Wednesday,Thursday,Friday -At 14:00
 $Settings = New-ScheduledTaskSettingsSet -AllowStartIfOnBatteries -DontStopIfGoingOnBatteries -StartWhenAvailable
 
@@ -32,4 +32,5 @@ Register-ScheduledTask `
 Write-Host "Scheduled task created: $TaskName" -ForegroundColor Green
 Write-Host "Runs Monday-Friday at 14:00"
 Write-Host "Bot: $BotFile"
-Write-Host "Log: $LogFile"
+Write-Host "Control log: $LogFile"
+Write-Host "Runtime log: $RuntimeLog"

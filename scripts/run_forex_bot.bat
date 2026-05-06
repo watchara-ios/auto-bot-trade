@@ -5,7 +5,8 @@ set "BOT_DIR=%~dp0.."
 for %%I in ("%BOT_DIR%") do set "BOT_DIR=%%~fI"
 set "BOT_FILE=%BOT_DIR%\forex_bot.py"
 set "LOG_DIR=%BOT_DIR%\logs"
-set "LOG_FILE=%LOG_DIR%\forex_cron.log"
+set "LOG_FILE=%LOG_DIR%\forex_control.log"
+set "RUNTIME_LOG=%LOG_DIR%\forex_runtime.log"
 
 if not exist "%LOG_DIR%" mkdir "%LOG_DIR%"
 
@@ -50,8 +51,9 @@ if "%PYTHON_CMD%"=="" (
 
 >> "%LOG_FILE%" echo [%date% %time%] Python command: %PYTHON_CMD%
 >> "%LOG_FILE%" echo [%date% %time%] Starting forex_bot.py
+>> "%LOG_FILE%" echo [%date% %time%] Runtime log: %RUNTIME_LOG%
 
-%PYTHON_CMD% -u "%BOT_FILE%" >> "%LOG_FILE%" 2>&1
+%PYTHON_CMD% -u "%BOT_FILE%" >> "%RUNTIME_LOG%" 2>&1
 set "EXIT_CODE=%ERRORLEVEL%"
 
 >> "%LOG_FILE%" echo [%date% %time%] forex_bot.py exited with code %EXIT_CODE%
