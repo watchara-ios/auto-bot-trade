@@ -43,7 +43,7 @@ BOT_DIR      = Path(__file__).resolve().parent
 PROJECT_ROOT = BOT_DIR.parent
 sys.path.insert(0, str(BOT_DIR))
 
-from donchian_core import DonchianCoreConfig, latest_signal
+from donchian_core import DonchianCoreConfig, latest_signal, _REJECT_STATS
 from demo_testcase_logger import log_demo_testcase
 from notifier import (
     notify_bot_started, notify_error,
@@ -85,6 +85,7 @@ class Config:
     EMA_SLOW   = 50
     EMA_BIG    = 200
     RSI_PERIOD = 14
+    MAGIC_NUMBER = int(os.getenv("FOREX_MAGIC_NUMBER", "20260424"))
 
     # Strategy
     RR                  = float(os.getenv("FOREX_RR", "2.5"))     # raised from 2.0
@@ -93,16 +94,16 @@ class Config:
     DONCHIAN_N          = int(os.getenv("FOREX_DONCHIAN_N", "20"))
     ADX_MIN             = float(os.getenv("FOREX_ADX_MIN", "18.0"))   # loosened from 20
     ADX_MAX             = float(os.getenv("FOREX_ADX_MAX", "50.0"))   # was missing → blocked strong trends
-    ATR_PERCENTILE_MIN  = float(os.getenv("FOREX_ATR_PCT_MIN", "50.0"))  # loosened from default 65
+    ATR_PERCENTILE_MIN  = float(os.getenv("FOREX_ATR_PCT_MIN", "30.0"))  # loosened from 50
     MIN_ATR_PCT         = float(os.getenv("FOREX_MIN_ATR_PCT", "0.0002"))  # fix: was 0.0005 → blocked GBPUSD/USDJPY
-    VOLUME_MULT         = float(os.getenv("FOREX_VOLUME_MULT", "1.0"))   # loosened from 1.2
+    VOLUME_MULT         = float(os.getenv("FOREX_VOLUME_MULT", "0.8"))   # loosened from 1.0
     ALLOWED_SIDE        = os.getenv("FOREX_ALLOWED_SIDE", "BOTH")
     REQUIRE_ATR_EXPANSION = os.getenv("FOREX_REQUIRE_ATR_EXPANSION", "false").lower() == "true"
 
     # Pro techniques (Minervini + ICT)
-    ADX_BARS_RISING = int(os.getenv("FOREX_ADX_BARS_RISING", "2"))
+    ADX_BARS_RISING = int(os.getenv("FOREX_ADX_BARS_RISING", "1"))      # loosened from 2
     BREAKEVEN_R     = float(os.getenv("FOREX_BREAKEVEN_R", "0.5"))
-    KILL_ZONE_ONLY  = os.getenv("FOREX_KILL_ZONE_ONLY", "true").lower() == "true"
+    KILL_ZONE_ONLY  = os.getenv("FOREX_KILL_ZONE_ONLY", "false").lower() == "true"  # off by default
     KILL_ZONES_UTC  = [(7, 9), (12, 14)]   # London open, NY open
     CORR_GROUPS     = [
         {"EURUSD", "GBPUSD", "EURGBP"},
@@ -111,7 +112,7 @@ class Config:
     ]
 
     # Risk
-    MAX_TRADES_PER_DAY    = int(os.getenv("FOREX_MAX_TRADES_PER_DAY", "3"))   # raised from 2
+    MAX_TRADES_PER_DAY    = int(os.getenv("FOREX_MAX_TRADES_PER_DAY", "5"))   # raised from 3
     MAX_DAILY_LOSS_PCT    = float(os.getenv("FOREX_MAX_DAILY_LOSS_PCT", "3.0"))
     MAX_SPREAD_POINTS     = int(os.getenv("FOREX_MAX_SPREAD_POINTS", "80"))
     # Gold (XAUUSD) spread is quoted in different point units — needs higher limit
@@ -166,9 +167,12 @@ class Config:
     ]
 
     # Paths
-    LOG_DIR            = Path("logs")
-    AI_STATE_FILE      = LOG_DIR / "forex_ai_state.json"
+    LOG_DIR               = Path("logs")
+    AI_STATE_FILE         = LOG_DIR / "forex_ai_state.json"
     AI_RECOMMENDATION_LOG = LOG_DIR / "forex_ai_recommendations.jsonl"
+    KILL_FILE             = LOG_DIR / "STOP"
+    STATE_FILE            = LOG_DIR / "forex_state.json"
+    MAX_CONSECUTIVE_LOSSES = int(os.getenv("FOREX_MAX_CONSECUTIVE_LOSSES", "3"))
 
 # Global mutable symbol (can be switched by AI watchlist)
 _SYMBOL = Config.SYMBOL
@@ -535,6 +539,8 @@ def _core_config() -> DonchianCoreConfig:
     ))
     return DonchianCoreConfig(
         allowed_side         = Config.ALLOWED_SIDE,
+        ema_fast             = Config.EMA_FAST,
+        ema_slow             = Config.EMA_SLOW,
         tier_a_risk          = Config.TIER_A_RISK_PERCENT / 100,
         tier_b_risk          = Config.TIER_B_RISK_PERCENT / 100,
         rr                   = Config.RR,
@@ -547,6 +553,7 @@ def _core_config() -> DonchianCoreConfig:
         volume_mult          = Config.VOLUME_MULT,
         require_atr_expansion= Config.REQUIRE_ATR_EXPANSION,
         adx_bars_rising      = Config.ADX_BARS_RISING,
+        max_trades_per_day   = Config.MAX_TRADES_PER_DAY,
     )
 
 
@@ -618,6 +625,18 @@ def calculate_lot(signal: dict, tp_sl: dict) -> float:
     max_lot = info.volume_max  or (risk_money / loss_per_lot)
     lot     = np.floor((risk_money / loss_per_lot) / step) * step
     lot     = min(max(lot, min_lot), max_lot)
+
+    # Margin safety: cap lot if it would consume >90% of free margin
+    order_type_mg = mt5.ORDER_TYPE_BUY if signal.get("side") == "BUY" else mt5.ORDER_TYPE_SELL
+    margin_needed = mt5.order_calc_margin(order_type_mg, symbol(), lot, float(tp_sl["entry"]))
+    if margin_needed is not None and margin_needed > 0:
+        free = float(getattr(account, "margin_free", 0))
+        if free > 0 and margin_needed > free * 0.9:
+            capped = np.floor(free * 0.9 / margin_needed * lot / step) * step
+            capped = max(min(capped, max_lot), min_lot)
+            warn(f"[MARGIN] needed={margin_needed:.2f} > free*0.9={free*0.9:.2f} — lot {lot:.3f}->{capped:.3f}")
+            lot = capped
+
     digits  = max(0, int(round(-np.log10(step)))) if step < 1 else 0
     return round(float(lot), digits)
 
@@ -641,6 +660,17 @@ def send_order(signal: dict, tp_sl: dict) -> dict | None:
     else:
         return None
 
+    # Stops level: verify SL/TP are not too close to current price
+    stops_lv = getattr(info, "stops_level", 0)
+    if stops_lv > 0:
+        min_dist = stops_lv * info.point
+        if abs(price - tp_sl["sl"]) < min_dist:
+            warn(f"[STOPS] SL too close: dist={abs(price-tp_sl['sl']):.5f} < min={min_dist:.5f} (stops_level={stops_lv})")
+            return None
+        if abs(tp_sl["tp"] - price) < min_dist:
+            warn(f"[STOPS] TP too close: dist={abs(tp_sl['tp']-price):.5f} < min={min_dist:.5f} (stops_level={stops_lv})")
+            return None
+
     lot = calculate_lot(signal, tp_sl)
     request = {
         "action":       mt5.TRADE_ACTION_DEAL,
@@ -651,7 +681,7 @@ def send_order(signal: dict, tp_sl: dict) -> dict | None:
         "sl":           tp_sl["sl"],
         "tp":           tp_sl["tp"],
         "deviation":    30,
-        "magic":        20260424,
+        "magic":        Config.MAGIC_NUMBER,
         "comment":      f"DONCHIAN_T{signal.get('tier','A')}",
         "type_time":    mt5.ORDER_TIME_GTC,
         "type_filling": mt5.ORDER_FILLING_IOC,
@@ -671,6 +701,12 @@ def send_order(signal: dict, tp_sl: dict) -> dict | None:
     result = mt5.order_send(request)
     log(f"📌 Order result: {result}")
     notify_order_result("FOREX", symbol(), side, result, dry_run=False)
+    if result is not None and result.retcode == mt5.TRADE_RETCODE_DONE:
+        time.sleep(0.3)
+        for p in (mt5.positions_get(symbol=symbol()) or []):
+            if p.magic == Config.MAGIC_NUMBER and p.sl == 0:
+                warn(f"[VERIFY] Position {p.ticket} has no SL — manual intervention required!")
+                notify_error("FOREX", f"Position {p.ticket} on {symbol()} opened without SL!")
     return result
 
 
@@ -928,6 +964,58 @@ def _notify_started(phase: str = "READY") -> None:
 
 
 # ─────────────────────────────────────────────────────────────────────────────
+# Bot state persistence + safety counters
+# ─────────────────────────────────────────────────────────────────────────────
+
+def load_forex_state() -> dict:
+    defaults: dict = {
+        "mt5_down": False,
+        "last_disconnect_notify": 0,
+        "last_stats_hour": -1,
+        "last_stats_date": None,
+        "consecutive_losses": 0,
+    }
+    try:
+        if Config.STATE_FILE.exists():
+            saved = json.loads(Config.STATE_FILE.read_text(encoding="utf-8"))
+            defaults.update(saved)
+    except (json.JSONDecodeError, OSError):
+        pass
+    return defaults
+
+
+def save_forex_state(state: dict) -> None:
+    Config.LOG_DIR.mkdir(parents=True, exist_ok=True)
+    saveable = {k: v for k, v in state.items()
+                if k not in ("mt5_down", "last_disconnect_notify")}
+    try:
+        Config.STATE_FILE.write_text(
+            json.dumps(saveable, indent=2, default=str), encoding="utf-8"
+        )
+    except OSError as exc:
+        warn(f"[STATE] Cannot save state: {exc}")
+
+
+def count_consecutive_losses() -> int:
+    """Count consecutive losing closed trades from MT5 deal history today."""
+    today = datetime.now().date()
+    deals = mt5.history_deals_get(
+        datetime.combine(today, dtime.min),
+        datetime.combine(today, dtime.max),
+    ) or []
+    closed = [d for d in deals
+              if d.entry == mt5.DEAL_ENTRY_OUT
+              and d.symbol == symbol()]
+    consec = 0
+    for d in reversed(closed):
+        if d.profit < 0:
+            consec += 1
+        else:
+            break
+    return consec
+
+
+# ─────────────────────────────────────────────────────────────────────────────
 # Main loop
 # ─────────────────────────────────────────────────────────────────────────────
 
@@ -949,18 +1037,43 @@ def run_bot() -> None:
         run_ai_scan(force=True)
 
     last_entry_candle: dict[str, object] = {}
-    state = {"mt5_down": False, "last_disconnect_notify": 0}
+    state = load_forex_state()
+    state["mt5_down"] = False
+    state["last_disconnect_notify"] = 0
 
     log("🚀 Bot running")
 
     while True:
         try:
+            if Config.KILL_FILE.exists():
+                log("[KILL] STOP file detected — exiting cleanly")
+                save_forex_state(state)
+                break
             mt5_ping()
             if state.get("mt5_down"):
                 state["mt5_down"] = False
                 notify_reconnected("FOREX", "MT5 restored")
 
             run_ai_scan()
+
+            # ── Daily stats reset + hourly log ───────────────────────────
+            _now = datetime.now()
+            today = _now.date()
+            if state["last_stats_date"] != today:
+                if _REJECT_STATS:
+                    log(f"[STATS] Daily summary: {dict(_REJECT_STATS.most_common())}")
+                _REJECT_STATS.clear()
+                state["last_stats_date"] = today
+                save_forex_state(state)
+            elif _now.hour != state["last_stats_hour"] and _REJECT_STATS:
+                total = _REJECT_STATS.get("_total_attempts", 1)
+                top = {
+                    k: f"{v}({v/total:.0%})"
+                    for k, v in _REJECT_STATS.most_common()
+                    if not k.startswith("_")
+                }
+                log(f"[STATS] Hourly rejections (of {total} attempts): {dict(list(top.items())[:8])}")
+                state["last_stats_hour"] = _now.hour
 
             # ── Session gate ──────────────────────────────────────────────
             if not pass_session_filter():
@@ -995,6 +1108,15 @@ def run_bot() -> None:
                 time.sleep(Config.CHECK_INTERVAL_SECONDS)
                 continue
 
+            # ── Consecutive loss stop ─────────────────────────────────────
+            consec = count_consecutive_losses()
+            state["consecutive_losses"] = consec
+            if consec >= Config.MAX_CONSECUTIVE_LOSSES:
+                log(f"[CONSEC] {consec} consecutive losses >= {Config.MAX_CONSECUTIVE_LOSSES} — new entries paused")
+                save_forex_state(state)
+                time.sleep(Config.CHECK_INTERVAL_SECONDS)
+                continue
+
             # ── Per-symbol analysis ───────────────────────────────────────
             order_sent = False
             for preferred in watchlist:
@@ -1005,17 +1127,20 @@ def run_bot() -> None:
 
                     corr_blocked, corr_msg = has_correlated_position(sym)
                     if corr_blocked:
+                        _REJECT_STATS["bot_correlated_pair"] += 1
                         log(f"[CORR] {sym} blocked: {corr_msg}")
                         continue
 
                     spread_ok, spread_msg = pass_spread_filter()
                     if not spread_ok:
+                        _REJECT_STATS["bot_spread_too_high"] += 1
                         _log_testcase("SPREAD_TOO_HIGH", spread_msg, get_spread_points())
                         log(f"⛔ {sym} {spread_msg}")
                         continue
 
                     risk_ok, risk_msg = pass_daily_risk_filter()
                     if not risk_ok:
+                        _REJECT_STATS["bot_daily_limit"] += 1
                         _log_testcase("DAILY_TRADE_LIMIT", risk_msg)
                         log(f"🛑 {sym} {risk_msg}")
                         continue
@@ -1042,6 +1167,7 @@ def run_bot() -> None:
                     tp_sl = calculate_tp_sl(signal)
                     log(f"TP/SL: {tp_sl}")
                     send_order(signal, tp_sl)
+                    save_forex_state(state)
 
                     last_entry_candle[sym] = candle_time
                     order_sent = True

@@ -4,7 +4,8 @@
       "Bash(python run_donchian_daytrade_v2.py)",
       "Bash(python3 run_donchian_daytrade_v2.py)",
       "Bash(python3 -c ' *)",
-      "Bash(python3 run_donchian_multi_symbol.py)"
+      "Bash(python3 run_donchian_multi_symbol.py)",
+      "Bash(python3 -c \"import ast, pathlib; ast.parse\\(pathlib.Path\\('bots/bitcoin_bot_hybrid.py'\\).read_text\\(\\)\\); print\\('OK'\\)\")"
     ]
   }
 }

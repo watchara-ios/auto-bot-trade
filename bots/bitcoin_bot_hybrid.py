@@ -21,7 +21,7 @@ import requests
 from dotenv import load_dotenv
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
-from donchian_core import DonchianCoreConfig, latest_signal
+from donchian_core import DonchianCoreConfig, latest_signal, _REJECT_STATS
 from demo_testcase_logger import log_demo_testcase
 from notifier import (
     notify_bot_started,
@@ -73,9 +73,9 @@ class Config:
     # Risk controls
     ENTRY_COOLDOWN          = 300        # seconds between entries per symbol
     MAX_OPEN_SYMBOLS        = 1
-    MAX_TRADES_PER_DAY      = 3          # +1 vs original — more signal opportunities
-    MAX_DAILY_LOSS_PCT      = 0.04       # 4% drawdown stop
-    DAILY_PROFIT_TARGET_PCT = 0.10       # 10% take-the-day-off
+    MAX_TRADES_PER_DAY      = int(os.getenv("HYBRID_MAX_TRADES_PER_DAY", "5"))
+    MAX_DAILY_LOSS_PCT      = float(os.getenv("HYBRID_MAX_DAILY_LOSS_PCT", "0.04"))
+    DAILY_PROFIT_TARGET_PCT = float(os.getenv("HYBRID_DAILY_PROFIT_TARGET_PCT", "0.06"))  # 1.5× max loss
     MAX_TOTAL_EXPOSURE_PCT  = 60.0
 
     # Position sizing
@@ -92,23 +92,29 @@ class Config:
 
     TRIGGER_GUARD_PCT = 0.0005
 
-    # ── Signal filter improvements ────────────────────────────────────────────
-    # Problem: ADX 20-30 window was too narrow, missed many valid trends.
-    # ATR percentile ≥65 filtered out most low-volatility but valid setups.
-    DONCHIAN_N         = 20
-    ADX_MIN            = 18.0   # loosened from 20 (catches earlier trends)
-    ADX_MAX            = 40.0   # raised from 30 (allows strong trending days)
-    ATR_PERCENTILE_MIN = 55.0   # lowered from 65 (more entries, still filters chop)
-    VOLUME_MULT        = 1.1    # lowered from 1.2 (less missed breakouts)
-    REQUIRE_ATR_EXPANSION = True
-    ATR_EXPANSION_PERIOD  = 50
+    # ── Trend EMAs (passed to donchian_core) ─────────────────────────────────
+    EMA_FAST_TREND = int(os.getenv("HYBRID_EMA_FAST", "20"))
+    EMA_SLOW_TREND = int(os.getenv("HYBRID_EMA_SLOW", "50"))
 
-    ALLOWED_SIDE = "BUY"
+    # ── Signal filters ────────────────────────────────────────────────────────
+    DONCHIAN_N         = int(os.getenv("HYBRID_DONCHIAN_N", "20"))
+    ADX_MIN            = float(os.getenv("HYBRID_ADX_MIN", "15.0"))    # loosened from 18
+    ADX_MAX            = float(os.getenv("HYBRID_ADX_MAX", "55.0"))    # raised from 40
+    ATR_PERCENTILE_MIN = float(os.getenv("HYBRID_ATR_PCT_MIN", "35.0"))  # lowered from 55
+    VOLUME_MULT        = float(os.getenv("HYBRID_VOLUME_MULT", "0.9")) # lowered from 1.1
+    MIN_ATR_PCT        = float(os.getenv("HYBRID_MIN_ATR_PCT", "0.0008"))  # crypto vol > forex
+    REQUIRE_ATR_EXPANSION = os.getenv("HYBRID_REQUIRE_ATR_EXPANSION", "false").lower() == "true"
+    ATR_EXPANSION_PERIOD  = int(os.getenv("HYBRID_ATR_EXPANSION_PERIOD", "50"))
 
-    # Extended session: added early NY open (13 UTC) and Asian session (2-3 UTC)
+    ALLOWED_SIDE = os.getenv("HYBRID_ALLOWED_SIDE", "BOTH")  # was "BUY" — crypto needs both sides
+
+    # Crypto is 24/7; no fixed session — default to all hours
     SESSION_HOURS_UTC = tuple(
         int(h.strip())
-        for h in os.getenv("HYBRID_SESSION_HOURS_UTC", "2,3,8,9,10,11,12,13").split(",")
+        for h in os.getenv(
+            "HYBRID_SESSION_HOURS_UTC",
+            ",".join(str(h) for h in range(24)),
+        ).split(",")
         if h.strip()
     )
 
@@ -122,6 +128,8 @@ class Config:
     LOG_FILE   = LOG_DIR / "hybrid_bot.log"
     TRADE_LOG  = LOG_DIR / "hybrid_trades.csv"
     STATE_FILE = LOG_DIR / "hybrid_state.json"
+    KILL_FILE  = LOG_DIR / "hybrid_STOP"
+    MAX_CONSECUTIVE_LOSSES = int(os.getenv("HYBRID_MAX_CONSECUTIVE_LOSSES", "3"))
 
 
 Config.LOG_DIR.mkdir(parents=True, exist_ok=True)
@@ -458,18 +466,22 @@ def summarize_timeframes(symbol: str, market: dict) -> None:
 
 def _core_config() -> DonchianCoreConfig:
     return DonchianCoreConfig(
-        allowed_side=Config.ALLOWED_SIDE,
-        tier_a_risk=Config.TIER_A_RISK,
-        tier_b_risk=Config.TIER_B_RISK,
-        rr=Config.RR,
-        donchian_n=Config.DONCHIAN_N,
-        adx_min=Config.ADX_MIN,
-        adx_max=Config.ADX_MAX,
-        session_hours_utc=Config.SESSION_HOURS_UTC,
-        atr_percentile_min=Config.ATR_PERCENTILE_MIN,
-        volume_mult=Config.VOLUME_MULT,
-        require_atr_expansion=Config.REQUIRE_ATR_EXPANSION,
-        atr_expansion_period=Config.ATR_EXPANSION_PERIOD,
+        allowed_side          = Config.ALLOWED_SIDE,
+        ema_fast              = Config.EMA_FAST_TREND,
+        ema_slow              = Config.EMA_SLOW_TREND,
+        min_atr_pct           = Config.MIN_ATR_PCT,
+        tier_a_risk           = Config.TIER_A_RISK,
+        tier_b_risk           = Config.TIER_B_RISK,
+        rr                    = Config.RR,
+        donchian_n            = Config.DONCHIAN_N,
+        adx_min               = Config.ADX_MIN,
+        adx_max               = Config.ADX_MAX,
+        session_hours_utc     = Config.SESSION_HOURS_UTC,
+        atr_percentile_min    = Config.ATR_PERCENTILE_MIN,
+        volume_mult           = Config.VOLUME_MULT,
+        require_atr_expansion = Config.REQUIRE_ATR_EXPANSION,
+        atr_expansion_period  = Config.ATR_EXPANSION_PERIOD,
+        max_trades_per_day    = Config.MAX_TRADES_PER_DAY,
     )
 
 
@@ -500,12 +512,21 @@ def ai_validate(signal: dict, market: dict) -> tuple[bool, str]:
         client = OpenAI(api_key=Config.DEEPSEEK_KEY, base_url="https://api.deepseek.com/v1")
         r5  = last_closed(prepare(market["5m"]))
         r15 = last_closed(prepare(market["15m"]))
-        prompt = f"""Validate this crypto futures setup. Return strict JSON only.
-Symbol: {signal['symbol']}  Side: {signal['side']}  Tier: {signal.get('tier')}
-Score: {signal.get('breakout_strength_score')}
-5m  close={r5.close:.2f} ema20={r5.ema20:.2f} rsi={r5.rsi:.1f} atr%={r5.atr_pct:.4f} vol={r5.vol_ratio:.2f}
-15m close={r15.close:.2f} ema20={r15.ema20:.2f} ema50={r15.ema50:.2f} rsi={r15.rsi:.1f}
-Return {{"action":"ALLOW"|"BLOCK","reason":"short"}}. Block only on obvious contradiction or extreme chop."""
+        trend_15m = "UP" if r15.close > r15.ema50 else "DOWN"
+        rsi_extreme = r5.rsi > 75 if signal["side"] == "BUY" else r5.rsi < 25
+        prompt = (
+            f"Validate this crypto futures setup. Return strict JSON only.\n"
+            f"Symbol: {signal['symbol']}  Side: {signal['side']}  Tier: {signal.get('tier')}\n"
+            f"Score: {signal.get('breakout_strength_score')}\n"
+            f"5m  close={r5.close:.2f} ema20={r5.ema20:.2f} rsi={r5.rsi:.1f} "
+            f"atr%={r5.atr_pct:.4f} vol={r5.vol_ratio:.2f}\n"
+            f"15m close={r15.close:.2f} ema20={r15.ema20:.2f} ema50={r15.ema50:.2f} "
+            f"rsi={r15.rsi:.1f} trend={trend_15m}\n"
+            f"RSI extreme vs signal direction: {rsi_extreme}\n"
+            f"Block if: SELL in strong 15m uptrend (price >> EMA50), "
+            f"BUY in strong 15m downtrend, or RSI extreme against signal direction. "
+            f'Return {{"action":"ALLOW"|"BLOCK","reason":"short (max 60 chars)"}}'
+        )
         resp = client.chat.completions.create(
             model=Config.AI_MODEL,
             messages=[{"role": "user", "content": prompt}],
@@ -539,6 +560,8 @@ def _fresh_state() -> dict:
         "dry_run": Config.DRY_RUN,
         "connection_down": False,
         "last_disconnect_notify": 0,
+        "consecutive_losses": 0,
+        "prev_open_symbols": [],
     }
     save_state(state)
     return state
@@ -620,6 +643,19 @@ def can_open_new(state: dict, balance: float, positions_by_symbol: dict) -> tupl
 
 def _utc_now() -> datetime:
     return datetime.now(timezone.utc)
+
+
+def is_near_funding(now: datetime | None = None) -> bool:
+    """True in the 5 min before each 8-hour funding window (00, 08, 16 UTC)."""
+    t = (now or _utc_now())
+    h, m = t.hour, t.minute
+    # 5 min before: 23:55-23:59, 07:55-07:59, 15:55-15:59
+    if h in (23, 7, 15) and m >= 55:
+        return True
+    # First 5 min after (price often spikes): 00:00-00:04, 08:00-08:04, 16:00-16:04
+    if h in (0, 8, 16) and m < 5:
+        return True
+    return False
 
 
 def entry_session_active(now: datetime | None = None) -> bool:
@@ -792,6 +828,7 @@ def execute_signal(signal: dict, balance: float, state: dict, market: dict) -> N
         log(f"🧠 {symbol} AI blocked: {reason}")
         return
 
+    state[f"balance_at_entry_{symbol}"] = balance
     log(
         f"🚀 OPEN {symbol} {signal['side']} qty={qty} tier={signal.get('tier')} "
         f"risk={signal.get('risk_pct', Config.TIER_A_RISK)*100:.2f}% "
@@ -894,18 +931,58 @@ def main() -> None:
     )
     _setup()
     state = load_state()
+    state.setdefault("last_stats_hour", -1)
+    state.setdefault("last_stats_date", None)
     core_cfg = _core_config()
 
     while True:
         try:
+            if Config.KILL_FILE.exists():
+                log("[KILL] STOP file detected — exiting cleanly")
+                save_state(state)
+                break
             balance              = Binance.balance()
             positions_by_symbol  = get_positions_by_symbol()
             reset_day(state, balance)
             mark_connected(state)
 
+            # ── Daily stats reset + hourly log ───────────────────────────
+            _now = datetime.now()
+            today = str(_now.date())
+            if state.get("last_stats_date") != today:
+                if _REJECT_STATS:
+                    log(f"[STATS] Daily summary: {dict(_REJECT_STATS.most_common())}")
+                _REJECT_STATS.clear()
+                state["last_stats_date"] = today
+            elif _now.hour != state.get("last_stats_hour", -1) and _REJECT_STATS:
+                total = _REJECT_STATS.get("_total_attempts", 1)
+                top = {
+                    k: f"{v}({v/total:.0%})"
+                    for k, v in _REJECT_STATS.most_common()
+                    if not k.startswith("_")
+                }
+                log(f"[STATS] Hourly rejections (of {total} attempts): {dict(list(top.items())[:8])}")
+                state["last_stats_hour"] = _now.hour
+
             session_active  = entry_session_active()
             open_positions  = active_positions(positions_by_symbol)
             daily_ret       = daily_return_pct(state, balance)
+
+            # Detect position closures → update consecutive_losses
+            prev_open = set(state.get("prev_open_symbols", []))
+            curr_open  = set(open_positions.keys())
+            for closed_sym in prev_open - curr_open:
+                bal_at_entry = state.get(f"balance_at_entry_{closed_sym}")
+                if bal_at_entry is not None:
+                    if balance < float(bal_at_entry):
+                        state["consecutive_losses"] = state.get("consecutive_losses", 0) + 1
+                        log(f"[CONSEC] Loss on {closed_sym} — consecutive={state['consecutive_losses']}")
+                    else:
+                        if state.get("consecutive_losses", 0) > 0:
+                            log(f"[CONSEC] Win/BE on {closed_sym} — consecutive_losses reset")
+                        state["consecutive_losses"] = 0
+                    state.pop(f"balance_at_entry_{closed_sym}", None)
+            state["prev_open_symbols"] = list(curr_open)
 
             log(
                 f"📊 Balance={balance:.2f} USDT | daily={daily_ret:+.2f}% | "
@@ -925,6 +1002,9 @@ def main() -> None:
             open_allowed, open_reason = can_open_new(state, balance, positions_by_symbol)
             if not session_active:
                 open_allowed, open_reason = False, "outside entry session"
+            if state.get("consecutive_losses", 0) >= Config.MAX_CONSECUTIVE_LOSSES:
+                open_allowed = False
+                open_reason  = f"consecutive losses stop ({state['consecutive_losses']})"
             if not open_allowed:
                 log(f"🚦 New entries paused: {open_reason}")
 
@@ -949,6 +1029,10 @@ def main() -> None:
                     block = "DAILY_TRADE_LIMIT" if "max trades" in open_reason else "RISK_LIMIT"
                     _maybe_demo_log(symbol, market, core_cfg,
                                     external_blocked_by=block, external_block_reason=open_reason)
+                    continue
+
+                if is_near_funding():
+                    log(f"⏸️ {symbol} skip: near funding window")
                     continue
 
                 _maybe_demo_log(symbol, market, core_cfg)
