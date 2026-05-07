@@ -19,8 +19,22 @@ TIMEFRAMES = {
     "M15": mt5.TIMEFRAME_M15,
 }
 
+# MT5 bar limit per request → chunk by N months
+# M1 ~1440 bars/day → 1 month ≈ 43,200 bars (safe)
+# M5 ~288 bars/day  → 2 months ≈ 17,280 bars (safe)
+# M15 → ดึงทีเดียวได้เลย
+CHUNK_MONTHS = {"M1": 1, "M5": 2, "M15": 999}
+
 UTC_FROM = datetime(2025, 1, 1, tzinfo=timezone.utc)
 UTC_TO   = datetime(2026, 5, 7, tzinfo=timezone.utc)
+
+
+def date_chunks(start: datetime, end: datetime, months: int):
+    """Yield (chunk_from, chunk_to) pairs of at most `months` months."""
+    cuts = pd.date_range(start=start, end=end, freq=f"{months}MS", tz=timezone.utc)
+    boundaries = [start] + list(cuts[cuts > start]) + [end]
+    for i in range(len(boundaries) - 1):
+        yield boundaries[i], boundaries[i + 1]
 
 OUTPUT_DIR = Path(__file__).resolve().parent.parent / "data" / "mt5_history"
 
@@ -54,24 +68,38 @@ for sym in SYMBOLS:
 
     sym_ok = True
     for tf_name, tf_const in TIMEFRAMES.items():
-        rates = mt5.copy_rates_range(sym, tf_const, UTC_FROM, UTC_TO)
+        chunks_months = CHUNK_MONTHS[tf_name]
+        chunks = list(date_chunks(UTC_FROM, UTC_TO, chunks_months))
 
-        if rates is None or len(rates) == 0:
-            err = mt5.last_error()
-            print(f"  ❌ {tf_name}: no data  error={err}")
-            print("       → Try: right-click chart in MT5 → History → Load All")
+        frames = []
+        failed = False
+        for c_from, c_to in chunks:
+            rates = mt5.copy_rates_range(sym, tf_const, c_from, c_to)
+            if rates is None or len(rates) == 0:
+                err = mt5.last_error()
+                print(f"  ❌ {tf_name}: no data ({c_from.date()}→{c_to.date()})  error={err}")
+                print("       → Try: right-click chart in MT5 → History → Load All")
+                failed = True
+                break
+            frames.append(pd.DataFrame(rates))
+
+        if failed or not frames:
             sym_ok = False
             continue
 
-        df = pd.DataFrame(rates)
+        df = pd.concat(frames, ignore_index=True)
         df["time"] = pd.to_datetime(df["time"], unit="s", utc=True)
-        df = df.rename(columns={"tick_volume": "volume"})[
-            ["time", "open", "high", "low", "close", "volume"]
-        ]
+        df = (
+            df.rename(columns={"tick_volume": "volume"})
+              [["time", "open", "high", "low", "close", "volume"]]
+              .drop_duplicates("time")
+              .sort_values("time")
+        )
 
         out_path = OUTPUT_DIR / f"{sym}_{tf_name}.csv"
         df.to_csv(out_path, index=False, encoding="utf-8-sig")
-        print(f"  ✅ {tf_name:3s}: {len(df):>7,} bars  ({df['time'].iloc[0].date()} → {df['time'].iloc[-1].date()})")
+        n_chunks = len(chunks)
+        print(f"  ✅ {tf_name:3s}: {len(df):>7,} bars  ({df['time'].iloc[0].date()} → {df['time'].iloc[-1].date()})  [{n_chunks} chunk{'s' if n_chunks > 1 else ''}]")
         results.append({"symbol": sym, "tf": tf_name, "bars": len(df)})
 
     if sym_ok:
