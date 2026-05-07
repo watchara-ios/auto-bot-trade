@@ -80,9 +80,9 @@ class Config:
     TF_EXEC  = mt5.TIMEFRAME_M1    # execution confirmation
     BARS     = 500
 
-    # Indicators
-    EMA_FAST   = 20
-    EMA_SLOW   = 50
+    # Indicators — backtest shows EMA(50/200) > EMA(20/50) for M15 trend quality
+    EMA_FAST   = int(os.getenv("FOREX_EMA_FAST", "50"))
+    EMA_SLOW   = int(os.getenv("FOREX_EMA_SLOW", "200"))
     EMA_BIG    = 200
     RSI_PERIOD = 14
     MAGIC_NUMBER = int(os.getenv("FOREX_MAGIC_NUMBER", "20260424"))
@@ -99,6 +99,11 @@ class Config:
     VOLUME_MULT         = float(os.getenv("FOREX_VOLUME_MULT", "0.8"))   # loosened from 1.0
     ALLOWED_SIDE        = os.getenv("FOREX_ALLOWED_SIDE", "BOTH")
     REQUIRE_ATR_EXPANSION = os.getenv("FOREX_REQUIRE_ATR_EXPANSION", "false").lower() == "true"
+
+    # D1 Regime filter — only trade when daily trend is clear (backtest: PF 0.60→0.90)
+    USE_D1_REGIME   = os.getenv("FOREX_USE_D1_REGIME", "true").lower() == "true"
+    D1_ADX_MIN      = float(os.getenv("FOREX_D1_ADX_MIN", "20.0"))
+    D1_BARS         = 260   # ~1 year of daily bars for EMA(200)
 
     # Pro techniques (Minervini + ICT)
     ADX_BARS_RISING = int(os.getenv("FOREX_ADX_BARS_RISING", "1"))      # loosened from 2
@@ -155,15 +160,17 @@ class Config:
     DEEPSEEK_MODEL     = os.getenv("FOREX_DEEPSEEK_MODEL", "deepseek-reasoner")
     AI_SYMBOL_LIMIT    = int(os.getenv("FOREX_AI_SYMBOL_UNIVERSE_LIMIT", "30"))
 
+    # Backtest shows EURJPY has no edge — removed from priority scan list
+    # XAUUSD removed — dedicated gold_bot.py handles Gold with Gold-specific config
     AI_MAJOR_PAIRS = [
         "EURUSD","GBPUSD","USDJPY","USDCHF","USDCAD",
-        "AUDUSD","NZDUSD","EURJPY","GBPJPY","XAUUSD",
+        "AUDUSD","NZDUSD","GBPJPY",
     ]
     AI_ALLOWED_SYMBOLS = [
         "EURUSD","GBPUSD","USDJPY","USDCHF","USDCAD","AUDUSD","NZDUSD",
         "EURJPY","GBPJPY","EURGBP","EURCHF","EURCAD","EURAUD","EURNZD",
         "GBPCHF","GBPCAD","GBPAUD","GBPNZD","AUDJPY","CADJPY","CHFJPY",
-        "NZDJPY","AUDCAD","AUDCHF","AUDNZD","CADCHF","NZDCAD","NZDCHF","XAUUSD",
+        "NZDJPY","AUDCAD","AUDCHF","AUDNZD","CADCHF","NZDCAD","NZDCHF",
     ]
 
     # Paths
@@ -336,6 +343,53 @@ def get_ohlcv(sym: str, timeframe: int, bars: int = 500) -> pd.DataFrame:
     df["time"] = pd.to_datetime(df["time"], unit="s")
     df.rename(columns={"tick_volume": "volume"}, inplace=True)
     return df
+
+
+def _d1_adx(df: pd.DataFrame, period: int = 14) -> float:
+    """Wilder's ADX on daily bars. Returns latest ADX value."""
+    high, low, close = df["high"], df["low"], df["close"]
+    prev_close = close.shift(1)
+    tr = pd.concat([high - low, (high - prev_close).abs(), (low - prev_close).abs()], axis=1).max(axis=1)
+    plus_dm  = (high.diff()).where((high.diff() > -low.diff()) & (high.diff() > 0), 0.0)
+    minus_dm = (-low.diff()).where((-low.diff() > high.diff()) & (-low.diff() > 0), 0.0)
+    alpha = 1 / period
+    atr_s    = tr.ewm(alpha=alpha, adjust=False).mean()
+    plus_di  = 100 * plus_dm.ewm(alpha=alpha, adjust=False).mean() / atr_s.replace(0, float("nan"))
+    minus_di = 100 * minus_dm.ewm(alpha=alpha, adjust=False).mean() / atr_s.replace(0, float("nan"))
+    dx = ((plus_di - minus_di).abs() / (plus_di + minus_di).replace(0, float("nan"))) * 100
+    adx = dx.ewm(alpha=alpha, adjust=False).mean()
+    return float(adx.iloc[-1]) if not adx.empty else 0.0
+
+
+def d1_regime_ok(sym: str, side: str) -> tuple[bool, str]:
+    """
+    Check D1 regime: ADX must be >= D1_ADX_MIN and D1 trend must align with signal side.
+    Returns (ok, reason_string).
+    """
+    if not Config.USE_D1_REGIME:
+        return True, ""
+    try:
+        df = get_ohlcv(sym, mt5.TIMEFRAME_D1, Config.D1_BARS)
+    except RuntimeError:
+        return True, ""  # fail-open: don't block if D1 data unavailable
+
+    if len(df) < 60:
+        return True, ""
+
+    close = df["close"]
+    ema50  = close.ewm(span=50,  adjust=False).mean()
+    ema200 = close.ewm(span=200, adjust=False).mean()
+    d1_trend = 1 if ema50.iloc[-1] > ema200.iloc[-1] else -1
+
+    d1_adx = _d1_adx(df)
+
+    if d1_adx < Config.D1_ADX_MIN:
+        return False, f"D1 ADX {d1_adx:.1f} < {Config.D1_ADX_MIN} (ranging)"
+    if side == "BUY" and d1_trend != 1:
+        return False, f"D1 trend bearish (EMA50={ema50.iloc[-1]:.5f} < EMA200={ema200.iloc[-1]:.5f})"
+    if side == "SELL" and d1_trend != -1:
+        return False, f"D1 trend bullish (EMA50={ema50.iloc[-1]:.5f} > EMA200={ema200.iloc[-1]:.5f})"
+    return True, f"D1 ADX={d1_adx:.1f} trend={'UP' if d1_trend == 1 else 'DOWN'}"
 
 
 def add_indicators(df: pd.DataFrame) -> pd.DataFrame:
@@ -564,17 +618,26 @@ def generate_signal() -> tuple[dict, pd.DataFrame]:
     df_m15 = get_ohlcv(sym, Config.TF_TREND, Config.BARS)
     signal, reason, candle_time = latest_signal(sym, df_m1, df_m5, df_m15, _core_config())
 
-    if signal is None:
+    def _no_trade(r: str) -> tuple[dict, pd.DataFrame]:
         return {
             "time":   candle_time or datetime.now(),
             "symbol": sym,
             "side":   "NO_TRADE",
             "price":  float(df_m5.iloc[-2]["close"]) if len(df_m5) >= 2 else 0.0,
-            "reason": reason,
+            "reason": r,
         }, df_m5
+
+    if signal is None:
+        return _no_trade(reason)
+
+    regime_ok, regime_reason = d1_regime_ok(sym, signal["side"])
+    if not regime_ok:
+        log(f"[D1_REGIME] blocked {signal['side']} — {regime_reason}")
+        return _no_trade(f"D1 regime: {regime_reason}")
 
     signal["time"]  = pd.Timestamp(signal["candle_time"])
     signal["price"] = signal["entry"]
+    signal["d1_regime"] = regime_reason
     return signal, df_m5
 
 

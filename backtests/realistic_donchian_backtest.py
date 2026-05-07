@@ -28,6 +28,8 @@ class Config:
     swing_lookback: int = 8
     adx_period: int = 14
     atr_period: int = 14
+    ema_fast: int = 50    # M15 fast EMA for trend; live bot default = 50 (EMA_SLOW)
+    ema_slow: int = 200   # M15 slow EMA for trend; live bot default = 200 (EMA_BIG)
     adx_min: float = 20.0
     rr: float = 2.0
     tier_a_risk: float = 0.0025
@@ -127,8 +129,8 @@ def adx(df: pd.DataFrame, period: int) -> pd.Series:
 
 def prepare(m5: pd.DataFrame, m15: pd.DataFrame, config: Config) -> pd.DataFrame:
     m15 = m15.copy()
-    m15["ema50"] = ema(m15["close"], 50)
-    m15["ema200"] = ema(m15["close"], 200)
+    m15["ema50"] = ema(m15["close"], config.ema_fast)
+    m15["ema200"] = ema(m15["close"], config.ema_slow)
     m15["trend"] = np.where(m15["ema50"] > m15["ema200"], 1, np.where(m15["ema50"] < m15["ema200"], -1, 0))
     m15["adx"] = adx(m15, config.adx_period)
     m15["adx_rising"] = m15["adx"] > m15["adx"].shift(1)
@@ -470,7 +472,7 @@ def run_backtest(symbol: str, m1: pd.DataFrame, m5: pd.DataFrame, config: Config
     equity = []
     daily_trades = {}
     daily_pnl = {}
-    unavailable_until = pd.Timestamp.min
+    unavailable_until = None
     equity_history: list[float] = []   # for Campbell/Millburn equity-curve filter
 
     for i in range(len(m5) - 1):
@@ -480,7 +482,7 @@ def run_backtest(symbol: str, m1: pd.DataFrame, m5: pd.DataFrame, config: Config
         max_dd = min(max_dd, (balance - peak) / peak)
         equity.append({"time": ts, "symbol": symbol, "variant": variant, "split": split, "balance": balance, "drawdown_pct": max_dd * 100})
         equity_history.append(balance)
-        if ts <= unavailable_until:
+        if unavailable_until is not None and ts <= unavailable_until:
             continue
         # Campbell & Co. / Millburn: pause entries when equity < its own MA
         if config.equity_curve_filter and len(equity_history) >= config.equity_curve_ma:
@@ -583,7 +585,12 @@ def run_backtest(symbol: str, m1: pd.DataFrame, m5: pd.DataFrame, config: Config
     return pd.DataFrame(trades), pd.DataFrame(equity)
 
 
-def metrics(trades: pd.DataFrame, equity: pd.DataFrame, days: int) -> dict:
+def metrics(
+    trades: pd.DataFrame,
+    equity: pd.DataFrame,
+    days: int,
+    initial_balance: float = 1000.0,
+) -> dict:
     if trades.empty:
         return {
             "total_trades": 0,
@@ -598,7 +605,7 @@ def metrics(trades: pd.DataFrame, equity: pd.DataFrame, days: int) -> dict:
     losses = trades[trades["pnl"] <= 0]
     gross_profit = wins["pnl"].sum()
     gross_loss = -losses["pnl"].sum()
-    start = 1000.0
+    start = initial_balance
     end = trades["balance"].iloc[-1]
     return {
         "total_trades": len(trades),
