@@ -10166,3 +10166,34 @@
 [2026-05-07 22:29:29] [SCAN] Analyzing EURGBPm
 [2026-05-07 22:29:30] [SKIP] EURGBPm same candle 2026-05-07 15:20:00  skip
 [2026-05-07 22:29:30] [WAIT] No order this round
+[2026-05-07 22:30:30] [AI] Using cached scan from 2026-05-07 22:04:12 | symbols=EURUSDm, GBPUSDm, USDJPYm, XAUUSDm, USDCADm, AUDUSDm, EURGBPm
+[2026-05-07 22:30:30] [WATCH] Watchlist: EURUSDm, GBPUSDm, USDJPYm, XAUUSDm, USDCADm, AUDUSDm, EURGBPm
+[2026-05-07 22:30:30] [SELECT] Symbol switched: EURGBPm -> EURUSDm | AI watchlist candidate
+[2026-05-07 22:30:30] [SCAN] Analyzing EURUSDm
+[2026-05-07 22:30:31] Signal: {'time': Timestamp('2026-05-07 15:25:00'), 'symbol': 'EURUSDm', 'side': 'NO_TRADE', 'price': 1.17646, 'reason': 'no Donchian breakout'}
+[2026-05-07 22:30:31] [SKIP] EURUSDm NO_TRADE: no Donchian breakout
+[2026-05-07 22:30:31] [SELECT] Symbol switched: EURUSDm -> GBPUSDm | AI watchlist candidate
+[2026-05-07 22:30:31] [SCAN] Analyzing GBPUSDm
+[2026-05-07 22:30:31] Signal: {'time': Timestamp('2026-05-07 15:25:00'), 'symbol': 'GBPUSDm', 'side': 'NO_TRADE', 'price': 1.36128, 'reason': 'M15 ADX too low 13.63 < 18.0'}
+[2026-05-07 22:30:31] [SKIP] GBPUSDm NO_TRADE: M15 ADX too low 13.63 < 18.0
+[2026-05-07 22:30:31] [SELECT] Symbol switched: GBPUSDm -> USDJPYm | AI watchlist candidate
+[2026-05-07 22:30:31] [SCAN] Analyzing USDJPYm
+[2026-05-07 22:30:32] Signal: {'time': Timestamp('2026-05-07 15:25:00'), 'symbol': 'USDJPYm', 'side': 'NO_TRADE', 'price': 156.441, 'reason': 'M15 ADX too low 17.52 < 18.0'}
+[2026-05-07 22:30:32] [SKIP] USDJPYm NO_TRADE: M15 ADX too low 17.52 < 18.0
+[2026-05-07 22:30:32] [SELECT] Symbol switched: USDJPYm -> XAUUSDm | AI watchlist candidate
+[2026-05-07 22:30:32] [SCAN] Analyzing XAUUSDm
+[2026-05-07 22:30:33] Signal: {'time': Timestamp('2026-05-07 15:25:00'), 'symbol': 'XAUUSDm', 'side': 'NO_TRADE', 'price': 4739.988, 'reason': 'no Donchian breakout'}
+[2026-05-07 22:30:33] [SKIP] XAUUSDm NO_TRADE: no Donchian breakout
+[2026-05-07 22:30:33] [SELECT] Symbol switched: XAUUSDm -> USDCADm | AI watchlist candidate
+[2026-05-07 22:30:33] [SCAN] Analyzing USDCADm
+[2026-05-07 22:30:34] Signal: {'time': Timestamp('2026-05-07 15:25:00'), 'symbol': 'USDCADm', 'side': 'NO_TRADE', 'price': 1.36381, 'reason': 'no Donchian breakout'}
+[2026-05-07 22:30:34] [SKIP] USDCADm NO_TRADE: no Donchian breakout
+[2026-05-07 22:30:34] [SELECT] Symbol switched: USDCADm -> AUDUSDm | AI watchlist candidate
+[2026-05-07 22:30:34] [SCAN] Analyzing AUDUSDm
+[2026-05-07 22:30:35] Signal: {'time': Timestamp('2026-05-07 15:25:00'), 'symbol': 'AUDUSDm', 'side': 'NO_TRADE', 'price': 0.72448, 'reason': 'no Donchian breakout'}
+[2026-05-07 22:30:35] [SKIP] AUDUSDm NO_TRADE: no Donchian breakout
+[2026-05-07 22:30:35] [SELECT] Symbol switched: AUDUSDm -> EURGBPm | AI watchlist candidate
+[2026-05-07 22:30:35] [SCAN] Analyzing EURGBPm
+[2026-05-07 22:30:35] Signal: {'time': Timestamp('2026-05-07 15:25:00'), 'symbol': 'EURGBPm', 'side': 'NO_TRADE', 'price': 0.86419, 'reason': 'no Donchian breakout'}
+[2026-05-07 22:30:35] [SKIP] EURGBPm NO_TRADE: no Donchian breakout
+[2026-05-07 22:30:35] [WAIT] No order this round
