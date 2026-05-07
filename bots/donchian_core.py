@@ -212,7 +212,7 @@ def signal_from_closed_row(symbol: str, row: pd.Series, cfg: bt.Config) -> tuple
 def apply_micro_edge_filters(row: pd.Series, side: str, config: DonchianCoreConfig) -> Optional[str]:
     fails: list[str] = []
 
-    if config.allowed_side and side != config.allowed_side:
+    if config.allowed_side and config.allowed_side.upper() != "BOTH" and side != config.allowed_side:
         _REJECT_STATS["side_blocked"] += 1
         fails.append(f"side blocked allowed={config.allowed_side} got={side}")
 

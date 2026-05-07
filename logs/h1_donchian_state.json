@@ -1,0 +1,12 @@
+{
+  "date": "2026-05-06",
+  "day_start_balance": null,
+  "trades_today": 0,
+  "last_trade_time": {},
+  "last_signal_bar": {},
+  "be_trigger": {},
+  "be_applied": {},
+  "dry_run": false,
+  "connection_down": false,
+  "last_disconnect_notify": 0
+}
