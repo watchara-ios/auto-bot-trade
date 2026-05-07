@@ -7,8 +7,7 @@ __pycache__/
 .env.locals'
 logs/*.bak_*
 
-# Large downloaded market data and generated reports.
-data/
+# Large downloaded market data and generated reports.s
 reports/
 data/*_2022_2025_*.csv
 data/ethereum_*.csv
