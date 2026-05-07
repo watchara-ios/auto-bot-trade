@@ -16,15 +16,30 @@ if not mt5.initialize():
 
 print("✅ Connected to MT5")
 
+# ===== ACCOUNT INFO (diagnostic) =====
+acc = mt5.account_info()
+if acc:
+    print(f"   Account : {acc.login}  Server: {acc.server}")
+    print(f"   Balance : {acc.balance:.2f}  Equity: {acc.equity:.2f}")
+    print(f"   Currency: {acc.currency}")
+else:
+    print("⚠️  account_info() returned None — not logged in?", mt5.last_error())
+
 # ===== DATE RANGE =====
 to_date = datetime.now()
 from_date = to_date - timedelta(days=DAYS_BACK)
+print(f"   Period  : {from_date.date()} → {to_date.date()} ({DAYS_BACK} days)")
 
 # ===== GET DEAL HISTORY =====
 deals = mt5.history_deals_get(from_date, to_date)
+print(f"   Raw deals returned: {len(deals) if deals else 0}  last_error={mt5.last_error()}")
 
 if deals is None or len(deals) == 0:
-    print("❌ No trade history found")
+    print("ℹ️  No trade history in this period.")
+    print("   Possible reasons:")
+    print("   1. Bot has not placed any orders yet (most likely)")
+    print("   2. MT5 terminal needs to load history: right-click chart → History → Load")
+    print("   3. Account is new / demo with no trades")
     mt5.shutdown()
     quit()
 
