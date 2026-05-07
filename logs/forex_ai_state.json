@@ -1,31 +1,41 @@
 {
   "last_scan_date": "2026-05-07",
-  "last_scan_at": "2026-05-07 14:00:37",
+  "last_scan_at": "2026-05-07 22:04:12",
   "last_recommendations": [
     {
       "symbol": "EURUSD",
-      "rating": 2,
-      "reason": "London-NY overlap increases liquidity; 1H chart shows support near 1.0800."
+      "rating": 1,
+      "reason": "High liquidity during London-NY overlap, tight spreads"
     },
     {
       "symbol": "GBPUSD",
       "rating": 1,
-      "reason": "High volatility during session; bullish breakout on 4H above 1.2500."
+      "reason": "Strong momentum and volatile news expected"
     },
     {
       "symbol": "USDJPY",
-      "rating": 3,
-      "reason": "Range-bound ahead of US data; wait for breakout above 155.50."
+      "rating": 2,
+      "reason": "Active but prone to sudden reversals; good for scalping"
     },
     {
       "symbol": "XAUUSD",
       "rating": 2,
-      "reason": "Safe-haven demand active; 1H resistance at $2350 tested."
+      "reason": "Gold sensitive to USD moves, high volume now"
     },
     {
-      "symbol": "EURJPY",
+      "symbol": "EURGBP",
       "rating": 3,
-      "reason": "Correlated moves with EUR/USD; moderate momentum in overlap."
+      "reason": "Less volatile, good for range traders with caution"
+    },
+    {
+      "symbol": "USDCAD",
+      "rating": 3,
+      "reason": "Liquid but range-bound, wait for breakout signals"
+    },
+    {
+      "symbol": "AUDUSD",
+      "rating": 3,
+      "reason": "Thinner liquidity, avoid during non-AU session peaks"
     }
   ],
   "candidate_universe": [
@@ -61,38 +71,55 @@
   ],
   "last_scan_error": "missing DEEPSEEK_API_KEY",
   "candidate_symbols": [
-    "GBPUSDm",
     "EURUSDm",
-    "XAUUSDm",
+    "GBPUSDm",
     "USDJPYm",
-    "EURJPYm"
+    "XAUUSDm",
+    "USDCADm",
+    "AUDUSDm",
+    "EURGBPm"
   ],
   "candidate_recommendations": [
     {
-      "symbol": "GBPUSDm",
+      "symbol": "EURUSDm",
       "rating": 1,
-      "reason": "High volatility during session; bullish breakout on 4H above 1.2500."
+      "reason": "High liquidity during London-NY overlap, tight spreads"
     },
     {
-      "symbol": "EURUSDm",
+      "symbol": "GBPUSDm",
+      "rating": 1,
+      "reason": "Strong momentum and volatile news expected"
+    },
+    {
+      "symbol": "USDJPYm",
       "rating": 2,
-      "reason": "London-NY overlap increases liquidity; 1H chart shows support near 1.0800."
+      "reason": "Active but prone to sudden reversals; good for scalping"
     },
     {
       "symbol": "XAUUSDm",
       "rating": 2,
-      "reason": "Safe-haven demand active; 1H resistance at $2350 tested."
+      "reason": "Gold sensitive to USD moves, high volume now"
     },
     {
-      "symbol": "USDJPYm",
+      "symbol": "USDCADm",
       "rating": 3,
-      "reason": "Range-bound ahead of US data; wait for breakout above 155.50."
+      "reason": "Liquid but range-bound, wait for breakout signals"
     },
     {
-      "symbol": "EURJPYm",
+      "symbol": "AUDUSDm",
       "rating": 3,
-      "reason": "Correlated moves with EUR/USD; moderate momentum in overlap."
+      "reason": "Thinner liquidity, avoid during non-AU session peaks"
+    },
+    {
+      "symbol": "EURGBPm",
+      "rating": 3,
+      "reason": "Less volatile, good for range traders with caution"
     }
   ],
-  "selected_symbol": "GBPUSDm"
+  "selected_symbol": "EURUSDm",
+  "selected_recommendation": {
+    "symbol": "EURUSDm",
+    "rating": 1,
+    "reason": "High liquidity during London-NY overlap, tight spreads"
+  }
 }

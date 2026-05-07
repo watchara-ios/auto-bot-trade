@@ -9235,3 +9235,461 @@
 [2026-05-07 21:47:39] [SCAN] Analyzing EURJPYm
 [2026-05-07 21:47:40] [SKIP] EURJPYm same candle 2026-05-07 14:40:00  skip
 [2026-05-07 21:47:40] [WAIT] No order this round
+[2026-05-07 21:48:40] [AI] Using cached scan from 2026-05-07 14:00:37 | symbols=GBPUSDm, EURUSDm, XAUUSDm, USDJPYm, EURJPYm
+[2026-05-07 21:48:40] [WATCH] Watchlist: GBPUSDm, EURUSDm, XAUUSDm, USDJPYm, EURJPYm
+[2026-05-07 21:48:40] [SELECT] Symbol switched: EURJPYm -> GBPUSDm | AI watchlist candidate
+[2026-05-07 21:48:40] [SCAN] Analyzing GBPUSDm
+[2026-05-07 21:48:41] [SKIP] GBPUSDm same candle 2026-05-07 14:40:00  skip
+[2026-05-07 21:48:41] [SELECT] Symbol switched: GBPUSDm -> EURUSDm | AI watchlist candidate
+[2026-05-07 21:48:41] [SCAN] Analyzing EURUSDm
+[2026-05-07 21:48:42] [SKIP] EURUSDm same candle 2026-05-07 14:40:00  skip
+[2026-05-07 21:48:42] [SELECT] Symbol switched: EURUSDm -> XAUUSDm | AI watchlist candidate
+[2026-05-07 21:48:42] [SCAN] Analyzing XAUUSDm
+[2026-05-07 21:48:42] [SKIP] XAUUSDm same candle 2026-05-07 14:40:00  skip
+[2026-05-07 21:48:42] [SELECT] Symbol switched: XAUUSDm -> USDJPYm | AI watchlist candidate
+[2026-05-07 21:48:42] [SCAN] Analyzing USDJPYm
+[2026-05-07 21:48:43] [SKIP] USDJPYm same candle 2026-05-07 14:40:00  skip
+[2026-05-07 21:48:43] [SELECT] Symbol switched: USDJPYm -> EURJPYm | AI watchlist candidate
+[2026-05-07 21:48:43] [SCAN] Analyzing EURJPYm
+[2026-05-07 21:48:44] [SKIP] EURJPYm same candle 2026-05-07 14:40:00  skip
+[2026-05-07 21:48:44] [WAIT] No order this round
+[2026-05-07 21:49:44] [AI] Using cached scan from 2026-05-07 14:00:37 | symbols=GBPUSDm, EURUSDm, XAUUSDm, USDJPYm, EURJPYm
+[2026-05-07 21:49:44] [WATCH] Watchlist: GBPUSDm, EURUSDm, XAUUSDm, USDJPYm, EURJPYm
+[2026-05-07 21:49:44] [SELECT] Symbol switched: EURJPYm -> GBPUSDm | AI watchlist candidate
+[2026-05-07 21:49:44] [SCAN] Analyzing GBPUSDm
+[2026-05-07 21:49:44] [SKIP] GBPUSDm same candle 2026-05-07 14:40:00  skip
+[2026-05-07 21:49:44] [SELECT] Symbol switched: GBPUSDm -> EURUSDm | AI watchlist candidate
+[2026-05-07 21:49:44] [SCAN] Analyzing EURUSDm
+[2026-05-07 21:49:45] [SKIP] EURUSDm same candle 2026-05-07 14:40:00  skip
+[2026-05-07 21:49:45] [SELECT] Symbol switched: EURUSDm -> XAUUSDm | AI watchlist candidate
+[2026-05-07 21:49:45] [SCAN] Analyzing XAUUSDm
+[2026-05-07 21:49:46] [SKIP] XAUUSDm same candle 2026-05-07 14:40:00  skip
+[2026-05-07 21:49:46] [SELECT] Symbol switched: XAUUSDm -> USDJPYm | AI watchlist candidate
+[2026-05-07 21:49:46] [SCAN] Analyzing USDJPYm
+[2026-05-07 21:49:47] [SKIP] USDJPYm same candle 2026-05-07 14:40:00  skip
+[2026-05-07 21:49:47] [SELECT] Symbol switched: USDJPYm -> EURJPYm | AI watchlist candidate
+[2026-05-07 21:49:47] [SCAN] Analyzing EURJPYm
+[2026-05-07 21:49:47] [SKIP] EURJPYm same candle 2026-05-07 14:40:00  skip
+[2026-05-07 21:49:47] [WAIT] No order this round
+[2026-05-07 21:50:47] [AI] Using cached scan from 2026-05-07 14:00:37 | symbols=GBPUSDm, EURUSDm, XAUUSDm, USDJPYm, EURJPYm
+[2026-05-07 21:50:47] [WATCH] Watchlist: GBPUSDm, EURUSDm, XAUUSDm, USDJPYm, EURJPYm
+[2026-05-07 21:50:47] [SELECT] Symbol switched: EURJPYm -> GBPUSDm | AI watchlist candidate
+[2026-05-07 21:50:47] [SCAN] Analyzing GBPUSDm
+[2026-05-07 21:50:48] Signal: {'time': Timestamp('2026-05-07 14:45:00'), 'symbol': 'GBPUSDm', 'side': 'NO_TRADE', 'price': 1.3621699999999999, 'reason': 'no Donchian breakout'}
+[2026-05-07 21:50:48] [SKIP] GBPUSDm NO_TRADE: no Donchian breakout
+[2026-05-07 21:50:48] [SELECT] Symbol switched: GBPUSDm -> EURUSDm | AI watchlist candidate
+[2026-05-07 21:50:48] [SCAN] Analyzing EURUSDm
+[2026-05-07 21:50:49] Signal: {'time': Timestamp('2026-05-07 14:45:00'), 'symbol': 'EURUSDm', 'side': 'NO_TRADE', 'price': 1.17741, 'reason': 'no Donchian breakout'}
+[2026-05-07 21:50:49] [SKIP] EURUSDm NO_TRADE: no Donchian breakout
+[2026-05-07 21:50:49] [SELECT] Symbol switched: EURUSDm -> XAUUSDm | AI watchlist candidate
+[2026-05-07 21:50:49] [SCAN] Analyzing XAUUSDm
+[2026-05-07 21:50:50] Signal: {'time': Timestamp('2026-05-07 14:45:00'), 'symbol': 'XAUUSDm', 'side': 'NO_TRADE', 'price': 4758.379, 'reason': 'no Donchian breakout'}
+[2026-05-07 21:50:50] [SKIP] XAUUSDm NO_TRADE: no Donchian breakout
+[2026-05-07 21:50:50] [SELECT] Symbol switched: XAUUSDm -> USDJPYm | AI watchlist candidate
+[2026-05-07 21:50:50] [SCAN] Analyzing USDJPYm
+[2026-05-07 21:50:51] Signal: {'time': Timestamp('2026-05-07 14:45:00'), 'symbol': 'USDJPYm', 'side': 'NO_TRADE', 'price': 156.35, 'reason': 'no Donchian breakout'}
+[2026-05-07 21:50:51] [SKIP] USDJPYm NO_TRADE: no Donchian breakout
+[2026-05-07 21:50:51] [SELECT] Symbol switched: USDJPYm -> EURJPYm | AI watchlist candidate
+[2026-05-07 21:50:51] [SCAN] Analyzing EURJPYm
+[2026-05-07 21:50:51] Signal: {'time': Timestamp('2026-05-07 14:45:00'), 'symbol': 'EURJPYm', 'side': 'NO_TRADE', 'price': 184.093, 'reason': 'no Donchian breakout'}
+[2026-05-07 21:50:51] [SKIP] EURJPYm NO_TRADE: no Donchian breakout
+[2026-05-07 21:50:51] [WAIT] No order this round
+[2026-05-07 21:51:51] [AI] Using cached scan from 2026-05-07 14:00:37 | symbols=GBPUSDm, EURUSDm, XAUUSDm, USDJPYm, EURJPYm
+[2026-05-07 21:51:51] [WATCH] Watchlist: GBPUSDm, EURUSDm, XAUUSDm, USDJPYm, EURJPYm
+[2026-05-07 21:51:51] [SELECT] Symbol switched: EURJPYm -> GBPUSDm | AI watchlist candidate
+[2026-05-07 21:51:51] [SCAN] Analyzing GBPUSDm
+[2026-05-07 21:51:52] [SKIP] GBPUSDm same candle 2026-05-07 14:45:00  skip
+[2026-05-07 21:51:52] [SELECT] Symbol switched: GBPUSDm -> EURUSDm | AI watchlist candidate
+[2026-05-07 21:51:52] [SCAN] Analyzing EURUSDm
+[2026-05-07 21:51:53] [SKIP] EURUSDm same candle 2026-05-07 14:45:00  skip
+[2026-05-07 21:51:53] [SELECT] Symbol switched: EURUSDm -> XAUUSDm | AI watchlist candidate
+[2026-05-07 21:51:53] [SCAN] Analyzing XAUUSDm
+[2026-05-07 21:51:54] [SKIP] XAUUSDm same candle 2026-05-07 14:45:00  skip
+[2026-05-07 21:51:54] [SELECT] Symbol switched: XAUUSDm -> USDJPYm | AI watchlist candidate
+[2026-05-07 21:51:54] [SCAN] Analyzing USDJPYm
+[2026-05-07 21:51:54] [SKIP] USDJPYm same candle 2026-05-07 14:45:00  skip
+[2026-05-07 21:51:54] [SELECT] Symbol switched: USDJPYm -> EURJPYm | AI watchlist candidate
+[2026-05-07 21:51:54] [SCAN] Analyzing EURJPYm
+[2026-05-07 21:51:55] [SKIP] EURJPYm same candle 2026-05-07 14:45:00  skip
+[2026-05-07 21:51:55] [WAIT] No order this round
+[2026-05-07 21:52:55] [AI] Using cached scan from 2026-05-07 14:00:37 | symbols=GBPUSDm, EURUSDm, XAUUSDm, USDJPYm, EURJPYm
+[2026-05-07 21:52:55] [WATCH] Watchlist: GBPUSDm, EURUSDm, XAUUSDm, USDJPYm, EURJPYm
+[2026-05-07 21:52:55] [SELECT] Symbol switched: EURJPYm -> GBPUSDm | AI watchlist candidate
+[2026-05-07 21:52:55] [SCAN] Analyzing GBPUSDm
+[2026-05-07 21:52:56] [SKIP] GBPUSDm same candle 2026-05-07 14:45:00  skip
+[2026-05-07 21:52:56] [SELECT] Symbol switched: GBPUSDm -> EURUSDm | AI watchlist candidate
+[2026-05-07 21:52:56] [SCAN] Analyzing EURUSDm
+[2026-05-07 21:52:56] [SKIP] EURUSDm same candle 2026-05-07 14:45:00  skip
+[2026-05-07 21:52:56] [SELECT] Symbol switched: EURUSDm -> XAUUSDm | AI watchlist candidate
+[2026-05-07 21:52:56] [SCAN] Analyzing XAUUSDm
+[2026-05-07 21:52:57] [SKIP] XAUUSDm same candle 2026-05-07 14:45:00  skip
+[2026-05-07 21:52:57] [SELECT] Symbol switched: XAUUSDm -> USDJPYm | AI watchlist candidate
+[2026-05-07 21:52:57] [SCAN] Analyzing USDJPYm
+[2026-05-07 21:52:58] [SKIP] USDJPYm same candle 2026-05-07 14:45:00  skip
+[2026-05-07 21:52:58] [SELECT] Symbol switched: USDJPYm -> EURJPYm | AI watchlist candidate
+[2026-05-07 21:52:58] [SCAN] Analyzing EURJPYm
+[2026-05-07 21:52:59] [SKIP] EURJPYm same candle 2026-05-07 14:45:00  skip
+[2026-05-07 21:52:59] [WAIT] No order this round
+[2026-05-07 21:53:59] [AI] Using cached scan from 2026-05-07 14:00:37 | symbols=GBPUSDm, EURUSDm, XAUUSDm, USDJPYm, EURJPYm
+[2026-05-07 21:53:59] [WATCH] Watchlist: GBPUSDm, EURUSDm, XAUUSDm, USDJPYm, EURJPYm
+[2026-05-07 21:53:59] [SELECT] Symbol switched: EURJPYm -> GBPUSDm | AI watchlist candidate
+[2026-05-07 21:53:59] [SCAN] Analyzing GBPUSDm
+[2026-05-07 21:53:59] [SKIP] GBPUSDm same candle 2026-05-07 14:45:00  skip
+[2026-05-07 21:53:59] [SELECT] Symbol switched: GBPUSDm -> EURUSDm | AI watchlist candidate
+[2026-05-07 21:53:59] [SCAN] Analyzing EURUSDm
+[2026-05-07 21:54:00] [SKIP] EURUSDm same candle 2026-05-07 14:45:00  skip
+[2026-05-07 21:54:00] [SELECT] Symbol switched: EURUSDm -> XAUUSDm | AI watchlist candidate
+[2026-05-07 21:54:00] [SCAN] Analyzing XAUUSDm
+[2026-05-07 21:54:01] [SKIP] XAUUSDm same candle 2026-05-07 14:45:00  skip
+[2026-05-07 21:54:01] [SELECT] Symbol switched: XAUUSDm -> USDJPYm | AI watchlist candidate
+[2026-05-07 21:54:01] [SCAN] Analyzing USDJPYm
+[2026-05-07 21:54:02] [SKIP] USDJPYm same candle 2026-05-07 14:45:00  skip
+[2026-05-07 21:54:02] [SELECT] Symbol switched: USDJPYm -> EURJPYm | AI watchlist candidate
+[2026-05-07 21:54:02] [SCAN] Analyzing EURJPYm
+[2026-05-07 21:54:02] [SKIP] EURJPYm same candle 2026-05-07 14:45:00  skip
+[2026-05-07 21:54:02] [WAIT] No order this round
+[2026-05-07 21:55:02] [AI] Using cached scan from 2026-05-07 14:00:37 | symbols=GBPUSDm, EURUSDm, XAUUSDm, USDJPYm, EURJPYm
+[2026-05-07 21:55:02] [WATCH] Watchlist: GBPUSDm, EURUSDm, XAUUSDm, USDJPYm, EURJPYm
+[2026-05-07 21:55:02] [SELECT] Symbol switched: EURJPYm -> GBPUSDm | AI watchlist candidate
+[2026-05-07 21:55:02] [SCAN] Analyzing GBPUSDm
+[2026-05-07 21:55:03] Signal: {'time': Timestamp('2026-05-07 14:50:00'), 'symbol': 'GBPUSDm', 'side': 'NO_TRADE', 'price': 1.36209, 'reason': 'no Donchian breakout'}
+[2026-05-07 21:55:03] [SKIP] GBPUSDm NO_TRADE: no Donchian breakout
+[2026-05-07 21:55:03] [SELECT] Symbol switched: GBPUSDm -> EURUSDm | AI watchlist candidate
+[2026-05-07 21:55:03] [SCAN] Analyzing EURUSDm
+[2026-05-07 21:55:04] Signal: {'time': Timestamp('2026-05-07 14:50:00'), 'symbol': 'EURUSDm', 'side': 'NO_TRADE', 'price': 1.17723, 'reason': 'no Donchian breakout'}
+[2026-05-07 21:55:04] [SKIP] EURUSDm NO_TRADE: no Donchian breakout
+[2026-05-07 21:55:04] [SELECT] Symbol switched: EURUSDm -> XAUUSDm | AI watchlist candidate
+[2026-05-07 21:55:04] [SCAN] Analyzing XAUUSDm
+[2026-05-07 21:55:05] Signal: {'time': Timestamp('2026-05-07 14:50:00'), 'symbol': 'XAUUSDm', 'side': 'NO_TRADE', 'price': 4760.453, 'reason': 'M15 ADX not rising'}
+[2026-05-07 21:55:05] [SKIP] XAUUSDm NO_TRADE: M15 ADX not rising
+[2026-05-07 21:55:05] [SELECT] Symbol switched: XAUUSDm -> USDJPYm | AI watchlist candidate
+[2026-05-07 21:55:05] [SCAN] Analyzing USDJPYm
+[2026-05-07 21:55:05] Signal: {'time': Timestamp('2026-05-07 14:50:00'), 'symbol': 'USDJPYm', 'side': 'NO_TRADE', 'price': 156.325, 'reason': 'no Donchian breakout'}
+[2026-05-07 21:55:05] [SKIP] USDJPYm NO_TRADE: no Donchian breakout
+[2026-05-07 21:55:05] [SELECT] Symbol switched: USDJPYm -> EURJPYm | AI watchlist candidate
+[2026-05-07 21:55:05] [SCAN] Analyzing EURJPYm
+[2026-05-07 21:55:06] Signal: {'time': Timestamp('2026-05-07 14:50:00'), 'symbol': 'EURJPYm', 'side': 'NO_TRADE', 'price': 184.038, 'reason': 'no Donchian breakout'}
+[2026-05-07 21:55:06] [SKIP] EURJPYm NO_TRADE: no Donchian breakout
+[2026-05-07 21:55:06] [WAIT] No order this round
+[2026-05-07 21:56:06] [AI] Using cached scan from 2026-05-07 14:00:37 | symbols=GBPUSDm, EURUSDm, XAUUSDm, USDJPYm, EURJPYm
+[2026-05-07 21:56:06] [WATCH] Watchlist: GBPUSDm, EURUSDm, XAUUSDm, USDJPYm, EURJPYm
+[2026-05-07 21:56:06] [SELECT] Symbol switched: EURJPYm -> GBPUSDm | AI watchlist candidate
+[2026-05-07 21:56:06] [SCAN] Analyzing GBPUSDm
+[2026-05-07 21:56:07] [SKIP] GBPUSDm same candle 2026-05-07 14:50:00  skip
+[2026-05-07 21:56:07] [SELECT] Symbol switched: GBPUSDm -> EURUSDm | AI watchlist candidate
+[2026-05-07 21:56:07] [SCAN] Analyzing EURUSDm
+[2026-05-07 21:56:08] [SKIP] EURUSDm same candle 2026-05-07 14:50:00  skip
+[2026-05-07 21:56:08] [SELECT] Symbol switched: EURUSDm -> XAUUSDm | AI watchlist candidate
+[2026-05-07 21:56:08] [SCAN] Analyzing XAUUSDm
+[2026-05-07 21:56:08] [SKIP] XAUUSDm same candle 2026-05-07 14:50:00  skip
+[2026-05-07 21:56:08] [SELECT] Symbol switched: XAUUSDm -> USDJPYm | AI watchlist candidate
+[2026-05-07 21:56:08] [SCAN] Analyzing USDJPYm
+[2026-05-07 21:56:09] [SKIP] USDJPYm same candle 2026-05-07 14:50:00  skip
+[2026-05-07 21:56:09] [SELECT] Symbol switched: USDJPYm -> EURJPYm | AI watchlist candidate
+[2026-05-07 21:56:09] [SCAN] Analyzing EURJPYm
+[2026-05-07 21:56:10] [SKIP] EURJPYm same candle 2026-05-07 14:50:00  skip
+[2026-05-07 21:56:10] [WAIT] No order this round
+[2026-05-07 21:57:10] [AI] Using cached scan from 2026-05-07 14:00:37 | symbols=GBPUSDm, EURUSDm, XAUUSDm, USDJPYm, EURJPYm
+[2026-05-07 21:57:10] [WATCH] Watchlist: GBPUSDm, EURUSDm, XAUUSDm, USDJPYm, EURJPYm
+[2026-05-07 21:57:10] [SELECT] Symbol switched: EURJPYm -> GBPUSDm | AI watchlist candidate
+[2026-05-07 21:57:10] [SCAN] Analyzing GBPUSDm
+[2026-05-07 21:57:11] [SKIP] GBPUSDm same candle 2026-05-07 14:50:00  skip
+[2026-05-07 21:57:11] [SELECT] Symbol switched: GBPUSDm -> EURUSDm | AI watchlist candidate
+[2026-05-07 21:57:11] [SCAN] Analyzing EURUSDm
+[2026-05-07 21:57:11] [SKIP] EURUSDm same candle 2026-05-07 14:50:00  skip
+[2026-05-07 21:57:11] [SELECT] Symbol switched: EURUSDm -> XAUUSDm | AI watchlist candidate
+[2026-05-07 21:57:11] [SCAN] Analyzing XAUUSDm
+[2026-05-07 21:57:12] [SKIP] XAUUSDm same candle 2026-05-07 14:50:00  skip
+[2026-05-07 21:57:12] [SELECT] Symbol switched: XAUUSDm -> USDJPYm | AI watchlist candidate
+[2026-05-07 21:57:12] [SCAN] Analyzing USDJPYm
+[2026-05-07 21:57:13] [SKIP] USDJPYm same candle 2026-05-07 14:50:00  skip
+[2026-05-07 21:57:13] [SELECT] Symbol switched: USDJPYm -> EURJPYm | AI watchlist candidate
+[2026-05-07 21:57:13] [SCAN] Analyzing EURJPYm
+[2026-05-07 21:57:13] [SKIP] EURJPYm same candle 2026-05-07 14:50:00  skip
+[2026-05-07 21:57:13] [WAIT] No order this round
+[2026-05-07 21:58:13] [AI] Using cached scan from 2026-05-07 14:00:37 | symbols=GBPUSDm, EURUSDm, XAUUSDm, USDJPYm, EURJPYm
+[2026-05-07 21:58:13] [WATCH] Watchlist: GBPUSDm, EURUSDm, XAUUSDm, USDJPYm, EURJPYm
+[2026-05-07 21:58:13] [SELECT] Symbol switched: EURJPYm -> GBPUSDm | AI watchlist candidate
+[2026-05-07 21:58:13] [SCAN] Analyzing GBPUSDm
+[2026-05-07 21:58:14] [SKIP] GBPUSDm same candle 2026-05-07 14:50:00  skip
+[2026-05-07 21:58:14] [SELECT] Symbol switched: GBPUSDm -> EURUSDm | AI watchlist candidate
+[2026-05-07 21:58:14] [SCAN] Analyzing EURUSDm
+[2026-05-07 21:58:15] [SKIP] EURUSDm same candle 2026-05-07 14:50:00  skip
+[2026-05-07 21:58:15] [SELECT] Symbol switched: EURUSDm -> XAUUSDm | AI watchlist candidate
+[2026-05-07 21:58:15] [SCAN] Analyzing XAUUSDm
+[2026-05-07 21:58:16] [SKIP] XAUUSDm same candle 2026-05-07 14:50:00  skip
+[2026-05-07 21:58:16] [SELECT] Symbol switched: XAUUSDm -> USDJPYm | AI watchlist candidate
+[2026-05-07 21:58:16] [SCAN] Analyzing USDJPYm
+[2026-05-07 21:58:16] [SKIP] USDJPYm same candle 2026-05-07 14:50:00  skip
+[2026-05-07 21:58:16] [SELECT] Symbol switched: USDJPYm -> EURJPYm | AI watchlist candidate
+[2026-05-07 21:58:16] [SCAN] Analyzing EURJPYm
+[2026-05-07 21:58:17] [SKIP] EURJPYm same candle 2026-05-07 14:50:00  skip
+[2026-05-07 21:58:17] [WAIT] No order this round
+[2026-05-07 21:59:17] [AI] Using cached scan from 2026-05-07 14:00:37 | symbols=GBPUSDm, EURUSDm, XAUUSDm, USDJPYm, EURJPYm
+[2026-05-07 21:59:17] [WATCH] Watchlist: GBPUSDm, EURUSDm, XAUUSDm, USDJPYm, EURJPYm
+[2026-05-07 21:59:17] [SELECT] Symbol switched: EURJPYm -> GBPUSDm | AI watchlist candidate
+[2026-05-07 21:59:17] [SCAN] Analyzing GBPUSDm
+[2026-05-07 21:59:18] [SKIP] GBPUSDm same candle 2026-05-07 14:50:00  skip
+[2026-05-07 21:59:18] [SELECT] Symbol switched: GBPUSDm -> EURUSDm | AI watchlist candidate
+[2026-05-07 21:59:18] [SCAN] Analyzing EURUSDm
+[2026-05-07 21:59:18] [SKIP] EURUSDm same candle 2026-05-07 14:50:00  skip
+[2026-05-07 21:59:18] [SELECT] Symbol switched: EURUSDm -> XAUUSDm | AI watchlist candidate
+[2026-05-07 21:59:18] [SCAN] Analyzing XAUUSDm
+[2026-05-07 21:59:19] [SKIP] XAUUSDm same candle 2026-05-07 14:50:00  skip
+[2026-05-07 21:59:19] [SELECT] Symbol switched: XAUUSDm -> USDJPYm | AI watchlist candidate
+[2026-05-07 21:59:19] [SCAN] Analyzing USDJPYm
+[2026-05-07 21:59:20] [SKIP] USDJPYm same candle 2026-05-07 14:50:00  skip
+[2026-05-07 21:59:20] [SELECT] Symbol switched: USDJPYm -> EURJPYm | AI watchlist candidate
+[2026-05-07 21:59:20] [SCAN] Analyzing EURJPYm
+[2026-05-07 21:59:21] [SKIP] EURJPYm same candle 2026-05-07 14:50:00  skip
+[2026-05-07 21:59:21] [WAIT] No order this round
+[2026-05-07 22:00:21] [AI] Using cached scan from 2026-05-07 14:00:37 | symbols=GBPUSDm, EURUSDm, XAUUSDm, USDJPYm, EURJPYm
+[2026-05-07 22:00:21] [STATS] Hourly rejections (of 2256 attempts): {'no_donchian_breakout': '2046(91%)', 'adx_not_rising': '129(6%)', 'side_blocked': '39(2%)', 'trend_not_aligned': '28(1%)', 'adx_too_low': '14(1%)', 'volume_low': '10(0%)', 'adx_too_high': '5(0%)'}
+[2026-05-07 22:00:21] [WATCH] Watchlist: GBPUSDm, EURUSDm, XAUUSDm, USDJPYm, EURJPYm
+[2026-05-07 22:00:21] [SELECT] Symbol switched: EURJPYm -> GBPUSDm | AI watchlist candidate
+[2026-05-07 22:00:21] [SCAN] Analyzing GBPUSDm
+[2026-05-07 22:00:21] Signal: {'time': Timestamp('2026-05-07 14:55:00'), 'symbol': 'GBPUSDm', 'side': 'NO_TRADE', 'price': 1.36296, 'reason': 'M15 ADX too low 11.32 < 18.0'}
+[2026-05-07 22:00:21] [SKIP] GBPUSDm NO_TRADE: M15 ADX too low 11.32 < 18.0
+[2026-05-07 22:00:21] [SELECT] Symbol switched: GBPUSDm -> EURUSDm | AI watchlist candidate
+[2026-05-07 22:00:21] [SCAN] Analyzing EURUSDm
+[2026-05-07 22:00:22] Signal: {'time': Timestamp('2026-05-07 14:55:00'), 'symbol': 'EURUSDm', 'side': 'NO_TRADE', 'price': 1.17756, 'reason': 'no Donchian breakout'}
+[2026-05-07 22:00:22] [SKIP] EURUSDm NO_TRADE: no Donchian breakout
+[2026-05-07 22:00:22] [SELECT] Symbol switched: EURUSDm -> XAUUSDm | AI watchlist candidate
+[2026-05-07 22:00:22] [SCAN] Analyzing XAUUSDm
+[2026-05-07 22:00:23] Signal: {'time': Timestamp('2026-05-07 14:55:00'), 'symbol': 'XAUUSDm', 'side': 'NO_TRADE', 'price': 4762.477, 'reason': 'M15 ADX not rising'}
+[2026-05-07 22:00:23] [SKIP] XAUUSDm NO_TRADE: M15 ADX not rising
+[2026-05-07 22:00:23] [SELECT] Symbol switched: XAUUSDm -> USDJPYm | AI watchlist candidate
+[2026-05-07 22:00:23] [SCAN] Analyzing USDJPYm
+[2026-05-07 22:00:24] Signal: {'time': Timestamp('2026-05-07 14:55:00'), 'symbol': 'USDJPYm', 'side': 'NO_TRADE', 'price': 156.251, 'reason': 'M15 ADX too low 13.85 < 18.0'}
+[2026-05-07 22:00:24] [SKIP] USDJPYm NO_TRADE: M15 ADX too low 13.85 < 18.0
+[2026-05-07 22:00:24] [SELECT] Symbol switched: USDJPYm -> EURJPYm | AI watchlist candidate
+[2026-05-07 22:00:24] [SCAN] Analyzing EURJPYm
+[2026-05-07 22:00:25] Signal: {'time': Timestamp('2026-05-07 14:55:00'), 'symbol': 'EURJPYm', 'side': 'NO_TRADE', 'price': 183.994, 'reason': 'no Donchian breakout'}
+[2026-05-07 22:00:25] [SKIP] EURJPYm NO_TRADE: no Donchian breakout
+[2026-05-07 22:00:25] [WAIT] No order this round
+[2026-05-07 22:01:25] [AI] Using cached scan from 2026-05-07 14:00:37 | symbols=GBPUSDm, EURUSDm, XAUUSDm, USDJPYm, EURJPYm
+[2026-05-07 22:01:25] [WATCH] Watchlist: GBPUSDm, EURUSDm, XAUUSDm, USDJPYm, EURJPYm
+[2026-05-07 22:01:25] [SELECT] Symbol switched: EURJPYm -> GBPUSDm | AI watchlist candidate
+[2026-05-07 22:01:25] [SCAN] Analyzing GBPUSDm
+[2026-05-07 22:01:25] [SKIP] GBPUSDm same candle 2026-05-07 14:55:00  skip
+[2026-05-07 22:01:25] [SELECT] Symbol switched: GBPUSDm -> EURUSDm | AI watchlist candidate
+[2026-05-07 22:01:25] [SCAN] Analyzing EURUSDm
+[2026-05-07 22:01:26] [SKIP] EURUSDm same candle 2026-05-07 14:55:00  skip
+[2026-05-07 22:01:26] [SELECT] Symbol switched: EURUSDm -> XAUUSDm | AI watchlist candidate
+[2026-05-07 22:01:26] [SCAN] Analyzing XAUUSDm
+[2026-05-07 22:01:27] [SKIP] XAUUSDm same candle 2026-05-07 14:55:00  skip
+[2026-05-07 22:01:27] [SELECT] Symbol switched: XAUUSDm -> USDJPYm | AI watchlist candidate
+[2026-05-07 22:01:27] [SCAN] Analyzing USDJPYm
+[2026-05-07 22:01:27] [SKIP] USDJPYm same candle 2026-05-07 14:55:00  skip
+[2026-05-07 22:01:27] [SELECT] Symbol switched: USDJPYm -> EURJPYm | AI watchlist candidate
+[2026-05-07 22:01:27] [SCAN] Analyzing EURJPYm
+[2026-05-07 22:01:28] [SKIP] EURJPYm same candle 2026-05-07 14:55:00  skip
+[2026-05-07 22:01:28] [WAIT] No order this round
+[2026-05-07 22:02:28] [AI] Using cached scan from 2026-05-07 14:00:37 | symbols=GBPUSDm, EURUSDm, XAUUSDm, USDJPYm, EURJPYm
+[2026-05-07 22:02:28] [WATCH] Watchlist: GBPUSDm, EURUSDm, XAUUSDm, USDJPYm, EURJPYm
+[2026-05-07 22:02:28] [SELECT] Symbol switched: EURJPYm -> GBPUSDm | AI watchlist candidate
+[2026-05-07 22:02:28] [SCAN] Analyzing GBPUSDm
+[2026-05-07 22:02:29] [SKIP] GBPUSDm same candle 2026-05-07 14:55:00  skip
+[2026-05-07 22:02:29] [SELECT] Symbol switched: GBPUSDm -> EURUSDm | AI watchlist candidate
+[2026-05-07 22:02:29] [SCAN] Analyzing EURUSDm
+[2026-05-07 22:02:30] [SKIP] EURUSDm same candle 2026-05-07 14:55:00  skip
+[2026-05-07 22:02:30] [SELECT] Symbol switched: EURUSDm -> XAUUSDm | AI watchlist candidate
+[2026-05-07 22:02:30] [SCAN] Analyzing XAUUSDm
+[2026-05-07 22:02:30] [SKIP] XAUUSDm same candle 2026-05-07 14:55:00  skip
+[2026-05-07 22:02:30] [SELECT] Symbol switched: XAUUSDm -> USDJPYm | AI watchlist candidate
+[2026-05-07 22:02:30] [SCAN] Analyzing USDJPYm
+[2026-05-07 22:02:31] [SKIP] USDJPYm same candle 2026-05-07 14:55:00  skip
+[2026-05-07 22:02:31] [SELECT] Symbol switched: USDJPYm -> EURJPYm | AI watchlist candidate
+[2026-05-07 22:02:31] [SCAN] Analyzing EURJPYm
+[2026-05-07 22:02:32] [SKIP] EURJPYm same candle 2026-05-07 14:55:00  skip
+[2026-05-07 22:02:32] [WAIT] No order this round
+[2026-05-07 22:03:32] [AI] Using cached scan from 2026-05-07 14:00:37 | symbols=GBPUSDm, EURUSDm, XAUUSDm, USDJPYm, EURJPYm
+[2026-05-07 22:03:32] [WATCH] Watchlist: GBPUSDm, EURUSDm, XAUUSDm, USDJPYm, EURJPYm
+[2026-05-07 22:03:32] [SELECT] Symbol switched: EURJPYm -> GBPUSDm | AI watchlist candidate
+[2026-05-07 22:03:32] [SCAN] Analyzing GBPUSDm
+[2026-05-07 22:03:33] [SKIP] GBPUSDm same candle 2026-05-07 14:55:00  skip
+[2026-05-07 22:03:33] [SELECT] Symbol switched: GBPUSDm -> EURUSDm | AI watchlist candidate
+[2026-05-07 22:03:33] [SCAN] Analyzing EURUSDm
+[2026-05-07 22:03:33] [SKIP] EURUSDm same candle 2026-05-07 14:55:00  skip
+[2026-05-07 22:03:33] [SELECT] Symbol switched: EURUSDm -> XAUUSDm | AI watchlist candidate
+[2026-05-07 22:03:33] [SCAN] Analyzing XAUUSDm
+[2026-05-07 22:03:34] [SKIP] XAUUSDm same candle 2026-05-07 14:55:00  skip
+[2026-05-07 22:03:34] [SELECT] Symbol switched: XAUUSDm -> USDJPYm | AI watchlist candidate
+[2026-05-07 22:03:34] [SCAN] Analyzing USDJPYm
+[2026-05-07 22:03:35] [SKIP] USDJPYm same candle 2026-05-07 14:55:00  skip
+[2026-05-07 22:03:35] [SELECT] Symbol switched: USDJPYm -> EURJPYm | AI watchlist candidate
+[2026-05-07 22:03:35] [SCAN] Analyzing EURJPYm
+[2026-05-07 22:03:36] [SKIP] EURJPYm same candle 2026-05-07 14:55:00  skip
+[2026-05-07 22:03:36] [WAIT] No order this round
+[2026-05-07 22:04:12] [START] Forex bot starting | pid=9048 | session=14:0023:59 | interval=60s | DRY_RUN=True
+[2026-05-07 22:04:12] [WAIT] Telegram skipped (missing TELEGRAM_BOT_TOKEN or TELEGRAM_CHAT_ID)
+[2026-05-07 22:04:12] [CONNECT] Connecting MT5...
+[2026-05-07 22:04:12] [WAIT] MT5 explicit login skipped (missing credentials)
+[2026-05-07 22:04:12] [SCAN] Symbol resolved: XAUUSD -> XAUUSDm
+[2026-05-07 22:04:12] [OK] MT5 connected | Symbol=XAUUSDm
+[2026-05-07 22:04:12] [SCAN] Account: login=3472957 | server=Exness-MT5Real | name=eab6fa3d74e94af8a3b2bc8be14bbcc7@exness.io | currency=USD | trade_allowed=True | trade_expert=True | balance=27.99 | equity=27.99 | margin_free=27.99
+[2026-05-07 22:04:12] [WAIT] Telegram skipped (missing TELEGRAM_BOT_TOKEN or TELEGRAM_CHAT_ID)
+[2026-05-07 22:04:12] [AI] DeepSeek daily scan starting...
+[2026-05-07 22:04:12] [AI] Candidates: EURUSD, GBPUSD, USDJPY, USDCHF, USDCAD, AUDUSD, NZDUSD, EURJPY, GBPJPY, XAUUSD, EURGBP, EURCHF, EURCAD, EURAUD, EURNZD, GBPCHF, GBPCAD, GBPAUD, GBPNZD, AUDJPY, CADJPY, CHFJPY, NZDJPY, AUDCAD, AUDCHF, AUDNZD, CADCHF, NZDCAD, NZDCHF
+[2026-05-07 22:04:22] [AI] AI watchlist: EURUSDm(r1), GBPUSDm(r1), USDJPYm(r2), XAUUSDm(r2), USDCADm(r3), AUDUSDm(r3), EURGBPm(r3)
+[2026-05-07 22:04:22] [AI] Scan done: {"timestamp": "2026-05-07 14:00:00", "recommendations": [{"symbol": "EURUSD", "rating": 1, "reason": "High liquidity during London-NY overlap, tight spreads"}, {"symbol": "GBPUSD", "rating": 1, "reason": "Strong momentum and volatile news expected"}, {"symbol": "USDJPY", "rating": 2, "reason": "Active but prone to sudden reversals; good for scalping"}, {"symbol": "XAUUSD", "rating": 2, "reason": "Gold sensitive to USD moves, high volume now"}, {"symbol": "EURGBP", "rating": 3, "reason": "Less volatile, good for range traders with caution"}, {"symbol": "USDCAD", "rating": 3, "reason": "Liquid but range-bound, wait for breakout signals"}, {"symbol": "AUDUSD", "rating": 3, "reason": "Thinner liquidity, avoid during non-AU session peaks"}]}
+[2026-05-07 22:04:22] [START] Bot running
+[2026-05-07 22:04:22] [AI] Using cached scan from 2026-05-07 22:04:12 | symbols=EURUSDm, GBPUSDm, USDJPYm, XAUUSDm, USDCADm, AUDUSDm, EURGBPm
+[2026-05-07 22:04:22] [WATCH] Watchlist: EURUSDm, GBPUSDm, USDJPYm, XAUUSDm, USDCADm, AUDUSDm, EURGBPm
+[2026-05-07 22:04:22] [SELECT] Symbol switched: XAUUSDm -> EURUSDm | AI watchlist candidate
+[2026-05-07 22:04:22] [SCAN] Analyzing EURUSDm
+[2026-05-07 22:04:23] Signal: {'time': Timestamp('2026-05-07 14:55:00'), 'symbol': 'EURUSDm', 'side': 'NO_TRADE', 'price': 1.17756, 'reason': 'no Donchian breakout'}
+[2026-05-07 22:04:23] [SKIP] EURUSDm NO_TRADE: no Donchian breakout
+[2026-05-07 22:04:23] [SELECT] Symbol switched: EURUSDm -> GBPUSDm | AI watchlist candidate
+[2026-05-07 22:04:23] [SCAN] Analyzing GBPUSDm
+[2026-05-07 22:04:24] Signal: {'time': Timestamp('2026-05-07 14:55:00'), 'symbol': 'GBPUSDm', 'side': 'NO_TRADE', 'price': 1.36296, 'reason': 'M15 ADX too low 11.32 < 18.0'}
+[2026-05-07 22:04:24] [SKIP] GBPUSDm NO_TRADE: M15 ADX too low 11.32 < 18.0
+[2026-05-07 22:04:24] [SELECT] Symbol switched: GBPUSDm -> USDJPYm | AI watchlist candidate
+[2026-05-07 22:04:24] [SCAN] Analyzing USDJPYm
+[2026-05-07 22:04:25] Signal: {'time': Timestamp('2026-05-07 14:55:00'), 'symbol': 'USDJPYm', 'side': 'NO_TRADE', 'price': 156.251, 'reason': 'M15 ADX too low 13.85 < 18.0'}
+[2026-05-07 22:04:25] [SKIP] USDJPYm NO_TRADE: M15 ADX too low 13.85 < 18.0
+[2026-05-07 22:04:25] [SELECT] Symbol switched: USDJPYm -> XAUUSDm | AI watchlist candidate
+[2026-05-07 22:04:25] [SCAN] Analyzing XAUUSDm
+[2026-05-07 22:04:26] Signal: {'time': Timestamp('2026-05-07 14:55:00'), 'symbol': 'XAUUSDm', 'side': 'NO_TRADE', 'price': 4762.477, 'reason': 'M15 ADX not rising'}
+[2026-05-07 22:04:26] [SKIP] XAUUSDm NO_TRADE: M15 ADX not rising
+[2026-05-07 22:04:26] [SELECT] Symbol switched: XAUUSDm -> USDCADm | AI watchlist candidate
+[2026-05-07 22:04:26] [SCAN] Analyzing USDCADm
+[2026-05-07 22:04:28] Signal: {'time': Timestamp('2026-05-07 14:55:00'), 'symbol': 'USDCADm', 'side': 'NO_TRADE', 'price': 1.36342, 'reason': 'no Donchian breakout'}
+[2026-05-07 22:04:28] [SKIP] USDCADm NO_TRADE: no Donchian breakout
+[2026-05-07 22:04:28] [SELECT] Symbol switched: USDCADm -> AUDUSDm | AI watchlist candidate
+[2026-05-07 22:04:28] [SCAN] Analyzing AUDUSDm
+[2026-05-07 22:04:29] Signal: {'time': Timestamp('2026-05-07 14:55:00'), 'symbol': 'AUDUSDm', 'side': 'NO_TRADE', 'price': 0.72575, 'reason': 'side blocked allowed=BOTH got=BUY'}
+[2026-05-07 22:04:29] [SKIP] AUDUSDm NO_TRADE: side blocked allowed=BOTH got=BUY
+[2026-05-07 22:04:29] [SELECT] Symbol switched: AUDUSDm -> EURGBPm | AI watchlist candidate
+[2026-05-07 22:04:29] [SCAN] Analyzing EURGBPm
+[2026-05-07 22:04:30] Signal: {'time': Timestamp('2026-05-07 14:55:00'), 'symbol': 'EURGBPm', 'side': 'NO_TRADE', 'price': 0.86389, 'reason': 'no Donchian breakout'}
+[2026-05-07 22:04:30] [SKIP] EURGBPm NO_TRADE: no Donchian breakout
+[2026-05-07 22:04:30] [WAIT] No order this round
+[2026-05-07 22:05:30] [AI] Using cached scan from 2026-05-07 22:04:12 | symbols=EURUSDm, GBPUSDm, USDJPYm, XAUUSDm, USDCADm, AUDUSDm, EURGBPm
+[2026-05-07 22:05:30] [STATS] Hourly rejections (of 7 attempts): {'no_donchian_breakout': '3(43%)', 'adx_too_low': '2(29%)', 'adx_not_rising': '1(14%)', 'side_blocked': '1(14%)'}
+[2026-05-07 22:05:30] [WATCH] Watchlist: EURUSDm, GBPUSDm, USDJPYm, XAUUSDm, USDCADm, AUDUSDm, EURGBPm
+[2026-05-07 22:05:30] [SELECT] Symbol switched: EURGBPm -> EURUSDm | AI watchlist candidate
+[2026-05-07 22:05:30] [SCAN] Analyzing EURUSDm
+[2026-05-07 22:05:31] Signal: {'time': Timestamp('2026-05-07 15:00:00'), 'symbol': 'EURUSDm', 'side': 'NO_TRADE', 'price': 1.17751, 'reason': 'no Donchian breakout'}
+[2026-05-07 22:05:31] [SKIP] EURUSDm NO_TRADE: no Donchian breakout
+[2026-05-07 22:05:31] [SELECT] Symbol switched: EURUSDm -> GBPUSDm | AI watchlist candidate
+[2026-05-07 22:05:31] [SCAN] Analyzing GBPUSDm
+[2026-05-07 22:05:32] Signal: {'time': Timestamp('2026-05-07 15:00:00'), 'symbol': 'GBPUSDm', 'side': 'NO_TRADE', 'price': 1.36273, 'reason': 'no Donchian breakout'}
+[2026-05-07 22:05:32] [SKIP] GBPUSDm NO_TRADE: no Donchian breakout
+[2026-05-07 22:05:32] [SELECT] Symbol switched: GBPUSDm -> USDJPYm | AI watchlist candidate
+[2026-05-07 22:05:32] [SCAN] Analyzing USDJPYm
+[2026-05-07 22:05:32] Signal: {'time': Timestamp('2026-05-07 15:00:00'), 'symbol': 'USDJPYm', 'side': 'NO_TRADE', 'price': 156.305, 'reason': 'no Donchian breakout'}
+[2026-05-07 22:05:32] [SKIP] USDJPYm NO_TRADE: no Donchian breakout
+[2026-05-07 22:05:32] [SELECT] Symbol switched: USDJPYm -> XAUUSDm | AI watchlist candidate
+[2026-05-07 22:05:32] [SCAN] Analyzing XAUUSDm
+[2026-05-07 22:05:33] Signal: {'time': Timestamp('2026-05-07 15:00:00'), 'symbol': 'XAUUSDm', 'side': 'NO_TRADE', 'price': 4759.184, 'reason': 'no Donchian breakout'}
+[2026-05-07 22:05:33] [SKIP] XAUUSDm NO_TRADE: no Donchian breakout
+[2026-05-07 22:05:33] [SELECT] Symbol switched: XAUUSDm -> USDCADm | AI watchlist candidate
+[2026-05-07 22:05:33] [SCAN] Analyzing USDCADm
+[2026-05-07 22:05:34] Signal: {'time': Timestamp('2026-05-07 15:00:00'), 'symbol': 'USDCADm', 'side': 'NO_TRADE', 'price': 1.36328, 'reason': 'no Donchian breakout'}
+[2026-05-07 22:05:34] [SKIP] USDCADm NO_TRADE: no Donchian breakout
+[2026-05-07 22:05:34] [SELECT] Symbol switched: USDCADm -> AUDUSDm | AI watchlist candidate
+[2026-05-07 22:05:34] [SCAN] Analyzing AUDUSDm
+[2026-05-07 22:05:35] Signal: {'time': Timestamp('2026-05-07 15:00:00'), 'symbol': 'AUDUSDm', 'side': 'NO_TRADE', 'price': 0.72555, 'reason': 'no Donchian breakout'}
+[2026-05-07 22:05:35] [SKIP] AUDUSDm NO_TRADE: no Donchian breakout
+[2026-05-07 22:05:35] [SELECT] Symbol switched: AUDUSDm -> EURGBPm | AI watchlist candidate
+[2026-05-07 22:05:35] [SCAN] Analyzing EURGBPm
+[2026-05-07 22:05:36] Signal: {'time': Timestamp('2026-05-07 15:00:00'), 'symbol': 'EURGBPm', 'side': 'NO_TRADE', 'price': 0.86401, 'reason': 'no Donchian breakout'}
+[2026-05-07 22:05:36] [SKIP] EURGBPm NO_TRADE: no Donchian breakout
+[2026-05-07 22:05:36] [WAIT] No order this round
+[2026-05-07 22:06:36] [AI] Using cached scan from 2026-05-07 22:04:12 | symbols=EURUSDm, GBPUSDm, USDJPYm, XAUUSDm, USDCADm, AUDUSDm, EURGBPm
+[2026-05-07 22:06:36] [WATCH] Watchlist: EURUSDm, GBPUSDm, USDJPYm, XAUUSDm, USDCADm, AUDUSDm, EURGBPm
+[2026-05-07 22:06:36] [SELECT] Symbol switched: EURGBPm -> EURUSDm | AI watchlist candidate
+[2026-05-07 22:06:36] [SCAN] Analyzing EURUSDm
+[2026-05-07 22:06:36] [SKIP] EURUSDm same candle 2026-05-07 15:00:00  skip
+[2026-05-07 22:06:36] [SELECT] Symbol switched: EURUSDm -> GBPUSDm | AI watchlist candidate
+[2026-05-07 22:06:36] [SCAN] Analyzing GBPUSDm
+[2026-05-07 22:06:37] [SKIP] GBPUSDm same candle 2026-05-07 15:00:00  skip
+[2026-05-07 22:06:37] [SELECT] Symbol switched: GBPUSDm -> USDJPYm | AI watchlist candidate
+[2026-05-07 22:06:37] [SCAN] Analyzing USDJPYm
+[2026-05-07 22:06:38] [SKIP] USDJPYm same candle 2026-05-07 15:00:00  skip
+[2026-05-07 22:06:38] [SELECT] Symbol switched: USDJPYm -> XAUUSDm | AI watchlist candidate
+[2026-05-07 22:06:38] [SCAN] Analyzing XAUUSDm
+[2026-05-07 22:06:39] [SKIP] XAUUSDm same candle 2026-05-07 15:00:00  skip
+[2026-05-07 22:06:39] [SELECT] Symbol switched: XAUUSDm -> USDCADm | AI watchlist candidate
+[2026-05-07 22:06:39] [SCAN] Analyzing USDCADm
+[2026-05-07 22:06:39] [SKIP] USDCADm same candle 2026-05-07 15:00:00  skip
+[2026-05-07 22:06:39] [SELECT] Symbol switched: USDCADm -> AUDUSDm | AI watchlist candidate
+[2026-05-07 22:06:39] [SCAN] Analyzing AUDUSDm
+[2026-05-07 22:06:40] [SKIP] AUDUSDm same candle 2026-05-07 15:00:00  skip
+[2026-05-07 22:06:40] [SELECT] Symbol switched: AUDUSDm -> EURGBPm | AI watchlist candidate
+[2026-05-07 22:06:40] [SCAN] Analyzing EURGBPm
+[2026-05-07 22:06:41] [SKIP] EURGBPm same candle 2026-05-07 15:00:00  skip
+[2026-05-07 22:06:41] [WAIT] No order this round
+[2026-05-07 22:07:41] [AI] Using cached scan from 2026-05-07 22:04:12 | symbols=EURUSDm, GBPUSDm, USDJPYm, XAUUSDm, USDCADm, AUDUSDm, EURGBPm
+[2026-05-07 22:07:41] [WATCH] Watchlist: EURUSDm, GBPUSDm, USDJPYm, XAUUSDm, USDCADm, AUDUSDm, EURGBPm
+[2026-05-07 22:07:41] [SELECT] Symbol switched: EURGBPm -> EURUSDm | AI watchlist candidate
+[2026-05-07 22:07:41] [SCAN] Analyzing EURUSDm
+[2026-05-07 22:07:42] [SKIP] EURUSDm same candle 2026-05-07 15:00:00  skip
+[2026-05-07 22:07:42] [SELECT] Symbol switched: EURUSDm -> GBPUSDm | AI watchlist candidate
+[2026-05-07 22:07:42] [SCAN] Analyzing GBPUSDm
+[2026-05-07 22:07:42] [SKIP] GBPUSDm same candle 2026-05-07 15:00:00  skip
+[2026-05-07 22:07:42] [SELECT] Symbol switched: GBPUSDm -> USDJPYm | AI watchlist candidate
+[2026-05-07 22:07:42] [SCAN] Analyzing USDJPYm
+[2026-05-07 22:07:43] [SKIP] USDJPYm same candle 2026-05-07 15:00:00  skip
+[2026-05-07 22:07:43] [SELECT] Symbol switched: USDJPYm -> XAUUSDm | AI watchlist candidate
+[2026-05-07 22:07:43] [SCAN] Analyzing XAUUSDm
+[2026-05-07 22:07:44] [SKIP] XAUUSDm same candle 2026-05-07 15:00:00  skip
+[2026-05-07 22:07:44] [SELECT] Symbol switched: XAUUSDm -> USDCADm | AI watchlist candidate
+[2026-05-07 22:07:44] [SCAN] Analyzing USDCADm
+[2026-05-07 22:07:44] [SKIP] USDCADm same candle 2026-05-07 15:00:00  skip
+[2026-05-07 22:07:44] [SELECT] Symbol switched: USDCADm -> AUDUSDm | AI watchlist candidate
+[2026-05-07 22:07:44] [SCAN] Analyzing AUDUSDm
+[2026-05-07 22:07:45] [SKIP] AUDUSDm same candle 2026-05-07 15:00:00  skip
+[2026-05-07 22:07:45] [SELECT] Symbol switched: AUDUSDm -> EURGBPm | AI watchlist candidate
+[2026-05-07 22:07:45] [SCAN] Analyzing EURGBPm
+[2026-05-07 22:07:46] [SKIP] EURGBPm same candle 2026-05-07 15:00:00  skip
+[2026-05-07 22:07:46] [WAIT] No order this round
+[2026-05-07 22:08:46] [AI] Using cached scan from 2026-05-07 22:04:12 | symbols=EURUSDm, GBPUSDm, USDJPYm, XAUUSDm, USDCADm, AUDUSDm, EURGBPm
+[2026-05-07 22:08:46] [WATCH] Watchlist: EURUSDm, GBPUSDm, USDJPYm, XAUUSDm, USDCADm, AUDUSDm, EURGBPm
+[2026-05-07 22:08:46] [SELECT] Symbol switched: EURGBPm -> EURUSDm | AI watchlist candidate
+[2026-05-07 22:08:46] [SCAN] Analyzing EURUSDm
+[2026-05-07 22:08:47] [SKIP] EURUSDm same candle 2026-05-07 15:00:00  skip
+[2026-05-07 22:08:47] [SELECT] Symbol switched: EURUSDm -> GBPUSDm | AI watchlist candidate
+[2026-05-07 22:08:47] [SCAN] Analyzing GBPUSDm
+[2026-05-07 22:08:47] [SKIP] GBPUSDm same candle 2026-05-07 15:00:00  skip
+[2026-05-07 22:08:47] [SELECT] Symbol switched: GBPUSDm -> USDJPYm | AI watchlist candidate
+[2026-05-07 22:08:47] [SCAN] Analyzing USDJPYm
+[2026-05-07 22:08:48] [SKIP] USDJPYm same candle 2026-05-07 15:00:00  skip
+[2026-05-07 22:08:48] [SELECT] Symbol switched: USDJPYm -> XAUUSDm | AI watchlist candidate
+[2026-05-07 22:08:48] [SCAN] Analyzing XAUUSDm
+[2026-05-07 22:08:49] [SKIP] XAUUSDm same candle 2026-05-07 15:00:00  skip
+[2026-05-07 22:08:49] [SELECT] Symbol switched: XAUUSDm -> USDCADm | AI watchlist candidate
+[2026-05-07 22:08:49] [SCAN] Analyzing USDCADm
+[2026-05-07 22:08:50] [SKIP] USDCADm same candle 2026-05-07 15:00:00  skip
+[2026-05-07 22:08:50] [SELECT] Symbol switched: USDCADm -> AUDUSDm | AI watchlist candidate
+[2026-05-07 22:08:50] [SCAN] Analyzing AUDUSDm
+[2026-05-07 22:08:50] [SKIP] AUDUSDm same candle 2026-05-07 15:00:00  skip
+[2026-05-07 22:08:50] [SELECT] Symbol switched: AUDUSDm -> EURGBPm | AI watchlist candidate
+[2026-05-07 22:08:50] [SCAN] Analyzing EURGBPm
+[2026-05-07 22:08:51] [SKIP] EURGBPm same candle 2026-05-07 15:00:00  skip
+[2026-05-07 22:08:51] [WAIT] No order this round
+[2026-05-07 22:09:51] [AI] Using cached scan from 2026-05-07 22:04:12 | symbols=EURUSDm, GBPUSDm, USDJPYm, XAUUSDm, USDCADm, AUDUSDm, EURGBPm
+[2026-05-07 22:09:51] [WATCH] Watchlist: EURUSDm, GBPUSDm, USDJPYm, XAUUSDm, USDCADm, AUDUSDm, EURGBPm
+[2026-05-07 22:09:51] [SELECT] Symbol switched: EURGBPm -> EURUSDm | AI watchlist candidate
+[2026-05-07 22:09:51] [SCAN] Analyzing EURUSDm
+[2026-05-07 22:09:52] [SKIP] EURUSDm same candle 2026-05-07 15:00:00  skip
+[2026-05-07 22:09:52] [SELECT] Symbol switched: EURUSDm -> GBPUSDm | AI watchlist candidate
+[2026-05-07 22:09:52] [SCAN] Analyzing GBPUSDm
+[2026-05-07 22:09:52] [SKIP] GBPUSDm same candle 2026-05-07 15:00:00  skip
+[2026-05-07 22:09:52] [SELECT] Symbol switched: GBPUSDm -> USDJPYm | AI watchlist candidate
+[2026-05-07 22:09:52] [SCAN] Analyzing USDJPYm
+[2026-05-07 22:09:53] [SKIP] USDJPYm same candle 2026-05-07 15:00:00  skip
+[2026-05-07 22:09:53] [SELECT] Symbol switched: USDJPYm -> XAUUSDm | AI watchlist candidate
+[2026-05-07 22:09:53] [SCAN] Analyzing XAUUSDm
+[2026-05-07 22:09:54] [SKIP] XAUUSDm same candle 2026-05-07 15:00:00  skip
+[2026-05-07 22:09:54] [SELECT] Symbol switched: XAUUSDm -> USDCADm | AI watchlist candidate
+[2026-05-07 22:09:54] [SCAN] Analyzing USDCADm
+[2026-05-07 22:09:55] [SKIP] USDCADm same candle 2026-05-07 15:00:00  skip
+[2026-05-07 22:09:55] [SELECT] Symbol switched: USDCADm -> AUDUSDm | AI watchlist candidate
+[2026-05-07 22:09:55] [SCAN] Analyzing AUDUSDm
+[2026-05-07 22:09:55] [SKIP] AUDUSDm same candle 2026-05-07 15:00:00  skip
+[2026-05-07 22:09:55] [SELECT] Symbol switched: AUDUSDm -> EURGBPm | AI watchlist candidate
+[2026-05-07 22:09:55] [SCAN] Analyzing EURGBPm
+[2026-05-07 22:09:56] [SKIP] EURGBPm same candle 2026-05-07 15:00:00  skip
+[2026-05-07 22:09:56] [WAIT] No order this round
