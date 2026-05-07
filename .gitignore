@@ -5,8 +5,6 @@ __pycache__/
 # Local secrets and runtime state.
 .env
 .env.locals'
-logs/
-*.log
 logs/*.bak_*
 
 # Large downloaded market data and generated reports.
