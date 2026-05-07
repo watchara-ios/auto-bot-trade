@@ -1,0 +1,32 @@
+
+============================================================
+[Thu 05/07/2026  0:17:21.98] Forex bot restart requested
+
+============================================================
+[Thu 05/07/2026  0:17:21.99] Forex bot stop requested
+SUCCESS: The scheduled task "Forex Bot" has been terminated successfully.
+Stopping PID 2696: py  -3 -u "C:\Users\watch\auto-bot-trade\forex_bot.py" 
+Stopping PID 12816: "C:\Users\watch\AppData\Local\Python\pythoncore-3.14-64\python.exe" -u "C:\Users\watch\auto-bot-trade\forex_bot.py" 
+Stopping PID 16260: powershell  -NoProfile -ExecutionPolicy Bypass -Command   "$procs = Get-CimInstance Win32_Process | Where-Object { $_.CommandLine -like '*forex_bot.py*' }; "   "if (-not $procs) { Write-Host 'No forex_bot.py process found'; exit 0 }; "   "$procs | ForEach-Object { Write-Host ('Stopping PID {0}: {1}' -f $_.ProcessId, $_.CommandLine); Stop-Process -Id $_.ProcessId -Force }"   
+[Thu 05/07/2026  0:17:22.85] Forex bot stop finished code -1
+
+============================================================
+[Thu 05/07/2026  0:17:25.18] Forex bot scheduled start requested
+SUCCESS: Attempted to run the scheduled task "Forex Bot".
+[Thu 05/07/2026  0:17:25.26] Forex bot scheduled start finished code 0
+[Thu 05/07/2026  0:17:25.26] Forex bot restart finished code 0
+
+============================================================
+[Thu 05/07/2026  0:17:25.50] Forex bot launcher started
+BOT_DIR=C:\Users\watch\auto-bot-trade
+BOT_FILE=C:\Users\watch\auto-bot-trade\forex_bot.py
+USER=watch
+COMPUTER=3PM
+FOREX_DRY_RUN=true
+FOREX_AI_SCAN_ON_BOT_START=true
+FOREX_CHECK_INTERVAL_SECONDS=60
+PYTHONUTF8=1
+PYTHONIOENCODING=utf-8
+[Thu 05/07/2026  0:17:25.63] Python command: py -3
+[Thu 05/07/2026  0:17:25.63] Starting forex_bot.py
+[Thu 05/07/2026  0:17:25.63] Runtime log: C:\Users\watch\auto-bot-trade\logs\forex_runtime.log
