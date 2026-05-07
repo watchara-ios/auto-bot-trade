@@ -40,23 +40,27 @@ print(f"✅ MT5 connected — account={acc.login}  server={acc.server}")
 print(f"   Period: {UTC_FROM.date()} → {UTC_TO.date()}")
 OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
 
-# ===== FETCH =====
+# ===== FETCH — โหลดทีละ symbol, ครั้งละ 3 timeframe (M1 + M5 + M15) =====
 results = []
 for sym in SYMBOLS:
     info = mt5.symbol_info(sym)
     if info is None:
-        print(f"  ⚠️  {sym}: not found on broker (check symbol name) — skipping")
+        print(f"\n⚠️  {sym}: not found on broker — skipping")
         continue
     if not info.visible:
         mt5.symbol_select(sym, True)
 
+    print(f"\n[{sym}]")
+
+    sym_ok = True
     for tf_name, tf_const in TIMEFRAMES.items():
         rates = mt5.copy_rates_range(sym, tf_const, UTC_FROM, UTC_TO)
 
         if rates is None or len(rates) == 0:
             err = mt5.last_error()
-            print(f"  ❌ {sym} {tf_name}: no data  error={err}")
+            print(f"  ❌ {tf_name}: no data  error={err}")
             print("       → Try: right-click chart in MT5 → History → Load All")
+            sym_ok = False
             continue
 
         df = pd.DataFrame(rates)
@@ -67,8 +71,11 @@ for sym in SYMBOLS:
 
         out_path = OUTPUT_DIR / f"{sym}_{tf_name}.csv"
         df.to_csv(out_path, index=False, encoding="utf-8-sig")
-        print(f"  ✅ {sym} {tf_name}: {len(df):,} bars → {out_path}")
+        print(f"  ✅ {tf_name:3s}: {len(df):>7,} bars  ({df['time'].iloc[0].date()} → {df['time'].iloc[-1].date()})")
         results.append({"symbol": sym, "tf": tf_name, "bars": len(df)})
+
+    if sym_ok:
+        print("  → พร้อมใช้ backtest")
 
 mt5.shutdown()
 
