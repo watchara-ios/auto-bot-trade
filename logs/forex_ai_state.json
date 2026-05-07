@@ -1,36 +1,31 @@
 {
-  "last_scan_date": "2026-05-04",
-  "last_scan_at": "2026-05-04 16:06:09",
+  "last_scan_date": "2026-05-07",
+  "last_scan_at": "2026-05-07 14:00:37",
   "last_recommendations": [
     {
       "symbol": "EURUSD",
       "rating": 2,
-      "reason": "London-NY overlap offers liquidity; 1H shows support near 1.1050."
+      "reason": "London-NY overlap increases liquidity; 1H chart shows support near 1.0800."
     },
     {
       "symbol": "GBPUSD",
       "rating": 1,
-      "reason": "Bullish momentum on 4H; active session favors GBP volatility."
+      "reason": "High volatility during session; bullish breakout on 4H above 1.2500."
     },
     {
       "symbol": "USDJPY",
       "rating": 3,
-      "reason": "Consolidating near resistance; wait for breakout during overlap."
-    },
-    {
-      "symbol": "USDCHF",
-      "rating": 2,
-      "reason": "Negative correlation with EURUSD; session liquidity aids entry."
-    },
-    {
-      "symbol": "USDCAD",
-      "rating": 3,
-      "reason": "Oil news pending; cautious trading in high liquidity window."
+      "reason": "Range-bound ahead of US data; wait for breakout above 155.50."
     },
     {
       "symbol": "XAUUSD",
       "rating": 2,
-      "reason": "Safe-haven demand; volatility picks up during London-NY overlap."
+      "reason": "Safe-haven demand active; 1H resistance at $2350 tested."
+    },
+    {
+      "symbol": "EURJPY",
+      "rating": 3,
+      "reason": "Correlated moves with EUR/USD; moderate momentum in overlap."
     }
   ],
   "candidate_universe": [
@@ -43,59 +38,61 @@
     "NZDUSD",
     "EURJPY",
     "GBPJPY",
-    "XAUUSD"
+    "XAUUSD",
+    "EURGBP",
+    "EURCHF",
+    "EURCAD",
+    "EURAUD",
+    "EURNZD",
+    "GBPCHF",
+    "GBPCAD",
+    "GBPAUD",
+    "GBPNZD",
+    "AUDJPY",
+    "CADJPY",
+    "CHFJPY",
+    "NZDJPY",
+    "AUDCAD",
+    "AUDCHF",
+    "AUDNZD",
+    "CADCHF",
+    "NZDCAD",
+    "NZDCHF"
   ],
+  "last_scan_error": "missing DEEPSEEK_API_KEY",
   "candidate_symbols": [
     "GBPUSDm",
     "EURUSDm",
-    "USDCHFm",
     "XAUUSDm",
     "USDJPYm",
-    "USDCADm"
+    "EURJPYm"
   ],
   "candidate_recommendations": [
     {
       "symbol": "GBPUSDm",
       "rating": 1,
-      "reason": "Bullish momentum on 4H; active session favors GBP volatility.",
-      "source_symbol": "GBPUSD"
+      "reason": "High volatility during session; bullish breakout on 4H above 1.2500."
     },
     {
       "symbol": "EURUSDm",
       "rating": 2,
-      "reason": "London-NY overlap offers liquidity; 1H shows support near 1.1050.",
-      "source_symbol": "EURUSD"
-    },
-    {
-      "symbol": "USDCHFm",
-      "rating": 2,
-      "reason": "Negative correlation with EURUSD; session liquidity aids entry.",
-      "source_symbol": "USDCHF"
+      "reason": "London-NY overlap increases liquidity; 1H chart shows support near 1.0800."
     },
     {
       "symbol": "XAUUSDm",
       "rating": 2,
-      "reason": "Safe-haven demand; volatility picks up during London-NY overlap.",
-      "source_symbol": "XAUUSD"
+      "reason": "Safe-haven demand active; 1H resistance at $2350 tested."
     },
     {
       "symbol": "USDJPYm",
       "rating": 3,
-      "reason": "Consolidating near resistance; wait for breakout during overlap.",
-      "source_symbol": "USDJPY"
+      "reason": "Range-bound ahead of US data; wait for breakout above 155.50."
     },
     {
-      "symbol": "USDCADm",
+      "symbol": "EURJPYm",
       "rating": 3,
-      "reason": "Oil news pending; cautious trading in high liquidity window.",
-      "source_symbol": "USDCAD"
+      "reason": "Correlated moves with EUR/USD; moderate momentum in overlap."
     }
   ],
-  "selected_symbol": "GBPUSDm",
-  "selected_recommendation": {
-    "symbol": "GBPUSDm",
-    "rating": 1,
-    "reason": "Bullish momentum on 4H; active session favors GBP volatility.",
-    "source_symbol": "GBPUSD"
-  }
+  "selected_symbol": "GBPUSDm"
 }
