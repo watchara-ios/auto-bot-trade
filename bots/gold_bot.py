@@ -119,7 +119,7 @@ class Config:
     MAGIC_NUMBER           = int(os.getenv("GOLD_MAGIC_NUMBER", "20260501"))
 
     # MT5
-    DRY_RUN             = os.getenv("GOLD_DRY_RUN", "true").lower() == "true"
+    DRY_RUN             = os.getenv("GOLD_DRY_RUN", "false").lower() == "true"
     MT5_LOGIN           = os.getenv("MT5_LOGIN", "").strip()
     MT5_PASSWORD        = os.getenv("MT5_PASSWORD", "").strip()
     MT5_SERVER          = os.getenv("MT5_SERVER", "").strip()
