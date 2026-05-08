@@ -48,6 +48,19 @@ class Config:
     API_KEY = os.getenv("BINANCE_API_KEY") or os.getenv("BINANCE2_API_KEY")
     SECRET  = os.getenv("BINANCE_SECRET")  or os.getenv("BINANCE2_SECRET")
     BASE_URL = os.getenv("BINANCE_BASE_URL", "https://fapi.binance.com").rstrip("/")
+    BASE_URLS = [
+        u.strip().rstrip("/")
+        for u in os.getenv(
+            "BINANCE_BASE_URLS",
+            ",".join([
+                BASE_URL,
+                "https://fapi1.binance.com",
+                "https://fapi2.binance.com",
+                "https://fapi3.binance.com",
+            ]),
+        ).split(",")
+        if u.strip()
+    ]
 
     # Symbols & timeframes
     SYMBOLS    = [s.strip().upper() for s in os.getenv("HYBRID_SYMBOLS", "BTCUSDT").split(",") if s.strip()]
@@ -63,6 +76,7 @@ class Config:
     POLL_SECONDS                     = int(os.getenv("HYBRID_POLL_SECONDS", "30"))
     OUTSIDE_SESSION_SLEEP_SECONDS    = int(os.getenv("HYBRID_OUTSIDE_SESSION_SLEEP_SECONDS", "300"))
     CONNECTION_RETRY_SLEEP_SECONDS   = int(os.getenv("HYBRID_CONNECTION_RETRY_SLEEP_SECONDS", "20"))
+    RATE_LIMIT_SLEEP_SECONDS         = int(os.getenv("HYBRID_RATE_LIMIT_SLEEP_SECONDS", "180"))
     DISCONNECT_NOTIFY_COOLDOWN_SECONDS = int(os.getenv("HYBRID_DISCONNECT_NOTIFY_COOLDOWN_SECONDS", "300"))
     REQUEST_RETRIES = int(os.getenv("HYBRID_REQUEST_RETRIES", "3"))
 
@@ -170,16 +184,21 @@ def warn(msg: str) -> None:
 # Binance API
 # ─────────────────────────────────────────────
 
+class BinanceRateLimitError(RuntimeError):
+    """Raised when Binance blocks/rate-limits this IP or endpoint."""
+
+
 class Binance:
     time_offset: int = 0
     _exchange_info_cache: dict = {}
+    _base_url_index: int = 0
 
     # ── helpers ──────────────────────────────
 
     @classmethod
     def sync_time(cls) -> None:
         try:
-            data = requests.get(f"{Config.BASE_URL}/fapi/v1/time", timeout=10).json()
+            data = requests.get(f"{cls.base_url()}/fapi/v1/time", timeout=10).json()
             cls.time_offset = int(data["serverTime"]) - int(time.time() * 1000)
             log(f"⏱️ Time synced offset={cls.time_offset}ms")
         except Exception as exc:
@@ -188,6 +207,27 @@ class Binance:
     @staticmethod
     def _headers() -> dict:
         return {"X-MBX-APIKEY": Config.API_KEY}
+
+    @classmethod
+    def base_url(cls) -> str:
+        return Config.BASE_URLS[cls._base_url_index % len(Config.BASE_URLS)]
+
+    @classmethod
+    def rotate_base_url(cls) -> str:
+        cls._base_url_index = (cls._base_url_index + 1) % len(Config.BASE_URLS)
+        url = cls.base_url()
+        warn(f"🌐 Binance endpoint rotated → {url}")
+        return url
+
+    @staticmethod
+    def _retry_after_seconds(response) -> int | None:
+        value = response.headers.get("Retry-After")
+        if not value:
+            return None
+        try:
+            return max(1, int(float(value)))
+        except ValueError:
+            return None
 
     @staticmethod
     def _sign(params: dict) -> str:
@@ -202,13 +242,32 @@ class Binance:
         last_exc: Exception | None = None
         for attempt in range(Config.REQUEST_RETRIES):
             try:
-                r = requests.get(f"{Config.BASE_URL}{path}", params=params or {}, timeout=15)
+                url = f"{Binance.base_url()}{path}"
+                r = requests.get(url, params=params or {}, timeout=15)
+                if r.status_code in (418, 429):
+                    retry_after = Binance._retry_after_seconds(r)
+                    msg = (
+                        f"Binance public rate-limit/block {r.status_code} on {path} "
+                        f"base={Binance.base_url()} retry_after={retry_after} body={r.text[:160]}"
+                    )
+                    Binance.rotate_base_url()
+                    raise BinanceRateLimitError(msg)
                 r.raise_for_status()
                 return r.json()
+            except BinanceRateLimitError as exc:
+                last_exc = exc
+                sleep_for = Config.RATE_LIMIT_SLEEP_SECONDS
+                if attempt < Config.REQUEST_RETRIES - 1:
+                    warn(f"⏳ {exc}; sleeping {sleep_for}s before retry")
+                    time.sleep(sleep_for)
+                else:
+                    break
             except Exception as exc:
                 last_exc = exc
                 if attempt < Config.REQUEST_RETRIES - 1:
                     time.sleep(min(2 ** attempt, 5))
+        if isinstance(last_exc, BinanceRateLimitError):
+            raise last_exc
         raise RuntimeError(f"Public GET {path} failed: {last_exc}")
 
     @staticmethod
@@ -218,19 +277,37 @@ class Binance:
         for attempt in range(Config.REQUEST_RETRIES):
             try:
                 p = {**base, "timestamp": int(time.time() * 1000) + Binance.time_offset, "recvWindow": 10000}
-                url = f"{Config.BASE_URL}{path}?{Binance._sign(p)}"
+                url = f"{Binance.base_url()}{path}?{Binance._sign(p)}"
                 fn = {"GET": requests.get, "POST": requests.post, "DELETE": requests.delete}[method]
                 r = fn(url, headers=Binance._headers(), timeout=15)
+                if r.status_code in (418, 429):
+                    retry_after = Binance._retry_after_seconds(r)
+                    msg = (
+                        f"Binance signed rate-limit/block {r.status_code} on {path} "
+                        f"base={Binance.base_url()} retry_after={retry_after} body={r.text[:160]}"
+                    )
+                    Binance.rotate_base_url()
+                    raise BinanceRateLimitError(msg)
                 data = r.json()
                 if r.status_code >= 400:
                     raise RuntimeError(f"Binance {r.status_code}: {data}")
                 return data
+            except BinanceRateLimitError as exc:
+                last_exc = exc
+                sleep_for = Config.RATE_LIMIT_SLEEP_SECONDS
+                if attempt < Config.REQUEST_RETRIES - 1:
+                    warn(f"⏳ {exc}; sleeping {sleep_for}s before retry")
+                    time.sleep(sleep_for)
+                else:
+                    break
             except Exception as exc:
                 last_exc = exc
                 if "-1021" in str(exc):
                     Binance.sync_time()
                 if attempt < Config.REQUEST_RETRIES - 1:
                     time.sleep(min(2 ** attempt, 5))
+        if isinstance(last_exc, BinanceRateLimitError):
+            raise last_exc
         raise RuntimeError(f"Signed {method} {path} failed: {last_exc}")
 
     # ── market data ──────────────────────────
@@ -1047,6 +1124,13 @@ def main() -> None:
         except KeyboardInterrupt:
             warn("🛑 Stopped by user")
             break
+        except BinanceRateLimitError as exc:
+            warn(f"🚧 Binance rate-limit/block: {exc}")
+            mark_disconnected(state, exc)
+            sleep_for = Config.RATE_LIMIT_SLEEP_SECONDS
+            log(f"⏳ Sleeping {sleep_for}s after Binance 418/429")
+            time.sleep(sleep_for)
+            continue
         except Exception as exc:
             warn(f"💥 Loop error: {exc}")
             mark_disconnected(state, exc)

@@ -18,7 +18,7 @@ import sys
 import time
 import builtins
 from collections import Counter
-from datetime import datetime, time as dtime
+from datetime import datetime, time as dtime, timezone
 from pathlib import Path
 
 import MetaTrader5 as mt5
@@ -306,7 +306,7 @@ def _last_closed_snapshot(timeframe: int, bars: int = 120) -> dict:
 
 def _build_ai_news_prompt(signal: dict, market: dict) -> str:
     now_local = datetime.now()
-    now_utc = datetime.utcnow()
+    now_utc = datetime.now(timezone.utc)
     return f"""You are a professional gold (XAUUSD) risk analyst.
 Task: decide whether a new gold trade should be blocked because of major market-moving news.
 
@@ -467,7 +467,7 @@ def pass_weekend_gate() -> bool:
     """Block trading during Fri 21:00 UTC – Sun 21:00 UTC (market closed)."""
     if not Config.BLOCK_WEEKEND_HOURS:
         return True
-    now = datetime.utcnow()
+    now = datetime.now(timezone.utc)
     wd  = now.weekday()   # Mon=0 … Sun=6
     h   = now.hour
     # Friday after 21:00 UTC
