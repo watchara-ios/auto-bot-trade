@@ -1,12 +1,12 @@
 """
-gold_bot.py — XAUUSDm Dedicated Bot (MetaTrader 5)  [Gold V2]
+gold_bot.py — XAUUSDm Dedicated Bot (MetaTrader 5)  [Gold V2 + Indicator V3]
 
-Strategy: session momentum breakout (Gold V2 core, backtest PF 1.845)
-  - SELL-only: sell_only is the PASS_DRY_RUN_CANDIDATE; BUY edge not validated
+Strategy: session momentum breakout (Gold V2 core)
+  - SELL: no additional indicator filter (backtest PF 1.845)
+  - BUY:  MACD histogram > 0 on M15 required (backtest PF 1.557, PASS_DRY_RUN_CANDIDATE)
   - Session: UTC 12:00-14:00 (Thai 19:00-21:00, NY early momentum)
   - Signal: Donchian-20 breakout + ADX rising + body quality + ATR percentile
-  - SL: max(8-bar swing_high, entry + ATR×1.0) for SELL
-  - RR: 1.8  |  Max hold: 720 min (auto-close on timeout)
+  - SL: max(8-bar swing/entry + ATR×1.0)  |  RR: 1.8  |  Max hold: 720 min
   - D1 regime filter ON (additional live safety layer)
   - AI news gate ON
   - Separate kill file: logs/gold_STOP
@@ -88,14 +88,15 @@ class Config:
     TF_EXEC  = mt5.TIMEFRAME_M1
     BARS     = 500
 
-    # Strategy — Gold V2 momentum (backtest sell_only PF 1.845)
-    ALLOWED_SIDE         = os.getenv("GOLD_ALLOWED_SIDE", "SELL")   # SELL-only is PASS_DRY_RUN_CANDIDATE
+    # Strategy — Gold V2 + Indicator V3 (SELL PF 1.845 | BUY+MACD PF 1.557)
+    ALLOWED_SIDE         = os.getenv("GOLD_ALLOWED_SIDE", "BOTH")    # BOTH: SELL unrestricted, BUY needs MACD
     RR                   = float(os.getenv("GOLD_RR", "1.8"))        # V2 validated RR
     RISK_PCT             = float(os.getenv("GOLD_RISK_PCT", "0.0025"))  # 0.25% per trade
     ADX_MIN              = float(os.getenv("GOLD_ADX_MIN", "18.0"))
     BODY_MULT            = float(os.getenv("GOLD_BODY_MULT", "2.0"))    # body > 2× avg_body20
     MAX_WICK_PCT         = float(os.getenv("GOLD_MAX_WICK_PCT", "0.40"))
     ATR_PERCENTILE_MIN   = float(os.getenv("GOLD_ATR_PCT_MIN", "40.0"))
+    MACD_BUY_FILTER      = os.getenv("GOLD_MACD_BUY_FILTER", "true").lower() == "true"  # require MACD hist>0 for BUY
     MOMENTUM_SL_ATR_MULT = float(os.getenv("GOLD_SL_ATR_MULT", "1.0")) # SL = swing + ATR×1.0
     MAX_HOLD_MINUTES     = int(os.getenv("GOLD_MAX_HOLD_MINUTES", "720"))  # 12h timeout exit
     # Session: UTC 12:00-14:00 (Thai 19:00-21:00, NY early momentum)
@@ -549,8 +550,18 @@ def _v2_config():
 
 
 # ─────────────────────────────────────────────────────────────────────────────
-# Signal generation (Gold V2 momentum)
+# Signal generation (Gold V2 momentum + Indicator V3 filters)
 # ─────────────────────────────────────────────────────────────────────────────
+
+def _m15_macd_hist(df_m15: pd.DataFrame, fast: int = 12, slow: int = 26, signal: int = 9) -> float:
+    """Return last *completed* M15 bar MACD histogram value (equivalent to shift(1) in backtest)."""
+    close = df_m15["close"]
+    if len(close) < slow + signal + 2:
+        return 0.0
+    macd_line = close.ewm(span=fast, adjust=False).mean() - close.ewm(span=slow, adjust=False).mean()
+    hist = macd_line - macd_line.ewm(span=signal, adjust=False).mean()
+    return float(hist.iloc[-2])   # iloc[-1] = forming bar, iloc[-2] = last completed bar
+
 
 def generate_signal() -> dict:
     from strategies.gold_v2_core import prepare as v2_prepare, momentum_signal, trade_levels
@@ -578,6 +589,12 @@ def generate_signal() -> dict:
     if sig is None:
         _REJECT_STATS["no_momentum_signal"] += 1
         return {"side": "NO_TRADE", "reason": "no_momentum_signal", "candle_time": candle_time}
+
+    if sig["side"] == "BUY" and Config.MACD_BUY_FILTER:
+        macd_val = _m15_macd_hist(df_m15)
+        if macd_val <= 0:
+            _REJECT_STATS["macd_buy_blocked"] += 1
+            return {"side": "NO_TRADE", "reason": f"BUY blocked: MACD hist {macd_val:.4f} <= 0", "candle_time": candle_time}
 
     tick = mt5.symbol_info_tick(Config.SYMBOL)
     if tick is None:
@@ -807,19 +824,20 @@ def count_consecutive_losses() -> int:
 # ─────────────────────────────────────────────────────────────────────────────
 
 def run_bot() -> None:
+    macd_note = "MACD_BUY_ON" if Config.MACD_BUY_FILTER else "MACD_BUY_OFF"
     log(
-        f"[START] Gold V2 bot | symbol={Config.SYMBOL} | pid={os.getpid()} | "
+        f"[START] Gold V2+IndV3 bot | symbol={Config.SYMBOL} | pid={os.getpid()} | "
         f"interval={Config.CHECK_INTERVAL_SECONDS}s | DRY_RUN={Config.DRY_RUN} | "
-        f"side={Config.ALLOWED_SIDE} | RR={Config.RR} | "
+        f"side={Config.ALLOWED_SIDE} | RR={Config.RR} | {macd_note} | "
         f"session=UTC{Config.SESSION_UTC_START_H:02d}:00-{Config.SESSION_UTC_END_H:02d}:00 | "
         f"D1_regime={'ON' if Config.USE_D1_REGIME else 'OFF'}"
     )
     notify_bot_started(
-        "Gold V2 Momentum Bot",
+        "Gold V2+IndV3 Momentum Bot",
         "DRY_RUN" if Config.DRY_RUN else "LIVE/DEMO",
         (
             f"Symbol: <code>{Config.SYMBOL}</code>\n"
-            f"Side: <code>{Config.ALLOWED_SIDE}</code>\n"
+            f"Side: <code>{Config.ALLOWED_SIDE}</code> | MACD BUY filter: <code>{Config.MACD_BUY_FILTER}</code>\n"
             f"Session: <code>UTC {Config.SESSION_UTC_START_H:02d}:00-{Config.SESSION_UTC_END_H:02d}:00</code>\n"
             f"RR: <code>{Config.RR}</code> | D1 regime: <code>{Config.USE_D1_REGIME}</code>\n"
             f"AI news gate: <code>{Config.AI_NEWS_ENABLED}</code>"
