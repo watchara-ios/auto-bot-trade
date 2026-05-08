@@ -1,13 +1,14 @@
 """
-gold_bot.py — XAUUSDm Dedicated Bot (MetaTrader 5)
+gold_bot.py — XAUUSDm Dedicated Bot (MetaTrader 5)  [Gold V2]
 
-Differences from forex_bot:
-  - Fixed symbol: XAUUSDm (no AI scan, no watchlist)
-  - No session filter — Gold trades 23/5, best moves include Asia session
-  - AI news gate — avoid major gold/USD/Fed events before entry
-  - D1 regime filter ON — only trade when daily trend is clear
-  - EMA(50/200) on M15 — slower trend = fewer false signals (backtest validated)
-  - ATR percentile ≥ 40 — trade only when volatility is above average
+Strategy: session momentum breakout (Gold V2 core, backtest PF 1.845)
+  - SELL-only: sell_only is the PASS_DRY_RUN_CANDIDATE; BUY edge not validated
+  - Session: UTC 12:00-14:00 (Thai 19:00-21:00, NY early momentum)
+  - Signal: Donchian-20 breakout + ADX rising + body quality + ATR percentile
+  - SL: max(8-bar swing_high, entry + ATR×1.0) for SELL
+  - RR: 1.8  |  Max hold: 720 min (auto-close on timeout)
+  - D1 regime filter ON (additional live safety layer)
+  - AI news gate ON
   - Separate kill file: logs/gold_STOP
   - Separate state file:  logs/gold_state.json
 """
@@ -51,8 +52,10 @@ def print(*args, **kwargs):  # noqa: A001
 BOT_DIR      = Path(__file__).resolve().parent
 PROJECT_ROOT = BOT_DIR.parent
 sys.path.insert(0, str(BOT_DIR))
+sys.path.insert(0, str(PROJECT_ROOT))   # for strategies.gold_v2_core
 
-from donchian_core import DonchianCoreConfig, latest_signal, _REJECT_STATS
+_REJECT_STATS: Counter = Counter()
+
 from notifier import (
     notify_bot_started, notify_error,
     notify_order_opened, notify_order_result,
@@ -85,22 +88,19 @@ class Config:
     TF_EXEC  = mt5.TIMEFRAME_M1
     BARS     = 500
 
-    # EMA — slower filter validated by backtest (EMA 50/200 > 20/50 for Gold)
-    EMA_FAST = int(os.getenv("GOLD_EMA_FAST", "50"))
-    EMA_SLOW = int(os.getenv("GOLD_EMA_SLOW", "200"))
-
-    # Strategy
-    RR                  = float(os.getenv("GOLD_RR", "2.5"))
-    TIER_A_RISK_PERCENT = float(os.getenv("GOLD_TIER_A_RISK", "0.25"))
-    TIER_B_RISK_PERCENT = float(os.getenv("GOLD_TIER_B_RISK", "1.0"))
-    DONCHIAN_N          = int(os.getenv("GOLD_DONCHIAN_N", "20"))
-    ADX_MIN             = float(os.getenv("GOLD_ADX_MIN", "18.0"))
-    ADX_MAX             = float(os.getenv("GOLD_ADX_MAX", "60.0"))   # Gold can have higher ADX
-    ATR_PERCENTILE_MIN  = float(os.getenv("GOLD_ATR_PCT_MIN", "40.0"))  # backtest: helps Gold
-    MIN_ATR_PCT         = float(os.getenv("GOLD_MIN_ATR_PCT", "0.0003"))
-    VOLUME_MULT         = float(os.getenv("GOLD_VOLUME_MULT", "0.8"))
-    BREAKEVEN_R         = float(os.getenv("GOLD_BREAKEVEN_R", "0.5"))
-    ALLOWED_SIDE        = os.getenv("GOLD_ALLOWED_SIDE", "BOTH")
+    # Strategy — Gold V2 momentum (backtest sell_only PF 1.845)
+    ALLOWED_SIDE         = os.getenv("GOLD_ALLOWED_SIDE", "SELL")   # SELL-only is PASS_DRY_RUN_CANDIDATE
+    RR                   = float(os.getenv("GOLD_RR", "1.8"))        # V2 validated RR
+    RISK_PCT             = float(os.getenv("GOLD_RISK_PCT", "0.0025"))  # 0.25% per trade
+    ADX_MIN              = float(os.getenv("GOLD_ADX_MIN", "18.0"))
+    BODY_MULT            = float(os.getenv("GOLD_BODY_MULT", "2.0"))    # body > 2× avg_body20
+    MAX_WICK_PCT         = float(os.getenv("GOLD_MAX_WICK_PCT", "0.40"))
+    ATR_PERCENTILE_MIN   = float(os.getenv("GOLD_ATR_PCT_MIN", "40.0"))
+    MOMENTUM_SL_ATR_MULT = float(os.getenv("GOLD_SL_ATR_MULT", "1.0")) # SL = swing + ATR×1.0
+    MAX_HOLD_MINUTES     = int(os.getenv("GOLD_MAX_HOLD_MINUTES", "720"))  # 12h timeout exit
+    # Session: UTC 12:00-14:00 (Thai 19:00-21:00, NY early momentum)
+    SESSION_UTC_START_H  = int(os.getenv("GOLD_SESSION_UTC_START_H", "12"))
+    SESSION_UTC_END_H    = int(os.getenv("GOLD_SESSION_UTC_END_H",   "14"))
 
     # D1 Regime — only trade when daily ADX ≥ 20 and D1 trend aligns
     USE_D1_REGIME = os.getenv("GOLD_USE_D1_REGIME", "true").lower() == "true"
@@ -523,83 +523,135 @@ def has_open_position() -> bool:
 
 
 # ─────────────────────────────────────────────────────────────────────────────
-# Core config (DonchianCoreConfig)
+# Gold V2 strategy config
 # ─────────────────────────────────────────────────────────────────────────────
 
-def _core_config() -> DonchianCoreConfig:
-    return DonchianCoreConfig(
-        allowed_side         = Config.ALLOWED_SIDE,
-        ema_fast             = Config.EMA_FAST,
-        ema_slow             = Config.EMA_SLOW,
-        tier_a_risk          = Config.TIER_A_RISK_PERCENT / 100,
-        tier_b_risk          = Config.TIER_B_RISK_PERCENT / 100,
-        rr                   = Config.RR,
-        donchian_n           = Config.DONCHIAN_N,
-        adx_min              = Config.ADX_MIN,
-        adx_max              = Config.ADX_MAX,
-        atr_percentile_min   = Config.ATR_PERCENTILE_MIN,
-        min_atr_pct          = Config.MIN_ATR_PCT,
-        volume_mult          = Config.VOLUME_MULT,
-        session_hours_utc    = (),       # Gold: no session filter
-        require_atr_expansion= False,
-        adx_bars_rising      = 1,
-        max_trades_per_day   = Config.MAX_TRADES_PER_DAY,
+def _v2_config():
+    from strategies.gold_v2_core import GoldV2Config
+    side = Config.ALLOWED_SIDE
+    return GoldV2Config(
+        strategy                    = "momentum",
+        variant                     = "live",
+        allowed_side                = side if side != "BOTH" else None,
+        session_ranges_utc_minutes  = ((Config.SESSION_UTC_START_H * 60,
+                                        Config.SESSION_UTC_END_H   * 60),),
+        adx_min                     = Config.ADX_MIN,
+        momentum_rr                 = Config.RR,
+        use_atr_expansion           = False,
+        body_mult                   = Config.BODY_MULT,
+        max_wick_pct                = Config.MAX_WICK_PCT,
+        momentum_sl_atr_mult        = Config.MOMENTUM_SL_ATR_MULT,
+        momentum_atr_percentile_min = Config.ATR_PERCENTILE_MIN,
+        max_trades_per_day          = Config.MAX_TRADES_PER_DAY,
+        max_hold_minutes            = Config.MAX_HOLD_MINUTES,
+        risk_pct                    = Config.RISK_PCT,
     )
 
 
 # ─────────────────────────────────────────────────────────────────────────────
-# Signal generation
+# Signal generation (Gold V2 momentum)
 # ─────────────────────────────────────────────────────────────────────────────
 
 def generate_signal() -> dict:
-    df_m1  = get_ohlcv(Config.TF_EXEC,  Config.BARS)
+    from strategies.gold_v2_core import prepare as v2_prepare, momentum_signal, trade_levels
+
     df_m5  = get_ohlcv(Config.TF_ENTRY, Config.BARS)
     df_m15 = get_ohlcv(Config.TF_TREND, Config.BARS)
+    df_m5  = df_m5.set_index("time")
+    df_m15 = df_m15.set_index("time")
 
-    signal, reason, _ = latest_signal(Config.SYMBOL, df_m1, df_m5, df_m15, _core_config())
-    if signal is None:
-        return {"side": "NO_TRADE", "reason": reason}
+    _REJECT_STATS["_total_attempts"] += 1
+    cfg = _v2_config()
 
-    regime_ok, regime_reason = d1_regime_ok(signal["side"])
-    if not regime_ok:
-        _REJECT_STATS["d1_regime_blocked"] += 1
-        log(f"[D1] blocked {signal['side']}: {regime_reason}")
-        return {"side": "NO_TRADE", "reason": f"D1 regime: {regime_reason}"}
+    try:
+        prepared = v2_prepare(df_m5, df_m15, cfg)
+    except Exception as exc:
+        return {"side": "NO_TRADE", "reason": f"prepare_error: {exc}"}
 
-    signal["d1_regime"] = regime_reason
-    return signal
+    if len(prepared) < 50:
+        return {"side": "NO_TRADE", "reason": "insufficient_bars"}
+
+    row         = prepared.iloc[-2]     # last fully-closed M5 bar
+    candle_time = str(prepared.index[-2])
+
+    sig = momentum_signal(row, cfg)
+    if sig is None:
+        _REJECT_STATS["no_momentum_signal"] += 1
+        return {"side": "NO_TRADE", "reason": "no_momentum_signal", "candle_time": candle_time}
+
+    tick = mt5.symbol_info_tick(Config.SYMBOL)
+    if tick is None:
+        return {"side": "NO_TRADE", "reason": "no_tick", "candle_time": candle_time}
+    entry = tick.bid if sig["side"] == "SELL" else tick.ask
+
+    levels = trade_levels(row, entry, sig, cfg)
+    if levels is None:
+        _REJECT_STATS["invalid_levels"] += 1
+        return {"side": "NO_TRADE", "reason": "invalid_levels", "candle_time": candle_time}
+    sl, tp, risk_dist = levels
+
+    if Config.USE_D1_REGIME:
+        regime_ok, regime_reason = d1_regime_ok(sig["side"])
+        if not regime_ok:
+            _REJECT_STATS["d1_regime_blocked"] += 1
+            log(f"[D1] blocked {sig['side']}: {regime_reason}")
+            return {"side": "NO_TRADE", "reason": f"D1: {regime_reason}", "candle_time": candle_time}
+        regime_note = regime_reason
+    else:
+        regime_note = ""
+
+    return {
+        "side":        sig["side"],
+        "entry":       entry,
+        "sl":          sl,
+        "tp":          tp,
+        "risk_dist":   risk_dist,
+        "pattern":     sig.get("pattern", ""),
+        "candle_time": candle_time,
+        "d1_regime":   regime_note,
+        "risk_pct":    Config.RISK_PCT,
+    }
 
 
 # ─────────────────────────────────────────────────────────────────────────────
-# SL move to breakeven
+# Position management: timeout exit (matches backtest max_hold_minutes=720)
 # ─────────────────────────────────────────────────────────────────────────────
 
-def _check_breakeven() -> None:
-    if Config.BREAKEVEN_R <= 0:
+def _check_max_hold() -> None:
+    if Config.MAX_HOLD_MINUTES <= 0:
         return
+    now = datetime.now(timezone.utc)
     for pos in (mt5.positions_get(symbol=Config.SYMBOL) or []):
-        if pos.magic != Config.MAGIC_NUMBER or pos.sl == 0:
+        if pos.magic != Config.MAGIC_NUMBER:
             continue
-        entry = pos.price_open
-        risk  = abs(entry - pos.sl)
-        if risk <= 0:
+        hold_min = (now - datetime.fromtimestamp(pos.time, tz=timezone.utc)).total_seconds() / 60
+        if hold_min < Config.MAX_HOLD_MINUTES:
             continue
-        sign  = 1 if pos.type == mt5.ORDER_TYPE_BUY else -1
-        be_trigger = entry + sign * risk * Config.BREAKEVEN_R
-        current    = mt5.symbol_info_tick(Config.SYMBOL)
-        if current is None:
+        tick = mt5.symbol_info_tick(Config.SYMBOL)
+        if tick is None:
             continue
-        mid = (current.ask + current.bid) / 2
-        if sign * (mid - be_trigger) >= 0 and sign * (entry - pos.sl) > 0:
-            req = mt5.order_send({
-                "action":   mt5.TRADE_ACTION_SLTP,
-                "symbol":   Config.SYMBOL,
-                "position": pos.ticket,
-                "sl":       entry,
-                "tp":       pos.tp,
-            })
-            if req and req.retcode == mt5.TRADE_RETCODE_DONE:
-                log(f"[BE] ticket={pos.ticket} SL moved to entry {entry:.5f}")
+        close_type  = mt5.ORDER_TYPE_BUY if pos.type == mt5.ORDER_TYPE_SELL else mt5.ORDER_TYPE_SELL
+        close_price = tick.ask if close_type == mt5.ORDER_TYPE_BUY else tick.bid
+        log(f"[TIMEOUT] ticket={pos.ticket} hold={hold_min:.0f}m >= {Config.MAX_HOLD_MINUTES}m — closing at {close_price:.5f}")
+        if Config.DRY_RUN:
+            log(f"[DRY_RUN] would close timeout {pos.ticket}")
+            continue
+        req = mt5.order_send({
+            "action":       mt5.TRADE_ACTION_DEAL,
+            "symbol":       Config.SYMBOL,
+            "volume":       pos.volume,
+            "type":         close_type,
+            "position":     pos.ticket,
+            "price":        close_price,
+            "deviation":    20,
+            "magic":        Config.MAGIC_NUMBER,
+            "comment":      "gold_timeout",
+            "type_time":    mt5.ORDER_TIME_GTC,
+            "type_filling": mt5.ORDER_FILLING_IOC,
+        })
+        if req and req.retcode == mt5.TRADE_RETCODE_DONE:
+            log(f"[TIMEOUT] Closed ticket={pos.ticket}")
+            notify_order_result("GOLD", Config.SYMBOL, "CLOSE_TIMEOUT", req, dry_run=False)
 
 
 # ─────────────────────────────────────────────────────────────────────────────
@@ -612,7 +664,7 @@ def _calculate_lot(signal: dict) -> float:
     if account is None or info is None:
         return Config.LOT
 
-    risk_pct   = float(signal.get("risk_pct", Config.TIER_A_RISK_PERCENT / 100))
+    risk_pct   = float(signal.get("risk_pct", Config.RISK_PCT))
     risk_money = account.balance * risk_pct
     stop_dist  = abs(float(signal["entry"]) - float(signal["sl"]))
     if stop_dist <= 0 or info.trade_tick_size <= 0 or info.trade_tick_value <= 0:
@@ -639,12 +691,13 @@ def _calculate_lot(signal: dict) -> float:
 
 def send_order(signal: dict) -> None:
     if Config.DRY_RUN:
-        log(f"[DRY_RUN] {signal['side']} entry={signal['entry']:.5f} sl={signal['sl']:.5f} tp={signal['tp']:.5f}")
+        log(f"[DRY_RUN] {signal['side']} pattern={signal.get('pattern','')} "
+            f"entry={signal['entry']:.5f} sl={signal['sl']:.5f} tp={signal['tp']:.5f}")
         notify_order_opened(
             "GOLD", Config.SYMBOL, signal["side"], 0,
             signal["entry"], signal["sl"], signal["tp"],
-            tier=signal.get("tier", ""),
-            risk_pct=signal.get("risk_pct", Config.TIER_A_RISK_PERCENT / 100),
+            tier="",
+            risk_pct=signal.get("risk_pct", Config.RISK_PCT),
             dry_run=True,
         )
         return
@@ -683,7 +736,7 @@ def send_order(signal: dict) -> None:
         "tp":           tp,
         "deviation":    10,
         "magic":        Config.MAGIC_NUMBER,
-        "comment":      f"gold_bot_{signal.get('tier','A')}",
+        "comment":      f"gold_v2_{signal.get('pattern', '')}",
         "type_time":    mt5.ORDER_TIME_GTC,
         "type_filling": mt5.ORDER_FILLING_IOC,
     }
@@ -755,18 +808,20 @@ def count_consecutive_losses() -> int:
 
 def run_bot() -> None:
     log(
-        f"🚀 Gold bot starting | symbol={Config.SYMBOL} | pid={os.getpid()} | "
+        f"[START] Gold V2 bot | symbol={Config.SYMBOL} | pid={os.getpid()} | "
         f"interval={Config.CHECK_INTERVAL_SECONDS}s | DRY_RUN={Config.DRY_RUN} | "
-        f"D1_regime={'ON' if Config.USE_D1_REGIME else 'OFF'} | "
-        f"EMA={Config.EMA_FAST}/{Config.EMA_SLOW}"
+        f"side={Config.ALLOWED_SIDE} | RR={Config.RR} | "
+        f"session=UTC{Config.SESSION_UTC_START_H:02d}:00-{Config.SESSION_UTC_END_H:02d}:00 | "
+        f"D1_regime={'ON' if Config.USE_D1_REGIME else 'OFF'}"
     )
     notify_bot_started(
-        "Gold Donchian Bot",
+        "Gold V2 Momentum Bot",
         "DRY_RUN" if Config.DRY_RUN else "LIVE/DEMO",
         (
             f"Symbol: <code>{Config.SYMBOL}</code>\n"
-            f"D1 regime: <code>{Config.USE_D1_REGIME}</code>\n"
-            f"EMA: <code>{Config.EMA_FAST}/{Config.EMA_SLOW}</code>\n"
+            f"Side: <code>{Config.ALLOWED_SIDE}</code>\n"
+            f"Session: <code>UTC {Config.SESSION_UTC_START_H:02d}:00-{Config.SESSION_UTC_END_H:02d}:00</code>\n"
+            f"RR: <code>{Config.RR}</code> | D1 regime: <code>{Config.USE_D1_REGIME}</code>\n"
             f"AI news gate: <code>{Config.AI_NEWS_ENABLED}</code>"
         ),
     )
@@ -819,9 +874,9 @@ def run_bot() -> None:
                 time.sleep(Config.CHECK_INTERVAL_SECONDS)
                 continue
 
-            # ── Manage open position (breakeven) ─────────────────────────
+            # ── Manage open position (timeout exit) ──────────────────────
             if has_open_position():
-                _check_breakeven()
+                _check_max_hold()
                 log("📌 Gold position open — skip new entry")
                 time.sleep(Config.CHECK_INTERVAL_SECONDS)
                 continue
@@ -875,9 +930,9 @@ def run_bot() -> None:
                 time.sleep(Config.CHECK_INTERVAL_SECONDS)
                 continue
 
-            log(f"👀 Signal: side={signal['side']} entry={signal.get('entry')} "
-                f"sl={signal.get('sl')} tp={signal.get('tp')} "
-                f"tier={signal.get('tier')} d1={signal.get('d1_regime','')} news={news_msg}")
+            log(f"👀 Signal: side={signal['side']} pattern={signal.get('pattern','')} "
+                f"entry={signal.get('entry')} sl={signal.get('sl')} tp={signal.get('tp')} "
+                f"d1={signal.get('d1_regime','')} news={news_msg}")
             send_order(signal)
             save_state(state)
             time.sleep(Config.CHECK_INTERVAL_SECONDS)

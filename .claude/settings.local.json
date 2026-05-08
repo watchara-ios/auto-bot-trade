@@ -5,7 +5,10 @@
       "Bash(python3 run_donchian_daytrade_v2.py)",
       "Bash(python3 -c ' *)",
       "Bash(python3 run_donchian_multi_symbol.py)",
-      "Bash(python3 -c \"import ast, pathlib; ast.parse\\(pathlib.Path\\('bots/bitcoin_bot_hybrid.py'\\).read_text\\(\\)\\); print\\('OK'\\)\")"
+      "Bash(python3 -c \"import ast, pathlib; ast.parse\\(pathlib.Path\\('bots/bitcoin_bot_hybrid.py'\\).read_text\\(\\)\\); print\\('OK'\\)\")",
+      "Bash(python3 -c \"import sys; sys.path.insert\\(0, 'backtests'\\); from strategies.gold_v2_core import GoldV2Config\")",
+      "Bash(python3 backtests/backtest_gold_v2_directional_robustness.py)",
+      "Bash(python3 -c \"import ast, pathlib; ast.parse\\(pathlib.Path\\('bots/gold_bot.py'\\).read_text\\(\\)\\); print\\('OK'\\)\")"
     ]
   }
 }
