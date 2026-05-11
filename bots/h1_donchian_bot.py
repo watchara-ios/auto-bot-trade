@@ -70,8 +70,8 @@ load_dotenv(ROOT / ".env")
 
 class Config:
     # Credentials
-    API_KEY  = os.getenv("BINANCE_API_KEY") or os.getenv("BINANCE2_API_KEY")
-    SECRET   = os.getenv("BINANCE_SECRET")  or os.getenv("BINANCE2_SECRET")
+    API_KEY  = os.getenv("BINANCE_API_KEY")
+    SECRET   = os.getenv("BINANCE_SECRET")
     BASE_URL = os.getenv("BINANCE_BASE_URL", "https://fapi.binance.com").rstrip("/")
 
     # Symbols

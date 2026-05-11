@@ -46,6 +46,9 @@ class DonchianCoreConfig:
     max_losses_per_day: int = 2
     # Pro: Minervini — ADX must accelerate ≥ N consecutive bars before entry
     adx_bars_rising: int = 1
+    # Set False to skip M15 EMA trend-alignment check (useful for Donchian breakout bots
+    # where EMA crossover lags too far behind price action during trend transitions)
+    require_trend_alignment: bool = True
 
 
 def to_indexed_ohlcv(df: pd.DataFrame) -> pd.DataFrame:
@@ -159,7 +162,7 @@ def breakout_strength_score(row: pd.Series, side: str, cfg: bt.Config) -> int:
     return score
 
 
-def signal_from_closed_row(symbol: str, row: pd.Series, cfg: bt.Config) -> tuple[Optional[dict], str]:
+def signal_from_closed_row(symbol: str, row: pd.Series, cfg: bt.Config, *, require_trend_alignment: bool = True) -> tuple[Optional[dict], str]:
     side = donchian_side(row, cfg)
     if side is None:
         _REJECT_STATS["no_donchian_breakout"] += 1
@@ -176,10 +179,11 @@ def signal_from_closed_row(symbol: str, row: pd.Series, cfg: bt.Config) -> tuple
     if cfg.require_m15_adx_rising and not bool(row.get("m15_adx_rising", False)):
         _REJECT_STATS["adx_not_rising"] += 1
         return None, "M15 ADX not rising"
-    trend = row.get("m15_trend")
-    if (side == "BUY" and trend != 1) or (side == "SELL" and trend != -1):
-        _REJECT_STATS["trend_not_aligned"] += 1
-        return None, f"M15 trend not aligned side={side} trend={trend}"
+    if require_trend_alignment:
+        trend = row.get("m15_trend")
+        if (side == "BUY" and trend != 1) or (side == "SELL" and trend != -1):
+            _REJECT_STATS["trend_not_aligned"] += 1
+            return None, f"M15 trend not aligned side={side} trend={trend}"
     if not bos_confirmed(row, side):
         _REJECT_STATS["bos_not_confirmed"] += 1
         return None, "BOS not confirmed"
@@ -281,7 +285,7 @@ def latest_signal(symbol: str, m1: pd.DataFrame, m5: pd.DataFrame, m15: pd.DataF
     row_time = m5_ready.index[-2]
     signal_time = row_time + pd.Timedelta(minutes=5)
     row = m5_ready.loc[row_time]
-    signal, reason = signal_from_closed_row(symbol, row, cfg)
+    signal, reason = signal_from_closed_row(symbol, row, cfg, require_trend_alignment=config.require_trend_alignment)
     if signal is None:
         return None, reason, row_time
     block_reason = apply_micro_edge_filters(row, signal["side"], config)

@@ -45,8 +45,8 @@ load_dotenv()
 
 class Config:
     # Credentials
-    API_KEY = os.getenv("BINANCE_API_KEY") or os.getenv("BINANCE2_API_KEY")
-    SECRET  = os.getenv("BINANCE_SECRET")  or os.getenv("BINANCE2_SECRET")
+    API_KEY = os.getenv("BINANCE_API_KEY")
+    SECRET  = os.getenv("BINANCE_SECRET")
     BASE_URL = os.getenv("BINANCE_BASE_URL", "https://fapi.binance.com").rstrip("/")
     BASE_URLS = [
         u.strip().rstrip("/")
@@ -559,6 +559,7 @@ def _core_config() -> DonchianCoreConfig:
         require_atr_expansion = Config.REQUIRE_ATR_EXPANSION,
         atr_expansion_period  = Config.ATR_EXPANSION_PERIOD,
         max_trades_per_day    = Config.MAX_TRADES_PER_DAY,
+        require_trend_alignment = False,  # EMA20/50 crossover lags too far; let Donchian breakout decide
     )
 
 
