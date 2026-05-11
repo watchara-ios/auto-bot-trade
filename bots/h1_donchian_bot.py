@@ -9,7 +9,7 @@ Strategy : H1 Donchian breakout `rr15` (proven config — see FINAL_REPORT.md)
 Primary symbol : SOLUSDT  (PF=1.661, WR=52.8%, DD=-2.4%)
 Optional       : BTCUSDT  (set HYBRID_SYMBOLS=SOLUSDT,BTCUSDT)
 
-Key differences from bitcoin_bot_hybrid.py:
+Key differences from bitcoin_bot.py:
   - Only M15 klines needed (resample to H1 + H4 internally)
   - Signal engine: realistic_donchian_backtest.prepare/signal/trade_levels
   - No session filter (H1 signals valid all hours)

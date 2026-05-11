@@ -10,7 +10,8 @@
       "Bash(python3 backtests/backtest_gold_v2_directional_robustness.py)",
       "Bash(python3 -c \"import ast, pathlib; ast.parse\\(pathlib.Path\\('bots/gold_bot.py'\\).read_text\\(\\)\\); print\\('OK'\\)\")",
       "Bash(python backtests/backtest_gold_indicator_v3.py)",
-      "Bash(python3 backtests/backtest_gold_indicator_v3.py)"
+      "Bash(python3 backtests/backtest_gold_indicator_v3.py)",
+      "Bash(sort -k8,9)"
     ]
   }
 }

@@ -607,7 +607,8 @@ def _core_config() -> DonchianCoreConfig:
         volume_mult          = Config.VOLUME_MULT,
         require_atr_expansion= Config.REQUIRE_ATR_EXPANSION,
         adx_bars_rising      = Config.ADX_BARS_RISING,
-        max_trades_per_day   = Config.MAX_TRADES_PER_DAY,
+        max_trades_per_day      = Config.MAX_TRADES_PER_DAY,
+        require_trend_alignment = False,  # EMA50/200 lags too far; Donchian breakout + ADX decide direction
     )
 
 

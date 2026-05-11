@@ -11,20 +11,33 @@ Trading bot workspace for crypto/forex experiments, live dry-run validation, and
 - `scripts/` - helper scripts and Windows scheduled-task launchers.
 - `logs/` - runtime logs, state files, and dry-run CSV logs.
 
-Root-level Python and PowerShell/BAT files are lightweight wrappers so old commands still work after the cleanup.
+Root-level Python files are lightweight wrappers for the current production bot entrypoints.
 
 ## Common Commands
 
-Run the hybrid crypto bot:
+Run the Bitcoin Donchian bot:
 
 ```bash
-python3 bitcoin_bot_hybrid.py
+python3 bitcoin_bot.py
 ```
 
-Run the Donchian live dry-run validator:
+Run the Gold bot:
 
 ```bash
-python3 dry_run_live_donchian.py
+python3 gold_bot.py
+```
+
+Run the Forex bot:
+
+```bash
+python3 forex_bot.py
+```
+
+Run the Donchian live dry-run validator directly from its module:
+
+```bash
+python3 bots/dry_run_live_donchian.py
+```
 ```
 
 Run the multi-timeframe backtest:
