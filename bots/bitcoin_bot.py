@@ -981,6 +981,18 @@ def _setup() -> None:
     if not Config.API_KEY or not Config.SECRET:
         raise RuntimeError("Missing API key/secret — set BINANCE_API_KEY + BINANCE_SECRET")
     Binance.sync_time()
+    try:
+        balance = Binance.balance()
+        log(f"✅ Binance auth OK | USDT balance={balance:.2f}")
+    except Exception as exc:
+        msg = str(exc)
+        if "-2015" in msg or "Invalid API-key" in msg:
+            raise RuntimeError(
+                "Binance auth failed: invalid API key, IP whitelist, or Futures trading permission. "
+                "Check BINANCE_API_KEY, BINANCE_SECRET, Binance Futures permissions, IP restrictions, "
+                "and whether BINANCE_BASE_URL matches mainnet/testnet keys."
+            ) from exc
+        raise
     for symbol in Config.SYMBOLS:
         Binance.set_margin(symbol)
         Binance.set_leverage(symbol)
