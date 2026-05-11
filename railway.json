@@ -4,7 +4,7 @@
     "builder": "RAILPACK"
   },
   "deploy": {
-    "startCommand": "python bitcoin_bot_hybrid.py",
+    "startCommand": "python bitcoin_bot.py",
     "restartPolicyType": "ALWAYS"
   }
 }
