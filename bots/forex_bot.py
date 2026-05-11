@@ -139,7 +139,7 @@ class Config:
     EXIT_AFTER_SESSION_END = True
 
     # MT5 connection
-    DRY_RUN              = os.getenv("FOREX_DRY_RUN", "false").lower() == "false"
+    DRY_RUN              = os.getenv("FOREX_DRY_RUN", "false").lower() == "true"
     MT5_LOGIN            = os.getenv("MT5_LOGIN", "").strip()
     MT5_PASSWORD         = os.getenv("MT5_PASSWORD", "").strip()
     MT5_SERVER           = os.getenv("MT5_SERVER", "").strip()
