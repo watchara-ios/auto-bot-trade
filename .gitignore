@@ -15,3 +15,5 @@ data/solana_*.csv
 reports/realistic_donchian/
 reports/pullback_structure/
 reports/liquidity_sweep_reclaim/
+
+.gitignore

@@ -37,8 +37,8 @@ class DryRunConfig:
         or os.getenv("BINANCE_FAPI_BASE_URL")
         or "https://demo-fapi.binance.com"
     )
-    api_key: str = os.getenv("BINANCE_API_KEY") or os.getenv("BINANCE2_API_KEY") or ""
-    api_secret: str = os.getenv("BINANCE_SECRET") or os.getenv("BINANCE2_SECRET") or ""
+    api_key: str = os.getenv("BINANCE_API_KEY") or ""
+    api_secret: str = os.getenv("BINANCE_SECRET") or ""
     live_trading: bool = os.getenv("MICRO_EDGE_LIVE_TRADING", "false").lower() == "true"
     dry_run: bool = os.getenv(
         "MICRO_EDGE_DRY_RUN",
