@@ -1,41 +1,36 @@
 {
-  "last_scan_date": "2026-05-07",
-  "last_scan_at": "2026-05-07 22:04:12",
+  "last_scan_date": "2026-05-09",
+  "last_scan_at": "2026-05-09 14:03:51",
   "last_recommendations": [
     {
       "symbol": "EURUSD",
-      "rating": 1,
-      "reason": "High liquidity during London-NY overlap, tight spreads"
+      "rating": 2,
+      "reason": "London open liquidity, moderate trend, good for scalping"
     },
     {
       "symbol": "GBPUSD",
-      "rating": 1,
-      "reason": "Strong momentum and volatile news expected"
+      "rating": 2,
+      "reason": "Cable active in London session, clear support levels"
     },
     {
       "symbol": "USDJPY",
-      "rating": 2,
-      "reason": "Active but prone to sudden reversals; good for scalping"
+      "rating": 1,
+      "reason": "High volume at Asian close, break of 152.50 possible"
     },
     {
-      "symbol": "XAUUSD",
-      "rating": 2,
-      "reason": "Gold sensitive to USD moves, high volume now"
-    },
-    {
-      "symbol": "EURGBP",
-      "rating": 3,
-      "reason": "Less volatile, good for range traders with caution"
-    },
-    {
-      "symbol": "USDCAD",
-      "rating": 3,
-      "reason": "Liquid but range-bound, wait for breakout signals"
+      "symbol": "GBPJPY",
+      "rating": 1,
+      "reason": "Volatile cross, strong momentum from UK data"
     },
     {
       "symbol": "AUDUSD",
       "rating": 3,
-      "reason": "Thinner liquidity, avoid during non-AU session peaks"
+      "reason": "Range-bound post-Asian session, wait for breakout"
+    },
+    {
+      "symbol": "EURNZD",
+      "rating": 3,
+      "reason": "Quiet but trending downward, re-test potential"
     }
   ],
   "candidate_universe": [
@@ -46,9 +41,8 @@
     "USDCAD",
     "AUDUSD",
     "NZDUSD",
-    "EURJPY",
     "GBPJPY",
-    "XAUUSD",
+    "EURJPY",
     "EURGBP",
     "EURCHF",
     "EURCAD",
@@ -71,55 +65,49 @@
   ],
   "last_scan_error": "missing DEEPSEEK_API_KEY",
   "candidate_symbols": [
+    "USDJPYm",
+    "GBPJPYm",
     "EURUSDm",
     "GBPUSDm",
-    "USDJPYm",
-    "XAUUSDm",
-    "USDCADm",
     "AUDUSDm",
-    "EURGBPm"
+    "EURNZDm"
   ],
   "candidate_recommendations": [
     {
-      "symbol": "EURUSDm",
+      "symbol": "USDJPYm",
       "rating": 1,
-      "reason": "High liquidity during London-NY overlap, tight spreads"
+      "reason": "High volume at Asian close, break of 152.50 possible"
+    },
+    {
+      "symbol": "GBPJPYm",
+      "rating": 1,
+      "reason": "Volatile cross, strong momentum from UK data"
+    },
+    {
+      "symbol": "EURUSDm",
+      "rating": 2,
+      "reason": "London open liquidity, moderate trend, good for scalping"
     },
     {
       "symbol": "GBPUSDm",
-      "rating": 1,
-      "reason": "Strong momentum and volatile news expected"
-    },
-    {
-      "symbol": "USDJPYm",
       "rating": 2,
-      "reason": "Active but prone to sudden reversals; good for scalping"
-    },
-    {
-      "symbol": "XAUUSDm",
-      "rating": 2,
-      "reason": "Gold sensitive to USD moves, high volume now"
-    },
-    {
-      "symbol": "USDCADm",
-      "rating": 3,
-      "reason": "Liquid but range-bound, wait for breakout signals"
+      "reason": "Cable active in London session, clear support levels"
     },
     {
       "symbol": "AUDUSDm",
       "rating": 3,
-      "reason": "Thinner liquidity, avoid during non-AU session peaks"
+      "reason": "Range-bound post-Asian session, wait for breakout"
     },
     {
-      "symbol": "EURGBPm",
+      "symbol": "EURNZDm",
       "rating": 3,
-      "reason": "Less volatile, good for range traders with caution"
+      "reason": "Quiet but trending downward, re-test potential"
     }
   ],
-  "selected_symbol": "EURUSDm",
+  "selected_symbol": "USDJPYm",
   "selected_recommendation": {
-    "symbol": "EURUSDm",
+    "symbol": "USDJPYm",
     "rating": 1,
-    "reason": "High liquidity during London-NY overlap, tight spreads"
+    "reason": "High volume at Asian close, break of 152.50 possible"
   }
 }
