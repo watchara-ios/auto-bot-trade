@@ -825,9 +825,10 @@ def count_consecutive_losses() -> int:
 
 def run_bot() -> None:
     macd_note = "MACD_BUY_ON" if Config.MACD_BUY_FILTER else "MACD_BUY_OFF"
+    mode = "DRY_RUN" if Config.DRY_RUN else "LIVE"
     log(
         f"[START] Gold V2+IndV3 bot | symbol={Config.SYMBOL} | pid={os.getpid()} | "
-        f"interval={Config.CHECK_INTERVAL_SECONDS}s | DRY_RUN={Config.DRY_RUN} | "
+        f"interval={Config.CHECK_INTERVAL_SECONDS}s | mode={mode} | DRY_RUN={Config.DRY_RUN} | "
         f"side={Config.ALLOWED_SIDE} | RR={Config.RR} | {macd_note} | "
         f"session=UTC{Config.SESSION_UTC_START_H:02d}:00-{Config.SESSION_UTC_END_H:02d}:00 | "
         f"D1_regime={'ON' if Config.USE_D1_REGIME else 'OFF'}"

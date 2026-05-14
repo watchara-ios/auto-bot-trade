@@ -1084,10 +1084,11 @@ def count_consecutive_losses() -> int:
 # ─────────────────────────────────────────────────────────────────────────────
 
 def run_bot() -> None:
+    mode = "DRY_RUN" if Config.DRY_RUN else "LIVE"
     log(
         f"🚀 Forex bot starting | pid={os.getpid()} | "
         f"session={Config.TRADE_START_HOUR}:00–{Config.TRADE_END_HOUR}:59 | "
-        f"interval={Config.CHECK_INTERVAL_SECONDS}s | DRY_RUN={Config.DRY_RUN}"
+        f"interval={Config.CHECK_INTERVAL_SECONDS}s | mode={mode} | DRY_RUN={Config.DRY_RUN}"
     )
     _notify_started("BOOTING")
     try:

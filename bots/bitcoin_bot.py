@@ -69,7 +69,7 @@ class Config:
 
     # Mode
     DRY_RUN     = os.getenv("HYBRID_DRY_RUN", "false").lower() == "true"
-    LEVERAGE    = 1
+    LEVERAGE    = int(os.getenv("HYBRID_LEVERAGE", "3"))
     MARGIN_TYPE = "ISOLATED"
 
     # Timing
@@ -91,6 +91,7 @@ class Config:
     MAX_DAILY_LOSS_PCT      = float(os.getenv("HYBRID_MAX_DAILY_LOSS_PCT", "0.04"))
     DAILY_PROFIT_TARGET_PCT = float(os.getenv("HYBRID_DAILY_PROFIT_TARGET_PCT", "0.06"))  # 1.5× max loss
     MAX_TOTAL_EXPOSURE_PCT  = 60.0
+    MARGIN_BUFFER_PCT       = float(os.getenv("HYBRID_MARGIN_BUFFER_PCT", "0.95"))
 
     # Position sizing
     TIER_A_RISK = 0.0025   # 0.25% per trade (conservative, compounding faster)
@@ -344,6 +345,13 @@ class Binance:
         for item in Binance.signed("GET", "/fapi/v2/balance"):
             if item.get("asset") == "USDT":
                 return float(item.get("balance", 0))
+        return 0.0
+
+    @staticmethod
+    def available_balance() -> float:
+        for item in Binance.signed("GET", "/fapi/v2/balance"):
+            if item.get("asset") == "USDT":
+                return float(item.get("availableBalance", item.get("balance", 0)))
         return 0.0
 
     @staticmethod
@@ -804,6 +812,20 @@ def quantity_for_signal(symbol: str, balance: float, signal: dict) -> float:
     return round_qty(symbol, risk_amount / stop_distance)
 
 
+def cap_qty_to_available_margin(symbol: str, qty: float, entry: float, available_margin: float) -> tuple[float, str]:
+    if Config.DRY_RUN:
+        return qty, "dry_run"
+    leverage = max(float(Config.LEVERAGE), 1.0)
+    usable_margin = max(available_margin, 0.0) * Config.MARGIN_BUFFER_PCT
+    required_margin = qty * entry / leverage
+    if required_margin <= usable_margin:
+        return qty, f"required_margin={required_margin:.2f} <= usable={usable_margin:.2f}"
+    capped_qty = round_qty(symbol, usable_margin * leverage / entry)
+    if capped_qty <= 0:
+        return 0.0, f"insufficient margin: required={required_margin:.2f} usable={usable_margin:.2f}"
+    return capped_qty, f"qty capped by margin {qty}->{capped_qty} required={required_margin:.2f} usable={usable_margin:.2f}"
+
+
 # ─────────────────────────────────────────────
 # Connection state
 # ─────────────────────────────────────────────
@@ -901,17 +923,35 @@ def execute_signal(signal: dict, balance: float, state: dict, market: dict) -> N
     if qty <= 0:
         log(f"⏸️ {symbol} skip: qty too small")
         return
+    available_margin = balance if Config.DRY_RUN else Binance.available_balance()
+    capped_qty, margin_msg = cap_qty_to_available_margin(symbol, qty, float(signal["entry"]), available_margin)
+    if capped_qty <= 0:
+        warn(f"⏸️ {symbol} skip: {margin_msg}")
+        return
+    if capped_qty < qty:
+        warn(f"💰 {symbol} {margin_msg}")
+        qty = capped_qty
     allowed, reason = ai_validate(signal, market)
     if not allowed:
         log(f"🧠 {symbol} AI blocked: {reason}")
         return
 
-    state[f"balance_at_entry_{symbol}"] = balance
     log(
-        f"🚀 OPEN {symbol} {signal['side']} qty={qty} tier={signal.get('tier')} "
+        f"🚀 OPEN REQUEST {symbol} {signal['side']} qty={qty} tier={signal.get('tier')} "
         f"risk={signal.get('risk_pct', Config.TIER_A_RISK)*100:.2f}% "
         f"entry~{signal['entry']:.2f} sl={signal['sl']:.2f} tp={signal['tp']:.2f}"
     )
+
+    try:
+        order_result = Binance.market_order(symbol, signal["side"], qty)
+    except Exception as exc:
+        msg = str(exc)
+        if "-2019" in msg or "Margin is insufficient" in msg:
+            warn(f"⏸️ {symbol} order rejected: insufficient margin | qty={qty} | {margin_msg}")
+            notify_error("BINANCE", f"Order rejected: insufficient margin for {symbol} qty={qty}")
+            return
+        raise
+    notify_order_result("BINANCE", symbol, signal["side"], order_result, dry_run=Config.DRY_RUN)
     notify_order_opened(
         "BINANCE", symbol, signal["side"], qty,
         signal["entry"], signal["sl"], signal["tp"],
@@ -920,13 +960,11 @@ def execute_signal(signal: dict, balance: float, state: dict, market: dict) -> N
         dry_run=Config.DRY_RUN,
     )
 
-    order_result = Binance.market_order(symbol, signal["side"], qty)
-    notify_order_result("BINANCE", symbol, signal["side"], order_result, dry_run=Config.DRY_RUN)
-
     Binance.algo_order(symbol, signal["exit_side"], "STOP_MARKET",        signal["sl"], qty, signal["side"])
     Binance.algo_order(symbol, signal["exit_side"], "TAKE_PROFIT_MARKET", signal["tp"], qty, signal["side"])
 
     # Update state
+    state[f"balance_at_entry_{symbol}"] = balance
     is_live = not Config.DRY_RUN
     if is_live:
         state["trades_today"] = state.get("trades_today", 0) + 1
@@ -1010,7 +1048,7 @@ def main() -> None:
         f"Strategy: Donchian{Config.DONCHIAN_N} {Config.ALLOWED_SIDE} | "
         f"ADX {Config.ADX_MIN:g}–{Config.ADX_MAX:g} | ATRpct>={Config.ATR_PERCENTILE_MIN:g} | "
         f"RR 1:{Config.RR:g} | SL={Config.SL_ATR}×ATR TP={Config.TP_ATR:.1f}×ATR | "
-        f"Session UTC={Config.SESSION_HOURS_UTC} | Symbols={Config.SYMBOLS}"
+        f"Leverage={Config.LEVERAGE}x | Session UTC={Config.SESSION_HOURS_UTC} | Symbols={Config.SYMBOLS}"
     )
     log("═" * 64)
 
@@ -1032,6 +1070,7 @@ def main() -> None:
                 save_state(state)
                 break
             balance              = Binance.balance()
+            available_balance    = balance if Config.DRY_RUN else Binance.available_balance()
             positions_by_symbol  = get_positions_by_symbol()
             reset_day(state, balance)
             mark_connected(state)
@@ -1075,7 +1114,8 @@ def main() -> None:
             state["prev_open_symbols"] = list(curr_open)
 
             log(
-                f"📊 Balance={balance:.2f} USDT | daily={daily_ret:+.2f}% | "
+                f"📊 Balance={balance:.2f} USDT | available={available_balance:.2f} USDT | "
+                f"lev={Config.LEVERAGE}x | daily={daily_ret:+.2f}% | "
                 f"trades={state.get('trades_today',0)}/{Config.MAX_TRADES_PER_DAY} | "
                 f"session={'✅' if session_active else '🌙'} | "
                 f"open_positions={len(open_positions)}"
