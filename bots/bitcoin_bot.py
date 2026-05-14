@@ -79,6 +79,7 @@ class Config:
     RATE_LIMIT_SLEEP_SECONDS         = int(os.getenv("HYBRID_RATE_LIMIT_SLEEP_SECONDS", "180"))
     DISCONNECT_NOTIFY_COOLDOWN_SECONDS = int(os.getenv("HYBRID_DISCONNECT_NOTIFY_COOLDOWN_SECONDS", "300"))
     REQUEST_RETRIES = int(os.getenv("HYBRID_REQUEST_RETRIES", "3"))
+    RECV_WINDOW_MS = int(os.getenv("HYBRID_RECV_WINDOW_MS", "60000"))
 
     # Debug / logging
     LOG_TIMEFRAME_SUMMARY    = os.getenv("HYBRID_LOG_TIMEFRAME_SUMMARY", "false").lower() == "true"
@@ -191,6 +192,7 @@ class BinanceRateLimitError(RuntimeError):
 
 class Binance:
     time_offset: int = 0
+    last_time_sync: float = 0
     _exchange_info_cache: dict = {}
     _base_url_index: int = 0
 
@@ -201,9 +203,15 @@ class Binance:
         try:
             data = requests.get(f"{cls.base_url()}/fapi/v1/time", timeout=10).json()
             cls.time_offset = int(data["serverTime"]) - int(time.time() * 1000)
+            cls.last_time_sync = time.time()
             log(f"⏱️ Time synced offset={cls.time_offset}ms")
         except Exception as exc:
             warn(f"⏱️ Time sync failed: {exc}")
+
+    @classmethod
+    def ensure_time_synced(cls, max_age_seconds: int = 300) -> None:
+        if time.time() - cls.last_time_sync >= max_age_seconds:
+            cls.sync_time()
 
     @staticmethod
     def _headers() -> dict:
@@ -277,7 +285,12 @@ class Binance:
         last_exc: Exception | None = None
         for attempt in range(Config.REQUEST_RETRIES):
             try:
-                p = {**base, "timestamp": int(time.time() * 1000) + Binance.time_offset, "recvWindow": 10000}
+                Binance.ensure_time_synced()
+                p = {
+                    **base,
+                    "timestamp": int(time.time() * 1000) + Binance.time_offset,
+                    "recvWindow": Config.RECV_WINDOW_MS,
+                }
                 url = f"{Binance.base_url()}{path}?{Binance._sign(p)}"
                 fn = {"GET": requests.get, "POST": requests.post, "DELETE": requests.delete}[method]
                 r = fn(url, headers=Binance._headers(), timeout=15)
@@ -304,9 +317,10 @@ class Binance:
             except Exception as exc:
                 last_exc = exc
                 if "-1021" in str(exc):
+                    warn(f"⏱️ Binance timestamp rejected on {method} {path}; re-syncing time")
                     Binance.sync_time()
                 if attempt < Config.REQUEST_RETRIES - 1:
-                    time.sleep(min(2 ** attempt, 5))
+                    time.sleep(0.5 if "-1021" in str(exc) else min(2 ** attempt, 5))
         if isinstance(last_exc, BinanceRateLimitError):
             raise last_exc
         raise RuntimeError(f"Signed {method} {path} failed: {last_exc}")
