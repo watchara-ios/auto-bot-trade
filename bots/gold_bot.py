@@ -143,6 +143,7 @@ class Config:
 
     # Paths
     LOG_DIR    = Path("logs")
+    LOG_FILE   = LOG_DIR / "gold_runtime.log"
     KILL_FILE  = LOG_DIR / "gold_STOP"
     STATE_FILE = LOG_DIR / "gold_state.json"
     AI_NEWS_STATE_FILE = LOG_DIR / "gold_ai_news_state.json"
@@ -153,11 +154,24 @@ class Config:
 # Logging
 # ─────────────────────────────────────────────────────────────────────────────
 
+def _append_runtime_log(line: str) -> None:
+    try:
+        Config.LOG_DIR.mkdir(parents=True, exist_ok=True)
+        with Config.LOG_FILE.open("a", encoding="utf-8") as f:
+            f.write(line + "\n")
+    except OSError:
+        pass
+
+
 def log(msg: str) -> None:
-    builtins.print(f"[{datetime.now():%Y-%m-%d %H:%M:%S}] {_safe(msg)}", flush=True)
+    line = f"[{datetime.now():%Y-%m-%d %H:%M:%S}] {_safe(msg)}"
+    builtins.print(line, flush=True)
+    _append_runtime_log(line)
 
 def warn(msg: str) -> None:
-    builtins.print(f"[{datetime.now():%Y-%m-%d %H:%M:%S}] WARN {_safe(msg)}", flush=True)
+    line = f"[{datetime.now():%Y-%m-%d %H:%M:%S}] WARN {_safe(msg)}"
+    builtins.print(line, flush=True)
+    _append_runtime_log(line)
 
 
 # ─────────────────────────────────────────────────────────────────────────────
