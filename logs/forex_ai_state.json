@@ -1,36 +1,41 @@
 {
-  "last_scan_date": "2026-05-09",
-  "last_scan_at": "2026-05-09 14:03:51",
+  "last_scan_date": "2026-05-14",
+  "last_scan_at": "2026-05-14 14:39:28",
   "last_recommendations": [
     {
-      "symbol": "EURUSD",
-      "rating": 2,
-      "reason": "London open liquidity, moderate trend, good for scalping"
-    },
-    {
       "symbol": "GBPUSD",
-      "rating": 2,
-      "reason": "Cable active in London session, clear support levels"
-    },
-    {
-      "symbol": "USDJPY",
       "rating": 1,
-      "reason": "High volume at Asian close, break of 152.50 possible"
+      "reason": "Strong momentum, bullish bias, support levels hold."
     },
     {
       "symbol": "GBPJPY",
       "rating": 1,
-      "reason": "Volatile cross, strong momentum from UK data"
+      "reason": "High volatility, strong bullish trend, good for scalping."
+    },
+    {
+      "symbol": "EURUSD",
+      "rating": 2,
+      "reason": "Steady trend, high liquidity, awaiting US data."
     },
     {
       "symbol": "AUDUSD",
-      "rating": 3,
-      "reason": "Range-bound post-Asian session, wait for breakout"
+      "rating": 2,
+      "reason": "Commodity-linked, moderate bullish, risk-on."
     },
     {
-      "symbol": "EURNZD",
+      "symbol": "EURJPY",
+      "rating": 2,
+      "reason": "Cross volatility, trending with EUR strength."
+    },
+    {
+      "symbol": "USDJPY",
       "rating": 3,
-      "reason": "Quiet but trending downward, re-test potential"
+      "reason": "Range-bound, low volatility, wait for breakout."
+    },
+    {
+      "symbol": "USDCHF",
+      "rating": 3,
+      "reason": "Correlated with EUR, but less momentum."
     }
   ],
   "candidate_universe": [
@@ -65,49 +70,55 @@
   ],
   "last_scan_error": "missing DEEPSEEK_API_KEY",
   "candidate_symbols": [
-    "USDJPYm",
+    "GBPUSDm",
     "GBPJPYm",
     "EURUSDm",
-    "GBPUSDm",
     "AUDUSDm",
-    "EURNZDm"
+    "EURJPYm",
+    "USDJPYm",
+    "USDCHFm"
   ],
   "candidate_recommendations": [
     {
-      "symbol": "USDJPYm",
+      "symbol": "GBPUSDm",
       "rating": 1,
-      "reason": "High volume at Asian close, break of 152.50 possible"
+      "reason": "Strong momentum, bullish bias, support levels hold."
     },
     {
       "symbol": "GBPJPYm",
       "rating": 1,
-      "reason": "Volatile cross, strong momentum from UK data"
+      "reason": "High volatility, strong bullish trend, good for scalping."
     },
     {
       "symbol": "EURUSDm",
       "rating": 2,
-      "reason": "London open liquidity, moderate trend, good for scalping"
-    },
-    {
-      "symbol": "GBPUSDm",
-      "rating": 2,
-      "reason": "Cable active in London session, clear support levels"
+      "reason": "Steady trend, high liquidity, awaiting US data."
     },
     {
       "symbol": "AUDUSDm",
-      "rating": 3,
-      "reason": "Range-bound post-Asian session, wait for breakout"
+      "rating": 2,
+      "reason": "Commodity-linked, moderate bullish, risk-on."
     },
     {
-      "symbol": "EURNZDm",
+      "symbol": "EURJPYm",
+      "rating": 2,
+      "reason": "Cross volatility, trending with EUR strength."
+    },
+    {
+      "symbol": "USDJPYm",
       "rating": 3,
-      "reason": "Quiet but trending downward, re-test potential"
+      "reason": "Range-bound, low volatility, wait for breakout."
+    },
+    {
+      "symbol": "USDCHFm",
+      "rating": 3,
+      "reason": "Correlated with EUR, but less momentum."
     }
   ],
-  "selected_symbol": "USDJPYm",
+  "selected_symbol": "GBPUSDm",
   "selected_recommendation": {
-    "symbol": "USDJPYm",
+    "symbol": "GBPUSDm",
     "rating": 1,
-    "reason": "High volume at Asian close, break of 152.50 possible"
+    "reason": "Strong momentum, bullish bias, support levels hold."
   }
 }
