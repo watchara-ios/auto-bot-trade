@@ -1039,8 +1039,14 @@ def _setup() -> None:
     except Exception as exc:
         msg = str(exc)
         if "-2015" in msg or "Invalid API-key" in msg:
+            request_ip = None
+            marker = "request ip:"
+            if marker in msg:
+                request_ip = msg.split(marker, 1)[1].split("'", 1)[0].strip()
+            ip_hint = f" Binance rejected request IP {request_ip}." if request_ip else ""
             raise RuntimeError(
                 "Binance auth failed: invalid API key, IP whitelist, or Futures trading permission. "
+                f"Base URL={Binance.base_url()}.{ip_hint} "
                 "Check BINANCE_API_KEY, BINANCE_SECRET, Binance Futures permissions, IP restrictions, "
                 "and whether BINANCE_BASE_URL matches mainnet/testnet keys."
             ) from exc
