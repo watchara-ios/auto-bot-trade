@@ -1,0 +1,616 @@
+2026-05-16 00:00:04,489 - INFO - [STATS] Daily summary: {'_total_attempts': 873, 'no_donchian_breakout': 804, 'adx_too_low': 31, 'adx_too_high': 15, 'm1_confirm_failed': 11}
+2026-05-16 00:00:04,491 - INFO - 📊 Balance=30.75 USDT | available=30.75 USDT | lev=3x | daily=+0.00% | trades=0/5 | session=✅ | open_positions=0
+2026-05-16 00:00:04,491 - INFO - 🔎 BTCUSDT
+2026-05-16 00:00:07,336 - WARNING - 🧹 BTCUSDT no position but 1 orphan orders; canceling
+2026-05-16 00:00:08,284 - INFO - ⏸️ BTCUSDT no signal: no Donchian breakout
+2026-05-16 00:00:40,752 - INFO - [STATS] Hourly rejections (of 1 attempts): {'no_donchian_breakout': '1(100%)'}
+2026-05-16 00:00:40,754 - INFO - 📊 Balance=30.75 USDT | available=30.75 USDT | lev=3x | daily=+0.00% | trades=0/5 | session=✅ | open_positions=0
+2026-05-16 00:00:40,754 - INFO - 🔎 BTCUSDT
+2026-05-16 00:00:43,648 - WARNING - 🧹 BTCUSDT no position but 1 orphan orders; canceling
+2026-05-16 00:00:44,620 - INFO - ⏸️ BTCUSDT no signal: no Donchian breakout
+2026-05-16 00:01:16,259 - INFO - 📊 Balance=30.75 USDT | available=30.75 USDT | lev=3x | daily=+0.00% | trades=0/5 | session=✅ | open_positions=0
+2026-05-16 00:01:16,259 - INFO - 🔎 BTCUSDT
+2026-05-16 00:01:19,071 - WARNING - 🧹 BTCUSDT no position but 1 orphan orders; canceling
+2026-05-16 00:01:20,079 - INFO - ⏸️ BTCUSDT no signal: no Donchian breakout
+2026-05-16 00:01:52,572 - INFO - 📊 Balance=30.75 USDT | available=30.75 USDT | lev=3x | daily=+0.00% | trades=0/5 | session=✅ | open_positions=0
+2026-05-16 00:01:52,573 - INFO - 🔎 BTCUSDT
+2026-05-16 00:01:55,351 - WARNING - 🧹 BTCUSDT no position but 1 orphan orders; canceling
+2026-05-16 00:01:56,295 - INFO - ⏸️ BTCUSDT no signal: no Donchian breakout
+2026-05-16 00:02:27,970 - INFO - 📊 Balance=30.75 USDT | available=30.75 USDT | lev=3x | daily=+0.00% | trades=0/5 | session=✅ | open_positions=0
+2026-05-16 00:02:27,970 - INFO - 🔎 BTCUSDT
+2026-05-16 00:02:30,780 - WARNING - 🧹 BTCUSDT no position but 1 orphan orders; canceling
+2026-05-16 00:02:31,777 - INFO - ⏸️ BTCUSDT no signal: no Donchian breakout
+2026-05-16 00:03:02,381 - INFO - ⏱️ Time synced offset=-62ms
+2026-05-16 00:03:04,118 - INFO - 📊 Balance=30.75 USDT | available=30.75 USDT | lev=3x | daily=+0.00% | trades=0/5 | session=✅ | open_positions=0
+2026-05-16 00:03:04,118 - INFO - 🔎 BTCUSDT
+2026-05-16 00:03:07,104 - WARNING - 🧹 BTCUSDT no position but 1 orphan orders; canceling
+2026-05-16 00:03:08,067 - INFO - ⏸️ BTCUSDT no signal: no Donchian breakout
+2026-05-16 00:03:39,790 - INFO - 📊 Balance=30.75 USDT | available=30.75 USDT | lev=3x | daily=+0.00% | trades=0/5 | session=✅ | open_positions=0
+2026-05-16 00:03:39,790 - INFO - 🔎 BTCUSDT
+2026-05-16 00:03:42,544 - WARNING - 🧹 BTCUSDT no position but 1 orphan orders; canceling
+2026-05-16 00:03:43,492 - INFO - ⏸️ BTCUSDT no signal: no Donchian breakout
+2026-05-16 00:04:15,259 - INFO - 📊 Balance=30.75 USDT | available=30.75 USDT | lev=3x | daily=+0.00% | trades=0/5 | session=✅ | open_positions=0
+2026-05-16 00:04:15,259 - INFO - 🔎 BTCUSDT
+2026-05-16 00:04:18,211 - WARNING - 🧹 BTCUSDT no position but 1 orphan orders; canceling
+2026-05-16 00:04:19,313 - INFO - ⏸️ BTCUSDT no signal: no Donchian breakout
+2026-05-16 00:04:50,980 - INFO - 📊 Balance=30.75 USDT | available=30.75 USDT | lev=3x | daily=+0.00% | trades=0/5 | session=✅ | open_positions=0
+2026-05-16 00:04:50,980 - INFO - 🔎 BTCUSDT
+2026-05-16 00:04:54,153 - WARNING - 🧹 BTCUSDT no position but 1 orphan orders; canceling
+2026-05-16 00:04:55,113 - INFO - ⏸️ BTCUSDT no signal: no Donchian breakout
+2026-05-16 00:05:26,819 - INFO - 📊 Balance=30.75 USDT | available=30.75 USDT | lev=3x | daily=+0.00% | trades=0/5 | session=✅ | open_positions=0
+2026-05-16 00:05:26,819 - INFO - 🔎 BTCUSDT
+2026-05-16 00:05:29,686 - WARNING - 🧹 BTCUSDT no position but 1 orphan orders; canceling
+2026-05-16 00:05:30,669 - INFO - ⏸️ BTCUSDT no signal: no Donchian breakout
+2026-05-16 00:06:02,432 - INFO - 📊 Balance=30.75 USDT | available=30.75 USDT | lev=3x | daily=+0.00% | trades=0/5 | session=✅ | open_positions=0
+2026-05-16 00:06:02,432 - INFO - 🔎 BTCUSDT
+2026-05-16 00:06:05,171 - WARNING - 🧹 BTCUSDT no position but 1 orphan orders; canceling
+2026-05-16 00:06:06,122 - INFO - ⏸️ BTCUSDT no signal: no Donchian breakout
+2026-05-16 00:06:37,762 - INFO - 📊 Balance=30.75 USDT | available=30.75 USDT | lev=3x | daily=+0.00% | trades=0/5 | session=✅ | open_positions=0
+2026-05-16 00:06:37,762 - INFO - 🔎 BTCUSDT
+2026-05-16 00:06:40,692 - WARNING - 🧹 BTCUSDT no position but 1 orphan orders; canceling
+2026-05-16 00:06:41,666 - INFO - ⏸️ BTCUSDT no signal: no Donchian breakout
+2026-05-16 00:07:13,372 - INFO - 📊 Balance=30.75 USDT | available=30.75 USDT | lev=3x | daily=+0.00% | trades=0/5 | session=✅ | open_positions=0
+2026-05-16 00:07:13,372 - INFO - 🔎 BTCUSDT
+2026-05-16 00:07:17,057 - WARNING - 🧹 BTCUSDT no position but 1 orphan orders; canceling
+2026-05-16 00:07:18,012 - INFO - ⏸️ BTCUSDT no signal: no Donchian breakout
+2026-05-16 00:07:49,693 - INFO - 📊 Balance=30.75 USDT | available=30.75 USDT | lev=3x | daily=+0.00% | trades=0/5 | session=✅ | open_positions=0
+2026-05-16 00:07:49,693 - INFO - 🔎 BTCUSDT
+2026-05-16 00:07:52,535 - WARNING - 🧹 BTCUSDT no position but 1 orphan orders; canceling
+2026-05-16 00:07:53,929 - INFO - ⏸️ BTCUSDT no signal: no Donchian breakout
+2026-05-16 00:08:24,657 - INFO - ⏱️ Time synced offset=-58ms
+2026-05-16 00:08:26,221 - INFO - 📊 Balance=30.75 USDT | available=30.75 USDT | lev=3x | daily=+0.00% | trades=0/5 | session=✅ | open_positions=0
+2026-05-16 00:08:26,221 - INFO - 🔎 BTCUSDT
+2026-05-16 00:08:29,622 - WARNING - 🧹 BTCUSDT no position but 1 orphan orders; canceling
+2026-05-16 00:08:30,891 - INFO - ⏸️ BTCUSDT no signal: no Donchian breakout
+2026-05-16 00:09:02,578 - INFO - 📊 Balance=30.75 USDT | available=30.75 USDT | lev=3x | daily=+0.00% | trades=0/5 | session=✅ | open_positions=0
+2026-05-16 00:09:02,578 - INFO - 🔎 BTCUSDT
+2026-05-16 00:09:05,364 - WARNING - 🧹 BTCUSDT no position but 1 orphan orders; canceling
+2026-05-16 00:09:06,343 - INFO - ⏸️ BTCUSDT no signal: no Donchian breakout
+2026-05-16 00:09:38,017 - INFO - 📊 Balance=30.75 USDT | available=30.75 USDT | lev=3x | daily=+0.00% | trades=0/5 | session=✅ | open_positions=0
+2026-05-16 00:09:38,018 - INFO - 🔎 BTCUSDT
+2026-05-16 00:09:41,752 - WARNING - 🧹 BTCUSDT no position but 1 orphan orders; canceling
+2026-05-16 00:09:42,702 - INFO - ⏸️ BTCUSDT no signal: no Donchian breakout
+2026-05-16 00:10:14,627 - INFO - 📊 Balance=30.75 USDT | available=30.75 USDT | lev=3x | daily=+0.00% | trades=0/5 | session=✅ | open_positions=0
+2026-05-16 00:10:14,627 - INFO - 🔎 BTCUSDT
+2026-05-16 00:10:17,566 - WARNING - 🧹 BTCUSDT no position but 1 orphan orders; canceling
+2026-05-16 00:10:18,531 - INFO - ⏸️ BTCUSDT no signal: no Donchian breakout
+2026-05-16 00:10:50,619 - INFO - 📊 Balance=30.75 USDT | available=30.75 USDT | lev=3x | daily=+0.00% | trades=0/5 | session=✅ | open_positions=0
+2026-05-16 00:10:50,619 - INFO - 🔎 BTCUSDT
+2026-05-16 00:10:53,463 - WARNING - 🧹 BTCUSDT no position but 1 orphan orders; canceling
+2026-05-16 00:10:54,378 - INFO - ⏸️ BTCUSDT no signal: no Donchian breakout
+2026-05-16 00:11:26,255 - INFO - 📊 Balance=30.75 USDT | available=30.75 USDT | lev=3x | daily=+0.00% | trades=0/5 | session=✅ | open_positions=0
+2026-05-16 00:11:26,255 - INFO - 🔎 BTCUSDT
+2026-05-16 00:11:28,993 - WARNING - 🧹 BTCUSDT no position but 1 orphan orders; canceling
+2026-05-16 00:11:29,951 - INFO - ⏸️ BTCUSDT no signal: no Donchian breakout
+2026-05-16 00:12:01,729 - INFO - 📊 Balance=30.75 USDT | available=30.75 USDT | lev=3x | daily=+0.00% | trades=0/5 | session=✅ | open_positions=0
+2026-05-16 00:12:01,729 - INFO - 🔎 BTCUSDT
+2026-05-16 00:12:05,412 - WARNING - 🧹 BTCUSDT no position but 1 orphan orders; canceling
+2026-05-16 00:12:06,364 - INFO - ⏸️ BTCUSDT no signal: no Donchian breakout
+2026-05-16 00:12:38,794 - INFO - 📊 Balance=30.75 USDT | available=30.75 USDT | lev=3x | daily=+0.00% | trades=0/5 | session=✅ | open_positions=0
+2026-05-16 00:12:38,794 - INFO - 🔎 BTCUSDT
+2026-05-16 00:12:41,834 - WARNING - 🧹 BTCUSDT no position but 1 orphan orders; canceling
+2026-05-16 00:12:42,812 - INFO - ⏸️ BTCUSDT no signal: no Donchian breakout
+2026-05-16 00:13:14,474 - INFO - 📊 Balance=30.75 USDT | available=30.75 USDT | lev=3x | daily=+0.00% | trades=0/5 | session=✅ | open_positions=0
+2026-05-16 00:13:14,475 - INFO - 🔎 BTCUSDT
+2026-05-16 00:13:17,299 - WARNING - 🧹 BTCUSDT no position but 1 orphan orders; canceling
+2026-05-16 00:13:18,294 - INFO - ⏸️ BTCUSDT no signal: no Donchian breakout
+2026-05-16 00:13:48,871 - INFO - ⏱️ Time synced offset=-57ms
+2026-05-16 00:13:51,194 - INFO - 📊 Balance=30.75 USDT | available=30.75 USDT | lev=3x | daily=+0.00% | trades=0/5 | session=✅ | open_positions=0
+2026-05-16 00:13:51,194 - INFO - 🔎 BTCUSDT
+2026-05-16 00:13:53,937 - WARNING - 🧹 BTCUSDT no position but 1 orphan orders; canceling
+2026-05-16 00:13:54,957 - INFO - ⏸️ BTCUSDT no signal: no Donchian breakout
+2026-05-16 00:14:26,646 - INFO - 📊 Balance=30.75 USDT | available=30.75 USDT | lev=3x | daily=+0.00% | trades=0/5 | session=✅ | open_positions=0
+2026-05-16 00:14:26,646 - INFO - 🔎 BTCUSDT
+2026-05-16 00:14:29,510 - WARNING - 🧹 BTCUSDT no position but 1 orphan orders; canceling
+2026-05-16 00:14:30,464 - INFO - ⏸️ BTCUSDT no signal: no Donchian breakout
+2026-05-16 00:15:02,522 - INFO - 📊 Balance=30.75 USDT | available=30.75 USDT | lev=3x | daily=+0.00% | trades=0/5 | session=✅ | open_positions=0
+2026-05-16 00:15:02,523 - INFO - 🔎 BTCUSDT
+2026-05-16 00:15:06,515 - WARNING - 🧹 BTCUSDT no position but 1 orphan orders; canceling
+2026-05-16 00:15:07,525 - INFO - ⏸️ BTCUSDT no signal: no Donchian breakout
+2026-05-16 00:15:39,175 - INFO - 📊 Balance=30.75 USDT | available=30.75 USDT | lev=3x | daily=+0.00% | trades=0/5 | session=✅ | open_positions=0
+2026-05-16 00:15:39,175 - INFO - 🔎 BTCUSDT
+2026-05-16 00:15:44,941 - WARNING - 🧹 BTCUSDT no position but 1 orphan orders; canceling
+2026-05-16 00:15:45,936 - INFO - ⏸️ BTCUSDT no signal: no Donchian breakout
+2026-05-16 00:16:17,691 - INFO - 📊 Balance=30.75 USDT | available=30.75 USDT | lev=3x | daily=+0.00% | trades=0/5 | session=✅ | open_positions=0
+2026-05-16 00:16:17,691 - INFO - 🔎 BTCUSDT
+2026-05-16 00:16:20,616 - WARNING - 🧹 BTCUSDT no position but 1 orphan orders; canceling
+2026-05-16 00:16:21,745 - INFO - ⏸️ BTCUSDT no signal: no Donchian breakout
+2026-05-16 00:16:53,597 - INFO - 📊 Balance=30.75 USDT | available=30.75 USDT | lev=3x | daily=+0.00% | trades=0/5 | session=✅ | open_positions=0
+2026-05-16 00:16:53,597 - INFO - 🔎 BTCUSDT
+2026-05-16 00:16:56,353 - WARNING - 🧹 BTCUSDT no position but 1 orphan orders; canceling
+2026-05-16 00:16:57,522 - INFO - ⏸️ BTCUSDT no signal: no Donchian breakout
+2026-05-16 00:17:29,265 - INFO - 📊 Balance=30.75 USDT | available=30.75 USDT | lev=3x | daily=+0.00% | trades=0/5 | session=✅ | open_positions=0
+2026-05-16 00:17:29,265 - INFO - 🔎 BTCUSDT
+2026-05-16 00:17:32,740 - WARNING - 🧹 BTCUSDT no position but 1 orphan orders; canceling
+2026-05-16 00:17:33,703 - INFO - ⏸️ BTCUSDT no signal: no Donchian breakout
+2026-05-16 00:18:05,399 - INFO - 📊 Balance=30.75 USDT | available=30.75 USDT | lev=3x | daily=+0.00% | trades=0/5 | session=✅ | open_positions=0
+2026-05-16 00:18:05,399 - INFO - 🔎 BTCUSDT
+2026-05-16 00:18:08,380 - WARNING - 🧹 BTCUSDT no position but 1 orphan orders; canceling
+2026-05-16 00:18:09,401 - INFO - ⏸️ BTCUSDT no signal: no Donchian breakout
+2026-05-16 00:18:41,112 - INFO - 📊 Balance=30.75 USDT | available=30.75 USDT | lev=3x | daily=+0.00% | trades=0/5 | session=✅ | open_positions=0
+2026-05-16 00:18:41,113 - INFO - 🔎 BTCUSDT
+2026-05-16 00:18:43,896 - WARNING - 🧹 BTCUSDT no position but 1 orphan orders; canceling
+2026-05-16 00:18:44,836 - INFO - ⏸️ BTCUSDT no signal: no Donchian breakout
+2026-05-16 00:19:15,490 - INFO - ⏱️ Time synced offset=-63ms
+2026-05-16 00:19:17,121 - INFO - 📊 Balance=30.75 USDT | available=30.75 USDT | lev=3x | daily=+0.00% | trades=0/5 | session=✅ | open_positions=0
+2026-05-16 00:19:17,121 - INFO - 🔎 BTCUSDT
+2026-05-16 00:19:19,901 - WARNING - 🧹 BTCUSDT no position but 1 orphan orders; canceling
+2026-05-16 00:19:20,865 - INFO - ⏸️ BTCUSDT no signal: no Donchian breakout
+2026-05-16 00:19:53,115 - INFO - 📊 Balance=30.75 USDT | available=30.75 USDT | lev=3x | daily=+0.00% | trades=0/5 | session=✅ | open_positions=0
+2026-05-16 00:19:53,115 - INFO - 🔎 BTCUSDT
+2026-05-16 00:19:55,842 - WARNING - 🧹 BTCUSDT no position but 1 orphan orders; canceling
+2026-05-16 00:19:56,823 - INFO - ⏸️ BTCUSDT no signal: no Donchian breakout
+2026-05-16 00:20:28,568 - INFO - 📊 Balance=30.75 USDT | available=30.75 USDT | lev=3x | daily=+0.00% | trades=0/5 | session=✅ | open_positions=0
+2026-05-16 00:20:28,569 - INFO - 🔎 BTCUSDT
+2026-05-16 00:20:31,390 - WARNING - 🧹 BTCUSDT no position but 1 orphan orders; canceling
+2026-05-16 00:20:32,373 - INFO - ⏸️ BTCUSDT no signal: no Donchian breakout
+2026-05-16 00:21:04,206 - INFO - 📊 Balance=30.75 USDT | available=30.75 USDT | lev=3x | daily=+0.00% | trades=0/5 | session=✅ | open_positions=0
+2026-05-16 00:21:04,207 - INFO - 🔎 BTCUSDT
+2026-05-16 00:21:08,706 - WARNING - 🧹 BTCUSDT no position but 1 orphan orders; canceling
+2026-05-16 00:21:09,931 - INFO - ⏸️ BTCUSDT no signal: no Donchian breakout
+2026-05-16 00:21:41,666 - INFO - 📊 Balance=30.75 USDT | available=30.75 USDT | lev=3x | daily=+0.00% | trades=0/5 | session=✅ | open_positions=0
+2026-05-16 00:21:41,666 - INFO - 🔎 BTCUSDT
+2026-05-16 00:21:44,511 - WARNING - 🧹 BTCUSDT no position but 1 orphan orders; canceling
+2026-05-16 00:21:45,509 - INFO - ⏸️ BTCUSDT no signal: no Donchian breakout
+2026-05-16 00:22:17,222 - INFO - 📊 Balance=30.75 USDT | available=30.75 USDT | lev=3x | daily=+0.00% | trades=0/5 | session=✅ | open_positions=0
+2026-05-16 00:22:17,223 - INFO - 🔎 BTCUSDT
+2026-05-16 00:22:19,890 - WARNING - 🧹 BTCUSDT no position but 1 orphan orders; canceling
+2026-05-16 00:22:20,864 - INFO - ⏸️ BTCUSDT no signal: no Donchian breakout
+2026-05-16 00:22:52,824 - INFO - 📊 Balance=30.75 USDT | available=30.75 USDT | lev=3x | daily=+0.00% | trades=0/5 | session=✅ | open_positions=0
+2026-05-16 00:22:52,824 - INFO - 🔎 BTCUSDT
+2026-05-16 00:22:55,593 - WARNING - 🧹 BTCUSDT no position but 1 orphan orders; canceling
+2026-05-16 00:22:56,604 - INFO - ⏸️ BTCUSDT no signal: no Donchian breakout
+2026-05-16 00:23:28,426 - INFO - 📊 Balance=30.75 USDT | available=30.75 USDT | lev=3x | daily=+0.00% | trades=0/5 | session=✅ | open_positions=0
+2026-05-16 00:23:28,427 - INFO - 🔎 BTCUSDT
+2026-05-16 00:23:31,298 - WARNING - 🧹 BTCUSDT no position but 1 orphan orders; canceling
+2026-05-16 00:23:32,260 - INFO - ⏸️ BTCUSDT no signal: no Donchian breakout
+2026-05-16 00:24:04,142 - INFO - 📊 Balance=30.75 USDT | available=30.75 USDT | lev=3x | daily=+0.00% | trades=0/5 | session=✅ | open_positions=0
+2026-05-16 00:24:04,142 - INFO - 🔎 BTCUSDT
+2026-05-16 00:24:07,430 - WARNING - 🧹 BTCUSDT no position but 1 orphan orders; canceling
+2026-05-16 00:24:08,576 - INFO - ⏸️ BTCUSDT no signal: no Donchian breakout
+2026-05-16 00:24:39,477 - INFO - ⏱️ Time synced offset=-57ms
+2026-05-16 00:24:41,608 - INFO - 📊 Balance=30.75 USDT | available=30.75 USDT | lev=3x | daily=+0.00% | trades=0/5 | session=✅ | open_positions=0
+2026-05-16 00:24:41,609 - INFO - 🔎 BTCUSDT
+2026-05-16 00:24:44,430 - WARNING - 🧹 BTCUSDT no position but 1 orphan orders; canceling
+2026-05-16 00:24:45,411 - INFO - ⏸️ BTCUSDT no signal: no Donchian breakout
+2026-05-16 00:25:17,884 - INFO - 📊 Balance=30.75 USDT | available=30.75 USDT | lev=3x | daily=+0.00% | trades=0/5 | session=✅ | open_positions=0
+2026-05-16 00:25:17,884 - INFO - 🔎 BTCUSDT
+2026-05-16 00:25:20,925 - WARNING - 🧹 BTCUSDT no position but 1 orphan orders; canceling
+2026-05-16 00:25:22,301 - INFO - ⏸️ BTCUSDT no signal: no Donchian breakout
+2026-05-16 00:25:54,075 - INFO - 📊 Balance=30.75 USDT | available=30.75 USDT | lev=3x | daily=+0.00% | trades=0/5 | session=✅ | open_positions=0
+2026-05-16 00:25:54,075 - INFO - 🔎 BTCUSDT
+2026-05-16 00:25:57,142 - WARNING - 🧹 BTCUSDT no position but 1 orphan orders; canceling
+2026-05-16 00:25:58,212 - INFO - ⏸️ BTCUSDT no signal: no Donchian breakout
+2026-05-16 00:26:29,946 - INFO - 📊 Balance=30.75 USDT | available=30.75 USDT | lev=3x | daily=+0.00% | trades=0/5 | session=✅ | open_positions=0
+2026-05-16 00:26:29,946 - INFO - 🔎 BTCUSDT
+2026-05-16 00:26:32,795 - WARNING - 🧹 BTCUSDT no position but 1 orphan orders; canceling
+2026-05-16 00:26:33,786 - INFO - ⏸️ BTCUSDT no signal: no Donchian breakout
+2026-05-16 00:27:05,469 - INFO - 📊 Balance=30.75 USDT | available=30.75 USDT | lev=3x | daily=+0.00% | trades=0/5 | session=✅ | open_positions=0
+2026-05-16 00:27:05,469 - INFO - 🔎 BTCUSDT
+2026-05-16 00:27:08,262 - WARNING - 🧹 BTCUSDT no position but 1 orphan orders; canceling
+2026-05-16 00:27:09,284 - INFO - ⏸️ BTCUSDT no signal: no Donchian breakout
+2026-05-16 00:27:40,888 - INFO - 📊 Balance=30.75 USDT | available=30.75 USDT | lev=3x | daily=+0.00% | trades=0/5 | session=✅ | open_positions=0
+2026-05-16 00:27:40,889 - INFO - 🔎 BTCUSDT
+2026-05-16 00:27:43,635 - WARNING - 🧹 BTCUSDT no position but 1 orphan orders; canceling
+2026-05-16 00:27:44,604 - INFO - ⏸️ BTCUSDT no signal: no Donchian breakout
+2026-05-16 00:28:16,537 - INFO - 📊 Balance=30.75 USDT | available=30.75 USDT | lev=3x | daily=+0.00% | trades=0/5 | session=✅ | open_positions=0
+2026-05-16 00:28:16,538 - INFO - 🔎 BTCUSDT
+2026-05-16 00:28:19,944 - WARNING - 🧹 BTCUSDT no position but 1 orphan orders; canceling
+2026-05-16 00:28:20,884 - INFO - ⏸️ BTCUSDT no signal: no Donchian breakout
+2026-05-16 00:28:52,554 - INFO - 📊 Balance=30.75 USDT | available=30.75 USDT | lev=3x | daily=+0.00% | trades=0/5 | session=✅ | open_positions=0
+2026-05-16 00:28:52,554 - INFO - 🔎 BTCUSDT
+2026-05-16 00:28:55,434 - WARNING - 🧹 BTCUSDT no position but 1 orphan orders; canceling
+2026-05-16 00:28:56,434 - INFO - ⏸️ BTCUSDT no signal: no Donchian breakout
+2026-05-16 00:29:28,096 - INFO - 📊 Balance=30.75 USDT | available=30.75 USDT | lev=3x | daily=+0.00% | trades=0/5 | session=✅ | open_positions=0
+2026-05-16 00:29:28,097 - INFO - 🔎 BTCUSDT
+2026-05-16 00:29:30,863 - WARNING - 🧹 BTCUSDT no position but 1 orphan orders; canceling
+2026-05-16 00:29:31,998 - INFO - ⏸️ BTCUSDT no signal: no Donchian breakout
+2026-05-16 00:30:02,622 - INFO - ⏱️ Time synced offset=-55ms
+2026-05-16 00:30:04,639 - INFO - 📊 Balance=30.75 USDT | available=30.75 USDT | lev=3x | daily=+0.00% | trades=0/5 | session=✅ | open_positions=0
+2026-05-16 00:30:04,639 - INFO - 🔎 BTCUSDT
+2026-05-16 00:30:08,118 - WARNING - 🧹 BTCUSDT no position but 1 orphan orders; canceling
+2026-05-16 00:30:09,165 - INFO - ⏸️ BTCUSDT no signal: no Donchian breakout
+2026-05-16 00:30:41,078 - INFO - 📊 Balance=30.75 USDT | available=30.75 USDT | lev=3x | daily=+0.00% | trades=0/5 | session=✅ | open_positions=0
+2026-05-16 00:30:41,079 - INFO - 🔎 BTCUSDT
+2026-05-16 00:30:44,244 - WARNING - 🧹 BTCUSDT no position but 1 orphan orders; canceling
+2026-05-16 00:30:45,210 - INFO - ⏸️ BTCUSDT no signal: no Donchian breakout
+2026-05-16 00:31:16,894 - INFO - 📊 Balance=30.75 USDT | available=30.75 USDT | lev=3x | daily=+0.00% | trades=0/5 | session=✅ | open_positions=0
+2026-05-16 00:31:16,895 - INFO - 🔎 BTCUSDT
+2026-05-16 00:31:19,690 - WARNING - 🧹 BTCUSDT no position but 1 orphan orders; canceling
+2026-05-16 00:31:20,659 - INFO - ⏸️ BTCUSDT no signal: no Donchian breakout
+2026-05-16 00:31:52,301 - INFO - 📊 Balance=30.75 USDT | available=30.75 USDT | lev=3x | daily=+0.00% | trades=0/5 | session=✅ | open_positions=0
+2026-05-16 00:31:52,301 - INFO - 🔎 BTCUSDT
+2026-05-16 00:31:55,237 - WARNING - 🧹 BTCUSDT no position but 1 orphan orders; canceling
+2026-05-16 00:31:56,254 - INFO - ⏸️ BTCUSDT no signal: no Donchian breakout
+2026-05-16 00:32:27,823 - INFO - 📊 Balance=30.75 USDT | available=30.75 USDT | lev=3x | daily=+0.00% | trades=0/5 | session=✅ | open_positions=0
+2026-05-16 00:32:27,823 - INFO - 🔎 BTCUSDT
+2026-05-16 00:32:30,723 - WARNING - 🧹 BTCUSDT no position but 1 orphan orders; canceling
+2026-05-16 00:32:31,675 - INFO - ⏸️ BTCUSDT no signal: no Donchian breakout
+2026-05-16 00:33:03,247 - INFO - 📊 Balance=30.75 USDT | available=30.75 USDT | lev=3x | daily=+0.00% | trades=0/5 | session=✅ | open_positions=0
+2026-05-16 00:33:03,247 - INFO - 🔎 BTCUSDT
+2026-05-16 00:33:05,996 - WARNING - 🧹 BTCUSDT no position but 1 orphan orders; canceling
+2026-05-16 00:33:06,886 - INFO - ⏸️ BTCUSDT no signal: no Donchian breakout
+2026-05-16 00:33:38,778 - INFO - 📊 Balance=30.75 USDT | available=30.75 USDT | lev=3x | daily=+0.00% | trades=0/5 | session=✅ | open_positions=0
+2026-05-16 00:33:38,778 - INFO - 🔎 BTCUSDT
+2026-05-16 00:33:41,562 - WARNING - 🧹 BTCUSDT no position but 1 orphan orders; canceling
+2026-05-16 00:33:42,527 - INFO - ⏸️ BTCUSDT no signal: no Donchian breakout
+2026-05-16 00:34:14,393 - INFO - 📊 Balance=30.75 USDT | available=30.75 USDT | lev=3x | daily=+0.00% | trades=0/5 | session=✅ | open_positions=0
+2026-05-16 00:34:14,394 - INFO - 🔎 BTCUSDT
+2026-05-16 00:34:17,059 - WARNING - 🧹 BTCUSDT no position but 1 orphan orders; canceling
+2026-05-16 00:34:17,968 - INFO - ⏸️ BTCUSDT no signal: no Donchian breakout
+2026-05-16 00:34:49,649 - INFO - 📊 Balance=30.75 USDT | available=30.75 USDT | lev=3x | daily=+0.00% | trades=0/5 | session=✅ | open_positions=0
+2026-05-16 00:34:49,649 - INFO - 🔎 BTCUSDT
+2026-05-16 00:34:52,503 - WARNING - 🧹 BTCUSDT no position but 1 orphan orders; canceling
+2026-05-16 00:34:53,467 - INFO - ⏸️ BTCUSDT no signal: no Donchian breakout
+2026-05-16 00:35:24,088 - INFO - ⏱️ Time synced offset=-66ms
+2026-05-16 00:35:25,780 - INFO - 📊 Balance=30.75 USDT | available=30.75 USDT | lev=3x | daily=+0.00% | trades=0/5 | session=✅ | open_positions=0
+2026-05-16 00:35:25,780 - INFO - 🔎 BTCUSDT
+2026-05-16 00:35:28,726 - WARNING - 🧹 BTCUSDT no position but 1 orphan orders; canceling
+2026-05-16 00:35:29,663 - INFO - ⏸️ BTCUSDT no signal: no Donchian breakout
+2026-05-16 00:36:01,364 - INFO - 📊 Balance=30.75 USDT | available=30.75 USDT | lev=3x | daily=+0.00% | trades=0/5 | session=✅ | open_positions=0
+2026-05-16 00:36:01,365 - INFO - 🔎 BTCUSDT
+2026-05-16 00:36:04,509 - WARNING - 🧹 BTCUSDT no position but 1 orphan orders; canceling
+2026-05-16 00:36:05,672 - INFO - ⏸️ BTCUSDT no signal: no Donchian breakout
+2026-05-16 00:36:37,277 - INFO - 📊 Balance=30.75 USDT | available=30.75 USDT | lev=3x | daily=+0.00% | trades=0/5 | session=✅ | open_positions=0
+2026-05-16 00:36:37,277 - INFO - 🔎 BTCUSDT
+2026-05-16 00:36:40,935 - WARNING - 🧹 BTCUSDT no position but 1 orphan orders; canceling
+2026-05-16 00:36:41,853 - INFO - ⏸️ BTCUSDT no signal: no Donchian breakout
+2026-05-16 00:37:14,530 - INFO - 📊 Balance=30.75 USDT | available=30.75 USDT | lev=3x | daily=+0.00% | trades=0/5 | session=✅ | open_positions=0
+2026-05-16 00:37:14,531 - INFO - 🔎 BTCUSDT
+2026-05-16 00:37:18,078 - WARNING - 🧹 BTCUSDT no position but 1 orphan orders; canceling
+2026-05-16 00:37:19,011 - INFO - ⏸️ BTCUSDT no signal: no Donchian breakout
+2026-05-16 00:37:50,734 - INFO - 📊 Balance=30.75 USDT | available=30.75 USDT | lev=3x | daily=+0.00% | trades=0/5 | session=✅ | open_positions=0
+2026-05-16 00:37:50,735 - INFO - 🔎 BTCUSDT
+2026-05-16 00:37:53,427 - WARNING - 🧹 BTCUSDT no position but 1 orphan orders; canceling
+2026-05-16 00:37:54,352 - INFO - ⏸️ BTCUSDT no signal: no Donchian breakout
+2026-05-16 00:38:26,101 - INFO - 📊 Balance=30.75 USDT | available=30.75 USDT | lev=3x | daily=+0.00% | trades=0/5 | session=✅ | open_positions=0
+2026-05-16 00:38:26,101 - INFO - 🔎 BTCUSDT
+2026-05-16 00:38:29,977 - WARNING - 🧹 BTCUSDT no position but 1 orphan orders; canceling
+2026-05-16 00:38:30,979 - INFO - ⏸️ BTCUSDT no signal: no Donchian breakout
+2026-05-16 00:39:02,657 - INFO - 📊 Balance=30.75 USDT | available=30.75 USDT | lev=3x | daily=+0.00% | trades=0/5 | session=✅ | open_positions=0
+2026-05-16 00:39:02,657 - INFO - 🔎 BTCUSDT
+2026-05-16 00:39:05,446 - WARNING - 🧹 BTCUSDT no position but 1 orphan orders; canceling
+2026-05-16 00:39:06,403 - INFO - ⏸️ BTCUSDT no signal: no Donchian breakout
+2026-05-16 00:39:38,096 - INFO - 📊 Balance=30.75 USDT | available=30.75 USDT | lev=3x | daily=+0.00% | trades=0/5 | session=✅ | open_positions=0
+2026-05-16 00:39:38,096 - INFO - 🔎 BTCUSDT
+2026-05-16 00:39:41,139 - WARNING - 🧹 BTCUSDT no position but 1 orphan orders; canceling
+2026-05-16 00:39:42,097 - INFO - ⏸️ BTCUSDT no signal: no Donchian breakout
+2026-05-16 00:40:14,274 - INFO - 📊 Balance=30.75 USDT | available=30.75 USDT | lev=3x | daily=+0.00% | trades=0/5 | session=✅ | open_positions=0
+2026-05-16 00:40:14,274 - INFO - 🔎 BTCUSDT
+2026-05-16 00:40:17,124 - WARNING - 🧹 BTCUSDT no position but 1 orphan orders; canceling
+2026-05-16 00:40:18,040 - INFO - ⏸️ BTCUSDT no signal: M15 ADX not rising
+2026-05-16 00:40:48,613 - INFO - ⏱️ Time synced offset=-59ms
+2026-05-16 00:40:50,245 - INFO - 📊 Balance=30.75 USDT | available=30.75 USDT | lev=3x | daily=+0.00% | trades=0/5 | session=✅ | open_positions=0
+2026-05-16 00:40:50,246 - INFO - 🔎 BTCUSDT
+2026-05-16 00:40:53,000 - WARNING - 🧹 BTCUSDT no position but 1 orphan orders; canceling
+2026-05-16 00:40:53,935 - INFO - ⏸️ BTCUSDT no signal: M15 ADX not rising
+2026-05-16 00:41:25,609 - INFO - 📊 Balance=30.75 USDT | available=30.75 USDT | lev=3x | daily=+0.00% | trades=0/5 | session=✅ | open_positions=0
+2026-05-16 00:41:25,610 - INFO - 🔎 BTCUSDT
+2026-05-16 00:41:28,583 - WARNING - 🧹 BTCUSDT no position but 1 orphan orders; canceling
+2026-05-16 00:41:29,868 - INFO - ⏸️ BTCUSDT no signal: M15 ADX not rising
+2026-05-16 00:42:03,693 - INFO - 📊 Balance=30.75 USDT | available=30.75 USDT | lev=3x | daily=+0.00% | trades=0/5 | session=✅ | open_positions=0
+2026-05-16 00:42:03,693 - INFO - 🔎 BTCUSDT
+2026-05-16 00:42:07,674 - WARNING - 🧹 BTCUSDT no position but 1 orphan orders; canceling
+2026-05-16 00:42:09,189 - INFO - ⏸️ BTCUSDT no signal: M15 ADX not rising
+2026-05-16 00:42:41,797 - INFO - 📊 Balance=30.75 USDT | available=30.75 USDT | lev=3x | daily=+0.00% | trades=0/5 | session=✅ | open_positions=0
+2026-05-16 00:42:41,797 - INFO - 🔎 BTCUSDT
+2026-05-16 00:42:44,673 - WARNING - 🧹 BTCUSDT no position but 1 orphan orders; canceling
+2026-05-16 00:42:45,666 - INFO - ⏸️ BTCUSDT no signal: M15 ADX not rising
+2026-05-16 00:43:18,745 - INFO - 📊 Balance=30.75 USDT | available=30.75 USDT | lev=3x | daily=+0.00% | trades=0/5 | session=✅ | open_positions=0
+2026-05-16 00:43:18,745 - INFO - 🔎 BTCUSDT
+2026-05-16 00:43:25,168 - WARNING - 🧹 BTCUSDT no position but 1 orphan orders; canceling
+2026-05-16 00:43:26,322 - INFO - ⏸️ BTCUSDT no signal: M15 ADX not rising
+2026-05-16 00:43:58,046 - INFO - 📊 Balance=30.75 USDT | available=30.75 USDT | lev=3x | daily=+0.00% | trades=0/5 | session=✅ | open_positions=0
+2026-05-16 00:43:58,046 - INFO - 🔎 BTCUSDT
+2026-05-16 00:44:00,948 - WARNING - 🧹 BTCUSDT no position but 1 orphan orders; canceling
+2026-05-16 00:44:02,043 - INFO - ⏸️ BTCUSDT no signal: M15 ADX not rising
+2026-05-16 00:44:33,680 - INFO - 📊 Balance=30.75 USDT | available=30.75 USDT | lev=3x | daily=+0.00% | trades=0/5 | session=✅ | open_positions=0
+2026-05-16 00:44:33,681 - INFO - 🔎 BTCUSDT
+2026-05-16 00:44:36,437 - WARNING - 🧹 BTCUSDT no position but 1 orphan orders; canceling
+2026-05-16 00:44:37,428 - INFO - ⏸️ BTCUSDT no signal: M15 ADX not rising
+2026-05-16 00:45:09,068 - INFO - 📊 Balance=30.75 USDT | available=30.75 USDT | lev=3x | daily=+0.00% | trades=0/5 | session=✅ | open_positions=0
+2026-05-16 00:45:09,069 - INFO - 🔎 BTCUSDT
+2026-05-16 00:45:11,924 - WARNING - 🧹 BTCUSDT no position but 1 orphan orders; canceling
+2026-05-16 00:45:12,924 - INFO - ⏸️ BTCUSDT no signal: no Donchian breakout
+2026-05-16 00:45:44,890 - INFO - 📊 Balance=30.75 USDT | available=30.75 USDT | lev=3x | daily=+0.00% | trades=0/5 | session=✅ | open_positions=0
+2026-05-16 00:45:44,890 - INFO - 🔎 BTCUSDT
+2026-05-16 00:45:47,749 - WARNING - 🧹 BTCUSDT no position but 1 orphan orders; canceling
+2026-05-16 00:45:48,775 - INFO - ⏸️ BTCUSDT no signal: no Donchian breakout
+2026-05-16 00:46:19,303 - INFO - ⏱️ Time synced offset=-57ms
+2026-05-16 00:46:20,840 - INFO - 📊 Balance=30.75 USDT | available=30.75 USDT | lev=3x | daily=+0.00% | trades=0/5 | session=✅ | open_positions=0
+2026-05-16 00:46:20,840 - INFO - 🔎 BTCUSDT
+2026-05-16 00:46:23,691 - WARNING - 🧹 BTCUSDT no position but 1 orphan orders; canceling
+2026-05-16 00:46:24,658 - INFO - ⏸️ BTCUSDT no signal: no Donchian breakout
+2026-05-16 00:46:56,280 - INFO - 📊 Balance=30.75 USDT | available=30.75 USDT | lev=3x | daily=+0.00% | trades=0/5 | session=✅ | open_positions=0
+2026-05-16 00:46:56,280 - INFO - 🔎 BTCUSDT
+2026-05-16 00:47:00,371 - WARNING - 🧹 BTCUSDT no position but 1 orphan orders; canceling
+2026-05-16 00:47:01,344 - INFO - ⏸️ BTCUSDT no signal: no Donchian breakout
+2026-05-16 00:47:33,210 - INFO - 📊 Balance=30.75 USDT | available=30.75 USDT | lev=3x | daily=+0.00% | trades=0/5 | session=✅ | open_positions=0
+2026-05-16 00:47:33,210 - INFO - 🔎 BTCUSDT
+2026-05-16 00:47:36,756 - WARNING - 🧹 BTCUSDT no position but 1 orphan orders; canceling
+2026-05-16 00:47:37,936 - INFO - ⏸️ BTCUSDT no signal: no Donchian breakout
+2026-05-16 00:48:09,971 - INFO - 📊 Balance=30.75 USDT | available=30.75 USDT | lev=3x | daily=+0.00% | trades=0/5 | session=✅ | open_positions=0
+2026-05-16 00:48:09,971 - INFO - 🔎 BTCUSDT
+2026-05-16 00:48:12,980 - WARNING - 🧹 BTCUSDT no position but 1 orphan orders; canceling
+2026-05-16 00:48:13,949 - INFO - ⏸️ BTCUSDT no signal: no Donchian breakout
+2026-05-16 00:48:45,697 - INFO - 📊 Balance=30.75 USDT | available=30.75 USDT | lev=3x | daily=+0.00% | trades=0/5 | session=✅ | open_positions=0
+2026-05-16 00:48:45,698 - INFO - 🔎 BTCUSDT
+2026-05-16 00:48:48,656 - WARNING - 🧹 BTCUSDT no position but 1 orphan orders; canceling
+2026-05-16 00:48:49,633 - INFO - ⏸️ BTCUSDT no signal: no Donchian breakout
+2026-05-16 00:49:21,347 - INFO - 📊 Balance=30.75 USDT | available=30.75 USDT | lev=3x | daily=+0.00% | trades=0/5 | session=✅ | open_positions=0
+2026-05-16 00:49:21,347 - INFO - 🔎 BTCUSDT
+2026-05-16 00:49:24,255 - WARNING - 🧹 BTCUSDT no position but 1 orphan orders; canceling
+2026-05-16 00:49:25,187 - INFO - ⏸️ BTCUSDT no signal: no Donchian breakout
+2026-05-16 00:49:56,971 - INFO - 📊 Balance=30.75 USDT | available=30.75 USDT | lev=3x | daily=+0.00% | trades=0/5 | session=✅ | open_positions=0
+2026-05-16 00:49:56,972 - INFO - 🔎 BTCUSDT
+2026-05-16 00:49:59,715 - WARNING - 🧹 BTCUSDT no position but 1 orphan orders; canceling
+2026-05-16 00:50:00,657 - INFO - ⏸️ BTCUSDT no signal: no Donchian breakout
+2026-05-16 00:50:32,515 - INFO - 📊 Balance=30.75 USDT | available=30.75 USDT | lev=3x | daily=+0.00% | trades=0/5 | session=✅ | open_positions=0
+2026-05-16 00:50:32,516 - INFO - 🔎 BTCUSDT
+2026-05-16 00:50:35,292 - WARNING - 🧹 BTCUSDT no position but 1 orphan orders; canceling
+2026-05-16 00:50:36,265 - INFO - ⏸️ BTCUSDT no signal: no Donchian breakout
+2026-05-16 00:51:07,945 - INFO - 📊 Balance=30.75 USDT | available=30.75 USDT | lev=3x | daily=+0.00% | trades=0/5 | session=✅ | open_positions=0
+2026-05-16 00:51:07,945 - INFO - 🔎 BTCUSDT
+2026-05-16 00:51:11,065 - WARNING - 🧹 BTCUSDT no position but 1 orphan orders; canceling
+2026-05-16 00:51:12,161 - INFO - ⏸️ BTCUSDT no signal: no Donchian breakout
+2026-05-16 00:51:42,736 - INFO - ⏱️ Time synced offset=-58ms
+2026-05-16 00:51:44,430 - INFO - 📊 Balance=30.75 USDT | available=30.75 USDT | lev=3x | daily=+0.00% | trades=0/5 | session=✅ | open_positions=0
+2026-05-16 00:51:44,431 - INFO - 🔎 BTCUSDT
+2026-05-16 00:51:47,685 - WARNING - 🧹 BTCUSDT no position but 1 orphan orders; canceling
+2026-05-16 00:51:48,997 - INFO - ⏸️ BTCUSDT no signal: no Donchian breakout
+2026-05-16 00:52:20,824 - INFO - 📊 Balance=30.75 USDT | available=30.75 USDT | lev=3x | daily=+0.00% | trades=0/5 | session=✅ | open_positions=0
+2026-05-16 00:52:20,824 - INFO - 🔎 BTCUSDT
+2026-05-16 00:52:23,549 - WARNING - 🧹 BTCUSDT no position but 1 orphan orders; canceling
+2026-05-16 00:52:24,519 - INFO - ⏸️ BTCUSDT no signal: no Donchian breakout
+2026-05-16 00:52:56,242 - INFO - 📊 Balance=30.75 USDT | available=30.75 USDT | lev=3x | daily=+0.00% | trades=0/5 | session=✅ | open_positions=0
+2026-05-16 00:52:56,242 - INFO - 🔎 BTCUSDT
+2026-05-16 00:52:59,200 - WARNING - 🧹 BTCUSDT no position but 1 orphan orders; canceling
+2026-05-16 00:53:00,161 - INFO - ⏸️ BTCUSDT no signal: no Donchian breakout
+2026-05-16 00:53:32,694 - INFO - 📊 Balance=30.75 USDT | available=30.75 USDT | lev=3x | daily=+0.00% | trades=0/5 | session=✅ | open_positions=0
+2026-05-16 00:53:32,694 - INFO - 🔎 BTCUSDT
+2026-05-16 00:53:35,581 - WARNING - 🧹 BTCUSDT no position but 1 orphan orders; canceling
+2026-05-16 00:53:36,615 - INFO - ⏸️ BTCUSDT no signal: no Donchian breakout
+2026-05-16 00:54:08,405 - INFO - 📊 Balance=30.75 USDT | available=30.75 USDT | lev=3x | daily=+0.00% | trades=0/5 | session=✅ | open_positions=0
+2026-05-16 00:54:08,405 - INFO - 🔎 BTCUSDT
+2026-05-16 00:54:11,411 - WARNING - 🧹 BTCUSDT no position but 1 orphan orders; canceling
+2026-05-16 00:54:12,645 - INFO - ⏸️ BTCUSDT no signal: no Donchian breakout
+2026-05-16 00:54:44,352 - INFO - 📊 Balance=30.75 USDT | available=30.75 USDT | lev=3x | daily=+0.00% | trades=0/5 | session=✅ | open_positions=0
+2026-05-16 00:54:44,352 - INFO - 🔎 BTCUSDT
+2026-05-16 00:54:47,353 - WARNING - 🧹 BTCUSDT no position but 1 orphan orders; canceling
+2026-05-16 00:54:48,315 - INFO - ⏸️ BTCUSDT no signal: no Donchian breakout
+2026-05-16 00:55:20,007 - INFO - 📊 Balance=30.75 USDT | available=30.75 USDT | lev=3x | daily=+0.00% | trades=0/5 | session=✅ | open_positions=0
+2026-05-16 00:55:20,007 - INFO - 🔎 BTCUSDT
+2026-05-16 00:55:22,723 - WARNING - 🧹 BTCUSDT no position but 1 orphan orders; canceling
+2026-05-16 00:55:23,734 - INFO - ⏸️ BTCUSDT no signal: no Donchian breakout
+2026-05-16 00:55:55,427 - INFO - 📊 Balance=30.75 USDT | available=30.75 USDT | lev=3x | daily=+0.00% | trades=0/5 | session=✅ | open_positions=0
+2026-05-16 00:55:55,428 - INFO - 🔎 BTCUSDT
+2026-05-16 00:55:58,932 - WARNING - 🧹 BTCUSDT no position but 1 orphan orders; canceling
+2026-05-16 00:56:03,230 - INFO - ⏸️ BTCUSDT no signal: no Donchian breakout
+2026-05-16 00:56:34,830 - INFO - 📊 Balance=30.75 USDT | available=30.75 USDT | lev=3x | daily=+0.00% | trades=0/5 | session=✅ | open_positions=0
+2026-05-16 00:56:34,830 - INFO - 🔎 BTCUSDT
+2026-05-16 00:56:37,545 - WARNING - 🧹 BTCUSDT no position but 1 orphan orders; canceling
+2026-05-16 00:56:38,509 - INFO - ⏸️ BTCUSDT no signal: no Donchian breakout
+2026-05-16 00:57:09,063 - INFO - ⏱️ Time synced offset=-55ms
+2026-05-16 00:57:10,627 - INFO - 📊 Balance=30.75 USDT | available=30.75 USDT | lev=3x | daily=+0.00% | trades=0/5 | session=✅ | open_positions=0
+2026-05-16 00:57:10,628 - INFO - 🔎 BTCUSDT
+2026-05-16 00:57:14,231 - WARNING - 🧹 BTCUSDT no position but 1 orphan orders; canceling
+2026-05-16 00:57:15,174 - INFO - ⏸️ BTCUSDT no signal: no Donchian breakout
+2026-05-16 00:57:46,855 - INFO - 📊 Balance=30.75 USDT | available=30.75 USDT | lev=3x | daily=+0.00% | trades=0/5 | session=✅ | open_positions=0
+2026-05-16 00:57:46,855 - INFO - 🔎 BTCUSDT
+2026-05-16 00:57:50,368 - WARNING - 🧹 BTCUSDT no position but 1 orphan orders; canceling
+2026-05-16 00:57:51,279 - INFO - ⏸️ BTCUSDT no signal: no Donchian breakout
+2026-05-16 00:58:22,971 - INFO - 📊 Balance=30.75 USDT | available=30.75 USDT | lev=3x | daily=+0.00% | trades=0/5 | session=✅ | open_positions=0
+2026-05-16 00:58:22,971 - INFO - 🔎 BTCUSDT
+2026-05-16 00:58:25,798 - WARNING - 🧹 BTCUSDT no position but 1 orphan orders; canceling
+2026-05-16 00:58:26,731 - INFO - ⏸️ BTCUSDT no signal: no Donchian breakout
+2026-05-16 00:58:58,505 - INFO - 📊 Balance=30.75 USDT | available=30.75 USDT | lev=3x | daily=+0.00% | trades=0/5 | session=✅ | open_positions=0
+2026-05-16 00:58:58,506 - INFO - 🔎 BTCUSDT
+2026-05-16 00:59:01,326 - WARNING - 🧹 BTCUSDT no position but 1 orphan orders; canceling
+2026-05-16 00:59:02,254 - INFO - ⏸️ BTCUSDT no signal: no Donchian breakout
+2026-05-16 00:59:33,921 - INFO - 📊 Balance=30.75 USDT | available=30.75 USDT | lev=3x | daily=+0.00% | trades=0/5 | session=✅ | open_positions=0
+2026-05-16 00:59:33,921 - INFO - 🔎 BTCUSDT
+2026-05-16 00:59:37,052 - WARNING - 🧹 BTCUSDT no position but 1 orphan orders; canceling
+2026-05-16 00:59:38,368 - INFO - ⏸️ BTCUSDT no signal: no Donchian breakout
+2026-05-16 01:00:10,163 - INFO - [STATS] Hourly rejections (of 100 attempts): {'no_donchian_breakout': '92(92%)', 'adx_not_rising': '8(8%)'}
+2026-05-16 01:00:10,164 - INFO - 📊 Balance=30.75 USDT | available=30.75 USDT | lev=3x | daily=+0.00% | trades=0/5 | session=✅ | open_positions=0
+2026-05-16 01:00:10,164 - INFO - 🔎 BTCUSDT
+2026-05-16 01:00:15,963 - WARNING - 🧹 BTCUSDT no position but 1 orphan orders; canceling
+2026-05-16 01:00:16,899 - INFO - ⏸️ BTCUSDT no signal: no Donchian breakout
+2026-05-16 01:00:49,021 - INFO - 📊 Balance=30.75 USDT | available=30.75 USDT | lev=3x | daily=+0.00% | trades=0/5 | session=✅ | open_positions=0
+2026-05-16 01:00:49,021 - INFO - 🔎 BTCUSDT
+2026-05-16 01:00:55,356 - WARNING - 🧹 BTCUSDT no position but 1 orphan orders; canceling
+2026-05-16 01:00:56,649 - INFO - ⏸️ BTCUSDT no signal: no Donchian breakout
+2026-05-16 01:01:28,943 - INFO - 📊 Balance=30.75 USDT | available=30.75 USDT | lev=3x | daily=+0.00% | trades=0/5 | session=✅ | open_positions=0
+2026-05-16 01:01:28,943 - INFO - 🔎 BTCUSDT
+2026-05-16 01:01:34,160 - WARNING - 🧹 BTCUSDT no position but 1 orphan orders; canceling
+2026-05-16 01:01:35,076 - INFO - ⏸️ BTCUSDT no signal: no Donchian breakout
+2026-05-16 01:02:06,812 - INFO - 📊 Balance=30.75 USDT | available=30.75 USDT | lev=3x | daily=+0.00% | trades=0/5 | session=✅ | open_positions=0
+2026-05-16 01:02:06,813 - INFO - 🔎 BTCUSDT
+2026-05-16 01:02:09,878 - INFO - ⏱️ Time synced offset=-57ms
+2026-05-16 01:02:10,962 - WARNING - 🧹 BTCUSDT no position but 1 orphan orders; canceling
+2026-05-16 01:02:11,885 - INFO - ⏸️ BTCUSDT no signal: no Donchian breakout
+2026-05-16 01:02:43,639 - INFO - 📊 Balance=30.75 USDT | available=30.75 USDT | lev=3x | daily=+0.00% | trades=0/5 | session=✅ | open_positions=0
+2026-05-16 01:02:43,639 - INFO - 🔎 BTCUSDT
+2026-05-16 01:02:47,170 - WARNING - 🧹 BTCUSDT no position but 1 orphan orders; canceling
+2026-05-16 01:02:48,100 - INFO - ⏸️ BTCUSDT no signal: no Donchian breakout
+2026-05-16 01:03:19,890 - INFO - 📊 Balance=30.75 USDT | available=30.75 USDT | lev=3x | daily=+0.00% | trades=0/5 | session=✅ | open_positions=0
+2026-05-16 01:03:19,890 - INFO - 🔎 BTCUSDT
+2026-05-16 01:03:23,104 - WARNING - 🧹 BTCUSDT no position but 1 orphan orders; canceling
+2026-05-16 01:03:24,076 - INFO - ⏸️ BTCUSDT no signal: no Donchian breakout
+2026-05-16 01:03:55,861 - INFO - 📊 Balance=30.75 USDT | available=30.75 USDT | lev=3x | daily=+0.00% | trades=0/5 | session=✅ | open_positions=0
+2026-05-16 01:03:55,862 - INFO - 🔎 BTCUSDT
+2026-05-16 01:03:58,748 - WARNING - 🧹 BTCUSDT no position but 1 orphan orders; canceling
+2026-05-16 01:04:00,310 - INFO - ⏸️ BTCUSDT no signal: no Donchian breakout
+2026-05-16 01:04:39,779 - INFO - 📊 Balance=30.75 USDT | available=30.75 USDT | lev=3x | daily=+0.00% | trades=0/5 | session=✅ | open_positions=0
+2026-05-16 01:04:39,779 - INFO - 🔎 BTCUSDT
+2026-05-16 01:04:43,847 - WARNING - 🧹 BTCUSDT no position but 1 orphan orders; canceling
+2026-05-16 01:04:45,605 - INFO - ⏸️ BTCUSDT no signal: no Donchian breakout
+2026-05-16 01:05:21,537 - INFO - 📊 Balance=30.75 USDT | available=30.75 USDT | lev=3x | daily=+0.00% | trades=0/5 | session=✅ | open_positions=0
+2026-05-16 01:05:21,538 - INFO - 🔎 BTCUSDT
+2026-05-16 01:05:24,823 - WARNING - 🧹 BTCUSDT no position but 1 orphan orders; canceling
+2026-05-16 01:05:27,636 - INFO - ⏸️ BTCUSDT no signal: M15 ADX not rising
+2026-05-16 01:05:59,387 - INFO - 📊 Balance=30.75 USDT | available=30.75 USDT | lev=3x | daily=+0.00% | trades=0/5 | session=✅ | open_positions=0
+2026-05-16 01:05:59,388 - INFO - 🔎 BTCUSDT
+2026-05-16 01:06:03,732 - WARNING - 🧹 BTCUSDT no position but 1 orphan orders; canceling
+2026-05-16 01:06:04,844 - INFO - ⏸️ BTCUSDT no signal: M15 ADX not rising
+2026-05-16 01:06:37,367 - INFO - 📊 Balance=30.75 USDT | available=30.75 USDT | lev=3x | daily=+0.00% | trades=0/5 | session=✅ | open_positions=0
+2026-05-16 01:06:37,367 - INFO - 🔎 BTCUSDT
+2026-05-16 01:06:40,112 - WARNING - 🧹 BTCUSDT no position but 1 orphan orders; canceling
+2026-05-16 01:06:41,060 - INFO - ⏸️ BTCUSDT no signal: M15 ADX not rising
+2026-05-16 01:07:11,628 - INFO - ⏱️ Time synced offset=-57ms
+2026-05-16 01:07:13,482 - INFO - 📊 Balance=30.75 USDT | available=30.75 USDT | lev=3x | daily=+0.00% | trades=0/5 | session=✅ | open_positions=0
+2026-05-16 01:07:13,483 - INFO - 🔎 BTCUSDT
+2026-05-16 01:07:16,328 - WARNING - 🧹 BTCUSDT no position but 1 orphan orders; canceling
+2026-05-16 01:07:17,254 - INFO - ⏸️ BTCUSDT no signal: M15 ADX not rising
+2026-05-16 01:07:48,873 - INFO - 📊 Balance=30.75 USDT | available=30.75 USDT | lev=3x | daily=+0.00% | trades=0/5 | session=✅ | open_positions=0
+2026-05-16 01:07:48,874 - INFO - 🔎 BTCUSDT
+2026-05-16 01:07:51,680 - WARNING - 🧹 BTCUSDT no position but 1 orphan orders; canceling
+2026-05-16 01:07:52,597 - INFO - ⏸️ BTCUSDT no signal: M15 ADX not rising
+2026-05-16 01:08:25,158 - INFO - 📊 Balance=30.75 USDT | available=30.75 USDT | lev=3x | daily=+0.00% | trades=0/5 | session=✅ | open_positions=0
+2026-05-16 01:08:25,159 - INFO - 🔎 BTCUSDT
+2026-05-16 01:08:28,026 - WARNING - 🧹 BTCUSDT no position but 1 orphan orders; canceling
+2026-05-16 01:08:28,938 - INFO - ⏸️ BTCUSDT no signal: M15 ADX not rising
+2026-05-16 01:09:00,953 - INFO - 📊 Balance=30.75 USDT | available=30.75 USDT | lev=3x | daily=+0.00% | trades=0/5 | session=✅ | open_positions=0
+2026-05-16 01:09:00,953 - INFO - 🔎 BTCUSDT
+2026-05-16 01:09:04,042 - WARNING - 🧹 BTCUSDT no position but 1 orphan orders; canceling
+2026-05-16 01:09:04,985 - INFO - ⏸️ BTCUSDT no signal: M15 ADX not rising
+2026-05-16 01:09:36,577 - INFO - 📊 Balance=30.75 USDT | available=30.75 USDT | lev=3x | daily=+0.00% | trades=0/5 | session=✅ | open_positions=0
+2026-05-16 01:09:36,577 - INFO - 🔎 BTCUSDT
+2026-05-16 01:09:40,337 - WARNING - 🧹 BTCUSDT no position but 1 orphan orders; canceling
+2026-05-16 01:09:41,619 - INFO - ⏸️ BTCUSDT no signal: M15 ADX not rising
+2026-05-16 01:10:14,120 - INFO - 📊 Balance=30.75 USDT | available=30.75 USDT | lev=3x | daily=+0.00% | trades=0/5 | session=✅ | open_positions=0
+2026-05-16 01:10:14,120 - INFO - 🔎 BTCUSDT
+2026-05-16 01:10:17,674 - WARNING - 🧹 BTCUSDT no position but 1 orphan orders; canceling
+2026-05-16 01:10:18,626 - INFO - ⏸️ BTCUSDT no signal: no Donchian breakout
+2026-05-16 01:10:50,707 - INFO - 📊 Balance=30.75 USDT | available=30.75 USDT | lev=3x | daily=+0.00% | trades=0/5 | session=✅ | open_positions=0
+2026-05-16 01:10:50,707 - INFO - 🔎 BTCUSDT
+2026-05-16 01:10:53,572 - WARNING - 🧹 BTCUSDT no position but 1 orphan orders; canceling
+2026-05-16 01:10:54,541 - INFO - ⏸️ BTCUSDT no signal: no Donchian breakout
+2026-05-16 01:11:26,419 - INFO - 📊 Balance=30.75 USDT | available=30.75 USDT | lev=3x | daily=+0.00% | trades=0/5 | session=✅ | open_positions=0
+2026-05-16 01:11:26,420 - INFO - 🔎 BTCUSDT
+2026-05-16 01:11:29,742 - WARNING - 🧹 BTCUSDT no position but 1 orphan orders; canceling
+2026-05-16 01:11:30,956 - INFO - ⏸️ BTCUSDT no signal: no Donchian breakout
+2026-05-16 01:12:02,870 - INFO - 📊 Balance=30.75 USDT | available=30.75 USDT | lev=3x | daily=+0.00% | trades=0/5 | session=✅ | open_positions=0
+2026-05-16 01:12:02,870 - INFO - 🔎 BTCUSDT
+2026-05-16 01:12:06,573 - WARNING - 🧹 BTCUSDT no position but 1 orphan orders; canceling
+2026-05-16 01:12:07,543 - INFO - ⏸️ BTCUSDT no signal: no Donchian breakout
+2026-05-16 01:12:38,259 - INFO - ⏱️ Time synced offset=-66ms
+2026-05-16 01:12:39,846 - INFO - 📊 Balance=30.75 USDT | available=30.75 USDT | lev=3x | daily=+0.00% | trades=0/5 | session=✅ | open_positions=0
+2026-05-16 01:12:39,846 - INFO - 🔎 BTCUSDT
+2026-05-16 01:12:43,074 - WARNING - 🧹 BTCUSDT no position but 1 orphan orders; canceling
+2026-05-16 01:12:43,971 - INFO - ⏸️ BTCUSDT no signal: no Donchian breakout
+2026-05-16 01:13:15,657 - INFO - 📊 Balance=30.75 USDT | available=30.75 USDT | lev=3x | daily=+0.00% | trades=0/5 | session=✅ | open_positions=0
+2026-05-16 01:13:15,657 - INFO - 🔎 BTCUSDT
+2026-05-16 01:13:19,471 - WARNING - 🧹 BTCUSDT no position but 1 orphan orders; canceling
+2026-05-16 01:13:20,598 - INFO - ⏸️ BTCUSDT no signal: no Donchian breakout
+2026-05-16 01:13:52,730 - INFO - 📊 Balance=30.75 USDT | available=30.75 USDT | lev=3x | daily=+0.00% | trades=0/5 | session=✅ | open_positions=0
+2026-05-16 01:13:52,730 - INFO - 🔎 BTCUSDT
+2026-05-16 01:13:55,576 - WARNING - 🧹 BTCUSDT no position but 1 orphan orders; canceling
+2026-05-16 01:13:56,510 - INFO - ⏸️ BTCUSDT no signal: no Donchian breakout
+2026-05-16 01:14:28,130 - INFO - 📊 Balance=30.75 USDT | available=30.75 USDT | lev=3x | daily=+0.00% | trades=0/5 | session=✅ | open_positions=0
+2026-05-16 01:14:28,130 - INFO - 🔎 BTCUSDT
+2026-05-16 01:14:30,923 - WARNING - 🧹 BTCUSDT no position but 1 orphan orders; canceling
+2026-05-16 01:14:31,848 - INFO - ⏸️ BTCUSDT no signal: no Donchian breakout
+2026-05-16 01:15:03,829 - INFO - 📊 Balance=30.75 USDT | available=30.75 USDT | lev=3x | daily=+0.00% | trades=0/5 | session=✅ | open_positions=0
+2026-05-16 01:15:03,830 - INFO - 🔎 BTCUSDT
+2026-05-16 01:15:06,912 - WARNING - 🧹 BTCUSDT no position but 1 orphan orders; canceling
+2026-05-16 01:15:07,934 - INFO - ⏸️ BTCUSDT no signal: no Donchian breakout
+2026-05-16 01:15:40,583 - INFO - 📊 Balance=30.75 USDT | available=30.75 USDT | lev=3x | daily=+0.00% | trades=0/5 | session=✅ | open_positions=0
+2026-05-16 01:15:40,583 - INFO - 🔎 BTCUSDT
+2026-05-16 01:15:43,675 - WARNING - 🧹 BTCUSDT no position but 1 orphan orders; canceling
+2026-05-16 01:15:44,742 - INFO - ⏸️ BTCUSDT no signal: no Donchian breakout
+2026-05-16 01:16:16,405 - INFO - 📊 Balance=30.75 USDT | available=30.75 USDT | lev=3x | daily=+0.00% | trades=0/5 | session=✅ | open_positions=0
+2026-05-16 01:16:16,405 - INFO - 🔎 BTCUSDT
+2026-05-16 01:16:19,893 - WARNING - 🧹 BTCUSDT no position but 1 orphan orders; canceling
+2026-05-16 01:16:20,822 - INFO - ⏸️ BTCUSDT no signal: no Donchian breakout
+2026-05-16 01:16:52,717 - INFO - 📊 Balance=30.75 USDT | available=30.75 USDT | lev=3x | daily=+0.00% | trades=0/5 | session=✅ | open_positions=0
+2026-05-16 01:16:52,718 - INFO - 🔎 BTCUSDT
+2026-05-16 01:16:55,541 - WARNING - 🧹 BTCUSDT no position but 1 orphan orders; canceling
+2026-05-16 01:16:56,495 - INFO - ⏸️ BTCUSDT no signal: no Donchian breakout
+2026-05-16 01:17:28,146 - INFO - 📊 Balance=30.75 USDT | available=30.75 USDT | lev=3x | daily=+0.00% | trades=0/5 | session=✅ | open_positions=0
+2026-05-16 01:17:28,146 - INFO - 🔎 BTCUSDT
+2026-05-16 01:17:30,859 - WARNING - 🧹 BTCUSDT no position but 1 orphan orders; canceling
+2026-05-16 01:17:31,783 - INFO - ⏸️ BTCUSDT no signal: no Donchian breakout
+2026-05-16 01:18:02,645 - INFO - ⏱️ Time synced offset=-59ms
+2026-05-16 01:18:05,234 - INFO - 📊 Balance=30.75 USDT | available=30.75 USDT | lev=3x | daily=+0.00% | trades=0/5 | session=✅ | open_positions=0
+2026-05-16 01:18:05,234 - INFO - 🔎 BTCUSDT
+2026-05-16 01:18:08,206 - WARNING - 🧹 BTCUSDT no position but 1 orphan orders; canceling
+2026-05-16 01:18:09,129 - INFO - ⏸️ BTCUSDT no signal: no Donchian breakout
+2026-05-16 01:18:41,252 - INFO - 📊 Balance=30.75 USDT | available=30.75 USDT | lev=3x | daily=+0.00% | trades=0/5 | session=✅ | open_positions=0
+2026-05-16 01:18:41,252 - INFO - 🔎 BTCUSDT
+2026-05-16 01:18:44,323 - WARNING - 🧹 BTCUSDT no position but 1 orphan orders; canceling
+2026-05-16 01:18:45,517 - INFO - ⏸️ BTCUSDT no signal: no Donchian breakout
+2026-05-16 01:19:17,217 - INFO - 📊 Balance=30.75 USDT | available=30.75 USDT | lev=3x | daily=+0.00% | trades=0/5 | session=✅ | open_positions=0
+2026-05-16 01:19:17,217 - INFO - 🔎 BTCUSDT
+2026-05-16 01:19:19,974 - WARNING - 🧹 BTCUSDT no position but 1 orphan orders; canceling
+2026-05-16 01:19:20,904 - INFO - ⏸️ BTCUSDT no signal: no Donchian breakout
+2026-05-16 01:19:52,575 - INFO - 📊 Balance=30.75 USDT | available=30.75 USDT | lev=3x | daily=+0.00% | trades=0/5 | session=✅ | open_positions=0
+2026-05-16 01:19:52,575 - INFO - 🔎 BTCUSDT
+2026-05-16 01:19:55,320 - WARNING - 🧹 BTCUSDT no position but 1 orphan orders; canceling
+2026-05-16 01:19:56,270 - INFO - ⏸️ BTCUSDT no signal: no Donchian breakout
+2026-05-16 01:20:28,030 - INFO - 📊 Balance=30.75 USDT | available=30.75 USDT | lev=3x | daily=+0.00% | trades=0/5 | session=✅ | open_positions=0
+2026-05-16 01:20:28,030 - INFO - 🔎 BTCUSDT
+2026-05-16 01:20:31,473 - WARNING - 🧹 BTCUSDT no position but 1 orphan orders; canceling
+2026-05-16 01:20:32,465 - INFO - ⏸️ BTCUSDT no signal: no Donchian breakout
+2026-05-16 01:21:04,201 - INFO - 📊 Balance=30.75 USDT | available=30.75 USDT | lev=3x | daily=+0.00% | trades=0/5 | session=✅ | open_positions=0
+2026-05-16 01:21:04,201 - INFO - 🔎 BTCUSDT
+2026-05-16 01:21:06,958 - WARNING - 🧹 BTCUSDT no position but 1 orphan orders; canceling
+2026-05-16 01:21:07,881 - INFO - ⏸️ BTCUSDT no signal: no Donchian breakout
+2026-05-16 01:21:40,585 - INFO - 📊 Balance=30.75 USDT | available=30.75 USDT | lev=3x | daily=+0.00% | trades=0/5 | session=✅ | open_positions=0
+2026-05-16 01:21:40,585 - INFO - 🔎 BTCUSDT
+2026-05-16 01:21:45,346 - WARNING - 🧹 BTCUSDT no position but 1 orphan orders; canceling
+2026-05-16 01:21:46,493 - INFO - ⏸️ BTCUSDT no signal: no Donchian breakout
+2026-05-16 01:22:18,393 - INFO - 📊 Balance=30.75 USDT | available=30.75 USDT | lev=3x | daily=+0.00% | trades=0/5 | session=✅ | open_positions=0
+2026-05-16 01:22:18,393 - INFO - 🔎 BTCUSDT
+2026-05-16 01:22:21,758 - WARNING - 🧹 BTCUSDT no position but 1 orphan orders; canceling
+2026-05-16 01:22:22,951 - INFO - ⏸️ BTCUSDT no signal: no Donchian breakout
+2026-05-16 01:22:55,385 - INFO - 📊 Balance=30.75 USDT | available=30.75 USDT | lev=3x | daily=+0.00% | trades=0/5 | session=✅ | open_positions=0
+2026-05-16 01:22:55,385 - INFO - 🔎 BTCUSDT
+2026-05-16 01:22:58,164 - WARNING - 🧹 BTCUSDT no position but 1 orphan orders; canceling
+2026-05-16 01:22:59,098 - INFO - ⏸️ BTCUSDT no signal: no Donchian breakout
+2026-05-16 01:23:29,699 - INFO - ⏱️ Time synced offset=-59ms
+2026-05-16 01:23:32,126 - INFO - 📊 Balance=30.75 USDT | available=30.75 USDT | lev=3x | daily=+0.00% | trades=0/5 | session=✅ | open_positions=0
+2026-05-16 01:23:32,127 - INFO - 🔎 BTCUSDT
+2026-05-16 01:23:35,239 - WARNING - 🧹 BTCUSDT no position but 1 orphan orders; canceling
+2026-05-16 01:23:36,182 - INFO - ⏸️ BTCUSDT no signal: no Donchian breakout
+2026-05-16 01:24:08,881 - INFO - 📊 Balance=30.75 USDT | available=30.75 USDT | lev=3x | daily=+0.00% | trades=0/5 | session=✅ | open_positions=0
+2026-05-16 01:24:08,881 - INFO - 🔎 BTCUSDT
+2026-05-16 01:24:12,015 - WARNING - 🧹 BTCUSDT no position but 1 orphan orders; canceling
+2026-05-16 01:24:12,956 - INFO - ⏸️ BTCUSDT no signal: no Donchian breakout
+2026-05-16 01:24:44,750 - INFO - 📊 Balance=30.75 USDT | available=30.75 USDT | lev=3x | daily=+0.00% | trades=0/5 | session=✅ | open_positions=0
+2026-05-16 01:24:44,750 - INFO - 🔎 BTCUSDT
+2026-05-16 01:24:48,702 - WARNING - 🧹 BTCUSDT no position but 1 orphan orders; canceling
+2026-05-16 01:24:49,862 - INFO - ⏸️ BTCUSDT no signal: no Donchian breakout
+2026-05-16 01:25:21,505 - INFO - 📊 Balance=30.75 USDT | available=30.75 USDT | lev=3x | daily=+0.00% | trades=0/5 | session=✅ | open_positions=0
+2026-05-16 01:25:21,505 - INFO - 🔎 BTCUSDT
+2026-05-16 01:25:24,419 - WARNING - 🧹 BTCUSDT no position but 1 orphan orders; canceling
+2026-05-16 01:25:25,355 - INFO - ⏸️ BTCUSDT no signal: no Donchian breakout
+2026-05-16 01:25:57,078 - INFO - 📊 Balance=30.75 USDT | available=30.75 USDT | lev=3x | daily=+0.00% | trades=0/5 | session=✅ | open_positions=0
+2026-05-16 01:25:57,078 - INFO - 🔎 BTCUSDT
+2026-05-16 01:26:00,056 - WARNING - 🧹 BTCUSDT no position but 1 orphan orders; canceling
+2026-05-16 01:26:01,025 - INFO - ⏸️ BTCUSDT no signal: no Donchian breakout
+2026-05-16 01:26:32,701 - INFO - 📊 Balance=30.75 USDT | available=30.75 USDT | lev=3x | daily=+0.00% | trades=0/5 | session=✅ | open_positions=0
+2026-05-16 01:26:32,701 - INFO - 🔎 BTCUSDT
+2026-05-16 01:26:35,809 - WARNING - 🧹 BTCUSDT no position but 1 orphan orders; canceling
+2026-05-16 01:26:36,798 - INFO - ⏸️ BTCUSDT no signal: no Donchian breakout
+2026-05-16 01:27:09,082 - INFO - 📊 Balance=30.75 USDT | available=30.75 USDT | lev=3x | daily=+0.00% | trades=0/5 | session=✅ | open_positions=0
+2026-05-16 01:27:09,082 - INFO - 🔎 BTCUSDT
+2026-05-16 01:27:13,407 - WARNING - 🧹 BTCUSDT no position but 1 orphan orders; canceling
+2026-05-16 01:27:14,776 - INFO - ⏸️ BTCUSDT no signal: no Donchian breakout
+2026-05-16 01:27:47,257 - INFO - 📊 Balance=30.75 USDT | available=30.75 USDT | lev=3x | daily=+0.00% | trades=0/5 | session=✅ | open_positions=0
+2026-05-16 01:27:47,257 - INFO - 🔎 BTCUSDT
+2026-05-16 01:27:50,484 - WARNING - 🧹 BTCUSDT no position but 1 orphan orders; canceling
+2026-05-16 01:27:51,616 - INFO - ⏸️ BTCUSDT no signal: no Donchian breakout
+2026-05-16 01:28:23,383 - INFO - 📊 Balance=30.75 USDT | available=30.75 USDT | lev=3x | daily=+0.00% | trades=0/5 | session=✅ | open_positions=0
+2026-05-16 01:28:23,384 - INFO - 🔎 BTCUSDT
+2026-05-16 01:28:26,163 - WARNING - 🧹 BTCUSDT no position but 1 orphan orders; canceling
+2026-05-16 01:28:27,155 - INFO - ⏸️ BTCUSDT no signal: no Donchian breakout
+2026-05-16 01:28:57,692 - INFO - ⏱️ Time synced offset=-60ms
+2026-05-16 01:28:59,395 - INFO - 📊 Balance=30.75 USDT | available=30.75 USDT | lev=3x | daily=+0.00% | trades=0/5 | session=✅ | open_positions=0
+2026-05-16 01:28:59,396 - INFO - 🔎 BTCUSDT
+2026-05-16 01:29:02,590 - WARNING - 🧹 BTCUSDT no position but 1 orphan orders; canceling
+2026-05-16 01:29:03,572 - INFO - ⏸️ BTCUSDT no signal: no Donchian breakout
+2026-05-16 01:29:37,512 - INFO - 📊 Balance=30.75 USDT | available=30.75 USDT | lev=3x | daily=+0.00% | trades=0/5 | session=✅ | open_positions=0
+2026-05-16 01:29:37,512 - INFO - 🔎 BTCUSDT
+2026-05-16 01:29:41,346 - WARNING - 🧹 BTCUSDT no position but 1 orphan orders; canceling
+2026-05-16 01:29:43,003 - INFO - ⏸️ BTCUSDT no signal: no Donchian breakout

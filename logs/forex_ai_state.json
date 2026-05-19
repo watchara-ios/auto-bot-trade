@@ -1,41 +1,41 @@
 {
-  "last_scan_date": "2026-05-14",
-  "last_scan_at": "2026-05-14 14:39:28",
+  "last_scan_date": "2026-05-19",
+  "last_scan_at": "2026-05-19 21:01:04",
   "last_recommendations": [
     {
-      "symbol": "GBPUSD",
-      "rating": 1,
-      "reason": "Strong momentum, bullish bias, support levels hold."
-    },
-    {
-      "symbol": "GBPJPY",
-      "rating": 1,
-      "reason": "High volatility, strong bullish trend, good for scalping."
-    },
-    {
       "symbol": "EURUSD",
-      "rating": 2,
-      "reason": "Steady trend, high liquidity, awaiting US data."
+      "rating": 1,
+      "reason": "High liquidity, strong trend during overlap."
     },
     {
-      "symbol": "AUDUSD",
+      "symbol": "GBPUSD",
       "rating": 2,
-      "reason": "Commodity-linked, moderate bullish, risk-on."
-    },
-    {
-      "symbol": "EURJPY",
-      "rating": 2,
-      "reason": "Cross volatility, trending with EUR strength."
+      "reason": "Volatile, but good momentum potential."
     },
     {
       "symbol": "USDJPY",
-      "rating": 3,
-      "reason": "Range-bound, low volatility, wait for breakout."
+      "rating": 2,
+      "reason": "Active pair, watch for US data."
+    },
+    {
+      "symbol": "GBPJPY",
+      "rating": 2,
+      "reason": "High volatility, good for breakout trades."
     },
     {
       "symbol": "USDCHF",
       "rating": 3,
-      "reason": "Correlated with EUR, but less momentum."
+      "reason": "Correlated with EUR, moderate moves."
+    },
+    {
+      "symbol": "EURJPY",
+      "rating": 3,
+      "reason": "Less liquid, carry trade interest."
+    },
+    {
+      "symbol": "AUDUSD",
+      "rating": 3,
+      "reason": "Asian session influence wanes."
     }
   ],
   "candidate_universe": [
@@ -70,55 +70,55 @@
   ],
   "last_scan_error": "missing DEEPSEEK_API_KEY",
   "candidate_symbols": [
-    "GBPUSDm",
-    "GBPJPYm",
     "EURUSDm",
-    "AUDUSDm",
-    "EURJPYm",
+    "GBPUSDm",
     "USDJPYm",
-    "USDCHFm"
+    "GBPJPYm",
+    "USDCHFm",
+    "AUDUSDm",
+    "EURJPYm"
   ],
   "candidate_recommendations": [
     {
-      "symbol": "GBPUSDm",
-      "rating": 1,
-      "reason": "Strong momentum, bullish bias, support levels hold."
-    },
-    {
-      "symbol": "GBPJPYm",
-      "rating": 1,
-      "reason": "High volatility, strong bullish trend, good for scalping."
-    },
-    {
       "symbol": "EURUSDm",
-      "rating": 2,
-      "reason": "Steady trend, high liquidity, awaiting US data."
+      "rating": 1,
+      "reason": "High liquidity, strong trend during overlap."
     },
     {
-      "symbol": "AUDUSDm",
+      "symbol": "GBPUSDm",
       "rating": 2,
-      "reason": "Commodity-linked, moderate bullish, risk-on."
-    },
-    {
-      "symbol": "EURJPYm",
-      "rating": 2,
-      "reason": "Cross volatility, trending with EUR strength."
+      "reason": "Volatile, but good momentum potential."
     },
     {
       "symbol": "USDJPYm",
-      "rating": 3,
-      "reason": "Range-bound, low volatility, wait for breakout."
+      "rating": 2,
+      "reason": "Active pair, watch for US data."
+    },
+    {
+      "symbol": "GBPJPYm",
+      "rating": 2,
+      "reason": "High volatility, good for breakout trades."
     },
     {
       "symbol": "USDCHFm",
       "rating": 3,
-      "reason": "Correlated with EUR, but less momentum."
+      "reason": "Correlated with EUR, moderate moves."
+    },
+    {
+      "symbol": "AUDUSDm",
+      "rating": 3,
+      "reason": "Asian session influence wanes."
+    },
+    {
+      "symbol": "EURJPYm",
+      "rating": 3,
+      "reason": "Less liquid, carry trade interest."
     }
   ],
-  "selected_symbol": "GBPUSDm",
+  "selected_symbol": "EURUSDm",
   "selected_recommendation": {
-    "symbol": "GBPUSDm",
+    "symbol": "EURUSDm",
     "rating": 1,
-    "reason": "Strong momentum, bullish bias, support levels hold."
+    "reason": "High liquidity, strong trend during overlap."
   }
 }

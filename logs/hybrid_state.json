@@ -1,13 +1,13 @@
 {
-  "date": "2026-05-15",
-  "day_start_balance": 30.04388339,
+  "date": "2026-05-19",
+  "day_start_balance": 30.75369022,
   "trades_today": 0,
   "last_trade_time": {},
   "dry_run": false,
-  "last_stats_hour": 2,
+  "last_stats_hour": 23,
   "last_stats_date": "2026-05-15",
-  "last_disconnect_notify": 1778808424.6560414,
-  "connection_down": true,
+  "last_disconnect_notify": 0,
+  "connection_down": false,
   "prev_open_symbols": [],
-  "balance_at_entry_BTCUSDT": 30.04388339
+  "consecutive_losses": 0
 }
