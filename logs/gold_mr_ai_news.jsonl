@@ -1,0 +1,1 @@
+{"last_scan_at": "2026-05-21 14:35:47", "action": "ALLOW", "risk_score": 20, "block_minutes": 60, "event": "none", "reason": "No high-impact gold news verified within 120 min; D1 ADX=16.3 supports mean-reversion.", "model": "deepseek-reasoner"}

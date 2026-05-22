@@ -1,41 +1,41 @@
 {
-  "last_scan_date": "2026-05-19",
-  "last_scan_at": "2026-05-19 21:01:04",
+  "last_scan_date": "2026-05-22",
+  "last_scan_at": "2026-05-22 14:00:19",
   "last_recommendations": [
     {
       "symbol": "EURUSD",
-      "rating": 1,
-      "reason": "High liquidity, strong trend during overlap."
+      "rating": 2,
+      "reason": "Range-bound with support at 1.0850, low volatility."
     },
     {
       "symbol": "GBPUSD",
-      "rating": 2,
-      "reason": "Volatile, but good momentum potential."
+      "rating": 1,
+      "reason": "Bullish momentum above 1.2700, good entry on dips."
     },
     {
       "symbol": "USDJPY",
-      "rating": 2,
-      "reason": "Active pair, watch for US data."
-    },
-    {
-      "symbol": "GBPJPY",
-      "rating": 2,
-      "reason": "High volatility, good for breakout trades."
+      "rating": 3,
+      "reason": "Resistance near 155.00, choppy; wait for breakout."
     },
     {
       "symbol": "USDCHF",
-      "rating": 3,
-      "reason": "Correlated with EUR, moderate moves."
-    },
-    {
-      "symbol": "EURJPY",
-      "rating": 3,
-      "reason": "Less liquid, carry trade interest."
+      "rating": 2,
+      "reason": "Bearish bias below 0.9050, short opportunity."
     },
     {
       "symbol": "AUDUSD",
+      "rating": 1,
+      "reason": "Strong uptrend with support at 0.6650."
+    },
+    {
+      "symbol": "NZDUSD",
       "rating": 3,
-      "reason": "Asian session influence wanes."
+      "reason": "Consolidating near 0.6200, lack of catalyst."
+    },
+    {
+      "symbol": "EURJPY",
+      "rating": 2,
+      "reason": "Correlated with EURUSD, moderate risk appetite."
     }
   ],
   "candidate_universe": [
@@ -70,55 +70,55 @@
   ],
   "last_scan_error": "missing DEEPSEEK_API_KEY",
   "candidate_symbols": [
-    "EURUSDm",
     "GBPUSDm",
-    "USDJPYm",
-    "GBPJPYm",
-    "USDCHFm",
     "AUDUSDm",
-    "EURJPYm"
+    "EURUSDm",
+    "USDCHFm",
+    "EURJPYm",
+    "USDJPYm",
+    "NZDUSDm"
   ],
   "candidate_recommendations": [
     {
-      "symbol": "EURUSDm",
-      "rating": 1,
-      "reason": "High liquidity, strong trend during overlap."
-    },
-    {
       "symbol": "GBPUSDm",
-      "rating": 2,
-      "reason": "Volatile, but good momentum potential."
-    },
-    {
-      "symbol": "USDJPYm",
-      "rating": 2,
-      "reason": "Active pair, watch for US data."
-    },
-    {
-      "symbol": "GBPJPYm",
-      "rating": 2,
-      "reason": "High volatility, good for breakout trades."
-    },
-    {
-      "symbol": "USDCHFm",
-      "rating": 3,
-      "reason": "Correlated with EUR, moderate moves."
+      "rating": 1,
+      "reason": "Bullish momentum above 1.2700, good entry on dips."
     },
     {
       "symbol": "AUDUSDm",
-      "rating": 3,
-      "reason": "Asian session influence wanes."
+      "rating": 1,
+      "reason": "Strong uptrend with support at 0.6650."
+    },
+    {
+      "symbol": "EURUSDm",
+      "rating": 2,
+      "reason": "Range-bound with support at 1.0850, low volatility."
+    },
+    {
+      "symbol": "USDCHFm",
+      "rating": 2,
+      "reason": "Bearish bias below 0.9050, short opportunity."
     },
     {
       "symbol": "EURJPYm",
+      "rating": 2,
+      "reason": "Correlated with EURUSD, moderate risk appetite."
+    },
+    {
+      "symbol": "USDJPYm",
       "rating": 3,
-      "reason": "Less liquid, carry trade interest."
+      "reason": "Resistance near 155.00, choppy; wait for breakout."
+    },
+    {
+      "symbol": "NZDUSDm",
+      "rating": 3,
+      "reason": "Consolidating near 0.6200, lack of catalyst."
     }
   ],
-  "selected_symbol": "EURUSDm",
+  "selected_symbol": "GBPUSDm",
   "selected_recommendation": {
-    "symbol": "EURUSDm",
+    "symbol": "GBPUSDm",
     "rating": 1,
-    "reason": "High liquidity, strong trend during overlap."
+    "reason": "Bullish momentum above 1.2700, good entry on dips."
   }
 }

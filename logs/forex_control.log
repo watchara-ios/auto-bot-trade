@@ -131,3 +131,18 @@ PYTHONIOENCODING=utf-8
 [Fri 05/15/2026 14:00:00.89] Python command: py -3
 [Fri 05/15/2026 14:00:00.89] Starting forex_bot.py
 [Fri 05/15/2026 14:00:00.89] Runtime log: C:\Users\watch\auto-bot-trade\logs\forex_runtime.log
+
+============================================================
+[Wed 05/20/2026 14:00:00.69] Forex bot launcher started
+BOT_DIR=C:\Users\watch\auto-bot-trade
+BOT_FILE=C:\Users\watch\auto-bot-trade\forex_bot.py
+USER=watch
+COMPUTER=3PM
+FOREX_DRY_RUN=false
+FOREX_AI_SCAN_ON_BOT_START=true
+FOREX_CHECK_INTERVAL_SECONDS=60
+PYTHONUTF8=1
+PYTHONIOENCODING=utf-8
+[Wed 05/20/2026 14:00:00.85] Python command: py -3
+[Wed 05/20/2026 14:00:00.85] Starting forex_bot.py
+[Wed 05/20/2026 14:00:00.85] Runtime log: C:\Users\watch\auto-bot-trade\logs\forex_runtime.log
