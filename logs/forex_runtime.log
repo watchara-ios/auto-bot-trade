@@ -40043,4 +40043,12 @@
 [2026-05-15 14:47:13] [SCAN] Analyzing AUDUSDm
 [2026-05-15 14:47:14] [SKIP] AUDUSDm same candle 2026-05-15 07:40:00  skip
 [2026-05-15 14:47:14] [WAIT] No order this round
-^C
+^CTraceback (most recent call last):
+  File "/Users/3pm/auto-bot-trade/forex_bot.py", line 4, in <module>
+    runpy.run_path(str(Path(__file__).resolve().parent / "bots" / "forex_bot.py"), run_name="__main__")
+  File "<frozen runpy>", line 291, in run_path
+  File "<frozen runpy>", line 98, in _run_module_code
+  File "<frozen runpy>", line 88, in _run_code
+  File "/Users/3pm/auto-bot-trade/bots/forex_bot.py", line 14, in <module>
+    import MetaTrader5 as mt5
+ModuleNotFoundError: No module named 'MetaTrader5'

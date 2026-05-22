@@ -17,7 +17,11 @@
       "Bash(python -m py_compile gold_mr_bot.py)",
       "Bash(python3 -m py_compile strategies/gold_mr_core.py)",
       "Bash(python3 -m py_compile bots/gold_mr_bot.py)",
-      "Bash(python3 -m py_compile gold_mr_bot.py)"
+      "Bash(python3 -m py_compile gold_mr_bot.py)",
+      "Bash(awk -F\"reason': '\" '{print $2}')",
+      "Bash(awk '{print $1}')",
+      "Bash(python3 forex_bot.py)",
+      "Bash(echo \"PID=$!\")"
     ]
   }
 }

@@ -220,10 +220,12 @@ def apply_micro_edge_filters(row: pd.Series, side: str, config: DonchianCoreConf
         _REJECT_STATS["side_blocked"] += 1
         fails.append(f"side blocked allowed={config.allowed_side} got={side}")
 
-    if config.session_hours_utc and row.name.hour not in config.session_hours_utc:
-        _REJECT_STATS["outside_session"] += 1
-        hrs = f"{min(config.session_hours_utc):02d}-{max(config.session_hours_utc):02d}"
-        fails.append(f"outside session ({hrs} UTC) hour={row.name.hour}")
+    if config.session_hours_utc:
+        signal_hour = (row.name + pd.Timedelta(minutes=5)).hour
+        if signal_hour not in config.session_hours_utc:
+            _REJECT_STATS["outside_session"] += 1
+            hrs = f"{min(config.session_hours_utc):02d}-{max(config.session_hours_utc):02d}"
+            fails.append(f"outside session ({hrs} UTC) hour={signal_hour}")
 
     adx = float(row.get("m15_adx", 0) or 0)
     if config.adx_max is not None and adx >= config.adx_max:
