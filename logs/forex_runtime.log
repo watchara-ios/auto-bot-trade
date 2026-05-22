@@ -67229,3 +67229,27 @@
 [2026-05-22 15:32:20] [SCAN] Analyzing NZDUSDm
 [2026-05-22 15:32:21] [SKIP] NZDUSDm same candle 2026-05-22 08:25:00  skip
 [2026-05-22 15:32:21] [WAIT] No order this round
+[2026-05-22 15:33:21] [AI] Using cached scan from 2026-05-22 14:00:19 | symbols=GBPUSDm, AUDUSDm, EURUSDm, USDCHFm, EURJPYm, USDJPYm, NZDUSDm
+[2026-05-22 15:33:21] [WATCH] Watchlist: GBPUSDm, AUDUSDm, EURUSDm, USDCHFm, EURJPYm, USDJPYm, NZDUSDm
+[2026-05-22 15:33:21] [SELECT] Symbol switched: NZDUSDm -> GBPUSDm | AI watchlist candidate
+[2026-05-22 15:33:21] [SCAN] Analyzing GBPUSDm
+[2026-05-22 15:33:22] [SKIP] GBPUSDm same candle 2026-05-22 08:25:00  skip
+[2026-05-22 15:33:22] [SELECT] Symbol switched: GBPUSDm -> AUDUSDm | AI watchlist candidate
+[2026-05-22 15:33:22] [SCAN] Analyzing AUDUSDm
+[2026-05-22 15:33:22] [SKIP] AUDUSDm same candle 2026-05-22 08:25:00  skip
+[2026-05-22 15:33:22] [SELECT] Symbol switched: AUDUSDm -> EURUSDm | AI watchlist candidate
+[2026-05-22 15:33:22] [SCAN] Analyzing EURUSDm
+[2026-05-22 15:33:23] [SKIP] EURUSDm same candle 2026-05-22 08:25:00  skip
+[2026-05-22 15:33:23] [SELECT] Symbol switched: EURUSDm -> USDCHFm | AI watchlist candidate
+[2026-05-22 15:33:23] [SCAN] Analyzing USDCHFm
+[2026-05-22 15:33:24] [SKIP] USDCHFm same candle 2026-05-22 08:25:00  skip
+[2026-05-22 15:33:24] [SELECT] Symbol switched: USDCHFm -> EURJPYm | AI watchlist candidate
+[2026-05-22 15:33:24] [SCAN] Analyzing EURJPYm
+[2026-05-22 15:33:25] [SKIP] EURJPYm same candle 2026-05-22 08:25:00  skip
+[2026-05-22 15:33:25] [SELECT] Symbol switched: EURJPYm -> USDJPYm | AI watchlist candidate
+[2026-05-22 15:33:25] [SCAN] Analyzing USDJPYm
+[2026-05-22 15:33:25] [SKIP] USDJPYm same candle 2026-05-22 08:25:00  skip
+[2026-05-22 15:33:25] [SELECT] Symbol switched: USDJPYm -> NZDUSDm | AI watchlist candidate
+[2026-05-22 15:33:25] [SCAN] Analyzing NZDUSDm
+[2026-05-22 15:33:26] [SKIP] NZDUSDm same candle 2026-05-22 08:25:00  skip
+[2026-05-22 15:33:26] [WAIT] No order this round

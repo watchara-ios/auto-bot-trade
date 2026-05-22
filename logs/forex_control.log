@@ -146,3 +146,4 @@ PYTHONIOENCODING=utf-8
 [Wed 05/20/2026 14:00:00.85] Python command: py -3
 [Wed 05/20/2026 14:00:00.85] Starting forex_bot.py
 [Wed 05/20/2026 14:00:00.85] Runtime log: C:\Users\watch\auto-bot-trade\logs\forex_runtime.log
+[Fri 05/22/2026 15:34:12.35] forex_bot.py exited with code -1
