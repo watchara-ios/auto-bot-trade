@@ -93,7 +93,7 @@ class Config:
     TIER_B_RISK_PERCENT = float(os.getenv("FOREX_TIER_B_RISK", "1.0"))
     DONCHIAN_N          = int(os.getenv("FOREX_DONCHIAN_N", "20"))
     ADX_MIN             = float(os.getenv("FOREX_ADX_MIN", "18.0"))   # loosened from 20
-    ADX_MAX             = float(os.getenv("FOREX_ADX_MAX", "50.0"))   # was missing → blocked strong trends
+    ADX_MAX             = float(os.getenv("FOREX_ADX_MAX", "60.0"))   # raised: ADX=50.07 was blocking valid GBPJPY trend
     ATR_PERCENTILE_MIN  = float(os.getenv("FOREX_ATR_PCT_MIN", "30.0"))  # loosened from 50
     MIN_ATR_PCT         = float(os.getenv("FOREX_MIN_ATR_PCT", "0.0002"))  # fix: was 0.0005 → blocked GBPUSD/USDJPY
     VOLUME_MULT         = float(os.getenv("FOREX_VOLUME_MULT", "0.8"))   # loosened from 1.0
@@ -476,8 +476,8 @@ def pass_daily_risk_filter() -> tuple[bool, str]:
         datetime.combine(today, dtime.max),
     ) or []
 
-    trades_today = sum(1 for d in deals if d.symbol == symbol() and d.entry == mt5.DEAL_ENTRY_IN)
-    profit_today = sum(d.profit for d in deals if d.symbol == symbol())
+    trades_today = sum(1 for d in deals if d.symbol == symbol() and d.entry == mt5.DEAL_ENTRY_IN and d.magic == Config.MAGIC_NUMBER)
+    profit_today = sum(d.profit for d in deals if d.symbol == symbol() and d.magic == Config.MAGIC_NUMBER)
     max_loss     = account.balance * (Config.MAX_DAILY_LOSS_PCT / 100)
 
     if trades_today >= Config.MAX_TRADES_PER_DAY:
@@ -492,15 +492,15 @@ def pass_daily_risk_filter() -> tuple[bool, str]:
 # ─────────────────────────────────────────────────────────────────────────────
 
 def has_open_position() -> bool:
-    pos = mt5.positions_get(symbol=symbol())
-    return pos is not None and len(pos) > 0
+    pos = mt5.positions_get(symbol=symbol()) or []
+    return any(p.magic == Config.MAGIC_NUMBER for p in pos)
 
 
 def has_any_open_position(symbols: list[str]) -> tuple[bool, str]:
     positions = mt5.positions_get() or []
     sym_set = set(symbols)
     for pos in positions:
-        if pos.symbol in sym_set:
+        if pos.symbol in sym_set and pos.magic == Config.MAGIC_NUMBER:
             return True, pos.symbol
     return False, ""
 
@@ -763,6 +763,12 @@ def send_order(signal: dict, tp_sl: dict) -> dict | None:
         return request
 
     result = mt5.order_send(request)
+    if result and result.retcode in (mt5.TRADE_RETCODE_REQUOTE, mt5.TRADE_RETCODE_PRICE_CHANGED):
+        tick = mt5.symbol_info_tick(symbol())
+        if tick:
+            request["price"] = tick.ask if side == "BUY" else tick.bid
+            log(f"[RETRY] {result.retcode_description} — retrying at {request['price']:.5f}")
+            result = mt5.order_send(request)
     log(f"📌 Order result: {result}")
     notify_order_result("FOREX", symbol(), side, result, dry_run=False)
     if result is not None and result.retcode == mt5.TRADE_RETCODE_DONE:
@@ -944,9 +950,13 @@ def run_ai_scan(force: bool = False) -> None:
             model=Config.DEEPSEEK_MODEL,
             messages=[{"role": "user", "content": _build_ai_prompt(candidates)}],
             temperature=0.2,
-            max_tokens=700,
+            max_tokens=1500,
         )
-        content = resp.choices[0].message.content.strip()
+        content = resp.choices[0].message.content or ""
+        # DeepSeek reasoner puts thinking in reasoning_content; content should be clean JSON.
+        # Fallback: strip <think>...</think> blocks if model embeds them in content.
+        if "<think>" in content:
+            content = content.split("</think>", 1)[-1]
         for fence in ("```json", "```"):
             if fence in content:
                 content = content.split(fence, 1)[1].split("```", 1)[0]
@@ -1069,7 +1079,8 @@ def count_consecutive_losses() -> int:
     ) or []
     closed = [d for d in deals
               if d.entry == mt5.DEAL_ENTRY_OUT
-              and d.symbol == symbol()]
+              and d.symbol == symbol()
+              and d.magic == Config.MAGIC_NUMBER]
     consec = 0
     for d in reversed(closed):
         if d.profit < 0:
