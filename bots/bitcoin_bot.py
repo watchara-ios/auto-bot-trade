@@ -95,8 +95,10 @@ class Config:
     MARGIN_BUFFER_PCT       = float(os.getenv("HYBRID_MARGIN_BUFFER_PCT", "0.95"))
 
     # Position sizing
-    TIER_A_RISK = 0.0025   # 0.25% per trade (conservative, compounding faster)
-    TIER_B_RISK = 0.01     # 1.0% for high-conviction
+    TIER_A_RISK = float(os.getenv("HYBRID_TIER_A_RISK", "0.0025"))   # 0.25% per trade
+    TIER_B_RISK = float(os.getenv("HYBRID_TIER_B_RISK", "0.02"))     # raised from 1% → 2%
+    # When risk-based qty < exchange minQty, fall back to minQty if actual risk ≤ this cap
+    MIN_QTY_FALLBACK_RISK = float(os.getenv("HYBRID_MIN_QTY_FALLBACK_RISK", "0.05"))  # 5%
 
     # ── RR improvements ──────────────────────────────────────────────────────
     # Problem: TP was 2× SL but price rarely reached it → now using ATR-based
@@ -818,12 +820,30 @@ def round_qty(symbol: str, qty: float) -> float:
     return rounded if rounded >= min_qty else 0.0
 
 
+def _exchange_min_qty(symbol: str) -> float:
+    for f in Binance.exchange_info(symbol)["filters"]:
+        if f["filterType"] == "LOT_SIZE":
+            return float(f["minQty"])
+    return 0.001
+
+
 def quantity_for_signal(symbol: str, balance: float, signal: dict) -> float:
-    risk_amount    = balance * float(signal.get("risk_pct", Config.TIER_A_RISK))
-    stop_distance  = abs(signal["entry"] - signal["sl"])
+    risk_amount   = balance * float(signal.get("risk_pct", Config.TIER_A_RISK))
+    stop_distance = abs(signal["entry"] - signal["sl"])
     if stop_distance <= 0:
         return 0.0
-    return round_qty(symbol, risk_amount / stop_distance)
+    qty = round_qty(symbol, risk_amount / stop_distance)
+    if qty <= 0:
+        # Risk-based qty is below exchange minimum; fall back to minQty if risk is acceptable
+        min_q = _exchange_min_qty(symbol)
+        actual_risk_pct = (stop_distance * min_q) / max(balance, 1)
+        if actual_risk_pct <= Config.MIN_QTY_FALLBACK_RISK:
+            warn(
+                f"⚠️ {symbol} risk qty too small (raw={risk_amount/stop_distance:.5f}); "
+                f"fallback min qty={min_q} actual_risk={actual_risk_pct:.2%}"
+            )
+            return min_q
+    return qty
 
 
 def cap_qty_to_available_margin(symbol: str, qty: float, entry: float, available_margin: float) -> tuple[float, str]:
@@ -935,7 +955,8 @@ def execute_signal(signal: dict, balance: float, state: dict, market: dict) -> N
         return
     qty = quantity_for_signal(symbol, balance, signal)
     if qty <= 0:
-        log(f"⏸️ {symbol} skip: qty too small")
+        stop_dist = abs(signal["entry"] - signal["sl"])
+        log(f"⏸️ {symbol} skip: qty too small (stop={stop_dist:.1f} risk={signal.get('risk_pct',0)*100:.1f}% balance={balance:.2f})")
         return
     available_margin = balance if Config.DRY_RUN else Binance.available_balance()
     capped_qty, margin_msg = cap_qty_to_available_margin(symbol, qty, float(signal["entry"]), available_margin)
