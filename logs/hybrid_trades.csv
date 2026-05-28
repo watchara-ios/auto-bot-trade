@@ -6,3 +6,4 @@ time,symbol,side,qty,entry_ref,sl,tp,score,tier,risk_pct,type,dry_run,reason
 2026-05-24T03:17:50,BTCUSDT,BUY,0.001,76092.0,75845.0,76833.0,80,B,0.01,donchian_tier_b,False,Donchian20 BUY + M15 trend + ADX 35.5 rising + BOS + Tier B
 2026-05-25T04:32:19,BTCUSDT,SELL,0.001,76524.7,76718.2,75944.2,80,B,0.01,donchian_tier_b,False,Donchian20 SELL + M15 trend + ADX 18.6 rising + BOS + Tier B
 2026-05-25T09:02:42,BTCUSDT,SELL,0.001,76949.5,77213.2,76158.40000000001,80,B,0.01,donchian_tier_b,False,Donchian20 SELL + M15 trend + ADX 20.1 rising + BOS + Tier B
+2026-05-25T21:12:42,BTCUSDT,BUY,0.001,77454.1,77254.8,78052.00000000001,62,A,0.0025,donchian_tier_a,False,Donchian20 BUY + M15 trend + ADX 39.3 rising + BOS + Tier A

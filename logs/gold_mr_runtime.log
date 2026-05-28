@@ -4177,3 +4177,1220 @@
 [2026-05-25 12:19:13] [SKIP] Same candle 2026-05-25 05:10:00  skip
 [2026-05-25 12:20:13] [SKIP] NO_TRADE: no_mr_signal
 [2026-05-25 12:21:13] [SKIP] Same candle 2026-05-25 05:15:00  skip
+[2026-05-25 12:22:13] [SKIP] Same candle 2026-05-25 05:15:00  skip
+[2026-05-25 12:23:13] [SKIP] Same candle 2026-05-25 05:15:00  skip
+[2026-05-25 12:24:13] [SKIP] Same candle 2026-05-25 05:15:00  skip
+[2026-05-25 12:25:13] [SKIP] NO_TRADE: no_mr_signal
+[2026-05-25 12:26:13] [SKIP] Same candle 2026-05-25 05:20:00  skip
+[2026-05-25 12:27:13] [SKIP] Same candle 2026-05-25 05:20:00  skip
+[2026-05-25 12:28:13] [SKIP] Same candle 2026-05-25 05:20:00  skip
+[2026-05-25 12:29:13] [SKIP] Same candle 2026-05-25 05:20:00  skip
+[2026-05-25 12:30:13] [SKIP] NO_TRADE: no_mr_signal
+[2026-05-25 12:31:13] [SKIP] Same candle 2026-05-25 05:25:00  skip
+[2026-05-25 12:32:13] [SKIP] Same candle 2026-05-25 05:25:00  skip
+[2026-05-25 12:33:13] [SKIP] Same candle 2026-05-25 05:25:00  skip
+[2026-05-25 12:34:13] [SKIP] Same candle 2026-05-25 05:25:00  skip
+[2026-05-25 12:35:13] [SKIP] NO_TRADE: no_mr_signal
+[2026-05-25 12:36:13] [SKIP] Same candle 2026-05-25 05:30:00  skip
+[2026-05-25 12:37:14] [SKIP] Same candle 2026-05-25 05:30:00  skip
+[2026-05-25 12:38:14] [SKIP] Same candle 2026-05-25 05:30:00  skip
+[2026-05-25 12:39:14] [SKIP] Same candle 2026-05-25 05:30:00  skip
+[2026-05-25 12:40:14] [SKIP] NO_TRADE: no_mr_signal
+[2026-05-25 12:41:14] [SKIP] Same candle 2026-05-25 05:35:00  skip
+[2026-05-25 12:42:14] [SKIP] Same candle 2026-05-25 05:35:00  skip
+[2026-05-25 12:43:14] [SKIP] Same candle 2026-05-25 05:35:00  skip
+[2026-05-25 12:44:14] [SKIP] Same candle 2026-05-25 05:35:00  skip
+[2026-05-25 12:45:14] [SKIP] NO_TRADE: no_mr_signal
+[2026-05-25 12:46:14] [SKIP] Same candle 2026-05-25 05:40:00  skip
+[2026-05-25 12:47:14] [SKIP] Same candle 2026-05-25 05:40:00  skip
+[2026-05-25 12:48:14] [SKIP] Same candle 2026-05-25 05:40:00  skip
+[2026-05-25 12:49:14] [SKIP] Same candle 2026-05-25 05:40:00  skip
+[2026-05-25 12:50:14] [SKIP] NO_TRADE: no_mr_signal
+[2026-05-25 12:51:14] [SKIP] Same candle 2026-05-25 05:45:00  skip
+[2026-05-25 12:52:14] [SKIP] Same candle 2026-05-25 05:45:00  skip
+[2026-05-25 12:53:14] [SKIP] Same candle 2026-05-25 05:45:00  skip
+[2026-05-25 12:54:14] [SKIP] Same candle 2026-05-25 05:45:00  skip
+[2026-05-25 12:55:14] [SKIP] NO_TRADE: no_mr_signal
+[2026-05-25 12:56:14] [SKIP] Same candle 2026-05-25 05:50:00  skip
+[2026-05-25 12:57:14] [SKIP] Same candle 2026-05-25 05:50:00  skip
+[2026-05-25 12:58:14] [SKIP] Same candle 2026-05-25 05:50:00  skip
+[2026-05-25 12:59:14] [SKIP] Same candle 2026-05-25 05:50:00  skip
+[2026-05-25 13:00:14] [STATS] Hourly (540 attempts): {'no_mr_signal': '540(100%)'}
+[2026-05-25 13:00:14] [SKIP] NO_TRADE: no_mr_signal
+[2026-05-25 13:01:14] [SKIP] Same candle 2026-05-25 05:55:00  skip
+[2026-05-25 13:02:14] [SKIP] Same candle 2026-05-25 05:55:00  skip
+[2026-05-25 13:03:14] [SKIP] Same candle 2026-05-25 05:55:00  skip
+[2026-05-25 13:04:14] [SKIP] Same candle 2026-05-25 05:55:00  skip
+[2026-05-25 13:05:14] [SKIP] NO_TRADE: no_mr_signal
+[2026-05-25 13:06:14] [SKIP] Same candle 2026-05-25 06:00:00  skip
+[2026-05-25 13:07:14] [SKIP] Same candle 2026-05-25 06:00:00  skip
+[2026-05-25 13:08:14] [SKIP] Same candle 2026-05-25 06:00:00  skip
+[2026-05-25 13:09:14] [SKIP] Same candle 2026-05-25 06:00:00  skip
+[2026-05-25 13:10:14] [SKIP] NO_TRADE: no_mr_signal
+[2026-05-25 13:11:14] [SKIP] Same candle 2026-05-25 06:05:00  skip
+[2026-05-25 13:12:14] [SKIP] Same candle 2026-05-25 06:05:00  skip
+[2026-05-25 13:13:14] [SKIP] Same candle 2026-05-25 06:05:00  skip
+[2026-05-25 13:14:14] [SKIP] Same candle 2026-05-25 06:05:00  skip
+[2026-05-25 13:15:14] [SKIP] NO_TRADE: no_mr_signal
+[2026-05-25 13:16:14] [SKIP] Same candle 2026-05-25 06:10:00  skip
+[2026-05-25 13:17:14] [SKIP] Same candle 2026-05-25 06:10:00  skip
+[2026-05-25 13:18:14] [SKIP] Same candle 2026-05-25 06:10:00  skip
+[2026-05-25 13:19:14] [SKIP] Same candle 2026-05-25 06:10:00  skip
+[2026-05-25 13:20:14] [SKIP] NO_TRADE: no_mr_signal
+[2026-05-25 13:21:14] [SKIP] Same candle 2026-05-25 06:15:00  skip
+[2026-05-25 13:22:14] [SKIP] Same candle 2026-05-25 06:15:00  skip
+[2026-05-25 13:23:14] [SKIP] Same candle 2026-05-25 06:15:00  skip
+[2026-05-25 13:24:14] [SKIP] Same candle 2026-05-25 06:15:00  skip
+[2026-05-25 13:25:14] [SKIP] NO_TRADE: no_mr_signal
+[2026-05-25 13:26:14] [SKIP] Same candle 2026-05-25 06:20:00  skip
+[2026-05-25 13:27:14] [SKIP] Same candle 2026-05-25 06:20:00  skip
+[2026-05-25 13:28:14] [SKIP] Same candle 2026-05-25 06:20:00  skip
+[2026-05-25 13:29:30] [SKIP] Same candle 2026-05-25 06:20:00  skip
+[2026-05-25 13:30:30] [SKIP] NO_TRADE: no_mr_signal
+[2026-05-25 13:31:30] [SKIP] Same candle 2026-05-25 06:25:00  skip
+[2026-05-25 13:32:30] [SKIP] Same candle 2026-05-25 06:25:00  skip
+[2026-05-25 13:33:30] [SKIP] Same candle 2026-05-25 06:25:00  skip
+[2026-05-25 13:34:30] [SKIP] Same candle 2026-05-25 06:25:00  skip
+[2026-05-25 13:35:30] [SKIP] NO_TRADE: no_mr_signal
+[2026-05-25 13:36:30] [SKIP] Same candle 2026-05-25 06:30:00  skip
+[2026-05-25 13:37:30] [SKIP] Same candle 2026-05-25 06:30:00  skip
+[2026-05-25 13:38:30] [SKIP] Same candle 2026-05-25 06:30:00  skip
+[2026-05-25 13:39:30] [SKIP] Same candle 2026-05-25 06:30:00  skip
+[2026-05-25 13:40:30] [SKIP] NO_TRADE: no_mr_signal
+[2026-05-25 13:41:30] [SKIP] Same candle 2026-05-25 06:35:00  skip
+[2026-05-25 13:42:30] [SKIP] Same candle 2026-05-25 06:35:00  skip
+[2026-05-25 13:43:30] [SKIP] Same candle 2026-05-25 06:35:00  skip
+[2026-05-25 13:44:30] [SKIP] Same candle 2026-05-25 06:35:00  skip
+[2026-05-25 13:45:30] [SKIP] NO_TRADE: no_mr_signal
+[2026-05-25 13:46:30] [SKIP] Same candle 2026-05-25 06:40:00  skip
+[2026-05-25 13:47:30] [SKIP] Same candle 2026-05-25 06:40:00  skip
+[2026-05-25 13:48:30] [SKIP] Same candle 2026-05-25 06:40:00  skip
+[2026-05-25 13:49:30] [SKIP] Same candle 2026-05-25 06:40:00  skip
+[2026-05-25 13:50:30] [SKIP] NO_TRADE: no_mr_signal
+[2026-05-25 13:51:30] [SKIP] Same candle 2026-05-25 06:45:00  skip
+[2026-05-25 13:52:30] [SKIP] Same candle 2026-05-25 06:45:00  skip
+[2026-05-25 13:53:30] [SKIP] Same candle 2026-05-25 06:45:00  skip
+[2026-05-25 13:54:30] [SKIP] Same candle 2026-05-25 06:45:00  skip
+[2026-05-25 13:55:30] [SKIP] NO_TRADE: no_mr_signal
+[2026-05-25 13:56:30] [SKIP] Same candle 2026-05-25 06:50:00  skip
+[2026-05-25 13:57:30] [SKIP] Same candle 2026-05-25 06:50:00  skip
+[2026-05-25 13:58:30] [SKIP] Same candle 2026-05-25 06:50:00  skip
+[2026-05-25 13:59:30] [SKIP] Same candle 2026-05-25 06:50:00  skip
+[2026-05-25 14:00:30] [STATS] Hourly (600 attempts): {'no_mr_signal': '600(100%)'}
+[2026-05-25 14:00:30] [SKIP] NO_TRADE: no_mr_signal
+[2026-05-25 14:01:30] [SKIP] Same candle 2026-05-25 06:55:00  skip
+[2026-05-25 14:02:30] [SKIP] Same candle 2026-05-25 06:55:00  skip
+[2026-05-25 14:03:30] [SKIP] Same candle 2026-05-25 06:55:00  skip
+[2026-05-25 14:04:30] [SKIP] Same candle 2026-05-25 06:55:00  skip
+[2026-05-25 14:05:30] [SKIP] NO_TRADE: no_mr_signal
+[2026-05-25 14:06:30] [SKIP] Same candle 2026-05-25 07:00:00  skip
+[2026-05-25 14:07:30] [SKIP] Same candle 2026-05-25 07:00:00  skip
+[2026-05-25 14:08:30] [SKIP] Same candle 2026-05-25 07:00:00  skip
+[2026-05-25 14:09:30] [SKIP] Same candle 2026-05-25 07:00:00  skip
+[2026-05-25 14:10:30] [SKIP] NO_TRADE: no_mr_signal
+[2026-05-25 14:11:30] [SKIP] Same candle 2026-05-25 07:05:00  skip
+[2026-05-25 14:12:30] [SKIP] Same candle 2026-05-25 07:05:00  skip
+[2026-05-25 14:13:30] [SKIP] Same candle 2026-05-25 07:05:00  skip
+[2026-05-25 14:14:30] [SKIP] Same candle 2026-05-25 07:05:00  skip
+[2026-05-25 14:15:30] [SKIP] NO_TRADE: no_mr_signal
+[2026-05-25 14:16:30] [SKIP] Same candle 2026-05-25 07:10:00  skip
+[2026-05-25 14:17:30] [SKIP] Same candle 2026-05-25 07:10:00  skip
+[2026-05-25 14:18:30] [SKIP] Same candle 2026-05-25 07:10:00  skip
+[2026-05-25 14:19:30] [SKIP] Same candle 2026-05-25 07:10:00  skip
+[2026-05-25 14:20:31] [SKIP] NO_TRADE: no_mr_signal
+[2026-05-25 14:21:31] [SKIP] Same candle 2026-05-25 07:15:00  skip
+[2026-05-25 14:22:31] [SKIP] Same candle 2026-05-25 07:15:00  skip
+[2026-05-25 14:23:31] [SKIP] Same candle 2026-05-25 07:15:00  skip
+[2026-05-25 14:24:31] [SKIP] Same candle 2026-05-25 07:15:00  skip
+[2026-05-25 14:25:31] [SKIP] NO_TRADE: no_mr_signal
+[2026-05-25 14:26:31] [SKIP] Same candle 2026-05-25 07:20:00  skip
+[2026-05-25 14:27:31] [SKIP] Same candle 2026-05-25 07:20:00  skip
+[2026-05-25 14:28:31] [SKIP] Same candle 2026-05-25 07:20:00  skip
+[2026-05-25 14:29:31] [SKIP] Same candle 2026-05-25 07:20:00  skip
+[2026-05-25 14:30:31] [SKIP] NO_TRADE: no_mr_signal
+[2026-05-25 14:31:31] [SKIP] Same candle 2026-05-25 07:25:00  skip
+[2026-05-25 14:32:31] [SKIP] Same candle 2026-05-25 07:25:00  skip
+[2026-05-25 14:33:31] [SKIP] Same candle 2026-05-25 07:25:00  skip
+[2026-05-25 14:34:31] [SKIP] Same candle 2026-05-25 07:25:00  skip
+[2026-05-25 14:35:31] [SKIP] NO_TRADE: no_mr_signal
+[2026-05-25 14:36:31] [SKIP] Same candle 2026-05-25 07:30:00  skip
+[2026-05-25 14:37:31] [SKIP] Same candle 2026-05-25 07:30:00  skip
+[2026-05-25 14:38:31] [SKIP] Same candle 2026-05-25 07:30:00  skip
+[2026-05-25 14:39:31] [SKIP] Same candle 2026-05-25 07:30:00  skip
+[2026-05-25 14:40:31] [SKIP] NO_TRADE: no_mr_signal
+[2026-05-25 14:41:31] [SKIP] Same candle 2026-05-25 07:35:00  skip
+[2026-05-25 14:42:31] [SKIP] Same candle 2026-05-25 07:35:00  skip
+[2026-05-25 14:43:31] [SKIP] Same candle 2026-05-25 07:35:00  skip
+[2026-05-25 14:44:31] [SKIP] Same candle 2026-05-25 07:35:00  skip
+[2026-05-25 14:45:31] [SKIP] NO_TRADE: no_mr_signal
+[2026-05-25 14:46:31] [SKIP] Same candle 2026-05-25 07:40:00  skip
+[2026-05-25 14:47:31] [SKIP] Same candle 2026-05-25 07:40:00  skip
+[2026-05-25 14:48:31] [SKIP] Same candle 2026-05-25 07:40:00  skip
+[2026-05-25 14:49:31] [SKIP] Same candle 2026-05-25 07:40:00  skip
+[2026-05-25 14:50:31] [SKIP] NO_TRADE: no_mr_signal
+[2026-05-25 14:51:31] [SKIP] Same candle 2026-05-25 07:45:00  skip
+[2026-05-25 14:52:31] [SKIP] Same candle 2026-05-25 07:45:00  skip
+[2026-05-25 14:53:31] [SKIP] Same candle 2026-05-25 07:45:00  skip
+[2026-05-25 14:54:31] [SKIP] Same candle 2026-05-25 07:45:00  skip
+[2026-05-25 14:55:31] [SKIP] NO_TRADE: no_mr_signal
+[2026-05-25 14:56:31] [SKIP] Same candle 2026-05-25 07:50:00  skip
+[2026-05-25 14:57:31] [SKIP] Same candle 2026-05-25 07:50:00  skip
+[2026-05-25 14:58:31] [SKIP] Same candle 2026-05-25 07:50:00  skip
+[2026-05-25 14:59:31] [SKIP] Same candle 2026-05-25 07:50:00  skip
+[2026-05-25 15:00:31] [STATS] Hourly (660 attempts): {'no_mr_signal': '660(100%)'}
+[2026-05-25 15:00:31] [SKIP] NO_TRADE: no_mr_signal
+[2026-05-25 15:01:31] [SKIP] Same candle 2026-05-25 07:55:00  skip
+[2026-05-25 15:02:31] [SKIP] Same candle 2026-05-25 07:55:00  skip
+[2026-05-25 15:03:31] [SKIP] Same candle 2026-05-25 07:55:00  skip
+[2026-05-25 15:04:31] [SKIP] Same candle 2026-05-25 07:55:00  skip
+[2026-05-25 15:05:31] [SKIP] NO_TRADE: no_mr_signal
+[2026-05-25 15:06:31] [SKIP] Same candle 2026-05-25 08:00:00  skip
+[2026-05-25 15:07:31] [SKIP] Same candle 2026-05-25 08:00:00  skip
+[2026-05-25 15:08:31] [SKIP] Same candle 2026-05-25 08:00:00  skip
+[2026-05-25 15:09:31] [SKIP] Same candle 2026-05-25 08:00:00  skip
+[2026-05-25 15:10:31] [SKIP] NO_TRADE: no_mr_signal
+[2026-05-25 15:11:31] [SKIP] Same candle 2026-05-25 08:05:00  skip
+[2026-05-25 15:12:32] [SKIP] Same candle 2026-05-25 08:05:00  skip
+[2026-05-25 15:13:32] [SKIP] Same candle 2026-05-25 08:05:00  skip
+[2026-05-25 15:14:32] [SKIP] Same candle 2026-05-25 08:05:00  skip
+[2026-05-25 15:15:32] [SKIP] NO_TRADE: no_mr_signal
+[2026-05-25 15:16:32] [SKIP] Same candle 2026-05-25 08:10:00  skip
+[2026-05-25 15:17:32] [SKIP] Same candle 2026-05-25 08:10:00  skip
+[2026-05-25 15:18:32] [SKIP] Same candle 2026-05-25 08:10:00  skip
+[2026-05-25 15:19:32] [SKIP] Same candle 2026-05-25 08:10:00  skip
+[2026-05-25 15:20:32] [SKIP] NO_TRADE: no_mr_signal
+[2026-05-25 15:21:32] [SKIP] Same candle 2026-05-25 08:15:00  skip
+[2026-05-25 15:22:32] [SKIP] Same candle 2026-05-25 08:15:00  skip
+[2026-05-25 15:23:32] [SKIP] Same candle 2026-05-25 08:15:00  skip
+[2026-05-25 15:24:32] [SKIP] Same candle 2026-05-25 08:15:00  skip
+[2026-05-25 15:25:32] [SKIP] NO_TRADE: no_mr_signal
+[2026-05-25 15:26:32] [SKIP] Same candle 2026-05-25 08:20:00  skip
+[2026-05-25 15:27:32] [SKIP] Same candle 2026-05-25 08:20:00  skip
+[2026-05-25 15:28:32] [SKIP] Same candle 2026-05-25 08:20:00  skip
+[2026-05-25 15:29:32] [SKIP] Same candle 2026-05-25 08:20:00  skip
+[2026-05-25 15:30:32] [SKIP] NO_TRADE: no_mr_signal
+[2026-05-25 15:31:32] [SKIP] Same candle 2026-05-25 08:25:00  skip
+[2026-05-25 15:32:32] [SKIP] Same candle 2026-05-25 08:25:00  skip
+[2026-05-25 15:33:32] [SKIP] Same candle 2026-05-25 08:25:00  skip
+[2026-05-25 15:34:32] [SKIP] Same candle 2026-05-25 08:25:00  skip
+[2026-05-25 15:35:32] [SKIP] NO_TRADE: no_mr_signal
+[2026-05-25 15:36:32] [SKIP] Same candle 2026-05-25 08:30:00  skip
+[2026-05-25 15:37:32] [SKIP] Same candle 2026-05-25 08:30:00  skip
+[2026-05-25 15:38:32] [SKIP] Same candle 2026-05-25 08:30:00  skip
+[2026-05-25 15:39:32] [SKIP] Same candle 2026-05-25 08:30:00  skip
+[2026-05-25 15:40:32] [SKIP] NO_TRADE: no_mr_signal
+[2026-05-25 15:41:32] [SKIP] Same candle 2026-05-25 08:35:00  skip
+[2026-05-25 15:42:32] [SKIP] Same candle 2026-05-25 08:35:00  skip
+[2026-05-25 15:43:32] [SKIP] Same candle 2026-05-25 08:35:00  skip
+[2026-05-25 15:44:32] [SKIP] Same candle 2026-05-25 08:35:00  skip
+[2026-05-25 15:45:32] [SKIP] NO_TRADE: no_mr_signal
+[2026-05-25 15:46:32] [SKIP] Same candle 2026-05-25 08:40:00  skip
+[2026-05-25 15:47:32] [SKIP] Same candle 2026-05-25 08:40:00  skip
+[2026-05-25 15:48:32] [SKIP] Same candle 2026-05-25 08:40:00  skip
+[2026-05-25 15:49:32] [SKIP] Same candle 2026-05-25 08:40:00  skip
+[2026-05-25 15:50:32] [SKIP] NO_TRADE: no_mr_signal
+[2026-05-25 15:51:32] [SKIP] Same candle 2026-05-25 08:45:00  skip
+[2026-05-25 15:52:32] [SKIP] Same candle 2026-05-25 08:45:00  skip
+[2026-05-25 15:53:32] [SKIP] Same candle 2026-05-25 08:45:00  skip
+[2026-05-25 15:54:32] [SKIP] Same candle 2026-05-25 08:45:00  skip
+[2026-05-25 15:55:32] [SKIP] NO_TRADE: no_mr_signal
+[2026-05-25 15:56:32] [SKIP] Same candle 2026-05-25 08:50:00  skip
+[2026-05-25 15:57:32] [SKIP] Same candle 2026-05-25 08:50:00  skip
+[2026-05-25 15:58:32] [SKIP] Same candle 2026-05-25 08:50:00  skip
+[2026-05-25 15:59:32] [SKIP] Same candle 2026-05-25 08:50:00  skip
+[2026-05-25 16:00:32] [STATS] Hourly (720 attempts): {'no_mr_signal': '720(100%)'}
+[2026-05-25 16:00:32] [SKIP] NO_TRADE: no_mr_signal
+[2026-05-25 16:01:32] [SKIP] Same candle 2026-05-25 08:55:00  skip
+[2026-05-25 16:02:32] [SKIP] Same candle 2026-05-25 08:55:00  skip
+[2026-05-25 16:03:33] [SKIP] Same candle 2026-05-25 08:55:00  skip
+[2026-05-25 16:04:33] [SKIP] Same candle 2026-05-25 08:55:00  skip
+[2026-05-25 16:05:33] [SKIP] NO_TRADE: no_mr_signal
+[2026-05-25 16:06:33] [SKIP] Same candle 2026-05-25 09:00:00  skip
+[2026-05-25 16:07:33] [SKIP] Same candle 2026-05-25 09:00:00  skip
+[2026-05-25 16:08:33] [SKIP] Same candle 2026-05-25 09:00:00  skip
+[2026-05-25 16:09:33] [SKIP] Same candle 2026-05-25 09:00:00  skip
+[2026-05-25 16:10:33] [SKIP] NO_TRADE: no_mr_signal
+[2026-05-25 16:11:33] [SKIP] Same candle 2026-05-25 09:05:00  skip
+[2026-05-25 16:12:33] [SKIP] Same candle 2026-05-25 09:05:00  skip
+[2026-05-25 16:13:33] [SKIP] Same candle 2026-05-25 09:05:00  skip
+[2026-05-25 16:14:33] [SKIP] Same candle 2026-05-25 09:05:00  skip
+[2026-05-25 16:15:33] [SKIP] NO_TRADE: no_mr_signal
+[2026-05-25 16:16:33] [SKIP] Same candle 2026-05-25 09:10:00  skip
+[2026-05-25 16:17:33] [SKIP] Same candle 2026-05-25 09:10:00  skip
+[2026-05-25 16:18:33] [SKIP] Same candle 2026-05-25 09:10:00  skip
+[2026-05-25 16:19:33] [SKIP] Same candle 2026-05-25 09:10:00  skip
+[2026-05-25 16:20:33] [SKIP] NO_TRADE: no_mr_signal
+[2026-05-25 16:21:33] [SKIP] Same candle 2026-05-25 09:15:00  skip
+[2026-05-25 16:22:33] [SKIP] Same candle 2026-05-25 09:15:00  skip
+[2026-05-25 16:23:33] [SKIP] Same candle 2026-05-25 09:15:00  skip
+[2026-05-25 16:24:33] [SKIP] Same candle 2026-05-25 09:15:00  skip
+[2026-05-25 16:25:33] [SKIP] NO_TRADE: no_mr_signal
+[2026-05-25 16:26:33] [SKIP] Same candle 2026-05-25 09:20:00  skip
+[2026-05-25 16:27:33] [SKIP] Same candle 2026-05-25 09:20:00  skip
+[2026-05-25 16:28:33] [SKIP] Same candle 2026-05-25 09:20:00  skip
+[2026-05-25 16:29:33] [SKIP] Same candle 2026-05-25 09:20:00  skip
+[2026-05-25 16:30:33] [SKIP] NO_TRADE: no_mr_signal
+[2026-05-25 16:31:33] [SKIP] Same candle 2026-05-25 09:25:00  skip
+[2026-05-25 16:32:33] [SKIP] Same candle 2026-05-25 09:25:00  skip
+[2026-05-25 16:33:33] [SKIP] Same candle 2026-05-25 09:25:00  skip
+[2026-05-25 16:34:33] [SKIP] Same candle 2026-05-25 09:25:00  skip
+[2026-05-25 16:35:33] [SKIP] NO_TRADE: no_mr_signal
+[2026-05-25 16:36:33] [SKIP] Same candle 2026-05-25 09:30:00  skip
+[2026-05-25 16:37:33] [SKIP] Same candle 2026-05-25 09:30:00  skip
+[2026-05-25 16:38:33] [SKIP] Same candle 2026-05-25 09:30:00  skip
+[2026-05-25 16:39:33] [SKIP] Same candle 2026-05-25 09:30:00  skip
+[2026-05-25 16:40:33] [SKIP] NO_TRADE: no_mr_signal
+[2026-05-25 16:41:33] [SKIP] Same candle 2026-05-25 09:35:00  skip
+[2026-05-25 16:42:33] [SKIP] Same candle 2026-05-25 09:35:00  skip
+[2026-05-25 16:43:33] [SKIP] Same candle 2026-05-25 09:35:00  skip
+[2026-05-25 16:44:33] [SKIP] Same candle 2026-05-25 09:35:00  skip
+[2026-05-25 16:45:33] [SKIP] NO_TRADE: no_mr_signal
+[2026-05-25 16:46:33] [SKIP] Same candle 2026-05-25 09:40:00  skip
+[2026-05-25 16:47:33] [SKIP] Same candle 2026-05-25 09:40:00  skip
+[2026-05-25 16:48:33] [SKIP] Same candle 2026-05-25 09:40:00  skip
+[2026-05-25 16:49:33] [SKIP] Same candle 2026-05-25 09:40:00  skip
+[2026-05-25 16:50:33] [SKIP] NO_TRADE: no_mr_signal
+[2026-05-25 16:51:33] [SKIP] Same candle 2026-05-25 09:45:00  skip
+[2026-05-25 16:52:33] [SKIP] Same candle 2026-05-25 09:45:00  skip
+[2026-05-25 16:53:33] [SKIP] Same candle 2026-05-25 09:45:00  skip
+[2026-05-25 16:54:33] [SKIP] Same candle 2026-05-25 09:45:00  skip
+[2026-05-25 16:55:34] [SKIP] NO_TRADE: no_mr_signal
+[2026-05-25 16:56:34] [SKIP] Same candle 2026-05-25 09:50:00  skip
+[2026-05-25 16:57:34] [SKIP] Same candle 2026-05-25 09:50:00  skip
+[2026-05-25 16:58:34] [SKIP] Same candle 2026-05-25 09:50:00  skip
+[2026-05-25 16:59:34] [SKIP] Same candle 2026-05-25 09:50:00  skip
+[2026-05-25 17:00:34] [STATS] Hourly (780 attempts): {'no_mr_signal': '780(100%)'}
+[2026-05-25 17:00:34] [SKIP] NO_TRADE: no_mr_signal
+[2026-05-25 17:01:34] [SKIP] Same candle 2026-05-25 09:55:00  skip
+[2026-05-25 17:02:34] [SKIP] Same candle 2026-05-25 09:55:00  skip
+[2026-05-25 17:03:34] [SKIP] Same candle 2026-05-25 09:55:00  skip
+[2026-05-25 17:04:34] [SKIP] Same candle 2026-05-25 09:55:00  skip
+[2026-05-25 17:05:34] [SKIP] NO_TRADE: no_mr_signal
+[2026-05-25 17:06:34] [SKIP] Same candle 2026-05-25 10:00:00  skip
+[2026-05-25 17:07:34] [SKIP] Same candle 2026-05-25 10:00:00  skip
+[2026-05-25 17:08:34] [SKIP] Same candle 2026-05-25 10:00:00  skip
+[2026-05-25 17:09:34] [SKIP] Same candle 2026-05-25 10:00:00  skip
+[2026-05-25 17:10:34] [SKIP] NO_TRADE: no_mr_signal
+[2026-05-25 17:11:34] [SKIP] Same candle 2026-05-25 10:05:00  skip
+[2026-05-25 17:12:34] [SKIP] Same candle 2026-05-25 10:05:00  skip
+[2026-05-25 17:13:34] [SKIP] Same candle 2026-05-25 10:05:00  skip
+[2026-05-25 17:14:34] [SKIP] Same candle 2026-05-25 10:05:00  skip
+[2026-05-25 17:15:34] [SKIP] NO_TRADE: no_mr_signal
+[2026-05-25 17:16:34] [SKIP] Same candle 2026-05-25 10:10:00  skip
+[2026-05-25 17:17:34] [SKIP] Same candle 2026-05-25 10:10:00  skip
+[2026-05-25 17:18:34] [SKIP] Same candle 2026-05-25 10:10:00  skip
+[2026-05-25 17:19:34] [SKIP] Same candle 2026-05-25 10:10:00  skip
+[2026-05-25 17:20:34] [SKIP] NO_TRADE: no_mr_signal
+[2026-05-25 17:21:34] [SKIP] Same candle 2026-05-25 10:15:00  skip
+[2026-05-25 17:22:34] [SKIP] Same candle 2026-05-25 10:15:00  skip
+[2026-05-25 17:23:34] [SKIP] Same candle 2026-05-25 10:15:00  skip
+[2026-05-25 17:24:34] [SKIP] Same candle 2026-05-25 10:15:00  skip
+[2026-05-25 17:25:34] [SKIP] NO_TRADE: no_mr_signal
+[2026-05-25 17:26:34] [SKIP] Same candle 2026-05-25 10:20:00  skip
+[2026-05-25 17:27:34] [SKIP] Same candle 2026-05-25 10:20:00  skip
+[2026-05-25 17:28:34] [SKIP] Same candle 2026-05-25 10:20:00  skip
+[2026-05-25 17:29:34] [SKIP] Same candle 2026-05-25 10:20:00  skip
+[2026-05-25 17:30:34] [SKIP] NO_TRADE: no_mr_signal
+[2026-05-25 17:31:34] [SKIP] Same candle 2026-05-25 10:25:00  skip
+[2026-05-25 17:32:34] [SKIP] Same candle 2026-05-25 10:25:00  skip
+[2026-05-25 17:33:34] [SKIP] Same candle 2026-05-25 10:25:00  skip
+[2026-05-25 17:34:34] [SKIP] Same candle 2026-05-25 10:25:00  skip
+[2026-05-25 17:35:34] [SKIP] NO_TRADE: no_mr_signal
+[2026-05-25 17:36:34] [SKIP] Same candle 2026-05-25 10:30:00  skip
+[2026-05-25 17:37:34] [SKIP] Same candle 2026-05-25 10:30:00  skip
+[2026-05-25 17:38:34] [SKIP] Same candle 2026-05-25 10:30:00  skip
+[2026-05-25 17:39:34] [SKIP] Same candle 2026-05-25 10:30:00  skip
+[2026-05-25 17:40:38] [AI] News risk: ALLOW score=10 event=none reason=No high-impact news events identified within 120 minutes. D1 ADX=16.6 indicates ranging conditions suitable for MR.
+[2026-05-25 17:40:38] [WATCH] Signal: side=SELL pattern=kc_reversal entry=4570.417 sl=4575.669650000001 tp=4562.538025 d1=D1 ADX=16.6 (ranging  MR OK) news=AI news OK score=10 | No high-impact news events identified within 120 minutes. D1 ADX=16.6 indicates ranging conditions suitable for MR.
+[2026-05-25 17:40:38] [ORDER] result: OrderSendResult(retcode=10027, deal=0, order=0, volume=0.0, price=0.0, bid=0.0, ask=0.0, comment='AutoTrading disabled by client', request_id=0, retcode_external=0, request=TradeRequest(action=1, magic=20260520, order=0, symbol='XAUUSDm', volume=0.01, price=4570.686, stoplimit=0.0, sl=4575.67, tp=4562.538, deviation=10, type=1, type_filling=1, type_time=0, expiration=0, comment='gold_mr_kc_reversal', position=0, position_by=0))
+[2026-05-25 17:41:39] [SKIP] Same candle 2026-05-25 10:35:00  skip
+[2026-05-25 17:42:39] [SKIP] Same candle 2026-05-25 10:35:00  skip
+[2026-05-25 17:43:39] [SKIP] Same candle 2026-05-25 10:35:00  skip
+[2026-05-25 17:44:40] [SKIP] Same candle 2026-05-25 10:35:00  skip
+[2026-05-25 17:45:40] [SKIP] NO_TRADE: no_mr_signal
+[2026-05-25 17:46:40] [SKIP] Same candle 2026-05-25 10:40:00  skip
+[2026-05-25 17:47:40] [SKIP] Same candle 2026-05-25 10:40:00  skip
+[2026-05-25 17:48:40] [SKIP] Same candle 2026-05-25 10:40:00  skip
+[2026-05-25 17:49:40] [SKIP] Same candle 2026-05-25 10:40:00  skip
+[2026-05-25 17:50:40] [SKIP] NO_TRADE: no_mr_signal
+[2026-05-25 17:51:40] [SKIP] Same candle 2026-05-25 10:45:00  skip
+[2026-05-25 17:52:40] [SKIP] Same candle 2026-05-25 10:45:00  skip
+[2026-05-25 17:53:40] [SKIP] Same candle 2026-05-25 10:45:00  skip
+[2026-05-25 17:54:40] [SKIP] Same candle 2026-05-25 10:45:00  skip
+[2026-05-25 17:55:40] [SKIP] NO_TRADE: no_mr_signal
+[2026-05-25 17:56:40] [SKIP] Same candle 2026-05-25 10:50:00  skip
+[2026-05-25 17:57:40] [SKIP] Same candle 2026-05-25 10:50:00  skip
+[2026-05-25 17:58:40] [SKIP] Same candle 2026-05-25 10:50:00  skip
+[2026-05-25 17:59:40] [SKIP] Same candle 2026-05-25 10:50:00  skip
+[2026-05-25 18:00:40] [STATS] Hourly (840 attempts): {'no_mr_signal': '835(99%)'}
+[2026-05-25 18:00:40] [SKIP] NO_TRADE: no_mr_signal
+[2026-05-25 18:01:40] [SKIP] Same candle 2026-05-25 10:55:00  skip
+[2026-05-25 18:02:40] [SKIP] Same candle 2026-05-25 10:55:00  skip
+[2026-05-25 18:03:40] [SKIP] Same candle 2026-05-25 10:55:00  skip
+[2026-05-25 18:04:40] [SKIP] Same candle 2026-05-25 10:55:00  skip
+[2026-05-25 18:05:40] [SKIP] NO_TRADE: no_mr_signal
+[2026-05-25 18:06:40] [SKIP] Same candle 2026-05-25 11:00:00  skip
+[2026-05-25 18:07:40] [SKIP] Same candle 2026-05-25 11:00:00  skip
+[2026-05-25 18:08:40] [SKIP] Same candle 2026-05-25 11:00:00  skip
+[2026-05-25 18:09:40] [SKIP] Same candle 2026-05-25 11:00:00  skip
+[2026-05-25 18:10:40] [SKIP] NO_TRADE: no_mr_signal
+[2026-05-25 18:11:40] [SKIP] Same candle 2026-05-25 11:05:00  skip
+[2026-05-25 18:12:40] [SKIP] Same candle 2026-05-25 11:05:00  skip
+[2026-05-25 18:13:40] [SKIP] Same candle 2026-05-25 11:05:00  skip
+[2026-05-25 18:14:40] [SKIP] Same candle 2026-05-25 11:05:00  skip
+[2026-05-25 18:15:40] [SKIP] NO_TRADE: no_mr_signal
+[2026-05-25 18:16:40] [SKIP] Same candle 2026-05-25 11:10:00  skip
+[2026-05-25 18:17:40] [SKIP] Same candle 2026-05-25 11:10:00  skip
+[2026-05-25 18:18:40] [SKIP] Same candle 2026-05-25 11:10:00  skip
+[2026-05-25 18:19:40] [SKIP] Same candle 2026-05-25 11:10:00  skip
+[2026-05-25 18:20:40] [SKIP] NO_TRADE: no_mr_signal
+[2026-05-25 18:21:40] [SKIP] Same candle 2026-05-25 11:15:00  skip
+[2026-05-25 18:22:40] [SKIP] Same candle 2026-05-25 11:15:00  skip
+[2026-05-25 18:23:40] [SKIP] Same candle 2026-05-25 11:15:00  skip
+[2026-05-25 18:24:40] [SKIP] Same candle 2026-05-25 11:15:00  skip
+[2026-05-25 18:25:45] WARN [AI] AI news gate failed: Expecting value: line 1 column 1 (char 0)
+[2026-05-25 18:25:45] [WATCH] Signal: side=SELL pattern=kc_reversal entry=4570.419 sl=4577.6498 tp=4559.5728 d1=D1 ADX=16.6 (ranging  MR OK) news=AI news OK score=0 | AI news unavailable; allowing (Expecting value: line 1 column 1 (char 0))
+[2026-05-25 18:25:45] [ORDER] result: OrderSendResult(retcode=10027, deal=0, order=0, volume=0.0, price=0.0, bid=0.0, ask=0.0, comment='AutoTrading disabled by client', request_id=0, retcode_external=0, request=TradeRequest(action=1, magic=20260520, order=0, symbol='XAUUSDm', volume=0.01, price=4570.57, stoplimit=0.0, sl=4577.65, tp=4559.573, deviation=10, type=1, type_filling=1, type_time=0, expiration=0, comment='gold_mr_kc_reversal', position=0, position_by=0))
+[2026-05-25 18:26:46] [SKIP] Same candle 2026-05-25 11:20:00  skip
+[2026-05-25 18:27:46] [SKIP] Same candle 2026-05-25 11:20:00  skip
+[2026-05-25 18:28:46] [SKIP] Same candle 2026-05-25 11:20:00  skip
+[2026-05-25 18:29:46] [SKIP] Same candle 2026-05-25 11:20:00  skip
+[2026-05-25 18:30:46] [SKIP] NO_TRADE: no_mr_signal
+[2026-05-25 18:31:46] [SKIP] Same candle 2026-05-25 11:25:00  skip
+[2026-05-25 18:32:46] [SKIP] Same candle 2026-05-25 11:25:00  skip
+[2026-05-25 18:33:46] [SKIP] Same candle 2026-05-25 11:25:00  skip
+[2026-05-25 18:34:46] [SKIP] Same candle 2026-05-25 11:25:00  skip
+[2026-05-25 18:35:46] [SKIP] NO_TRADE: no_mr_signal
+[2026-05-25 18:36:46] [SKIP] Same candle 2026-05-25 11:30:00  skip
+[2026-05-25 18:37:46] [SKIP] Same candle 2026-05-25 11:30:00  skip
+[2026-05-25 18:38:46] [SKIP] Same candle 2026-05-25 11:30:00  skip
+[2026-05-25 18:39:46] [SKIP] Same candle 2026-05-25 11:30:00  skip
+[2026-05-25 18:40:46] [SKIP] NO_TRADE: no_mr_signal
+[2026-05-25 18:41:46] [SKIP] Same candle 2026-05-25 11:35:00  skip
+[2026-05-25 18:42:46] [SKIP] Same candle 2026-05-25 11:35:00  skip
+[2026-05-25 18:43:47] [SKIP] Same candle 2026-05-25 11:35:00  skip
+[2026-05-25 18:44:47] [SKIP] Same candle 2026-05-25 11:35:00  skip
+[2026-05-25 18:45:47] [SKIP] NO_TRADE: no_mr_signal
+[2026-05-25 18:46:47] [SKIP] Same candle 2026-05-25 11:40:00  skip
+[2026-05-25 18:47:47] [SKIP] Same candle 2026-05-25 11:40:00  skip
+[2026-05-25 18:48:47] [SKIP] Same candle 2026-05-25 11:40:00  skip
+[2026-05-25 18:49:47] [SKIP] Same candle 2026-05-25 11:40:00  skip
+[2026-05-25 18:50:47] [SKIP] NO_TRADE: no_mr_signal
+[2026-05-25 18:51:47] [SKIP] Same candle 2026-05-25 11:45:00  skip
+[2026-05-25 18:52:47] [SKIP] Same candle 2026-05-25 11:45:00  skip
+[2026-05-25 18:53:47] [SKIP] Same candle 2026-05-25 11:45:00  skip
+[2026-05-25 18:54:47] [SKIP] Same candle 2026-05-25 11:45:00  skip
+[2026-05-25 18:55:47] [SKIP] NO_TRADE: no_mr_signal
+[2026-05-25 18:56:47] [SKIP] Same candle 2026-05-25 11:50:00  skip
+[2026-05-25 18:57:47] [SKIP] Same candle 2026-05-25 11:50:00  skip
+[2026-05-25 18:58:47] [SKIP] Same candle 2026-05-25 11:50:00  skip
+[2026-05-25 18:59:47] [SKIP] Same candle 2026-05-25 11:50:00  skip
+[2026-05-25 19:00:47] [STATS] Hourly (900 attempts): {'no_mr_signal': '890(99%)'}
+[2026-05-25 19:00:47] [SKIP] NO_TRADE: no_mr_signal
+[2026-05-25 19:01:47] [SKIP] Same candle 2026-05-25 11:55:00  skip
+[2026-05-25 19:02:47] [SKIP] Same candle 2026-05-25 11:55:00  skip
+[2026-05-25 19:03:47] [SKIP] Same candle 2026-05-25 11:55:00  skip
+[2026-05-25 19:04:47] [SKIP] Same candle 2026-05-25 11:55:00  skip
+[2026-05-25 19:05:47] [SKIP] NO_TRADE: no_mr_signal
+[2026-05-25 19:06:47] [SKIP] Same candle 2026-05-25 12:00:00  skip
+[2026-05-25 19:07:47] [SKIP] Same candle 2026-05-25 12:00:00  skip
+[2026-05-25 19:08:47] [SKIP] Same candle 2026-05-25 12:00:00  skip
+[2026-05-25 19:09:47] [SKIP] Same candle 2026-05-25 12:00:00  skip
+[2026-05-25 19:10:47] [SKIP] NO_TRADE: no_mr_signal
+[2026-05-25 19:11:47] [SKIP] Same candle 2026-05-25 12:05:00  skip
+[2026-05-25 19:12:47] [SKIP] Same candle 2026-05-25 12:05:00  skip
+[2026-05-25 19:13:47] [SKIP] Same candle 2026-05-25 12:05:00  skip
+[2026-05-25 19:14:47] [SKIP] Same candle 2026-05-25 12:05:00  skip
+[2026-05-25 19:15:47] [SKIP] NO_TRADE: no_mr_signal
+[2026-05-25 19:16:47] [SKIP] Same candle 2026-05-25 12:10:00  skip
+[2026-05-25 19:17:47] [SKIP] Same candle 2026-05-25 12:10:00  skip
+[2026-05-25 19:18:47] [SKIP] Same candle 2026-05-25 12:10:00  skip
+[2026-05-25 19:19:47] [SKIP] Same candle 2026-05-25 12:10:00  skip
+[2026-05-25 19:20:47] [SKIP] NO_TRADE: no_mr_signal
+[2026-05-25 19:21:47] [SKIP] Same candle 2026-05-25 12:15:00  skip
+[2026-05-25 19:22:47] [SKIP] Same candle 2026-05-25 12:15:00  skip
+[2026-05-25 19:23:47] [SKIP] Same candle 2026-05-25 12:15:00  skip
+[2026-05-25 19:24:47] [SKIP] Same candle 2026-05-25 12:15:00  skip
+[2026-05-25 19:25:47] [SKIP] NO_TRADE: no_mr_signal
+[2026-05-25 19:26:47] [SKIP] Same candle 2026-05-25 12:20:00  skip
+[2026-05-25 19:27:47] [SKIP] Same candle 2026-05-25 12:20:00  skip
+[2026-05-25 19:28:47] [SKIP] Same candle 2026-05-25 12:20:00  skip
+[2026-05-25 19:29:47] [SKIP] Same candle 2026-05-25 12:20:00  skip
+[2026-05-25 19:30:47] [SKIP] NO_TRADE: no_mr_signal
+[2026-05-25 19:31:47] [SKIP] Same candle 2026-05-25 12:25:00  skip
+[2026-05-25 19:32:47] [SKIP] Same candle 2026-05-25 12:25:00  skip
+[2026-05-25 19:33:48] [SKIP] Same candle 2026-05-25 12:25:00  skip
+[2026-05-25 19:34:48] [SKIP] Same candle 2026-05-25 12:25:00  skip
+[2026-05-25 19:35:48] [SKIP] NO_TRADE: no_mr_signal
+[2026-05-25 19:36:48] [SKIP] Same candle 2026-05-25 12:30:00  skip
+[2026-05-25 19:37:48] [SKIP] Same candle 2026-05-25 12:30:00  skip
+[2026-05-25 19:38:48] [SKIP] Same candle 2026-05-25 12:30:00  skip
+[2026-05-25 19:39:48] [SKIP] Same candle 2026-05-25 12:30:00  skip
+[2026-05-25 19:40:48] [SKIP] NO_TRADE: no_mr_signal
+[2026-05-25 19:41:48] [SKIP] Same candle 2026-05-25 12:35:00  skip
+[2026-05-25 19:42:48] [SKIP] Same candle 2026-05-25 12:35:00  skip
+[2026-05-25 19:43:48] [SKIP] Same candle 2026-05-25 12:35:00  skip
+[2026-05-25 19:44:48] [SKIP] Same candle 2026-05-25 12:35:00  skip
+[2026-05-25 19:45:48] [SKIP] NO_TRADE: no_mr_signal
+[2026-05-25 19:46:48] [SKIP] Same candle 2026-05-25 12:40:00  skip
+[2026-05-25 19:47:48] [SKIP] Same candle 2026-05-25 12:40:00  skip
+[2026-05-25 19:48:48] [SKIP] Same candle 2026-05-25 12:40:00  skip
+[2026-05-25 19:49:48] [SKIP] Same candle 2026-05-25 12:40:00  skip
+[2026-05-25 19:50:48] [SKIP] NO_TRADE: no_mr_signal
+[2026-05-25 19:51:48] [SKIP] Same candle 2026-05-25 12:45:00  skip
+[2026-05-25 19:52:48] [SKIP] Same candle 2026-05-25 12:45:00  skip
+[2026-05-25 19:53:48] [SKIP] Same candle 2026-05-25 12:45:00  skip
+[2026-05-25 19:54:48] [SKIP] Same candle 2026-05-25 12:45:00  skip
+[2026-05-25 19:55:48] [SKIP] NO_TRADE: no_mr_signal
+[2026-05-25 19:56:48] [SKIP] Same candle 2026-05-25 12:50:00  skip
+[2026-05-25 19:57:48] [SKIP] Same candle 2026-05-25 12:50:00  skip
+[2026-05-25 19:58:48] [SKIP] Same candle 2026-05-25 12:50:00  skip
+[2026-05-25 19:59:48] [SKIP] Same candle 2026-05-25 12:50:00  skip
+[2026-05-25 20:00:48] [STATS] Hourly (960 attempts): {'no_mr_signal': '950(99%)'}
+[2026-05-25 20:00:48] [SKIP] NO_TRADE: no_mr_signal
+[2026-05-25 20:01:48] [SKIP] Same candle 2026-05-25 12:55:00  skip
+[2026-05-25 20:02:48] [SKIP] Same candle 2026-05-25 12:55:00  skip
+[2026-05-25 20:03:48] [SKIP] Same candle 2026-05-25 12:55:00  skip
+[2026-05-25 20:04:48] [SKIP] Same candle 2026-05-25 12:55:00  skip
+[2026-05-25 20:05:48] [SKIP] NO_TRADE: no_mr_signal
+[2026-05-25 20:06:48] [SKIP] Same candle 2026-05-25 13:00:00  skip
+[2026-05-25 20:07:48] [SKIP] Same candle 2026-05-25 13:00:00  skip
+[2026-05-25 20:08:48] [SKIP] Same candle 2026-05-25 13:00:00  skip
+[2026-05-25 20:09:48] [SKIP] Same candle 2026-05-25 13:00:00  skip
+[2026-05-25 20:10:48] [SKIP] NO_TRADE: no_mr_signal
+[2026-05-25 20:11:48] [SKIP] Same candle 2026-05-25 13:05:00  skip
+[2026-05-25 20:12:48] [SKIP] Same candle 2026-05-25 13:05:00  skip
+[2026-05-25 20:13:48] [SKIP] Same candle 2026-05-25 13:05:00  skip
+[2026-05-25 20:14:48] [SKIP] Same candle 2026-05-25 13:05:00  skip
+[2026-05-25 20:15:48] [SKIP] NO_TRADE: no_mr_signal
+[2026-05-25 20:16:48] [SKIP] Same candle 2026-05-25 13:10:00  skip
+[2026-05-25 20:17:48] [SKIP] Same candle 2026-05-25 13:10:00  skip
+[2026-05-25 20:18:48] [SKIP] Same candle 2026-05-25 13:10:00  skip
+[2026-05-25 20:19:48] [SKIP] Same candle 2026-05-25 13:10:00  skip
+[2026-05-25 20:20:48] [SKIP] NO_TRADE: no_mr_signal
+[2026-05-25 20:21:48] [SKIP] Same candle 2026-05-25 13:15:00  skip
+[2026-05-25 20:22:49] [SKIP] Same candle 2026-05-25 13:15:00  skip
+[2026-05-25 20:23:49] [SKIP] Same candle 2026-05-25 13:15:00  skip
+[2026-05-25 20:24:49] [SKIP] Same candle 2026-05-25 13:15:00  skip
+[2026-05-25 20:25:49] [SKIP] NO_TRADE: no_mr_signal
+[2026-05-25 20:26:49] [SKIP] Same candle 2026-05-25 13:20:00  skip
+[2026-05-25 20:27:49] [SKIP] Same candle 2026-05-25 13:20:00  skip
+[2026-05-25 20:28:49] [SKIP] Same candle 2026-05-25 13:20:00  skip
+[2026-05-25 20:29:49] [SKIP] Same candle 2026-05-25 13:20:00  skip
+[2026-05-25 20:30:49] [SKIP] NO_TRADE: no_mr_signal
+[2026-05-25 20:31:49] [SKIP] Same candle 2026-05-25 13:25:00  skip
+[2026-05-25 20:32:49] [SKIP] Same candle 2026-05-25 13:25:00  skip
+[2026-05-25 20:33:49] [SKIP] Same candle 2026-05-25 13:25:00  skip
+[2026-05-25 20:34:49] [SKIP] Same candle 2026-05-25 13:25:00  skip
+[2026-05-25 20:35:49] [SKIP] NO_TRADE: no_mr_signal
+[2026-05-25 20:36:49] [SKIP] Same candle 2026-05-25 13:30:00  skip
+[2026-05-25 20:37:49] [SKIP] Same candle 2026-05-25 13:30:00  skip
+[2026-05-25 20:38:49] [SKIP] Same candle 2026-05-25 13:30:00  skip
+[2026-05-25 20:39:49] [SKIP] Same candle 2026-05-25 13:30:00  skip
+[2026-05-25 20:40:49] [SKIP] NO_TRADE: no_mr_signal
+[2026-05-25 20:41:49] [SKIP] Same candle 2026-05-25 13:35:00  skip
+[2026-05-25 20:42:49] [SKIP] Same candle 2026-05-25 13:35:00  skip
+[2026-05-25 20:43:49] [SKIP] Same candle 2026-05-25 13:35:00  skip
+[2026-05-25 20:44:49] [SKIP] Same candle 2026-05-25 13:35:00  skip
+[2026-05-25 20:45:49] [SKIP] NO_TRADE: no_mr_signal
+[2026-05-25 20:46:49] [SKIP] Same candle 2026-05-25 13:40:00  skip
+[2026-05-25 20:47:49] [SKIP] Same candle 2026-05-25 13:40:00  skip
+[2026-05-25 20:48:49] [SKIP] Same candle 2026-05-25 13:40:00  skip
+[2026-05-25 20:49:49] [SKIP] Same candle 2026-05-25 13:40:00  skip
+[2026-05-25 20:50:49] [SKIP] NO_TRADE: no_mr_signal
+[2026-05-25 20:51:49] [SKIP] Same candle 2026-05-25 13:45:00  skip
+[2026-05-25 20:52:49] [SKIP] Same candle 2026-05-25 13:45:00  skip
+[2026-05-25 20:53:49] [SKIP] Same candle 2026-05-25 13:45:00  skip
+[2026-05-25 20:54:49] [SKIP] Same candle 2026-05-25 13:45:00  skip
+[2026-05-25 20:55:49] [SKIP] NO_TRADE: no_mr_signal
+[2026-05-25 20:56:49] [SKIP] Same candle 2026-05-25 13:50:00  skip
+[2026-05-25 20:57:49] [SKIP] Same candle 2026-05-25 13:50:00  skip
+[2026-05-25 20:58:49] [SKIP] Same candle 2026-05-25 13:50:00  skip
+[2026-05-25 20:59:49] [SKIP] Same candle 2026-05-25 13:50:00  skip
+[2026-05-25 21:00:49] [STATS] Hourly (1020 attempts): {'no_mr_signal': '1010(99%)'}
+[2026-05-25 21:00:49] [SKIP] NO_TRADE: no_mr_signal
+[2026-05-25 21:01:49] [SKIP] Same candle 2026-05-25 13:55:00  skip
+[2026-05-25 21:02:49] [SKIP] Same candle 2026-05-25 13:55:00  skip
+[2026-05-25 21:03:49] [SKIP] Same candle 2026-05-25 13:55:00  skip
+[2026-05-25 21:04:49] [SKIP] Same candle 2026-05-25 13:55:00  skip
+[2026-05-25 21:05:49] [SKIP] NO_TRADE: no_mr_signal
+[2026-05-25 21:06:49] [SKIP] Same candle 2026-05-25 14:00:00  skip
+[2026-05-25 21:07:49] [SKIP] Same candle 2026-05-25 14:00:00  skip
+[2026-05-25 21:08:49] [SKIP] Same candle 2026-05-25 14:00:00  skip
+[2026-05-25 21:09:49] [SKIP] Same candle 2026-05-25 14:00:00  skip
+[2026-05-25 21:10:49] [SKIP] NO_TRADE: no_mr_signal
+[2026-05-25 21:11:49] [SKIP] Same candle 2026-05-25 14:05:00  skip
+[2026-05-25 21:12:50] [SKIP] Same candle 2026-05-25 14:05:00  skip
+[2026-05-25 21:13:50] [SKIP] Same candle 2026-05-25 14:05:00  skip
+[2026-05-25 21:14:50] [SKIP] Same candle 2026-05-25 14:05:00  skip
+[2026-05-25 21:15:50] [SKIP] NO_TRADE: no_mr_signal
+[2026-05-25 21:16:50] [SKIP] Same candle 2026-05-25 14:10:00  skip
+[2026-05-25 21:17:50] [SKIP] Same candle 2026-05-25 14:10:00  skip
+[2026-05-25 21:18:50] [SKIP] Same candle 2026-05-25 14:10:00  skip
+[2026-05-25 21:19:50] [SKIP] Same candle 2026-05-25 14:10:00  skip
+[2026-05-25 21:20:50] [SKIP] NO_TRADE: no_mr_signal
+[2026-05-25 21:21:50] [SKIP] Same candle 2026-05-25 14:15:00  skip
+[2026-05-25 21:22:50] [SKIP] Same candle 2026-05-25 14:15:00  skip
+[2026-05-25 21:23:50] [SKIP] Same candle 2026-05-25 14:15:00  skip
+[2026-05-25 21:24:50] [SKIP] Same candle 2026-05-25 14:15:00  skip
+[2026-05-25 21:25:50] [SKIP] NO_TRADE: no_mr_signal
+[2026-05-25 21:26:50] [SKIP] Same candle 2026-05-25 14:20:00  skip
+[2026-05-25 21:27:50] [SKIP] Same candle 2026-05-25 14:20:00  skip
+[2026-05-25 21:28:50] [SKIP] Same candle 2026-05-25 14:20:00  skip
+[2026-05-25 21:29:50] [SKIP] Same candle 2026-05-25 14:20:00  skip
+[2026-05-25 21:30:50] [SKIP] NO_TRADE: no_mr_signal
+[2026-05-25 21:31:50] [SKIP] Same candle 2026-05-25 14:25:00  skip
+[2026-05-25 21:32:50] [SKIP] Same candle 2026-05-25 14:25:00  skip
+[2026-05-25 21:33:50] [SKIP] Same candle 2026-05-25 14:25:00  skip
+[2026-05-25 21:34:50] [SKIP] Same candle 2026-05-25 14:25:00  skip
+[2026-05-25 21:35:50] [SKIP] NO_TRADE: no_mr_signal
+[2026-05-25 21:36:50] [SKIP] Same candle 2026-05-25 14:30:00  skip
+[2026-05-25 21:37:50] [SKIP] Same candle 2026-05-25 14:30:00  skip
+[2026-05-25 21:38:50] [SKIP] Same candle 2026-05-25 14:30:00  skip
+[2026-05-25 21:39:50] [SKIP] Same candle 2026-05-25 14:30:00  skip
+[2026-05-25 21:40:50] [SKIP] NO_TRADE: no_mr_signal
+[2026-05-25 21:41:50] [SKIP] Same candle 2026-05-25 14:35:00  skip
+[2026-05-25 21:42:50] [SKIP] Same candle 2026-05-25 14:35:00  skip
+[2026-05-25 21:43:50] [SKIP] Same candle 2026-05-25 14:35:00  skip
+[2026-05-25 21:44:50] [SKIP] Same candle 2026-05-25 14:35:00  skip
+[2026-05-25 21:45:50] [SKIP] NO_TRADE: no_mr_signal
+[2026-05-25 21:46:50] [SKIP] Same candle 2026-05-25 14:40:00  skip
+[2026-05-25 21:47:50] [SKIP] Same candle 2026-05-25 14:40:00  skip
+[2026-05-25 21:48:50] [SKIP] Same candle 2026-05-25 14:40:00  skip
+[2026-05-25 21:49:50] [SKIP] Same candle 2026-05-25 14:40:00  skip
+[2026-05-25 21:50:50] [SKIP] NO_TRADE: no_mr_signal
+[2026-05-25 21:51:50] [SKIP] Same candle 2026-05-25 14:45:00  skip
+[2026-05-25 21:52:50] [SKIP] Same candle 2026-05-25 14:45:00  skip
+[2026-05-25 21:53:50] [SKIP] Same candle 2026-05-25 14:45:00  skip
+[2026-05-25 21:54:50] [SKIP] Same candle 2026-05-25 14:45:00  skip
+[2026-05-25 21:55:50] [SKIP] NO_TRADE: no_mr_signal
+[2026-05-25 21:56:50] [SKIP] Same candle 2026-05-25 14:50:00  skip
+[2026-05-25 21:57:50] [SKIP] Same candle 2026-05-25 14:50:00  skip
+[2026-05-25 21:58:50] [SKIP] Same candle 2026-05-25 14:50:00  skip
+[2026-05-25 21:59:50] [SKIP] Same candle 2026-05-25 14:50:00  skip
+[2026-05-25 22:00:50] [STATS] Hourly (1080 attempts): {'no_mr_signal': '1070(99%)'}
+[2026-05-25 22:00:50] [SKIP] NO_TRADE: no_mr_signal
+[2026-05-25 22:01:50] [SKIP] Same candle 2026-05-25 14:55:00  skip
+[2026-05-25 22:02:50] [SKIP] Same candle 2026-05-25 14:55:00  skip
+[2026-05-25 22:03:51] [SKIP] Same candle 2026-05-25 14:55:00  skip
+[2026-05-25 22:04:51] [SKIP] Same candle 2026-05-25 14:55:00  skip
+[2026-05-25 22:05:51] [SKIP] NO_TRADE: no_mr_signal
+[2026-05-25 22:06:51] [SKIP] Same candle 2026-05-25 15:00:00  skip
+[2026-05-25 22:07:51] [SKIP] Same candle 2026-05-25 15:00:00  skip
+[2026-05-25 22:08:51] [SKIP] Same candle 2026-05-25 15:00:00  skip
+[2026-05-25 22:09:51] [SKIP] Same candle 2026-05-25 15:00:00  skip
+[2026-05-25 22:10:51] [SKIP] NO_TRADE: no_mr_signal
+[2026-05-25 22:11:51] [SKIP] Same candle 2026-05-25 15:05:00  skip
+[2026-05-25 22:12:51] [SKIP] Same candle 2026-05-25 15:05:00  skip
+[2026-05-25 22:13:51] [SKIP] Same candle 2026-05-25 15:05:00  skip
+[2026-05-25 22:14:51] [SKIP] Same candle 2026-05-25 15:05:00  skip
+[2026-05-25 22:15:51] [SKIP] NO_TRADE: no_mr_signal
+[2026-05-25 22:16:51] [SKIP] Same candle 2026-05-25 15:10:00  skip
+[2026-05-25 22:17:51] [SKIP] Same candle 2026-05-25 15:10:00  skip
+[2026-05-25 22:18:51] [SKIP] Same candle 2026-05-25 15:10:00  skip
+[2026-05-25 22:19:51] [SKIP] Same candle 2026-05-25 15:10:00  skip
+[2026-05-25 22:20:51] [SKIP] NO_TRADE: no_mr_signal
+[2026-05-25 22:21:51] [SKIP] Same candle 2026-05-25 15:15:00  skip
+[2026-05-25 22:22:51] [SKIP] Same candle 2026-05-25 15:15:00  skip
+[2026-05-25 22:23:51] [SKIP] Same candle 2026-05-25 15:15:00  skip
+[2026-05-25 22:24:51] [SKIP] Same candle 2026-05-25 15:15:00  skip
+[2026-05-25 22:25:51] [SKIP] NO_TRADE: no_mr_signal
+[2026-05-25 22:26:51] [SKIP] Same candle 2026-05-25 15:20:00  skip
+[2026-05-25 22:27:51] [SKIP] Same candle 2026-05-25 15:20:00  skip
+[2026-05-25 22:28:51] [SKIP] Same candle 2026-05-25 15:20:00  skip
+[2026-05-25 22:29:51] [SKIP] Same candle 2026-05-25 15:20:00  skip
+[2026-05-25 22:30:51] [SKIP] NO_TRADE: no_mr_signal
+[2026-05-25 22:31:51] [SKIP] Same candle 2026-05-25 15:25:00  skip
+[2026-05-25 22:32:51] [SKIP] Same candle 2026-05-25 15:25:00  skip
+[2026-05-25 22:33:51] [SKIP] Same candle 2026-05-25 15:25:00  skip
+[2026-05-25 22:34:51] [SKIP] Same candle 2026-05-25 15:25:00  skip
+[2026-05-25 22:35:51] [SKIP] NO_TRADE: no_mr_signal
+[2026-05-25 22:36:51] [SKIP] Same candle 2026-05-25 15:30:00  skip
+[2026-05-25 22:37:51] [SKIP] Same candle 2026-05-25 15:30:00  skip
+[2026-05-25 22:38:51] [SKIP] Same candle 2026-05-25 15:30:00  skip
+[2026-05-25 22:39:51] [SKIP] Same candle 2026-05-25 15:30:00  skip
+[2026-05-25 22:40:51] [SKIP] NO_TRADE: no_mr_signal
+[2026-05-25 22:41:51] [SKIP] Same candle 2026-05-25 15:35:00  skip
+[2026-05-25 22:42:51] [SKIP] Same candle 2026-05-25 15:35:00  skip
+[2026-05-25 22:43:51] [SKIP] Same candle 2026-05-25 15:35:00  skip
+[2026-05-25 22:44:51] [SKIP] Same candle 2026-05-25 15:35:00  skip
+[2026-05-25 22:45:51] [SKIP] NO_TRADE: no_mr_signal
+[2026-05-25 22:46:51] [SKIP] Same candle 2026-05-25 15:40:00  skip
+[2026-05-25 22:47:51] [SKIP] Same candle 2026-05-25 15:40:00  skip
+[2026-05-25 22:48:51] [SKIP] Same candle 2026-05-25 15:40:00  skip
+[2026-05-25 22:49:51] [SKIP] Same candle 2026-05-25 15:40:00  skip
+[2026-05-25 22:50:51] [SKIP] NO_TRADE: no_mr_signal
+[2026-05-25 22:51:51] [SKIP] Same candle 2026-05-25 15:45:00  skip
+[2026-05-25 22:52:51] [SKIP] Same candle 2026-05-25 15:45:00  skip
+[2026-05-25 22:53:52] [SKIP] Same candle 2026-05-25 15:45:00  skip
+[2026-05-25 22:54:52] [SKIP] Same candle 2026-05-25 15:45:00  skip
+[2026-05-25 22:55:52] [SKIP] NO_TRADE: no_mr_signal
+[2026-05-25 22:56:52] [SKIP] Same candle 2026-05-25 15:50:00  skip
+[2026-05-25 22:57:52] [SKIP] Same candle 2026-05-25 15:50:00  skip
+[2026-05-25 22:58:52] [SKIP] Same candle 2026-05-25 15:50:00  skip
+[2026-05-25 22:59:52] [SKIP] Same candle 2026-05-25 15:50:00  skip
+[2026-05-25 23:00:52] [STATS] Hourly (1140 attempts): {'no_mr_signal': '1130(99%)'}
+[2026-05-25 23:00:52] [SKIP] NO_TRADE: no_mr_signal
+[2026-05-25 23:01:52] [SKIP] Same candle 2026-05-25 15:55:00  skip
+[2026-05-28 13:29:18] [START] Gold MR Bot | symbol=XAUUSDm | pid=21496 | interval=60s | DRY_RUN=False | side=BOTH | RR=1.5 | KC(20,2.0) | RSI(14) OB=70.0 OS=30.0 | session=UTC07:00-20:00 | D1_range_filter=ON D1_ADX_MAX=30.0
+[2026-05-28 13:29:19] [CONNECT] account=3472957  server=Exness-MT5Real  balance=27.99
+[2026-05-28 13:29:19] [START] Gold MR bot running
+[2026-05-28 13:29:19] [SKIP] NO_TRADE: no_mr_signal
+[2026-05-28 13:30:19] [STATS] Hourly (1 attempts): {'no_mr_signal': '1(100%)'}
+[2026-05-28 13:30:19] [SKIP] NO_TRADE: no_mr_signal
+[2026-05-28 13:31:19] [SKIP] Same candle 2026-05-28 06:25:00  skip
+[2026-05-28 13:32:19] [SKIP] Same candle 2026-05-28 06:25:00  skip
+[2026-05-28 13:33:19] [SKIP] Same candle 2026-05-28 06:25:00  skip
+[2026-05-28 13:34:19] [SKIP] Same candle 2026-05-28 06:25:00  skip
+[2026-05-28 13:35:19] [SKIP] NO_TRADE: no_mr_signal
+[2026-05-28 13:36:19] [SKIP] Same candle 2026-05-28 06:30:00  skip
+[2026-05-28 13:37:19] [SKIP] Same candle 2026-05-28 06:30:00  skip
+[2026-05-28 13:38:19] [SKIP] Same candle 2026-05-28 06:30:00  skip
+[2026-05-28 13:39:19] [SKIP] Same candle 2026-05-28 06:30:00  skip
+[2026-05-28 13:40:19] [SKIP] NO_TRADE: no_mr_signal
+[2026-05-28 13:41:19] [SKIP] Same candle 2026-05-28 06:35:00  skip
+[2026-05-28 13:42:19] [SKIP] Same candle 2026-05-28 06:35:00  skip
+[2026-05-28 13:43:19] [SKIP] Same candle 2026-05-28 06:35:00  skip
+[2026-05-28 13:44:19] [SKIP] Same candle 2026-05-28 06:35:00  skip
+[2026-05-28 13:45:19] [SKIP] NO_TRADE: no_mr_signal
+[2026-05-28 13:46:19] [SKIP] Same candle 2026-05-28 06:40:00  skip
+[2026-05-28 13:47:19] [SKIP] Same candle 2026-05-28 06:40:00  skip
+[2026-05-28 13:48:19] [SKIP] Same candle 2026-05-28 06:40:00  skip
+[2026-05-28 13:49:19] [SKIP] Same candle 2026-05-28 06:40:00  skip
+[2026-05-28 13:50:19] [SKIP] NO_TRADE: no_mr_signal
+[2026-05-28 13:51:19] [SKIP] Same candle 2026-05-28 06:45:00  skip
+[2026-05-28 13:52:19] [SKIP] Same candle 2026-05-28 06:45:00  skip
+[2026-05-28 13:53:19] [SKIP] Same candle 2026-05-28 06:45:00  skip
+[2026-05-28 13:54:19] [SKIP] Same candle 2026-05-28 06:45:00  skip
+[2026-05-28 13:55:20] [SKIP] NO_TRADE: no_mr_signal
+[2026-05-28 13:56:20] [SKIP] Same candle 2026-05-28 06:50:00  skip
+[2026-05-28 13:57:20] [SKIP] Same candle 2026-05-28 06:50:00  skip
+[2026-05-28 13:58:20] [SKIP] Same candle 2026-05-28 06:50:00  skip
+[2026-05-28 13:59:20] [SKIP] Same candle 2026-05-28 06:50:00  skip
+[2026-05-28 14:00:20] [STATS] Hourly (31 attempts): {'no_mr_signal': '31(100%)'}
+[2026-05-28 14:00:20] [SKIP] NO_TRADE: no_mr_signal
+[2026-05-28 14:01:20] [SKIP] Same candle 2026-05-28 06:55:00  skip
+[2026-05-28 14:02:20] [SKIP] Same candle 2026-05-28 06:55:00  skip
+[2026-05-28 14:03:20] [SKIP] Same candle 2026-05-28 06:55:00  skip
+[2026-05-28 14:04:20] [SKIP] Same candle 2026-05-28 06:55:00  skip
+[2026-05-28 14:05:20] [SKIP] NO_TRADE: no_mr_signal
+[2026-05-28 14:06:20] [SKIP] Same candle 2026-05-28 07:00:00  skip
+[2026-05-28 14:07:20] [SKIP] Same candle 2026-05-28 07:00:00  skip
+[2026-05-28 14:08:20] [SKIP] Same candle 2026-05-28 07:00:00  skip
+[2026-05-28 14:09:20] [SKIP] Same candle 2026-05-28 07:00:00  skip
+[2026-05-28 14:10:20] [SKIP] NO_TRADE: no_mr_signal
+[2026-05-28 14:11:20] [SKIP] Same candle 2026-05-28 07:05:00  skip
+[2026-05-28 14:12:20] [SKIP] Same candle 2026-05-28 07:05:00  skip
+[2026-05-28 14:13:20] [SKIP] Same candle 2026-05-28 07:05:00  skip
+[2026-05-28 14:14:20] [SKIP] Same candle 2026-05-28 07:05:00  skip
+[2026-05-28 14:15:20] [SKIP] NO_TRADE: no_mr_signal
+[2026-05-28 14:16:20] [SKIP] Same candle 2026-05-28 07:10:00  skip
+[2026-05-28 14:17:20] [SKIP] Same candle 2026-05-28 07:10:00  skip
+[2026-05-28 14:18:20] [SKIP] Same candle 2026-05-28 07:10:00  skip
+[2026-05-28 14:19:20] [SKIP] Same candle 2026-05-28 07:10:00  skip
+[2026-05-28 14:20:20] [SKIP] NO_TRADE: no_mr_signal
+[2026-05-28 14:21:20] [SKIP] Same candle 2026-05-28 07:15:00  skip
+[2026-05-28 14:22:20] [SKIP] Same candle 2026-05-28 07:15:00  skip
+[2026-05-28 14:23:20] [SKIP] Same candle 2026-05-28 07:15:00  skip
+[2026-05-28 14:24:20] [SKIP] Same candle 2026-05-28 07:15:00  skip
+[2026-05-28 14:25:20] [SKIP] NO_TRADE: no_mr_signal
+[2026-05-28 14:26:20] [SKIP] Same candle 2026-05-28 07:20:00  skip
+[2026-05-28 14:27:20] [SKIP] Same candle 2026-05-28 07:20:00  skip
+[2026-05-28 14:28:20] [SKIP] Same candle 2026-05-28 07:20:00  skip
+[2026-05-28 14:29:20] [SKIP] Same candle 2026-05-28 07:20:00  skip
+[2026-05-28 14:30:20] [SKIP] NO_TRADE: no_mr_signal
+[2026-05-28 14:31:20] [SKIP] Same candle 2026-05-28 07:25:00  skip
+[2026-05-28 14:32:20] [SKIP] Same candle 2026-05-28 07:25:00  skip
+[2026-05-28 14:33:20] [SKIP] Same candle 2026-05-28 07:25:00  skip
+[2026-05-28 14:34:20] [SKIP] Same candle 2026-05-28 07:25:00  skip
+[2026-05-28 14:35:20] [SKIP] NO_TRADE: no_mr_signal
+[2026-05-28 14:36:20] [SKIP] Same candle 2026-05-28 07:30:00  skip
+[2026-05-28 14:37:20] [SKIP] Same candle 2026-05-28 07:30:00  skip
+[2026-05-28 14:38:20] [SKIP] Same candle 2026-05-28 07:30:00  skip
+[2026-05-28 14:39:20] [SKIP] Same candle 2026-05-28 07:30:00  skip
+[2026-05-28 14:40:20] [SKIP] NO_TRADE: no_mr_signal
+[2026-05-28 14:41:20] [SKIP] Same candle 2026-05-28 07:35:00  skip
+[2026-05-28 14:42:20] [SKIP] Same candle 2026-05-28 07:35:00  skip
+[2026-05-28 14:43:20] [SKIP] Same candle 2026-05-28 07:35:00  skip
+[2026-05-28 14:44:20] [SKIP] Same candle 2026-05-28 07:35:00  skip
+[2026-05-28 14:45:20] [SKIP] NO_TRADE: no_mr_signal
+[2026-05-28 14:46:21] [SKIP] Same candle 2026-05-28 07:40:00  skip
+[2026-05-28 14:47:21] [SKIP] Same candle 2026-05-28 07:40:00  skip
+[2026-05-28 14:48:21] [SKIP] Same candle 2026-05-28 07:40:00  skip
+[2026-05-28 14:49:21] [SKIP] Same candle 2026-05-28 07:40:00  skip
+[2026-05-28 14:50:21] [SKIP] NO_TRADE: no_mr_signal
+[2026-05-28 14:51:21] [SKIP] Same candle 2026-05-28 07:45:00  skip
+[2026-05-28 14:52:21] [SKIP] Same candle 2026-05-28 07:45:00  skip
+[2026-05-28 14:53:21] [SKIP] Same candle 2026-05-28 07:45:00  skip
+[2026-05-28 14:54:21] [SKIP] Same candle 2026-05-28 07:45:00  skip
+[2026-05-28 14:55:21] [SKIP] NO_TRADE: no_mr_signal
+[2026-05-28 14:56:21] [SKIP] Same candle 2026-05-28 07:50:00  skip
+[2026-05-28 14:57:21] [SKIP] Same candle 2026-05-28 07:50:00  skip
+[2026-05-28 14:58:21] [SKIP] Same candle 2026-05-28 07:50:00  skip
+[2026-05-28 14:59:21] [SKIP] Same candle 2026-05-28 07:50:00  skip
+[2026-05-28 15:00:21] [STATS] Hourly (91 attempts): {'no_mr_signal': '91(100%)'}
+[2026-05-28 15:00:21] [SKIP] NO_TRADE: no_mr_signal
+[2026-05-28 15:01:21] [SKIP] Same candle 2026-05-28 07:55:00  skip
+[2026-05-28 15:02:21] [SKIP] Same candle 2026-05-28 07:55:00  skip
+[2026-05-28 15:03:21] [SKIP] Same candle 2026-05-28 07:55:00  skip
+[2026-05-28 15:04:21] [SKIP] Same candle 2026-05-28 07:55:00  skip
+[2026-05-28 15:05:21] [SKIP] NO_TRADE: no_mr_signal
+[2026-05-28 15:06:21] [SKIP] Same candle 2026-05-28 08:00:00  skip
+[2026-05-28 15:07:21] [SKIP] Same candle 2026-05-28 08:00:00  skip
+[2026-05-28 15:08:21] [SKIP] Same candle 2026-05-28 08:00:00  skip
+[2026-05-28 15:09:21] [SKIP] Same candle 2026-05-28 08:00:00  skip
+[2026-05-28 15:10:21] [SKIP] NO_TRADE: no_mr_signal
+[2026-05-28 15:11:21] [SKIP] Same candle 2026-05-28 08:05:00  skip
+[2026-05-28 15:12:21] [SKIP] Same candle 2026-05-28 08:05:00  skip
+[2026-05-28 15:13:21] [SKIP] Same candle 2026-05-28 08:05:00  skip
+[2026-05-28 15:14:21] [SKIP] Same candle 2026-05-28 08:05:00  skip
+[2026-05-28 15:15:21] [SKIP] NO_TRADE: no_mr_signal
+[2026-05-28 15:16:21] [SKIP] Same candle 2026-05-28 08:10:00  skip
+[2026-05-28 15:17:21] [SKIP] Same candle 2026-05-28 08:10:00  skip
+[2026-05-28 15:18:21] [SKIP] Same candle 2026-05-28 08:10:00  skip
+[2026-05-28 15:19:21] [SKIP] Same candle 2026-05-28 08:10:00  skip
+[2026-05-28 15:20:21] [SKIP] NO_TRADE: no_mr_signal
+[2026-05-28 15:21:21] [SKIP] Same candle 2026-05-28 08:15:00  skip
+[2026-05-28 15:22:21] [SKIP] Same candle 2026-05-28 08:15:00  skip
+[2026-05-28 15:23:21] [SKIP] Same candle 2026-05-28 08:15:00  skip
+[2026-05-28 15:24:21] [SKIP] Same candle 2026-05-28 08:15:00  skip
+[2026-05-28 15:25:21] [SKIP] NO_TRADE: no_mr_signal
+[2026-05-28 15:26:21] [SKIP] Same candle 2026-05-28 08:20:00  skip
+[2026-05-28 15:27:21] [SKIP] Same candle 2026-05-28 08:20:00  skip
+[2026-05-28 15:28:21] [SKIP] Same candle 2026-05-28 08:20:00  skip
+[2026-05-28 15:29:21] [SKIP] Same candle 2026-05-28 08:20:00  skip
+[2026-05-28 15:30:21] [SKIP] NO_TRADE: no_mr_signal
+[2026-05-28 15:31:21] [SKIP] Same candle 2026-05-28 08:25:00  skip
+[2026-05-28 15:32:21] [SKIP] Same candle 2026-05-28 08:25:00  skip
+[2026-05-28 15:33:21] [SKIP] Same candle 2026-05-28 08:25:00  skip
+[2026-05-28 15:34:21] [SKIP] Same candle 2026-05-28 08:25:00  skip
+[2026-05-28 15:35:21] [SKIP] NO_TRADE: no_mr_signal
+[2026-05-28 15:36:22] [SKIP] Same candle 2026-05-28 08:30:00  skip
+[2026-05-28 15:37:22] [SKIP] Same candle 2026-05-28 08:30:00  skip
+[2026-05-28 15:38:22] [SKIP] Same candle 2026-05-28 08:30:00  skip
+[2026-05-28 15:39:22] [SKIP] Same candle 2026-05-28 08:30:00  skip
+[2026-05-28 15:40:22] [SKIP] NO_TRADE: no_mr_signal
+[2026-05-28 15:41:22] [SKIP] Same candle 2026-05-28 08:35:00  skip
+[2026-05-28 15:42:22] [SKIP] Same candle 2026-05-28 08:35:00  skip
+[2026-05-28 15:43:22] [SKIP] Same candle 2026-05-28 08:35:00  skip
+[2026-05-28 15:44:22] [SKIP] Same candle 2026-05-28 08:35:00  skip
+[2026-05-28 15:45:22] [SKIP] NO_TRADE: no_mr_signal
+[2026-05-28 15:46:22] [SKIP] Same candle 2026-05-28 08:40:00  skip
+[2026-05-28 15:47:22] [SKIP] Same candle 2026-05-28 08:40:00  skip
+[2026-05-28 15:48:22] [SKIP] Same candle 2026-05-28 08:40:00  skip
+[2026-05-28 15:49:22] [SKIP] Same candle 2026-05-28 08:40:00  skip
+[2026-05-28 15:50:22] [SKIP] NO_TRADE: no_mr_signal
+[2026-05-28 15:51:22] [SKIP] Same candle 2026-05-28 08:45:00  skip
+[2026-05-28 15:52:22] [SKIP] Same candle 2026-05-28 08:45:00  skip
+[2026-05-28 15:53:22] [SKIP] Same candle 2026-05-28 08:45:00  skip
+[2026-05-28 15:54:22] [SKIP] Same candle 2026-05-28 08:45:00  skip
+[2026-05-28 15:55:22] [SKIP] NO_TRADE: no_mr_signal
+[2026-05-28 15:56:22] [SKIP] Same candle 2026-05-28 08:50:00  skip
+[2026-05-28 15:57:22] [SKIP] Same candle 2026-05-28 08:50:00  skip
+[2026-05-28 15:58:22] [SKIP] Same candle 2026-05-28 08:50:00  skip
+[2026-05-28 15:59:22] [SKIP] Same candle 2026-05-28 08:50:00  skip
+[2026-05-28 16:00:22] [STATS] Hourly (151 attempts): {'no_mr_signal': '151(100%)'}
+[2026-05-28 16:00:22] [SKIP] NO_TRADE: no_mr_signal
+[2026-05-28 16:01:22] [SKIP] Same candle 2026-05-28 08:55:00  skip
+[2026-05-28 16:02:22] [SKIP] Same candle 2026-05-28 08:55:00  skip
+[2026-05-28 16:03:22] [SKIP] Same candle 2026-05-28 08:55:00  skip
+[2026-05-28 16:04:22] [SKIP] Same candle 2026-05-28 08:55:00  skip
+[2026-05-28 16:05:22] [SKIP] NO_TRADE: no_mr_signal
+[2026-05-28 16:06:22] [SKIP] Same candle 2026-05-28 09:00:00  skip
+[2026-05-28 16:07:22] [SKIP] Same candle 2026-05-28 09:00:00  skip
+[2026-05-28 16:08:22] [SKIP] Same candle 2026-05-28 09:00:00  skip
+[2026-05-28 16:09:22] [SKIP] Same candle 2026-05-28 09:00:00  skip
+[2026-05-28 16:10:22] [SKIP] NO_TRADE: no_mr_signal
+[2026-05-28 16:11:22] [SKIP] Same candle 2026-05-28 09:05:00  skip
+[2026-05-28 16:12:22] [SKIP] Same candle 2026-05-28 09:05:00  skip
+[2026-05-28 16:13:22] [SKIP] Same candle 2026-05-28 09:05:00  skip
+[2026-05-28 16:14:22] [SKIP] Same candle 2026-05-28 09:05:00  skip
+[2026-05-28 16:15:22] [SKIP] NO_TRADE: no_mr_signal
+[2026-05-28 16:16:22] [SKIP] Same candle 2026-05-28 09:10:00  skip
+[2026-05-28 16:17:22] [SKIP] Same candle 2026-05-28 09:10:00  skip
+[2026-05-28 16:18:22] [SKIP] Same candle 2026-05-28 09:10:00  skip
+[2026-05-28 16:19:22] [SKIP] Same candle 2026-05-28 09:10:00  skip
+[2026-05-28 16:20:22] [SKIP] NO_TRADE: no_mr_signal
+[2026-05-28 16:21:22] [SKIP] Same candle 2026-05-28 09:15:00  skip
+[2026-05-28 16:22:22] [SKIP] Same candle 2026-05-28 09:15:00  skip
+[2026-05-28 16:23:22] [SKIP] Same candle 2026-05-28 09:15:00  skip
+[2026-05-28 16:24:22] [SKIP] Same candle 2026-05-28 09:15:00  skip
+[2026-05-28 16:25:23] [SKIP] NO_TRADE: no_mr_signal
+[2026-05-28 16:26:23] [SKIP] Same candle 2026-05-28 09:20:00  skip
+[2026-05-28 16:27:23] [SKIP] Same candle 2026-05-28 09:20:00  skip
+[2026-05-28 16:28:23] [SKIP] Same candle 2026-05-28 09:20:00  skip
+[2026-05-28 16:29:23] [SKIP] Same candle 2026-05-28 09:20:00  skip
+[2026-05-28 16:30:23] [SKIP] NO_TRADE: no_mr_signal
+[2026-05-28 16:31:23] [SKIP] Same candle 2026-05-28 09:25:00  skip
+[2026-05-28 16:32:23] [SKIP] Same candle 2026-05-28 09:25:00  skip
+[2026-05-28 16:33:23] [SKIP] Same candle 2026-05-28 09:25:00  skip
+[2026-05-28 16:34:23] [SKIP] Same candle 2026-05-28 09:25:00  skip
+[2026-05-28 16:35:23] [SKIP] NO_TRADE: no_mr_signal
+[2026-05-28 16:36:23] [SKIP] Same candle 2026-05-28 09:30:00  skip
+[2026-05-28 16:37:23] [SKIP] Same candle 2026-05-28 09:30:00  skip
+[2026-05-28 16:38:23] [SKIP] Same candle 2026-05-28 09:30:00  skip
+[2026-05-28 16:39:23] [SKIP] Same candle 2026-05-28 09:30:00  skip
+[2026-05-28 16:40:23] [SKIP] NO_TRADE: no_mr_signal
+[2026-05-28 16:41:23] [SKIP] Same candle 2026-05-28 09:35:00  skip
+[2026-05-28 16:42:23] [SKIP] Same candle 2026-05-28 09:35:00  skip
+[2026-05-28 16:43:23] [SKIP] Same candle 2026-05-28 09:35:00  skip
+[2026-05-28 16:44:23] [SKIP] Same candle 2026-05-28 09:35:00  skip
+[2026-05-28 16:45:23] [SKIP] NO_TRADE: no_mr_signal
+[2026-05-28 16:46:23] [SKIP] Same candle 2026-05-28 09:40:00  skip
+[2026-05-28 16:47:23] [SKIP] Same candle 2026-05-28 09:40:00  skip
+[2026-05-28 16:48:23] [SKIP] Same candle 2026-05-28 09:40:00  skip
+[2026-05-28 16:49:23] [SKIP] Same candle 2026-05-28 09:40:00  skip
+[2026-05-28 16:50:23] [SKIP] NO_TRADE: no_mr_signal
+[2026-05-28 16:51:23] [SKIP] Same candle 2026-05-28 09:45:00  skip
+[2026-05-28 16:52:23] [SKIP] Same candle 2026-05-28 09:45:00  skip
+[2026-05-28 16:53:23] [SKIP] Same candle 2026-05-28 09:45:00  skip
+[2026-05-28 16:54:23] [SKIP] Same candle 2026-05-28 09:45:00  skip
+[2026-05-28 16:55:23] [SKIP] NO_TRADE: no_mr_signal
+[2026-05-28 16:56:23] [SKIP] Same candle 2026-05-28 09:50:00  skip
+[2026-05-28 16:57:23] [SKIP] Same candle 2026-05-28 09:50:00  skip
+[2026-05-28 16:58:23] [SKIP] Same candle 2026-05-28 09:50:00  skip
+[2026-05-28 16:59:23] [SKIP] Same candle 2026-05-28 09:50:00  skip
+[2026-05-28 17:00:23] [STATS] Hourly (211 attempts): {'no_mr_signal': '211(100%)'}
+[2026-05-28 17:00:23] [SKIP] NO_TRADE: no_mr_signal
+[2026-05-28 17:01:23] [SKIP] Same candle 2026-05-28 09:55:00  skip
+[2026-05-28 17:02:23] [SKIP] Same candle 2026-05-28 09:55:00  skip
+[2026-05-28 17:03:23] [SKIP] Same candle 2026-05-28 09:55:00  skip
+[2026-05-28 17:04:23] [SKIP] Same candle 2026-05-28 09:55:00  skip
+[2026-05-28 17:05:23] [SKIP] NO_TRADE: no_mr_signal
+[2026-05-28 17:06:23] [SKIP] Same candle 2026-05-28 10:00:00  skip
+[2026-05-28 17:07:23] [SKIP] Same candle 2026-05-28 10:00:00  skip
+[2026-05-28 17:08:23] [SKIP] Same candle 2026-05-28 10:00:00  skip
+[2026-05-28 17:09:23] [SKIP] Same candle 2026-05-28 10:00:00  skip
+[2026-05-28 17:10:23] [SKIP] NO_TRADE: no_mr_signal
+[2026-05-28 17:11:23] [SKIP] Same candle 2026-05-28 10:05:00  skip
+[2026-05-28 17:12:23] [SKIP] Same candle 2026-05-28 10:05:00  skip
+[2026-05-28 17:13:23] [SKIP] Same candle 2026-05-28 10:05:00  skip
+[2026-05-28 17:14:23] [SKIP] Same candle 2026-05-28 10:05:00  skip
+[2026-05-28 17:15:23] [SKIP] NO_TRADE: no_mr_signal
+[2026-05-28 17:16:24] [SKIP] Same candle 2026-05-28 10:10:00  skip
+[2026-05-28 17:17:24] [SKIP] Same candle 2026-05-28 10:10:00  skip
+[2026-05-28 17:18:24] [SKIP] Same candle 2026-05-28 10:10:00  skip
+[2026-05-28 17:19:24] [SKIP] Same candle 2026-05-28 10:10:00  skip
+[2026-05-28 17:20:24] [SKIP] NO_TRADE: no_mr_signal
+[2026-05-28 17:21:24] [SKIP] Same candle 2026-05-28 10:15:00  skip
+[2026-05-28 17:22:24] [SKIP] Same candle 2026-05-28 10:15:00  skip
+[2026-05-28 17:23:24] [SKIP] Same candle 2026-05-28 10:15:00  skip
+[2026-05-28 17:24:24] [SKIP] Same candle 2026-05-28 10:15:00  skip
+[2026-05-28 17:25:24] [SKIP] NO_TRADE: no_mr_signal
+[2026-05-28 17:26:24] [SKIP] Same candle 2026-05-28 10:20:00  skip
+[2026-05-28 17:27:24] [SKIP] Same candle 2026-05-28 10:20:00  skip
+[2026-05-28 17:28:24] [SKIP] Same candle 2026-05-28 10:20:00  skip
+[2026-05-28 17:29:24] [SKIP] Same candle 2026-05-28 10:20:00  skip
+[2026-05-28 17:30:24] [SKIP] NO_TRADE: no_mr_signal
+[2026-05-28 17:31:24] [SKIP] Same candle 2026-05-28 10:25:00  skip
+[2026-05-28 17:32:24] [SKIP] Same candle 2026-05-28 10:25:00  skip
+[2026-05-28 17:33:24] [SKIP] Same candle 2026-05-28 10:25:00  skip
+[2026-05-28 17:34:24] [SKIP] Same candle 2026-05-28 10:25:00  skip
+[2026-05-28 17:35:24] [SKIP] NO_TRADE: no_mr_signal
+[2026-05-28 17:36:24] [SKIP] Same candle 2026-05-28 10:30:00  skip
+[2026-05-28 17:37:24] [SKIP] Same candle 2026-05-28 10:30:00  skip
+[2026-05-28 17:38:24] [SKIP] Same candle 2026-05-28 10:30:00  skip
+[2026-05-28 17:39:24] [SKIP] Same candle 2026-05-28 10:30:00  skip
+[2026-05-28 17:40:24] [SKIP] NO_TRADE: no_mr_signal
+[2026-05-28 17:41:24] [SKIP] Same candle 2026-05-28 10:35:00  skip
+[2026-05-28 17:42:24] [SKIP] Same candle 2026-05-28 10:35:00  skip
+[2026-05-28 17:43:24] [SKIP] Same candle 2026-05-28 10:35:00  skip
+[2026-05-28 17:44:24] [SKIP] Same candle 2026-05-28 10:35:00  skip
+[2026-05-28 17:45:24] [SKIP] NO_TRADE: no_mr_signal
+[2026-05-28 17:46:24] [SKIP] Same candle 2026-05-28 10:40:00  skip
+[2026-05-28 17:47:24] [SKIP] Same candle 2026-05-28 10:40:00  skip
+[2026-05-28 17:48:24] [SKIP] Same candle 2026-05-28 10:40:00  skip
+[2026-05-28 17:49:24] [SKIP] Same candle 2026-05-28 10:40:00  skip
+[2026-05-28 17:50:24] [SKIP] NO_TRADE: no_mr_signal
+[2026-05-28 17:51:24] [SKIP] Same candle 2026-05-28 10:45:00  skip
+[2026-05-28 17:52:24] [SKIP] Same candle 2026-05-28 10:45:00  skip
+[2026-05-28 17:53:24] [SKIP] Same candle 2026-05-28 10:45:00  skip
+[2026-05-28 17:54:24] [SKIP] Same candle 2026-05-28 10:45:00  skip
+[2026-05-28 17:55:24] [SKIP] NO_TRADE: no_mr_signal
+[2026-05-28 17:56:24] [SKIP] Same candle 2026-05-28 10:50:00  skip
+[2026-05-28 17:57:24] [SKIP] Same candle 2026-05-28 10:50:00  skip
+[2026-05-28 17:58:24] [SKIP] Same candle 2026-05-28 10:50:00  skip
+[2026-05-28 17:59:24] [SKIP] Same candle 2026-05-28 10:50:00  skip
+[2026-05-28 18:00:24] [STATS] Hourly (271 attempts): {'no_mr_signal': '271(100%)'}
+[2026-05-28 18:00:24] [SKIP] NO_TRADE: no_mr_signal
+[2026-05-28 18:01:24] [SKIP] Same candle 2026-05-28 10:55:00  skip
+[2026-05-28 18:02:24] [SKIP] Same candle 2026-05-28 10:55:00  skip
+[2026-05-28 18:03:24] [SKIP] Same candle 2026-05-28 10:55:00  skip
+[2026-05-28 18:04:25] [SKIP] Same candle 2026-05-28 10:55:00  skip
+[2026-05-28 18:05:25] [SKIP] NO_TRADE: no_mr_signal
+[2026-05-28 18:06:25] [SKIP] Same candle 2026-05-28 11:00:00  skip
+[2026-05-28 18:07:25] [SKIP] Same candle 2026-05-28 11:00:00  skip
+[2026-05-28 18:08:25] [SKIP] Same candle 2026-05-28 11:00:00  skip
+[2026-05-28 18:09:25] [SKIP] Same candle 2026-05-28 11:00:00  skip
+[2026-05-28 18:10:25] [SKIP] NO_TRADE: no_mr_signal
+[2026-05-28 18:11:25] [SKIP] Same candle 2026-05-28 11:05:00  skip
+[2026-05-28 18:12:25] [SKIP] Same candle 2026-05-28 11:05:00  skip
+[2026-05-28 18:13:25] [SKIP] Same candle 2026-05-28 11:05:00  skip
+[2026-05-28 18:14:25] [SKIP] Same candle 2026-05-28 11:05:00  skip
+[2026-05-28 18:15:25] [SKIP] NO_TRADE: no_mr_signal
+[2026-05-28 18:16:25] [SKIP] Same candle 2026-05-28 11:10:00  skip
+[2026-05-28 18:17:25] [SKIP] Same candle 2026-05-28 11:10:00  skip
+[2026-05-28 18:18:25] [SKIP] Same candle 2026-05-28 11:10:00  skip
+[2026-05-28 18:19:25] [SKIP] Same candle 2026-05-28 11:10:00  skip
+[2026-05-28 18:20:25] [SKIP] NO_TRADE: no_mr_signal
+[2026-05-28 18:21:25] [SKIP] Same candle 2026-05-28 11:15:00  skip
+[2026-05-28 18:22:25] [SKIP] Same candle 2026-05-28 11:15:00  skip
+[2026-05-28 18:23:25] [SKIP] Same candle 2026-05-28 11:15:00  skip
+[2026-05-28 18:24:25] [SKIP] Same candle 2026-05-28 11:15:00  skip
+[2026-05-28 18:25:25] [SKIP] NO_TRADE: no_mr_signal
+[2026-05-28 18:26:25] [SKIP] Same candle 2026-05-28 11:20:00  skip
+[2026-05-28 18:27:25] [SKIP] Same candle 2026-05-28 11:20:00  skip
+[2026-05-28 18:28:25] [SKIP] Same candle 2026-05-28 11:20:00  skip
+[2026-05-28 18:29:25] [SKIP] Same candle 2026-05-28 11:20:00  skip
+[2026-05-28 18:30:25] [SKIP] NO_TRADE: no_mr_signal
+[2026-05-28 18:31:25] [SKIP] Same candle 2026-05-28 11:25:00  skip
+[2026-05-28 18:32:25] [SKIP] Same candle 2026-05-28 11:25:00  skip
+[2026-05-28 18:33:25] [SKIP] Same candle 2026-05-28 11:25:00  skip
+[2026-05-28 18:34:25] [SKIP] Same candle 2026-05-28 11:25:00  skip
+[2026-05-28 18:35:25] [SKIP] NO_TRADE: no_mr_signal
+[2026-05-28 18:36:25] [SKIP] Same candle 2026-05-28 11:30:00  skip
+[2026-05-28 18:37:25] [SKIP] Same candle 2026-05-28 11:30:00  skip
+[2026-05-28 18:38:25] [SKIP] Same candle 2026-05-28 11:30:00  skip
+[2026-05-28 18:39:25] [SKIP] Same candle 2026-05-28 11:30:00  skip
+[2026-05-28 18:40:25] [SKIP] NO_TRADE: no_mr_signal
+[2026-05-28 18:41:25] [SKIP] Same candle 2026-05-28 11:35:00  skip
+[2026-05-28 18:42:25] [SKIP] Same candle 2026-05-28 11:35:00  skip
+[2026-05-28 18:43:25] [SKIP] Same candle 2026-05-28 11:35:00  skip
+[2026-05-28 18:44:25] [SKIP] Same candle 2026-05-28 11:35:00  skip
+[2026-05-28 18:45:25] [SKIP] NO_TRADE: no_mr_signal
+[2026-05-28 18:46:25] [SKIP] Same candle 2026-05-28 11:40:00  skip
+[2026-05-28 18:47:25] [SKIP] Same candle 2026-05-28 11:40:00  skip
+[2026-05-28 18:48:25] [SKIP] Same candle 2026-05-28 11:40:00  skip
+[2026-05-28 18:49:25] [SKIP] Same candle 2026-05-28 11:40:00  skip
+[2026-05-28 18:50:25] [SKIP] NO_TRADE: no_mr_signal
+[2026-05-28 18:51:25] [SKIP] Same candle 2026-05-28 11:45:00  skip
+[2026-05-28 18:52:25] [SKIP] Same candle 2026-05-28 11:45:00  skip
+[2026-05-28 18:53:25] [SKIP] Same candle 2026-05-28 11:45:00  skip
+[2026-05-28 18:54:26] [SKIP] Same candle 2026-05-28 11:45:00  skip
+[2026-05-28 18:55:26] [SKIP] NO_TRADE: no_mr_signal
+[2026-05-28 18:56:26] [SKIP] Same candle 2026-05-28 11:50:00  skip
+[2026-05-28 18:57:26] [SKIP] Same candle 2026-05-28 11:50:00  skip
+[2026-05-28 18:58:26] [SKIP] Same candle 2026-05-28 11:50:00  skip
+[2026-05-28 18:59:26] [SKIP] Same candle 2026-05-28 11:50:00  skip
+[2026-05-28 19:00:26] [STATS] Hourly (331 attempts): {'no_mr_signal': '331(100%)'}
+[2026-05-28 19:00:26] [SKIP] NO_TRADE: no_mr_signal
+[2026-05-28 19:01:26] [SKIP] Same candle 2026-05-28 11:55:00  skip
+[2026-05-28 19:02:26] [SKIP] Same candle 2026-05-28 11:55:00  skip
+[2026-05-28 19:03:26] [SKIP] Same candle 2026-05-28 11:55:00  skip
+[2026-05-28 19:04:26] [SKIP] Same candle 2026-05-28 11:55:00  skip
+[2026-05-28 19:05:26] [SKIP] NO_TRADE: no_mr_signal
+[2026-05-28 19:06:26] [SKIP] Same candle 2026-05-28 12:00:00  skip
+[2026-05-28 19:07:26] [SKIP] Same candle 2026-05-28 12:00:00  skip
+[2026-05-28 19:08:26] [SKIP] Same candle 2026-05-28 12:00:00  skip
+[2026-05-28 19:09:26] [SKIP] Same candle 2026-05-28 12:00:00  skip
+[2026-05-28 19:10:26] [SKIP] NO_TRADE: no_mr_signal
+[2026-05-28 19:11:26] [SKIP] Same candle 2026-05-28 12:05:00  skip
+[2026-05-28 19:12:26] [SKIP] Same candle 2026-05-28 12:05:00  skip
+[2026-05-28 19:13:26] [SKIP] Same candle 2026-05-28 12:05:00  skip
+[2026-05-28 19:14:26] [SKIP] Same candle 2026-05-28 12:05:00  skip
+[2026-05-28 19:15:26] [SKIP] NO_TRADE: no_mr_signal
+[2026-05-28 19:16:26] [SKIP] Same candle 2026-05-28 12:10:00  skip
+[2026-05-28 19:17:26] [SKIP] Same candle 2026-05-28 12:10:00  skip
+[2026-05-28 19:18:26] [SKIP] Same candle 2026-05-28 12:10:00  skip
+[2026-05-28 19:19:26] [SKIP] Same candle 2026-05-28 12:10:00  skip
+[2026-05-28 19:20:26] [SKIP] NO_TRADE: no_mr_signal
+[2026-05-28 19:21:26] [SKIP] Same candle 2026-05-28 12:15:00  skip
+[2026-05-28 19:22:26] [SKIP] Same candle 2026-05-28 12:15:00  skip
+[2026-05-28 19:23:26] [SKIP] Same candle 2026-05-28 12:15:00  skip
+[2026-05-28 19:24:26] [SKIP] Same candle 2026-05-28 12:15:00  skip
+[2026-05-28 19:25:26] [SKIP] NO_TRADE: no_mr_signal
+[2026-05-28 19:26:26] [SKIP] Same candle 2026-05-28 12:20:00  skip
+[2026-05-28 19:27:26] [SKIP] Same candle 2026-05-28 12:20:00  skip
+[2026-05-28 19:28:26] [SKIP] Same candle 2026-05-28 12:20:00  skip
+[2026-05-28 19:29:26] [SKIP] Same candle 2026-05-28 12:20:00  skip
+[2026-05-28 19:30:26] [SKIP] NO_TRADE: no_mr_signal
+[2026-05-28 19:31:26] [SKIP] Same candle 2026-05-28 12:25:00  skip
+[2026-05-28 19:32:26] [SKIP] Same candle 2026-05-28 12:25:00  skip
+[2026-05-28 19:33:26] [SKIP] Same candle 2026-05-28 12:25:00  skip
+[2026-05-28 19:34:26] [SKIP] Same candle 2026-05-28 12:25:00  skip
+[2026-05-28 19:35:26] [SKIP] NO_TRADE: no_mr_signal
+[2026-05-28 19:36:26] [SKIP] Same candle 2026-05-28 12:30:00  skip
+[2026-05-28 19:37:26] [SKIP] Same candle 2026-05-28 12:30:00  skip
+[2026-05-28 19:38:26] [SKIP] Same candle 2026-05-28 12:30:00  skip
+[2026-05-28 19:39:26] [SKIP] Same candle 2026-05-28 12:30:00  skip
+[2026-05-28 19:40:26] [SKIP] NO_TRADE: no_mr_signal
+[2026-05-28 19:41:26] [SKIP] Same candle 2026-05-28 12:35:00  skip
+[2026-05-28 19:42:26] [SKIP] Same candle 2026-05-28 12:35:00  skip
+[2026-05-28 19:43:27] [SKIP] Same candle 2026-05-28 12:35:00  skip
+[2026-05-28 19:44:27] [SKIP] Same candle 2026-05-28 12:35:00  skip
+[2026-05-28 19:45:27] [SKIP] NO_TRADE: no_mr_signal
+[2026-05-28 19:46:27] [SKIP] Same candle 2026-05-28 12:40:00  skip
+[2026-05-28 19:47:27] [SKIP] Same candle 2026-05-28 12:40:00  skip
+[2026-05-28 19:48:27] [SKIP] Same candle 2026-05-28 12:40:00  skip
+[2026-05-28 19:49:27] [SKIP] Same candle 2026-05-28 12:40:00  skip
+[2026-05-28 19:50:27] [SKIP] NO_TRADE: no_mr_signal
+[2026-05-28 19:51:27] [SKIP] Same candle 2026-05-28 12:45:00  skip
+[2026-05-28 19:52:27] [SKIP] Same candle 2026-05-28 12:45:00  skip
+[2026-05-28 19:53:27] [SKIP] Same candle 2026-05-28 12:45:00  skip
+[2026-05-28 19:54:27] [SKIP] Same candle 2026-05-28 12:45:00  skip
+[2026-05-28 19:55:27] [SKIP] NO_TRADE: no_mr_signal
+[2026-05-28 19:56:27] [SKIP] Same candle 2026-05-28 12:50:00  skip
+[2026-05-28 19:57:27] [SKIP] Same candle 2026-05-28 12:50:00  skip
+[2026-05-28 19:58:27] [SKIP] Same candle 2026-05-28 12:50:00  skip
+[2026-05-28 19:59:27] [SKIP] Same candle 2026-05-28 12:50:00  skip
+[2026-05-28 20:00:27] [STATS] Hourly (391 attempts): {'no_mr_signal': '391(100%)'}
+[2026-05-28 20:00:27] [SKIP] NO_TRADE: no_mr_signal
+[2026-05-28 20:01:27] [SKIP] Same candle 2026-05-28 12:55:00  skip
+[2026-05-28 20:02:27] [SKIP] Same candle 2026-05-28 12:55:00  skip
+[2026-05-28 20:03:27] [SKIP] Same candle 2026-05-28 12:55:00  skip
+[2026-05-28 20:04:27] [SKIP] Same candle 2026-05-28 12:55:00  skip
+[2026-05-28 20:05:27] [SKIP] NO_TRADE: no_mr_signal
+[2026-05-28 20:06:27] [SKIP] Same candle 2026-05-28 13:00:00  skip
+[2026-05-28 20:07:27] [SKIP] Same candle 2026-05-28 13:00:00  skip
+[2026-05-28 20:08:27] [SKIP] Same candle 2026-05-28 13:00:00  skip
+[2026-05-28 20:09:27] [SKIP] Same candle 2026-05-28 13:00:00  skip
+[2026-05-28 20:10:27] [SKIP] NO_TRADE: no_mr_signal
+[2026-05-28 20:11:27] [SKIP] Same candle 2026-05-28 13:05:00  skip
+[2026-05-28 20:12:27] [SKIP] Same candle 2026-05-28 13:05:00  skip
+[2026-05-28 20:13:27] [SKIP] Same candle 2026-05-28 13:05:00  skip
+[2026-05-28 20:14:27] [SKIP] Same candle 2026-05-28 13:05:00  skip
+[2026-05-28 20:15:27] [SKIP] NO_TRADE: no_mr_signal
+[2026-05-28 20:16:27] [SKIP] Same candle 2026-05-28 13:10:00  skip
+[2026-05-28 20:17:27] [SKIP] Same candle 2026-05-28 13:10:00  skip
+[2026-05-28 20:18:27] [SKIP] Same candle 2026-05-28 13:10:00  skip
+[2026-05-28 20:19:27] [SKIP] Same candle 2026-05-28 13:10:00  skip
+[2026-05-28 20:20:27] [SKIP] NO_TRADE: no_mr_signal
+[2026-05-28 20:21:27] [SKIP] Same candle 2026-05-28 13:15:00  skip
+[2026-05-28 20:22:27] [SKIP] Same candle 2026-05-28 13:15:00  skip
+[2026-05-28 20:23:27] [SKIP] Same candle 2026-05-28 13:15:00  skip
+[2026-05-28 20:24:27] [SKIP] Same candle 2026-05-28 13:15:00  skip
+[2026-05-28 20:25:27] [SKIP] NO_TRADE: no_mr_signal
+[2026-05-28 20:26:27] [SKIP] Same candle 2026-05-28 13:20:00  skip
+[2026-05-28 20:27:27] [SKIP] Same candle 2026-05-28 13:20:00  skip
+[2026-05-28 20:28:27] [SKIP] Same candle 2026-05-28 13:20:00  skip
+[2026-05-28 20:29:27] [SKIP] Same candle 2026-05-28 13:20:00  skip
+[2026-05-28 20:30:27] [SKIP] NO_TRADE: no_mr_signal
+[2026-05-28 20:31:27] [SKIP] Same candle 2026-05-28 13:25:00  skip
+[2026-05-28 20:32:27] [SKIP] Same candle 2026-05-28 13:25:00  skip
+[2026-05-28 20:33:27] [SKIP] Same candle 2026-05-28 13:25:00  skip
+[2026-05-28 20:34:27] [SKIP] Same candle 2026-05-28 13:25:00  skip
+[2026-05-28 20:35:33] [AI] News risk: ALLOW score=10 event=none reason=No known high-impact news within 120 minutes; D1 ranging (ADX 20.4) supports MR trade.
+[2026-05-28 20:35:33] [WATCH] Signal: side=SELL pattern=kc_reversal entry=4420.538 sl=4440.491 tp=4390.6084999999985 d1=D1 ADX=20.4 (ranging  MR OK) news=AI news OK score=10 | No known high-impact news within 120 minutes; D1 ranging (ADX 20.4) supports MR trade.
+[2026-05-28 20:35:33] [ORDER] result: OrderSendResult(retcode=10027, deal=0, order=0, volume=0.0, price=0.0, bid=0.0, ask=0.0, comment='AutoTrading disabled by client', request_id=0, retcode_external=0, request=TradeRequest(action=1, magic=20260520, order=0, symbol='XAUUSDm', volume=0.01, price=4421.051, stoplimit=0.0, sl=4440.491, tp=4390.608, deviation=10, type=1, type_filling=1, type_time=0, expiration=0, comment='gold_mr_kc_reversal', position=0, position_by=0))
+[2026-05-28 20:36:34] [SKIP] Same candle 2026-05-28 13:30:00  skip
+[2026-05-28 20:37:34] [SKIP] Same candle 2026-05-28 13:30:00  skip
+[2026-05-28 20:38:34] [SKIP] Same candle 2026-05-28 13:30:00  skip
+[2026-05-28 20:39:34] [SKIP] Same candle 2026-05-28 13:30:00  skip
+[2026-05-28 20:40:34] [SKIP] NO_TRADE: no_mr_signal
+[2026-05-28 20:41:34] [SKIP] Same candle 2026-05-28 13:35:00  skip
+[2026-05-28 20:42:34] [SKIP] Same candle 2026-05-28 13:35:00  skip
+[2026-05-28 20:43:34] [SKIP] Same candle 2026-05-28 13:35:00  skip
+[2026-05-28 20:44:34] [SKIP] Same candle 2026-05-28 13:35:00  skip
+[2026-05-28 20:45:34] [SKIP] NO_TRADE: no_mr_signal
+[2026-05-28 20:46:34] [SKIP] Same candle 2026-05-28 13:40:00  skip
+[2026-05-28 20:47:34] [SKIP] Same candle 2026-05-28 13:40:00  skip
+[2026-05-28 20:48:34] [SKIP] Same candle 2026-05-28 13:40:00  skip
+[2026-05-28 20:49:34] [SKIP] Same candle 2026-05-28 13:40:00  skip
+[2026-05-28 20:50:34] [SKIP] NO_TRADE: no_mr_signal
+[2026-05-28 20:51:34] [SKIP] Same candle 2026-05-28 13:45:00  skip
+[2026-05-28 20:52:34] [SKIP] Same candle 2026-05-28 13:45:00  skip
+[2026-05-28 20:53:34] [SKIP] Same candle 2026-05-28 13:45:00  skip
+[2026-05-28 20:54:34] [SKIP] Same candle 2026-05-28 13:45:00  skip
+[2026-05-28 20:55:34] [SKIP] NO_TRADE: no_mr_signal
+[2026-05-28 20:56:34] [SKIP] Same candle 2026-05-28 13:50:00  skip
+[2026-05-28 20:57:35] [SKIP] Same candle 2026-05-28 13:50:00  skip
+[2026-05-28 20:58:35] [SKIP] Same candle 2026-05-28 13:50:00  skip
+[2026-05-28 20:59:35] [SKIP] Same candle 2026-05-28 13:50:00  skip
+[2026-05-28 21:00:35] [STATS] Hourly (451 attempts): {'no_mr_signal': '446(99%)'}
+[2026-05-28 21:00:35] [SKIP] NO_TRADE: no_mr_signal
+[2026-05-28 21:01:35] [SKIP] Same candle 2026-05-28 13:55:00  skip
+[2026-05-28 21:02:35] [SKIP] Same candle 2026-05-28 13:55:00  skip
+[2026-05-28 21:03:35] [SKIP] Same candle 2026-05-28 13:55:00  skip
+[2026-05-28 21:04:35] [SKIP] Same candle 2026-05-28 13:55:00  skip
+[2026-05-28 21:05:35] [SKIP] NO_TRADE: no_mr_signal
+[2026-05-28 21:06:35] [SKIP] Same candle 2026-05-28 14:00:00  skip
+[2026-05-28 21:07:35] [SKIP] Same candle 2026-05-28 14:00:00  skip
+[2026-05-28 21:08:35] [SKIP] Same candle 2026-05-28 14:00:00  skip
+[2026-05-28 21:09:35] [SKIP] Same candle 2026-05-28 14:00:00  skip
+[2026-05-28 21:10:35] [SKIP] NO_TRADE: no_mr_signal
+[2026-05-28 21:11:35] [SKIP] Same candle 2026-05-28 14:05:00  skip
+[2026-05-28 21:12:35] [SKIP] Same candle 2026-05-28 14:05:00  skip
+[2026-05-28 21:13:35] [SKIP] Same candle 2026-05-28 14:05:00  skip
+[2026-05-28 21:14:35] [SKIP] Same candle 2026-05-28 14:05:00  skip
+[2026-05-28 21:15:35] [SKIP] NO_TRADE: no_mr_signal
+[2026-05-28 21:16:35] [SKIP] Same candle 2026-05-28 14:10:00  skip
+[2026-05-28 21:17:35] [SKIP] Same candle 2026-05-28 14:10:00  skip
+[2026-05-28 21:18:35] [SKIP] Same candle 2026-05-28 14:10:00  skip
+[2026-05-28 21:19:35] [SKIP] Same candle 2026-05-28 14:10:00  skip
+[2026-05-28 21:20:35] [SKIP] NO_TRADE: no_mr_signal
+[2026-05-28 21:21:35] [SKIP] Same candle 2026-05-28 14:15:00  skip
+[2026-05-28 21:22:35] [SKIP] Same candle 2026-05-28 14:15:00  skip
+[2026-05-28 21:23:35] [SKIP] Same candle 2026-05-28 14:15:00  skip
+[2026-05-28 21:24:35] [SKIP] Same candle 2026-05-28 14:15:00  skip
+[2026-05-28 21:25:35] [SKIP] NO_TRADE: no_mr_signal
+[2026-05-28 21:26:35] [SKIP] Same candle 2026-05-28 14:20:00  skip
+[2026-05-28 21:27:35] [SKIP] Same candle 2026-05-28 14:20:00  skip
+[2026-05-28 21:28:35] [SKIP] Same candle 2026-05-28 14:20:00  skip
+[2026-05-28 21:29:35] [SKIP] Same candle 2026-05-28 14:20:00  skip
+[2026-05-28 21:30:35] [SKIP] NO_TRADE: no_mr_signal
+[2026-05-28 21:31:35] [SKIP] Same candle 2026-05-28 14:25:00  skip
+[2026-05-28 21:32:35] [SKIP] Same candle 2026-05-28 14:25:00  skip
+[2026-05-28 21:33:35] [SKIP] Same candle 2026-05-28 14:25:00  skip
+[2026-05-28 21:34:35] [SKIP] Same candle 2026-05-28 14:25:00  skip
+[2026-05-28 21:35:39] WARN [AI] AI news gate failed: Expecting value: line 3 column 16 (char 38)
+[2026-05-28 21:35:39] [WATCH] Signal: side=SELL pattern=kc_reversal entry=4457.515 sl=4476.5867 tp=4428.907450000001 d1=D1 ADX=20.4 (ranging  MR OK) news=AI news OK score=0 | AI news unavailable; allowing (Expecting value: line 3 column 16 (char 38))
+[2026-05-28 21:35:39] [ORDER] result: OrderSendResult(retcode=10027, deal=0, order=0, volume=0.0, price=0.0, bid=0.0, ask=0.0, comment='AutoTrading disabled by client', request_id=0, retcode_external=0, request=TradeRequest(action=1, magic=20260520, order=0, symbol='XAUUSDm', volume=0.01, price=4457.208, stoplimit=0.0, sl=4476.587, tp=4428.907, deviation=10, type=1, type_filling=1, type_time=0, expiration=0, comment='gold_mr_kc_reversal', position=0, position_by=0))
+[2026-05-28 21:36:41] [SKIP] Same candle 2026-05-28 14:30:00  skip
+[2026-05-28 21:37:41] [SKIP] Same candle 2026-05-28 14:30:00  skip
+[2026-05-28 21:38:41] [SKIP] Same candle 2026-05-28 14:30:00  skip
+[2026-05-28 21:39:41] [SKIP] Same candle 2026-05-28 14:30:00  skip
+[2026-05-28 21:40:41] [SKIP] NO_TRADE: no_mr_signal
+[2026-05-28 21:41:41] [SKIP] Same candle 2026-05-28 14:35:00  skip
+[2026-05-28 21:42:41] [SKIP] Same candle 2026-05-28 14:35:00  skip
+[2026-05-28 21:43:41] [SKIP] Same candle 2026-05-28 14:35:00  skip
+[2026-05-28 21:44:41] [SKIP] Same candle 2026-05-28 14:35:00  skip
+[2026-05-28 21:45:41] [SKIP] NO_TRADE: no_mr_signal
+[2026-05-28 21:46:41] [SKIP] Same candle 2026-05-28 14:40:00  skip
+[2026-05-28 21:47:41] [SKIP] Same candle 2026-05-28 14:40:00  skip
+[2026-05-28 21:48:41] [SKIP] Same candle 2026-05-28 14:40:00  skip
+[2026-05-28 21:49:41] [SKIP] Same candle 2026-05-28 14:40:00  skip
+[2026-05-28 21:50:41] [SKIP] NO_TRADE: no_mr_signal
+[2026-05-28 21:51:41] [SKIP] Same candle 2026-05-28 14:45:00  skip
+[2026-05-28 21:52:41] [SKIP] Same candle 2026-05-28 14:45:00  skip
+[2026-05-28 21:53:41] [SKIP] Same candle 2026-05-28 14:45:00  skip
+[2026-05-28 21:54:41] [SKIP] Same candle 2026-05-28 14:45:00  skip
+[2026-05-28 21:55:41] [SKIP] NO_TRADE: no_mr_signal
+[2026-05-28 21:56:41] [SKIP] Same candle 2026-05-28 14:50:00  skip
+[2026-05-28 21:57:41] [SKIP] Same candle 2026-05-28 14:50:00  skip
+[2026-05-28 21:58:41] [SKIP] Same candle 2026-05-28 14:50:00  skip
+[2026-05-28 21:59:41] [SKIP] Same candle 2026-05-28 14:50:00  skip
+[2026-05-28 22:00:41] [STATS] Hourly (511 attempts): {'no_mr_signal': '501(98%)'}
+[2026-05-28 22:00:41] [WATCH] Signal: side=SELL pattern=kc_reversal entry=4472.505 sl=4487.6173 tp=4449.83655 d1=D1 ADX=20.4 (ranging  MR OK) news=AI news OK score=0 | AI news unavailable; allowing (Expecting value: line 3 column 16 (char 38))
+[2026-05-28 22:00:41] [ORDER] result: OrderSendResult(retcode=10027, deal=0, order=0, volume=0.0, price=0.0, bid=0.0, ask=0.0, comment='AutoTrading disabled by client', request_id=0, retcode_external=0, request=TradeRequest(action=1, magic=20260520, order=0, symbol='XAUUSDm', volume=0.01, price=4472.505, stoplimit=0.0, sl=4487.617, tp=4449.837, deviation=10, type=1, type_filling=1, type_time=0, expiration=0, comment='gold_mr_kc_reversal', position=0, position_by=0))
+[2026-05-28 22:01:42] [SKIP] Same candle 2026-05-28 14:55:00  skip
+[2026-05-28 22:02:42] [SKIP] Same candle 2026-05-28 14:55:00  skip
+[2026-05-28 22:03:42] [SKIP] Same candle 2026-05-28 14:55:00  skip
+[2026-05-28 22:04:42] [SKIP] Same candle 2026-05-28 14:55:00  skip
+[2026-05-28 22:05:42] [SKIP] NO_TRADE: no_mr_signal
+[2026-05-28 22:06:42] [SKIP] Same candle 2026-05-28 15:00:00  skip
+[2026-05-28 22:07:43] [SKIP] Same candle 2026-05-28 15:00:00  skip
+[2026-05-28 22:08:43] [SKIP] Same candle 2026-05-28 15:00:00  skip
+[2026-05-28 22:09:43] [SKIP] Same candle 2026-05-28 15:00:00  skip
+[2026-05-28 22:10:48] WARN [AI] AI news gate failed: Unterminated string starting at: line 2 column 13 (char 14)
+[2026-05-28 22:10:48] [WATCH] Signal: side=SELL pattern=kc_reversal entry=4472.911 sl=4488.78685 tp=4449.0972249999995 d1=D1 ADX=20.4 (ranging  MR OK) news=AI news OK score=0 | AI news unavailable; allowing (Unterminated string starting at: line 2 column 13 (char 14))
+[2026-05-28 22:10:48] [ORDER] result: OrderSendResult(retcode=10027, deal=0, order=0, volume=0.0, price=0.0, bid=0.0, ask=0.0, comment='AutoTrading disabled by client', request_id=0, retcode_external=0, request=TradeRequest(action=1, magic=20260520, order=0, symbol='XAUUSDm', volume=0.01, price=4472.241, stoplimit=0.0, sl=4488.787, tp=4449.097, deviation=10, type=1, type_filling=1, type_time=0, expiration=0, comment='gold_mr_kc_reversal', position=0, position_by=0))
+[2026-05-28 22:11:50] [SKIP] Same candle 2026-05-28 15:05:00  skip
+[2026-05-28 22:12:50] [SKIP] Same candle 2026-05-28 15:05:00  skip
+[2026-05-28 22:13:50] [SKIP] Same candle 2026-05-28 15:05:00  skip
+[2026-05-28 22:14:50] [SKIP] Same candle 2026-05-28 15:05:00  skip
+[2026-05-28 22:15:50] [WATCH] Signal: side=SELL pattern=kc_reversal entry=4472.155 sl=4492.9992 tp=4440.8886999999995 d1=D1 ADX=20.4 (ranging  MR OK) news=AI news OK score=0 | AI news unavailable; allowing (Unterminated string starting at: line 2 column 13 (char 14))
+[2026-05-28 22:15:50] [ORDER] result: OrderSendResult(retcode=10027, deal=0, order=0, volume=0.0, price=0.0, bid=0.0, ask=0.0, comment='AutoTrading disabled by client', request_id=0, retcode_external=0, request=TradeRequest(action=1, magic=20260520, order=0, symbol='XAUUSDm', volume=0.01, price=4472.155, stoplimit=0.0, sl=4492.999, tp=4440.889, deviation=10, type=1, type_filling=1, type_time=0, expiration=0, comment='gold_mr_kc_reversal', position=0, position_by=0))
+[2026-05-28 22:16:51] [SKIP] Same candle 2026-05-28 15:10:00  skip
+[2026-05-28 22:17:51] [SKIP] Same candle 2026-05-28 15:10:00  skip
+[2026-05-28 22:18:51] [SKIP] Same candle 2026-05-28 15:10:00  skip
+[2026-05-28 22:19:51] [SKIP] Same candle 2026-05-28 15:10:00  skip
+[2026-05-28 22:20:51] [SKIP] NO_TRADE: no_mr_signal
+[2026-05-28 22:21:51] [SKIP] Same candle 2026-05-28 15:15:00  skip
+[2026-05-28 22:22:51] [SKIP] Same candle 2026-05-28 15:15:00  skip
+[2026-05-28 22:23:51] [SKIP] Same candle 2026-05-28 15:15:00  skip
+[2026-05-28 22:24:51] [SKIP] Same candle 2026-05-28 15:15:00  skip
+[2026-05-28 22:25:51] [SKIP] NO_TRADE: no_mr_signal
+[2026-05-28 22:26:51] [SKIP] Same candle 2026-05-28 15:20:00  skip
+[2026-05-28 22:27:51] [SKIP] Same candle 2026-05-28 15:20:00  skip
+[2026-05-28 22:28:51] [SKIP] Same candle 2026-05-28 15:20:00  skip
+[2026-05-28 22:29:51] [SKIP] Same candle 2026-05-28 15:20:00  skip

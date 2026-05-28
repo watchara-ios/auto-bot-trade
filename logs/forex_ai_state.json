@@ -1,36 +1,41 @@
 {
-  "last_scan_date": "2026-05-24",
-  "last_scan_at": "2026-05-24 14:09:40",
+  "last_scan_date": "2026-05-28",
+  "last_scan_at": "2026-05-28 14:00:11",
   "last_recommendations": [
     {
       "symbol": "EURUSD",
       "rating": 1,
-      "reason": "High liquidity during overlap, bullish bias on US data."
+      "reason": "High liquidity, tight spreads, strong trend"
     },
     {
       "symbol": "GBPUSD",
-      "rating": 2,
-      "reason": "Mixed UK data, range-bound but volatile."
+      "rating": 1,
+      "reason": "Volatile but trending, good momentum"
     },
     {
       "symbol": "USDJPY",
       "rating": 2,
-      "reason": "Yen weak on BOJ stance, uptrend intact."
+      "reason": "Sensitive to US yields, range-bound"
+    },
+    {
+      "symbol": "USDCHF",
+      "rating": 2,
+      "reason": "Correlated with EURUSD, safe haven"
+    },
+    {
+      "symbol": "USDCAD",
+      "rating": 2,
+      "reason": "Oil price influence, moderate trend"
     },
     {
       "symbol": "AUDUSD",
-      "rating": 2,
-      "reason": "Commodity support, but risk-off may cap."
+      "rating": 3,
+      "reason": "Commodity-linked, low volatility"
     },
     {
       "symbol": "EURJPY",
-      "rating": 3,
-      "reason": "Cross pair, high volatility but unclear direction."
-    },
-    {
-      "symbol": "GBPJPY",
-      "rating": 3,
-      "reason": "Wide spreads, momentum unclear, wait for breakout."
+      "rating": 2,
+      "reason": "Cross pair, high volatility"
     }
   ],
   "candidate_universe": [
@@ -68,46 +73,52 @@
     "EURUSDm",
     "GBPUSDm",
     "USDJPYm",
-    "AUDUSDm",
-    "GBPJPYm",
-    "EURJPYm"
+    "USDCHFm",
+    "USDCADm",
+    "EURJPYm",
+    "AUDUSDm"
   ],
   "candidate_recommendations": [
     {
       "symbol": "EURUSDm",
       "rating": 1,
-      "reason": "High liquidity during overlap, bullish bias on US data."
+      "reason": "High liquidity, tight spreads, strong trend"
     },
     {
       "symbol": "GBPUSDm",
-      "rating": 2,
-      "reason": "Mixed UK data, range-bound but volatile."
+      "rating": 1,
+      "reason": "Volatile but trending, good momentum"
     },
     {
       "symbol": "USDJPYm",
       "rating": 2,
-      "reason": "Yen weak on BOJ stance, uptrend intact."
+      "reason": "Sensitive to US yields, range-bound"
     },
     {
-      "symbol": "AUDUSDm",
+      "symbol": "USDCHFm",
       "rating": 2,
-      "reason": "Commodity support, but risk-off may cap."
+      "reason": "Correlated with EURUSD, safe haven"
     },
     {
-      "symbol": "GBPJPYm",
-      "rating": 3,
-      "reason": "Wide spreads, momentum unclear, wait for breakout."
+      "symbol": "USDCADm",
+      "rating": 2,
+      "reason": "Oil price influence, moderate trend"
     },
     {
       "symbol": "EURJPYm",
+      "rating": 2,
+      "reason": "Cross pair, high volatility"
+    },
+    {
+      "symbol": "AUDUSDm",
       "rating": 3,
-      "reason": "Cross pair, high volatility but unclear direction."
+      "reason": "Commodity-linked, low volatility"
     }
   ],
   "selected_symbol": "EURUSDm",
   "selected_recommendation": {
     "symbol": "EURUSDm",
     "rating": 1,
-    "reason": "High liquidity during overlap, bullish bias on US data."
+    "reason": "High liquidity, tight spreads, strong trend"
   }
 }

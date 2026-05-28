@@ -1,3 +1,0 @@
-2026-05-25 00:00:00,106 - INFO - [STATS] Daily summary: {'_total_attempts': 2331, 'no_donchian_breakout': 2169, 'adx_not_rising': 58, 'atr_too_low': 43, 'adx_too_high': 33, 'm1_confirm_failed': 13}
-2026-05-25 00:00:00,110 - INFO - 📊 Balance=31.51 USDT | available=31.51 USDT | lev=3x | daily=+0.00% | trades=0/5 | session=✅ | open_positions=0
-2026-05-25 00:00:00,110 - INFO - 🔎 BTCUSDT
