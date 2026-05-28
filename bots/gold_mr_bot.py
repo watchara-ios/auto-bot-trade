@@ -810,14 +810,31 @@ def send_order(signal: dict) -> None:
     }
     result = mt5.order_send(request)
     log(f"[ORDER] result: {result}")
-    notify_order_result("GOLD_MR", Config.SYMBOL, side, result, dry_run=False)
 
-    if result is not None and result.retcode == mt5.TRADE_RETCODE_DONE:
-        time.sleep(0.3)
-        for p in (mt5.positions_get(symbol=Config.SYMBOL) or []):
-            if p.magic == Config.MAGIC_NUMBER and p.sl == 0:
-                warn(f"[VERIFY] Position {p.ticket} has no SL — please set manually!")
-                notify_error("GOLD_MR", f"Position {p.ticket} on {Config.SYMBOL} opened without SL!")
+    retcode = getattr(result, "retcode", None)
+    if result is None or retcode != mt5.TRADE_RETCODE_DONE:
+        comment = getattr(result, "comment", "no response")
+        msg = f"Order FAILED retcode={retcode}: {comment}"
+        if retcode == 10027:
+            msg += " — Enable AutoTrading in MT5 terminal (AutoTrading button)"
+        warn(f"[ORDER_FAIL] {msg}")
+        notify_error("GOLD_MR", msg)
+        return
+
+    notify_order_result("GOLD_MR", Config.SYMBOL, side, result, dry_run=False)
+    notify_order_opened(
+        "GOLD_MR", Config.SYMBOL, side, lot,
+        signal["entry"], signal["sl"], signal["tp"],
+        tier="MR",
+        risk_pct=signal.get("risk_pct", Config.RISK_PCT),
+        dry_run=False,
+    )
+
+    time.sleep(0.3)
+    for p in (mt5.positions_get(symbol=Config.SYMBOL) or []):
+        if p.magic == Config.MAGIC_NUMBER and p.sl == 0:
+            warn(f"[VERIFY] Position {p.ticket} has no SL — please set manually!")
+            notify_error("GOLD_MR", f"Position {p.ticket} on {Config.SYMBOL} opened without SL!")
 
 
 # ─────────────────────────────────────────────────────────────────────────────
